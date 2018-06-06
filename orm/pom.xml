@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>www.zfoo.com</groupId>
+    <artifactId>orm</artifactId>
+    <version>1.0</version>
+
+    <!-- jar包版本号 -->
+    <properties>
+        <file.encoding>UTF-8</file.encoding><!-- 编码格式 -->
+        <project.build.sourceEncoding>${file.encoding}</project.build.sourceEncoding><!-- 文件拷贝时的编码 -->
+        <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding><!-- 输出的编码 -->
+        <maven.compiler.encoding>${file.encoding}</maven.compiler.encoding><!-- 编译时的编码 -->
+        <maven.compiler.plugin.version>3.5</maven.compiler.plugin.version><!-- 用于编译java代码 -->
+        <maven.resources.plugin.version>3.0.0</maven.resources.plugin.version><!-- 用于自定义拷贝资源文件 -->
+        <maven.surefire.plugin.version>2.20</maven.surefire.plugin.version><!-- 用于测试 -->
+        <maven.shade.plugin.version>3.0.0</maven.shade.plugin.version><!-- 用于打包 -->
+        <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version><!-- 用于添加override文件，覆盖别的包 -->
+        <exec.maven.plugin.version>1.5.0</exec.maven.plugin.version><!-- 用于批量运行java main方法 -->
+
+
+        <java.version>1.8</java.version>
+
+        <commons-codec.version>1.9</commons-codec.version>
+        <commons-dbcp.version>1.4</commons-dbcp.version>
+        <commons-io.version>2.5</commons-io.version>
+        <commons-collections.version>3.2.2</commons-collections.version>
+        <commons-lang.version>3.6</commons-lang.version>
+
+        <google.guava.version>22.0</google.guava.version>
+
+        <spring.version>4.2.2.RELEASE</spring.version>
+        <testng.version>6.8.7</testng.version>
+
+        <jackson.version>1.9.13</jackson.version>
+
+        <javassist.version>3.12.1.GA</javassist.version>
+
+        <netty.version>4.1.6.Final</netty.version>
+
+        <jdom.version>1.1</jdom.version>
+
+        <poi.version>3.10-FINAL</poi.version>
+
+        <mysql.version>5.1.29</mysql.version>
+        <spring.orm.version>4.2.2.RELEASE</spring.orm.version>
+        <hibernate.version>3.6.10.Final</hibernate.version>
+        <hibernate.entitymanager.version>3.6.10.Final</hibernate.entitymanager.version>
+
+        <slf4j.version>1.7.25</slf4j.version>
+        <log4j.version>1.2.17</log4j.version>
+
+        <zfoo.event.version>1.0</zfoo.event.version>
+        <zfoo.hotswap.version>1.0</zfoo.hotswap.version>
+        <zfoo.net.version>1.0</zfoo.net.version>
+        <zfoo.orm.version>1.0</zfoo.orm.version>
+        <zfoo.scheduler.version>1.0</zfoo.scheduler.version>
+        <zfoo.storage.version>1.0</zfoo.storage.version>
+        <zfoo.util.version>1.0</zfoo.util.version>
+    </properties>
+
+    <dependencies>
+        <!-- 依赖的数据库连接池类库-->
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>${commons-dbcp.version}</version>
+        </dependency>
+
+        <!-- 数据结构操作库 -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${google.guava.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-collections</groupId>
+            <artifactId>commons-collections</artifactId>
+            <version>${commons-collections.version}</version>
+        </dependency>
+
+        <!-- lang工具类操作库 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${commons-lang.version}</version>
+        </dependency>
+        <!-- io工具类操作库 -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+
+        <!-- JDBC驱动程序的依赖类库 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+        <!-- hibernate的依赖类库 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+        <!-- 围绕提供JPA(Java Persistence Api)编程接口的Hibernate Core的一个包装 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>${hibernate.entitymanager.version}</version>
+        </dependency>
+
+        <!-- spring为所有的orm框架提供的封装依赖类库 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-orm</artifactId>
+            <version>${spring.orm.version}</version>
+        </dependency>
+
+        <!-- 依赖的Spring模块类库 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- 动态生成二进制字节码的javassist类库 -->
+        <dependency>
+            <groupId>javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>${javassist.version}</version>
+        </dependency>
+
+        <!-- 依赖的util类库 -->
+        <dependency>
+            <groupId>www.zfoo.com</groupId>
+            <artifactId>util</artifactId>
+            <version>${zfoo.util.version}</version>
+        </dependency>
+
+        <!-- 依赖的日志系统，使用Log4j+SLF4J -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <!-- 依赖的测试库 -->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>${testng.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <testSourceDirectory>src/test/java</testSourceDirectory>
+
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven.compiler.plugin.version}</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${file.encoding}</encoding>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven.resources.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <encoding>${file.encoding}</encoding>
+                            <outputDirectory>${project.build.directory}/resource</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources/</directory>
+                                    <filtering>false</filtering>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven.surefire.plugin.version}</version>
+                <configuration>
+                    <forkMode>once</forkMode>
+                    <threadCount>10</threadCount>
+                    <argLine>-Dfile.encoding=UTF-8</argLine><!--argLine传入JVM选项-->
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${maven.shade.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <transformers>
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                            <!--<mainClass>com.xxg.Main</mainClass>-->
+                        </transformer>
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                            <resource>META-INF/spring.handlers</resource>
+                        </transformer>
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+                            <resource>META-INF/spring.schemas</resource>
+                        </transformer>
+                    </transformers>
+                </configuration>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>${build.helper.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>add-source</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>add-source</goal>
+                        </goals>
+                        <configuration>
+                            <sources>
+                                <source>src/override</source>
+                            </sources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>${exec.maven.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skip>true</skip>
+                    <includePluginDependencies>true</includePluginDependencies>
+                    <mainClass>XXXXXX</mainClass>
+                    <arguments>
+                        <argument>arg0</argument>
+                        <argument>arg1</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

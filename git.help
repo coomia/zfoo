@@ -1,0 +1,25 @@
+# 首先在本地创建ssh key；
+ssh-keygen -t rsa -C "your_email@youremail.com"
+
+# 为了验证是否成功，在git bash下输入：
+ssh -T git@github.com
+
+# 配置一下你的身份，这样在提交代码的时候Git就可以知道是谁提交的了
+git config --global user.name "jaysunxiao"
+git config --global user.email "jaysunxiao@gmail.com"
+
+# 进入要上传的仓库，右键git bash，添加远程地址：
+git init
+git remote add origin git@github.com:jaysunxiao/zfoo
+
+# 提交流程
+git add *
+git commit -m "提交信息"
+
+# 提交本地仓库的文件到服务器仓库
+git push origin master
+
+# 拉取远程服务器仓库的文件
+git pull --rebase origin master
+
+# Git是不跟踪空目录的，所以需要跟踪那么就需要添加文件！也就是说Git中不存在真正意义上的空目录.

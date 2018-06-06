@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<protocols version="1.0" author="jaysunxiao">
+
+    <protocol id="0" location="com.zfoo.test.CM_Int"/>
+    <protocol id="1" location="com.zfoo.test.SM_Int"/>
+    <protocol id="2" location="com.zfoo.test.CM_Float"/>
+    <protocol id="3" location="com.zfoo.test.SM_Float"/>
+    <protocol id="4" location="com.zfoo.test.CM_Object"/>
+    <protocol id="5" location="com.zfoo.test.SM_Object"/>
+    <protocol id="6" location="com.zfoo.test.ObjectA"/>
+    <protocol id="7" location="com.zfoo.test.ObjectB"/>
+    <protocol id="8" location="com.zfoo.test.CM_Collection"/>
+    <protocol id="9" location="com.zfoo.test.CM_Array"/>
+    <protocol id="10" location="com.zfoo.test.CM_Map"/>
+
+
+</protocols>

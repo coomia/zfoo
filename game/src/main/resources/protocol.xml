@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+
+<protocols version="1.0" author="jaysunxiao">
+
+    <protocol id="1" location="com.zfoo.game.gameserver.module.activity.packet.CM_ActivityInfo"/>
+    <protocol id="2" location="com.zfoo.game.gameserver.module.player.packet.CM_Login"/>
+    <protocol id="3" location="com.zfoo.game.gameserver.module.player.packet.SM_Login"/>
+
+
+</protocols>
