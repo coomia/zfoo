@@ -8,7 +8,6 @@
     <artifactId>orm</artifactId>
     <version>1.0</version>
 
-    <!-- jar包版本号 -->
     <properties>
         <file.encoding>UTF-8</file.encoding><!-- 编码格式 -->
         <project.build.sourceEncoding>${file.encoding}</project.build.sourceEncoding><!-- 文件拷贝时的编码 -->
@@ -29,6 +28,7 @@
         <commons-io.version>2.5</commons-io.version>
         <commons-collections.version>3.2.2</commons-collections.version>
         <commons-lang.version>3.6</commons-lang.version>
+        <commons-fileupload.version>1.2.1</commons-fileupload.version>
 
         <google.guava.version>22.0</google.guava.version>
 
@@ -50,6 +50,9 @@
         <hibernate.version>3.6.10.Final</hibernate.version>
         <hibernate.entitymanager.version>3.6.10.Final</hibernate.entitymanager.version>
 
+        <jstl.version>1.2</jstl.version>
+        <servlet-api.version>3.1.0</servlet-api.version>
+
         <slf4j.version>1.7.25</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
 
@@ -60,6 +63,7 @@
         <zfoo.scheduler.version>1.0</zfoo.scheduler.version>
         <zfoo.storage.version>1.0</zfoo.storage.version>
         <zfoo.util.version>1.0</zfoo.util.version>
+        <zfoo.web.version>1.0</zfoo.web.version>
     </properties>
 
     <dependencies>
@@ -108,6 +112,17 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>${hibernate.version}</version>
+            <!--排除比较旧的jar包-->
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-collections</groupId>
+                    <artifactId>commons-collections</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- 围绕提供JPA(Java Persistence Api)编程接口的Hibernate Core的一个包装 -->
@@ -115,6 +130,16 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>${hibernate.entitymanager.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>javassist</groupId>
+                    <artifactId>javassist</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <!-- spring为所有的orm框架提供的封装依赖类库 -->

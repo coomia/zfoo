@@ -8,7 +8,6 @@
     <artifactId>net</artifactId>
     <version>1.0</version>
 
-    <!-- jar包版本号 -->
     <properties>
         <file.encoding>UTF-8</file.encoding><!-- 编码格式 -->
         <project.build.sourceEncoding>${file.encoding}</project.build.sourceEncoding><!-- 文件拷贝时的编码 -->
@@ -29,6 +28,7 @@
         <commons-io.version>2.5</commons-io.version>
         <commons-collections.version>3.2.2</commons-collections.version>
         <commons-lang.version>3.6</commons-lang.version>
+        <commons-fileupload.version>1.2.1</commons-fileupload.version>
 
         <google.guava.version>22.0</google.guava.version>
 
@@ -50,6 +50,9 @@
         <hibernate.version>3.6.10.Final</hibernate.version>
         <hibernate.entitymanager.version>3.6.10.Final</hibernate.entitymanager.version>
 
+        <jstl.version>1.2</jstl.version>
+        <servlet-api.version>3.1.0</servlet-api.version>
+
         <slf4j.version>1.7.25</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
 
@@ -60,6 +63,7 @@
         <zfoo.scheduler.version>1.0</zfoo.scheduler.version>
         <zfoo.storage.version>1.0</zfoo.storage.version>
         <zfoo.util.version>1.0</zfoo.util.version>
+        <zfoo.web.version>1.0</zfoo.web.version>
     </properties>
 
 

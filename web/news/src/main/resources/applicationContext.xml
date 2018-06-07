@@ -31,14 +31,13 @@
     http://www.zfoo.com/schema/orm-1.0.xsd">
 
 
-    <context:component-scan base-package="com.zfoo.game"/>
+    <context:component-scan base-package="com.zfoo.news"/>
 
-    <event:event id="eventBus" event-bus-package="com.zfoo.game"/>
+    <event:event id="eventBus" event-bus-package="com.zfoo.news"/>
 
-    <net:net id="net" protocol-location="protocol.xml" receiver-package="facade" host-address="127.0.0.1"
-             port="9999"/>
+    <!--<net:net id="net" protocol-location="protocol.xml" receiver-package="facade" host-address="127.0.0.1" port="9999"/>-->
 
-    <scheduler:scheduler id="schedulerManager" scheduler-package="com.zfoo.game"/>
+    <scheduler:scheduler id="schedulerManager" scheduler-package="com.zfoo.news"/>
 
     <resource:storage id="resourceManager">
         <resource:scan package="com.zfoo.**.resource"/>
@@ -49,7 +48,7 @@
         <property name="ignoreUnresolvablePlaceholders" value="true"/>
         <property name="locations">
             <list>
-                <value>classpath:jdbc4game.properties</value>
+                <value>classpath:jdbc.properties</value>
             </list>
         </property>
     </bean>
@@ -86,7 +85,7 @@
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="com.zfoo.orm"/>
+        <property name="packagesToScan" value="com.zfoo.news"/>
         <!--<property name="packagesToScan" value="com.zfoo.orm**.entity"/> 扫描全部entity包下的entity-->
         <property name="hibernateProperties">
             <props>
@@ -126,7 +125,7 @@
             <orm:persister name="1m" type="time" config="0 0/30 * * * ?"/>
         </orm:persisters>
         <orm:entities>
-            <orm:entity-package>com.zfoo.game.**.entity</orm:entity-package>
+            <orm:entity-package>com.zfoo.news.**.entity</orm:entity-package>
         </orm:entities>
     </orm:orm>
 

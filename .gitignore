@@ -21,3 +21,15 @@
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
+
+
+# 忽略IntelliJ IDEA生成的项目描述文件
+.idea
+*.iml
+
+# 忽略npm生成的package描述文件
+**/package-lock.json
+
+
+# 忽略web前端前端package.json所有依赖的包
+web/**/node_modules/**

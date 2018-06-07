@@ -1,0 +1,8 @@
+{
+  "name": "news-web",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular": "^1.7.0",
+    "angular-material": "^1.1.9"
+  }
+}

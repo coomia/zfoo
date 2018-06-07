@@ -7,6 +7,8 @@ import com.zfoo.orm.model.anno.UniqueIndex;
 import com.zfoo.orm.model.entity.IEntity;
 import com.zfoo.util.AssertionUtils;
 import com.zfoo.util.ReflectionUtils;
+import org.slf4j.helpers.FormattingTuple;
+import org.slf4j.helpers.MessageFormatter;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
@@ -34,7 +36,9 @@ public class CacheDef {
 
     public static CacheDef valueOf(Class<?> clazz, Map<String, Integer> cacheMap, Map<String, PersisterDef> persisterMap) {
         if (!IEntity.class.isAssignableFrom(clazz)) {
-            throw new IllegalArgumentException("被Cache注解标注的实体类必须继承IEntity");
+            FormattingTuple message = MessageFormatter.arrayFormat("被[{}]注解标注的实体类[{}]必须继承[{}]"
+                    ,new Object[]{ Cache.class.getName(),clazz.getName(),IEntity.class.getName()});
+            throw new IllegalArgumentException(message.getMessage());
         }
 
         CacheDef cacheDef = new CacheDef();
