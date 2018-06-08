@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>websocket</title>
+</head>
+<body>
+<script type="text/javascript">
+    // 创建Web Socket对象
+    var webSocket = new WebSocket("ws://127.0.0.1:30000");
+
+    // 当WebSocket建立网络连接时激发该函数
+    webSocket.onopen = function () {
+        alert("已打开连接");
+        // 发送消息
+        webSocket.send("我是jaysunxiao");
+    };
+
+    // 当WebSocket被关闭时触发该事件。
+    webSocket.onclose = function (event) {
+        alert("已断开连接");
+    };
+
+
+    // 网络连接出现错误时触发该事件。
+    webSocket.onerror = function (event) {
+        alert("连接错误");
+    };
+
+    // 为onmessage事件绑定监听器，接收消息
+    webSocket.onmessage = function (event) {
+        // 接收消息
+        alert("收到的消息是：" + event.data);
+    };
+
+    // WebSocket还定义了一个readyState属性，该属性可以返回该WebSocket所处的状态。
+    // CONNECTING（数值0）：WebSocket正在尝试与服务器建立连接。
+    // OPEN（数值1）：WebSocket与服务器已建立连接。
+    // CLOSING（数值2）：WebSocket正在关闭与服务器的连接。
+    // CLOSED（数值3）：WebSocket已经关闭了与服务器的连接。
+
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> 通过属性进行校验 </title>
+</head>
+<body>
+<form action="http://www.baidu.com" method="get">
+    <p>
+        <label for="email">邮箱：</label>
+        <input id="email" name="email" type="text" required pattern="\d{3}"/>
+    </p>
+    <p>
+        <label for="password">密码框：</label>
+        <input id="password" name="password" type="password" required/>
+    </p>
+    <input id='ok' type="submit" value="登录百度首页"/>
+</form>
+
+<hr/>
+<script type="text/javascript">
+    var check = function () {
+        var email = document.getElementById("email");
+        if (!email.checkValidity()) {
+            email.setCustomValidity("邮箱是必填的！");
+        }
+
+
+        var password = document.getElementById("password");
+        if (!password.checkValidity()) {
+            password.setCustomValidity("密码是必填的！");
+        }
+    };
+</script>
+</body>
+</html>
