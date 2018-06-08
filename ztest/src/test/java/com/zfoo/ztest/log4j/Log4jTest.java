@@ -1,8 +1,7 @@
-package com.zfoo.log4j;
+package com.zfoo.ztest.log4j;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.Test;
 
 /**
  * @author jaysunxiao

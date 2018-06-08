@@ -78,6 +78,13 @@
             <version>${zfoo.util.version}</version>
         </dependency>
 
+        <!-- 依赖的通信类库 -->
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-all</artifactId>
+            <version>${netty.version}</version>
+        </dependency>
+
         <!-- 动态生成二进制字节码的javassist类库 -->
         <dependency>
             <groupId>javassist</groupId>
