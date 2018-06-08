@@ -3,8 +3,6 @@
   "version": "0.0.1",
   "dependencies": {
     "angular": "^1.7.0",
-    "angular-material": "^1.1.9",
-    "polymer": "^0.5.0",
-    "polymer-all-elements": "^0.0.6"
+    "angular-material": "^1.1.9"
   }
 }

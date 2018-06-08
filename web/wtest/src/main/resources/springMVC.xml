@@ -10,13 +10,13 @@
     <!--启动注解识别-->
     <context:annotation-config/>
 
-    <context:component-scan base-package="com.zfoo.news.**.control">
+    <context:component-scan base-package="com.zfoo.wtest">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
     <mvc:annotation-driven/>
 
-    <!--开通静态资源的访问：对进入DispatcherServlet的URL进行筛查，如果发现是静态资源的请求，就将该请求转由Web应用服务器默认的Servlet处理，如果不是静态资源的请求，才由DispatcherServlet继续处理-->
+    <!--开通静态资源的访问-->
     <mvc:default-servlet-handler/>
 
     <!-- 视图定位 -->
@@ -30,14 +30,11 @@
 
     <!-- 对上传文件的解析-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+
     <mvc:interceptors>
         <mvc:interceptor>
-            <mvc:mapping path="/fore*"/>
-            <bean class="com.zfoo.news.user.interceptor.UserInterceptor"/>
-        </mvc:interceptor>
-        <mvc:interceptor>
-            <mvc:mapping path="/fore*"/>
-            <bean class="com.zfoo.news.login.interceptor.LoginInterceptor"/>
+            <mvc:mapping path="/*"/>
+            <bean class="com.zfoo.wtest.ajax.AllRequestInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>

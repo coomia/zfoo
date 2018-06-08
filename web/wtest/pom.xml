@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>www.zfoo.com</groupId>
+        <artifactId>web</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <artifactId>wtest</artifactId>
+    <version>1.0</version>
+
+    <description>wtest = web + test，是一个web的test工程</description>
+
+    <packaging>war</packaging>
+
+    <properties>
+        <file.encoding>UTF-8</file.encoding><!-- 编码格式 -->
+        <project.build.sourceEncoding>${file.encoding}</project.build.sourceEncoding><!-- 文件拷贝时的编码 -->
+        <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding><!-- 输出的编码 -->
+        <maven.compiler.encoding>${file.encoding}</maven.compiler.encoding><!-- 编译时的编码 -->
+        <maven.compiler.plugin.version>3.5</maven.compiler.plugin.version><!-- 用于编译java代码 -->
+        <maven.resources.plugin.version>3.0.0</maven.resources.plugin.version><!-- 用于自定义拷贝资源文件 -->
+        <maven.surefire.plugin.version>2.20</maven.surefire.plugin.version><!-- 用于测试 -->
+        <maven.shade.plugin.version>3.0.0</maven.shade.plugin.version><!-- 用于打包 -->
+        <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version><!-- 用于添加override文件，覆盖别的包 -->
+        <exec.maven.plugin.version>1.5.0</exec.maven.plugin.version><!-- 用于批量运行java main方法 -->
+
+
+        <java.version>1.8</java.version>
+
+        <commons-codec.version>1.9</commons-codec.version>
+        <commons-dbcp.version>1.4</commons-dbcp.version>
+        <commons-io.version>2.5</commons-io.version>
+        <commons-collections.version>3.2.2</commons-collections.version>
+        <commons-lang.version>3.6</commons-lang.version>
+        <commons-fileupload.version>1.2.1</commons-fileupload.version>
+
+        <google.guava.version>22.0</google.guava.version>
+
+        <spring.version>4.2.2.RELEASE</spring.version>
+        <testng.version>6.8.7</testng.version>
+
+        <jackson.version>1.9.13</jackson.version>
+
+        <javassist.version>3.12.1.GA</javassist.version>
+
+        <netty.version>4.1.6.Final</netty.version>
+
+        <jdom.version>1.1</jdom.version>
+
+        <poi.version>3.10-FINAL</poi.version>
+
+        <mysql.version>5.1.29</mysql.version>
+        <spring.orm.version>4.2.2.RELEASE</spring.orm.version>
+        <hibernate.version>3.6.10.Final</hibernate.version>
+        <hibernate.entitymanager.version>3.6.10.Final</hibernate.entitymanager.version>
+
+        <jstl.version>1.2</jstl.version>
+        <servlet-api.version>3.1.0</servlet-api.version>
+
+        <slf4j.version>1.7.25</slf4j.version>
+        <log4j.version>1.2.17</log4j.version>
+
+        <zfoo.event.version>1.0</zfoo.event.version>
+        <zfoo.hotswap.version>1.0</zfoo.hotswap.version>
+        <zfoo.net.version>1.0</zfoo.net.version>
+        <zfoo.orm.version>1.0</zfoo.orm.version>
+        <zfoo.scheduler.version>1.0</zfoo.scheduler.version>
+        <zfoo.storage.version>1.0</zfoo.storage.version>
+        <zfoo.util.version>1.0</zfoo.util.version>
+        <zfoo.web.version>1.0</zfoo.web.version>
+    </properties>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <sourceDirectory>src/main/java</sourceDirectory>
+    </build>
+
+</project>
