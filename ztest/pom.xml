@@ -32,6 +32,11 @@
         <commons-io.version>2.5</commons-io.version>
         <commons-collections.version>3.2.2</commons-collections.version>
         <commons-lang.version>3.6</commons-lang.version>
+        <commons-fileupload.version>1.2.1</commons-fileupload.version>
+
+        <zookeeper.version>3.4.10</zookeeper.version>
+        <curator-framework.version>4.0.0</curator-framework.version>
+        <curator-recipes.version>4.0.0</curator-recipes.version>
 
         <google.guava.version>22.0</google.guava.version>
 
@@ -83,6 +88,30 @@
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>${netty.version}</version>
+        </dependency>
+
+
+        <!-- https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper -->
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>${zookeeper.version}</version>
+        </dependency>
+
+        <!-- curator /kjʊə'reɪtə/ n.  馆长; 评议员; 管理者; 监护人 -->
+        <!-- https://mvnrepository.com/artifact/org.apache.curator/curator-framework -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-framework</artifactId>
+            <version>${curator-framework.version}</version>
+        </dependency>
+
+        <!-- recipe /ˈresɪpi/ n.  食谱; 处方; 烹饪法; 制作法 -->
+        <!-- https://mvnrepository.com/artifact/org.apache.curator/curator-recipes -->
+        <dependency>
+            <groupId>org.apache.curator</groupId>
+            <artifactId>curator-recipes</artifactId>
+            <version>${curator-recipes.version}</version>
         </dependency>
 
         <!-- 动态生成二进制字节码的javassist类库 -->
