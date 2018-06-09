@@ -31,5 +31,6 @@ hs_err_pid*
 **/package-lock.json
 
 
-# 忽略web前端前端package.json所有依赖的包
+# 忽略web前端前端package.json，bower.json所有依赖的包
 web/**/node_modules/**
+web/**/bower_components/**
