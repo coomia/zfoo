@@ -89,6 +89,8 @@
     document.writeln("异常处理:");
     try {
         document.writeln(c);
+
+        throw "error";
     } catch (error) {
         document.writeln(error);
     } finally {

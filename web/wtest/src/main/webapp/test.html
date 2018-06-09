@@ -36,8 +36,9 @@
 
         // 4.success, error, alwarys callback
         xhr.onload = function () {
-            if (xhr.status == 200)
+            if (xhr.status == 200) {
                 console.log('load, %s', xhr.responseText);
+            }
         }
 
 
@@ -73,24 +74,28 @@
 
     var button2 = document.getElementById("bt2");
     button2.onclick = function () {
-        ajax(false)
+        ajax('/login', true)
             .before(
                 function (xhr) {
                     console.log("ajax before method" + xhr.toString());
                 })
-            .post('/login', JSON.stringify(
+            .post()
+            .header("Content-Type", "application/json")
+            .header('test', 'value')
+            .send(JSON.stringify(
                 {
                     keyword: 'c',
                     other: 'test'
-                }), 'json')
-            .header("Content-Type", "application/json")
-            .header('test', 'value')
-            .success(function (xhr) {
-                if (xhr.status == 200)
-                    console.log('load, %s', xhr.responseText);
-            }).timeout(100, function () {
-            console.log('timeout!');
-        }).error(function () {
+                }))
+            .onload(
+                function (xhr) {
+                    if (xhr.status == 200) {
+                        console.log('load, %s', xhr.responseText);
+                    }
+                })
+            .timeout(100, function () {
+                console.log('timeout!');
+            }).error(function () {
             alert('保存失败，请重试');
         });
     }
