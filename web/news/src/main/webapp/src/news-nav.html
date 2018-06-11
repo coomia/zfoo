@@ -5,72 +5,76 @@
 
 <dom-module id="news-nav">
 
-  <template>
+    <template>
 
-    <iron-media-query query="max-width: 767px" query-matches="{{_smallScreen}}"></iron-media-query>
+        <iron-media-query query="max-width: 767px" query-matches="{{_smallScreen}}"></iron-media-query>
 
-    <news-header
-        app-title="[[appTitle]]"
-        page="[[page]]"
-        categories="[[categories]]"
-        category="[[category]]"
-        small-screen="[[_smallScreen]]"
-        drawer-opened="{{_drawerOpened}}">
-      <slot></slot>
-    </news-header>
+        <news-header
+                app-title="[[appTitle]]"
+                page="[[page]]"
+                categories="[[categories]]"
+                category="[[category]]"
+                small-screen="[[_smallScreen]]"
+                drawer-opened="{{_drawerOpened}}">
+            <slot></slot>
+        </news-header>
 
-    <!--
-      Lazy-create the drawer on small viewports.
-    -->
-    <dom-if if="[[_shouldRenderDrawer(_smallScreen, loadComplete)]]">
-      <template>
-        <news-drawer
-            categories="[[categories]]"
-            category="[[category]]"
-            drawer-opened="{{_drawerOpened}}">
-        </news-drawer>
-      </template>
-    </dom-if>
+        <!--
+          Lazy-create the drawer on small viewports.
+        -->
+        <dom-if if="[[_shouldRenderDrawer(_smallScreen, loadComplete)]]">
+            <template>
+                <news-drawer
+                        categories="[[categories]]"
+                        category="[[category]]"
+                        drawer-opened="{{_drawerOpened}}">
+                </news-drawer>
+            </template>
+        </dom-if>
 
 
-  </template>
+    </template>
 
-  <script>
+    <script>
 
-    class NewsNav extends Polymer.Element {
+        class NewsNav extends Polymer.Element {
 
-      static get is() { return 'news-nav'; }
+            static get is() {
+                return 'news-nav';
+            }
 
-      static get properties() { return {
+            static get properties() {
+                return {
 
-        appTitle: String,
+                    appTitle: String,
 
-        page: String,
+                    page: String,
 
-        categories: Array,
+                    categories: Array,
 
-        category: Object,
+                    category: Object,
 
-        loadComplete: Boolean,
+                    loadComplete: Boolean,
 
-        _smallScreen: Boolean,
+                    _smallScreen: Boolean,
 
-        _drawerOpened: Boolean
+                    _drawerOpened: Boolean
 
-      }}
+                }
+            }
 
-      closeDrawer() {
-        this._drawerOpened = false;
-      }
+            closeDrawer() {
+                this._drawerOpened = false;
+            }
 
-      _shouldRenderDrawer(smallScreen, loadComplete) {
-        return smallScreen && loadComplete;
-      }
+            _shouldRenderDrawer(smallScreen, loadComplete) {
+                return smallScreen && loadComplete;
+            }
 
-    }
+        }
 
-    customElements.define(NewsNav.is, NewsNav);
+        customElements.define(NewsNav.is, NewsNav);
 
-  </script>
+    </script>
 
 </dom-module>
