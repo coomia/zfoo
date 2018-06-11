@@ -267,9 +267,7 @@
         -->
         <app-box role="banner" class="sticky-nav" threshold="[[_getScrollThreshold(smallScreen)]]">
             <app-toolbar class="sticky-nav-toolbar">
-                <paper-icon-button
-                        arial-label="Main navigation"
-                        icon="[[_menuIcon(drawerOpened)]]" on-click="_toggleDrawer"></paper-icon-button>
+                <paper-icon-button arial-label="Main navigation" icon="[[_menuIcon(drawerOpened)]]" on-click="_toggleDrawer"></paper-icon-button>
                 <div class="sticky-nav-center">
                     <div class="logo">
                         <a href="/" aria-label$="[[_computeAppHomeLabel(appTitle)]]">[[appTitle]]</a>
