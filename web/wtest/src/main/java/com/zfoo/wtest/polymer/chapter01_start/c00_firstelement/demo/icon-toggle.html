@@ -1,0 +1,94 @@
+<link rel="import" href="../../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../../bower_components/iron-icon/iron-icon.html">
+
+<dom-module id="icon-toggle">
+
+    <template>
+
+        <style>
+            :host {
+                display: inline-block;
+            }
+
+            /*The <iron-icon> tag uses an SVG icon. */
+            /*The fill and stroke properties are SVG-specific CSS properties. */
+            /*They set the fill color and the outline color for the icon, respectively.*/
+
+            /*You apply a custom property inside your element using the var function.*/
+            /*background-color: var(--my-custom-property, defaultValue);*/
+            :host iron-icon {
+                fill: var(--icon-toggle-color, rgba(0, 0, 0, 0));
+                stroke: var(--icon-toggle-outline-color, currentcolor);
+            }
+
+            /*The :host() function matches the host element if the selector inside the parentheses matches the host element. */
+            /*In this case, [pressed]is a standard CSS attribute selector, so this rule matches when the icon-toggle has a pressed attribute set on it.*/
+            :host([pressed]) iron-icon {
+                fill: var(--icon-toggle-pressed-color, currentcolor);
+            }
+        </style>
+
+        <!-- shadow DOM goes here -->
+        <iron-icon icon="[[toggleIcon]]" on-click="toggle"></iron-icon>
+
+    </template>
+
+    <script>
+
+        // <dom-module> 说明是自定义标签
+        // <template> 自定义标签的内容和CSS样式的模板
+        // <style> 自定义标签的CSS样式
+        // :host 代指自己定义的这个标签
+        class IconToggle extends Polymer.Element {
+
+            // You then give your new element a name, so that the browser can recognize it when you use it in tags.
+            // This name must match the id given in your element's template definition (<dom-module id="icon-toggle">).
+            static get is() {
+                return 'icon-toggle';
+            }
+
+
+            // For this more complicated property, you supply a configuration object with several fields.
+            // The value specifies the property's default value.
+            // The notify property tells Polymer to dispatch property change events when the property value changes. This lets the change be observed by other nodes.
+            // The reflectToAttribute property tells Polymer to update the corresponding attribute when the property changes.
+            // This lets you style the element using an attribute selector, like icon-toggle[pressed].
+            static get properties() {
+                return {
+                    pressed: {
+                        type: Boolean,
+                        notify: true,
+                        reflectToAttribute: true,
+                        value: false,
+                    },
+                    toggleIcon: {
+                        type: String
+                    }
+                };
+            }
+
+            constructor() {
+                super();
+            }
+
+            // Observe the pressed property on the object
+            static get observers() {
+                return [
+                    'pressedChanged(pressed)'
+                ]
+            }
+
+            pressedChanged(pressed) {
+                alert("pressed=" + pressed);
+            }
+
+            toggle() {
+                this.pressed = !this.pressed;
+            }
+        }
+
+        customElements.define(IconToggle.is, IconToggle);
+    </script>
+
+</dom-module>
+

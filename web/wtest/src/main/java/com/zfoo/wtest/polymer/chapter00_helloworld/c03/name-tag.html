@@ -1,0 +1,30 @@
+<!-- import polymer-element -->
+<link rel="import"  href="https://polygit.org/components/polymer/polymer-element.html">
+
+<dom-module id="name-tag">
+    <template>
+        <!-- bind to the "owner" property -->
+        This is <b>{{owner}}</b>'s name-tag element.
+    </template>
+
+    <script>
+
+        // Use data binding:
+        // Of course, it's not enough to have static shadow DOM. You usually want to have your element update its shadow DOM dynamically.
+        // Data binding is a great way to quickly propagate changes in your element and reduce boilerplate code.
+        // You can bind properties in your component using the "double-mustache" syntax ({{}}).
+        // The {{}} is replaced by the value of the property referenced between the brackets.
+
+        class NameTag extends Polymer.Element {
+            static get is() { return "name-tag"; }
+
+            // set this element's owner property
+            constructor() {
+                super();
+                this.owner = "Daniel";
+            }
+        }
+
+        customElements.define(NameTag.is, NameTag);
+    </script>
+</dom-module>

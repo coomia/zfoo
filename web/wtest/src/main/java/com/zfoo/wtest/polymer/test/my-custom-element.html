@@ -1,0 +1,48 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../bower_components/app-route/app-route.html">
+
+<dom-module id="my-custom-element">
+
+    <template>
+        <app-route route="{{route}}" pattern="{{pattern}}" active="{{active}}"></app-route>
+
+        <div>Route is <span hidden$="{{active}}">not</span> active.</div>
+        <p>Route path:{{route.path}}</p>
+        <p>Match pattern:{{pattern}}</p>
+    </template>
+
+    <script>
+        class MyCustomElement extends Polymer.Element {
+            static get is() {
+                return "my-custom-element";
+            }
+
+            static get properties() {
+                return {
+                    pattern: {
+                        value: '/store',
+                    },
+                    route: {
+                        value: function () {
+                            // Route objects are composed of the `path` that we want tomatch on, the `prefix`,
+                            // which is everything that has already been matched by someone else before it got to us, andan __queryParams object,
+                            // which represents the ?key=value part of the URL.
+                            // __queryParams is preceded by underscores because unless you're
+                            // doing the power-user thing of generating your own route objects,
+                            // you want to access query params directly from the <app-route>
+                            // element.
+                            return {
+                                path: '/store/garden',
+                                prefix: '',
+                                __queryParams: {}
+                            };
+                        }
+                    }
+                };
+            }
+        }
+
+        customElements.define(MyCustomElement.is, MyCustomElement);
+    </script>
+
+</dom-module>

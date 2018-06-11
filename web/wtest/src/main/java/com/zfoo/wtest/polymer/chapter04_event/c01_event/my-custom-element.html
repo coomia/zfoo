@@ -1,0 +1,33 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="my-custom-element">
+
+    <!--通过id绑定，推荐方法-->
+    <template>
+        <button id="myButton">Kick Me</button>
+    </template>
+
+    <script>
+        function handleClick() {
+            alert("on my god!!!");
+            // 此处this代表myButton本身，只触发一次handleClick，触发后就移除这个事件
+            this.removeEventListener("click", handleClick);
+        }
+
+        class MyCustomElement extends Polymer.Element {
+            static get is() {
+                return "my-custom-element";
+            }
+
+            ready() {
+                super.ready();
+                // 此处this代表my-custom-element
+                this.$.myButton.addEventListener("click", handleClick);
+            }
+
+        }
+
+        customElements.define(MyCustomElement.is, MyCustomElement);
+    </script>
+
+</dom-module>

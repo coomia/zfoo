@@ -1,0 +1,30 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="x-target">
+
+    <!--通过id绑定，推荐方法-->
+    <template>
+        <button id="myButton">Kick Me</button>
+    </template>
+
+    <script>
+
+        class XTarget extends Polymer.Element {
+            static get is() {
+                return 'x-target';
+            }
+
+            static get properties() {
+                return {
+                    someProp: {
+                        type: String,
+                        notify: true
+                    }
+                }
+            }
+        }
+
+        customElements.define(XTarget.is, XTarget);
+    </script>
+
+</dom-module>

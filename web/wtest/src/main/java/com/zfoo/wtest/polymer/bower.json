@@ -1,0 +1,38 @@
+{
+  "name": "polymer",
+  "version": "1.0.0",
+  "description": "这个项目的所有的依赖类库",
+  "authors": [
+    "github:jaysunxiao"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "input"
+  ],
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jaysunxiao/metalmin"
+  },
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/PolymerElements/iron-input",
+  "dependencies": {
+    "polymer": "polymer/polymer#^2.0.0",
+    "app-layout": "polymerelements/app-layout#^2.0.0",
+    "app-route": "polymerelements/app-route#^2.0.0",
+    "iron-a11y-announcer": "PolymerElements/iron-a11y-announcer#^2.0.0",
+    "iron-flex-layout": "polymerelements/iron-flex-layout#^2.0.0",
+    "iron-icon": "polymerelements/iron-icon#^2.0.0",
+    "iron-iconset-svg": "polymerelements/iron-iconset-svg#^2.0.0",
+    "iron-input": "polymerelements/iron-input#^2.0.0",
+    "iron-pages": "polymerelements/iron-pages#^2.0.0",
+    "iron-selector": "polymerelements/iron-selector#^2.0.0",
+    "paper-icon-button": "polymerelements/paper-icon-button#^2.0.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "polymerelements/iron-component-page#1 - 2",
+    "iron-demo-helpers": "polymerelements/iron-demo-helpers#1 - 2",
+    "web-component-tester": "^6.0.0"
+  }
+}
