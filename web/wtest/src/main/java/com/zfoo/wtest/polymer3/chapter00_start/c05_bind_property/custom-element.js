@@ -10,7 +10,10 @@ class CustomElement extends PolymerElement {
     // configure the owner property
     static get properties() {
         return {
-            foo: String
+            foo: {
+                type: String,
+                value: 'World'
+            }
         };
     }
 
@@ -19,6 +22,10 @@ class CustomElement extends PolymerElement {
         
         <!-- bind to the "owner" property -->
         <p>Hello <b>[[foo]]</b>!</p>
+        <!-- iron-input exposes a two-way bindable input value -->
+        <iron-input bind-value="{{foo}}">
+            <input is="iron-input" placeholder="Your name here...">
+        </iron-input>
         
         `;
     }

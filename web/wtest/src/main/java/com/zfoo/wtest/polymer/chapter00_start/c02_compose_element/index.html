@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Compose with shadow DOM</title>
-    <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js" async></script>
-    <script src="custom-element.js" type="module" async></script>
-
+    <script src="../../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="import" href="custom-element.html">
 
     <!--设置h1标签的颜色为红色，不会影响dom的内部元素标签，但是自定义标签里面的嵌套元素不使用dom-->
     <style>
@@ -16,12 +13,10 @@
 
 </head>
 <body>
-
 <custom-element>
     <!--红色-->
     <h1>This is my picture!</h1>
     <img src="icon.png">
 </custom-element>
-
 </body>
 </html>

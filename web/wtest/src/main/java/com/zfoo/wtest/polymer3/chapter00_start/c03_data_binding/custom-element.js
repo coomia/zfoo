@@ -1,27 +1,30 @@
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
+import {PolymerElement, html} from '../../node_modules/@polymer/polymer/polymer-element.js';
 
-// Define the class for a new element called custom-element
+
+// Use data binding:
+// Of course, it's not enough to have static shadow DOM. You usually want to have your element update its shadow DOM dynamically.
+// Data binding is a great way to quickly propagate changes in your element and reduce boilerplate code.
+// You can bind properties in your component using the "double-mustache" syntax ({{}}).
+// The {{}} is replaced by the value of the property referenced between the brackets.
 class CustomElement extends PolymerElement {
+
+    static get is() {
+        return "custom-element";
+    }
+
     constructor() {
         super();
-
         /* set this element's owner property */
-        this.owner = 'Daniel';
+        this.foo = "World";
     }
 
     static get template() {
         return html`
         <!-- bind to the "owner" property -->
-        This is <b>{{owner}}</b>'s name-tag element.
+        Hello <b>{{foo}}</b>!
         `;
     }
 }
 
 // Register the new element
-customElements.define('custom-element', CustomElement);
-
-/* TODO:
-  * - Try editing the value of the `owner` property.
-  * - Try adding another property and binding it in your component.
-  * Hint: Add the following property definition to the constructor: `this.propertyName = "Property contents";` and add `{{propertyName}}` to the element’s shadow DOM.
-  */
+customElements.define(CustomElement.is, CustomElement);

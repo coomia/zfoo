@@ -1,0 +1,34 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-input/iron-input.html">
+
+<dom-module id="custom-element">
+
+    <template>
+        <!-- bind to the "owner" property -->
+        <p>Hello <b>[[foo]]</b>!</p>
+        <!-- iron-input exposes a two-way bindable input value -->
+        <iron-input bind-value="{{foo}}">
+            <input is="iron-input" placeholder="Your name here...">
+        </iron-input>
+    </template>
+
+    <script>
+        class CustomElement extends Polymer.Element {
+
+            static get is() {
+                return "custom-element";
+            }
+
+            // configure the owner property
+            static get properties() {
+                return {
+                    foo: String
+                };
+            }
+
+        }
+
+        customElements.define(CustomElement.is, CustomElement);
+    </script>
+
+</dom-module>
