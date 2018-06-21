@@ -14,6 +14,7 @@ class CustomElement extends PolymerElement {
 
     // Shadow DOM is encapsulated inside the element.
     // Polymer's DOM templating to create a shadow DOM tree for your element.
+    // You can think of shadow DOM as a scoped subtree inside your element.So document-level CSS can't restyle the <h1> by accident
     // ShadowDOM最大的用处应该是隔离外部环境用于封装组件,它有一种既定的样式，外部css不会影响到它
     static get template() {
         return html`

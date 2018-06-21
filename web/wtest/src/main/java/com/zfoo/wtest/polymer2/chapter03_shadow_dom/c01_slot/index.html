@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>First element</title>
+    <script src="../../bower_components/webcomponentsjs/webcomponents-loader.js"></script>
+    <link rel="import" href="custom-icon-toggle.html">
+</head>
+<body>
+
+<custom-icon-toggle toggle-icon="star">
+
+    <!--会通过slot属性匹配slot里的name-->
+    <span slot="title">Card Title</span>
+
+    <!--如果没有slot使用默认的，匹配slot里没有name属性的-->
+    <div>
+        Some text for the body of the card.
+    </div>
+
+    <!--这个找不到匹配的slot-->
+    <span slot="abc">This footer doesn't show up.</span>
+
+</custom-icon-toggle>
+
+</body>
+</html>

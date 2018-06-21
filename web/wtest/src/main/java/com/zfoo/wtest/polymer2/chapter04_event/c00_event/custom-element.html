@@ -1,0 +1,29 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="custom-element">
+
+    <!--绑定事件的两种方式?-->
+    <!--通过元素绑定，这种方法不推荐，晦涩难懂-->
+    <template>
+        <!--By default, custom events don't propagate though shadow DOM boundaries. -->
+        <!--To allow a custom event to travel through a shadow DOM boundary and be retargeted, you need to create it with the composed flag set to true:-->
+        <!--var event = new CustomEvent('my-event', {bubbles: true, composed: true});-->
+        <!--必须绑定的是on-click，不能是onclick-->
+        <button on-click="handleClick">Kick Me</button>
+    </template>
+
+    <script>
+        class CustomElement extends Polymer.Element {
+            static get is() {
+                return "custom-element";
+            }
+
+            handleClick() {
+                alert("on my god!!!");
+            }
+        }
+
+        customElements.define(CustomElement.is, CustomElement);
+    </script>
+
+</dom-module>

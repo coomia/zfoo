@@ -1,7 +1,8 @@
 {
-  "name": "start-polymer3",
+  "name": "learning-polymer3.0",
   "version": "1.0.0",
   "author": "jaysunxiao@gmail.com",
+  "description": "这个项目的所有的依赖类库",
   "dependencies": {
     "@webcomponents/webcomponentsjs": "^1.2.0",
     "@polymer/polymer": "^3.0.0-pre.12",

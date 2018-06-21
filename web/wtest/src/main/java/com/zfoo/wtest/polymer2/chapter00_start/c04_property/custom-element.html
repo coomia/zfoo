@@ -1,0 +1,29 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="custom-element">
+
+    <template>
+        <!-- bind to the "foo" property -->
+        <p>Hello <b>[[foo]]</b>!</p>
+    </template>
+
+    <script>
+        class CustomElement extends Polymer.Element {
+
+            static get is() {
+                return "custom-element";
+            }
+
+            // configure the owner property
+            static get properties() {
+                return {
+                    foo: String
+                };
+            }
+
+        }
+
+        customElements.define(CustomElement.is, CustomElement);
+    </script>
+
+</dom-module>

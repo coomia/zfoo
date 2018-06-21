@@ -1,5 +1,4 @@
 import {PolymerElement, html} from '@polymer/polymer/polymer-element.js';
-import '@polymer/iron-input/iron-input.js';
 
 class CustomElement extends PolymerElement {
 
