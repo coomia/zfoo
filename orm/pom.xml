@@ -4,26 +4,23 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>www.zfoo.com</groupId>
+    <groupId>com.zfoo</groupId>
     <artifactId>orm</artifactId>
     <version>1.0</version>
 
-    <!-- jar包版本号 -->
     <properties>
-        <file.encoding>UTF-8</file.encoding><!-- 编码格式 -->
-        <project.build.sourceEncoding>${file.encoding}</project.build.sourceEncoding><!-- 文件拷贝时的编码 -->
-        <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding><!-- 输出的编码 -->
-        <maven.compiler.encoding>${file.encoding}</maven.compiler.encoding><!-- 编译时的编码 -->
-        <maven.compiler.plugin.version>3.5</maven.compiler.plugin.version><!-- 用于编译java代码 -->
-        <maven.resources.plugin.version>3.0.0</maven.resources.plugin.version><!-- 用于自定义拷贝资源文件 -->
-        <maven.surefire.plugin.version>2.20</maven.surefire.plugin.version><!-- 用于测试 -->
-        <maven.shade.plugin.version>3.0.0</maven.shade.plugin.version><!-- 用于打包 -->
-        <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version><!-- 用于添加override文件，覆盖别的包 -->
-        <exec.maven.plugin.version>1.5.0</exec.maven.plugin.version><!-- 用于批量运行java main方法 -->
+        <!-- 本项目的其它module版本号 -->
+        <zfoo.event.version>1.0</zfoo.event.version>
+        <zfoo.hotswap.version>1.0</zfoo.hotswap.version>
+        <zfoo.net.version>1.0</zfoo.net.version>
+        <zfoo.orm.version>1.0</zfoo.orm.version>
+        <zfoo.scheduler.version>1.0</zfoo.scheduler.version>
+        <zfoo.storage.version>1.0</zfoo.storage.version>
+        <zfoo.util.version>1.0</zfoo.util.version>
+        <zfoo.web.version>1.0</zfoo.web.version>
+        <zfoo.zplugin.version>1.0</zfoo.zplugin.version>
 
-
-        <java.version>1.8</java.version>
-
+        <!-- 依赖的jar包版本号 -->
         <commons-codec.version>1.9</commons-codec.version>
         <commons-dbcp.version>1.4</commons-dbcp.version>
         <commons-io.version>2.5</commons-io.version>
@@ -31,14 +28,16 @@
         <commons-lang.version>3.6</commons-lang.version>
         <commons-fileupload.version>1.2.1</commons-fileupload.version>
 
+
+        <google.guava.version>22.0</google.guava.version>
+
+
         <zookeeper.version>3.4.10</zookeeper.version>
         <curator-framework.version>4.0.0</curator-framework.version>
         <curator-recipes.version>4.0.0</curator-recipes.version>
 
-        <google.guava.version>22.0</google.guava.version>
 
         <spring.version>4.2.2.RELEASE</spring.version>
-        <testng.version>6.8.7</testng.version>
 
         <jackson.version>1.9.13</jackson.version>
 
@@ -61,17 +60,44 @@
         <slf4j.version>1.7.25</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
 
-        <zfoo.event.version>1.0</zfoo.event.version>
-        <zfoo.hotswap.version>1.0</zfoo.hotswap.version>
-        <zfoo.net.version>1.0</zfoo.net.version>
-        <zfoo.orm.version>1.0</zfoo.orm.version>
-        <zfoo.scheduler.version>1.0</zfoo.scheduler.version>
-        <zfoo.storage.version>1.0</zfoo.storage.version>
-        <zfoo.util.version>1.0</zfoo.util.version>
-        <zfoo.web.version>1.0</zfoo.web.version>
+        <junit.version>4.12</junit.version>
+
+
+        <!-- plugin相关版本号 -->
+        <java.version>1.8</java.version>
+        <file.encoding>UTF-8</file.encoding>
+
+        <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>3.0.0</maven-resources-plugin.version>
+        <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
+        <maven-shade-plugin.version>3.0.0</maven-shade-plugin.version>
+        <maven-site-plugin.version>3.7</maven-site-plugin.version>
+        <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>
+        <maven-javadoc-plugin.version>3.0.0</maven-javadoc-plugin.version>
+
+        <maven-plugin-api.version>3.5.0</maven-plugin-api.version>
+        <maven-plugin-annotations.version>3.5</maven-plugin-annotations.version>
+
+        <maven-help-plugin.version>3.0.0</maven-help-plugin.version>
+
+        <exec-maven-plugin.version>1.5.0</exec-maven-plugin.version><!-- 用于批量运行java main方法 -->
+
+        <!-- site中javadoc输出格式配置 -->
+        <dependency.locations.enabled>false</dependency.locations.enabled>
+        <project.build.sourceEncoding>${file.encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding>
     </properties>
 
     <dependencies>
+
+        <!-- 依赖的util类库 -->
+        <dependency>
+            <groupId>com.zfoo</groupId>
+            <artifactId>util</artifactId>
+            <version>${zfoo.util.version}</version>
+        </dependency>
+
         <!-- 依赖的数据库连接池类库-->
         <dependency>
             <groupId>commons-dbcp</groupId>
@@ -168,13 +194,6 @@
             <version>${javassist.version}</version>
         </dependency>
 
-        <!-- 依赖的util类库 -->
-        <dependency>
-            <groupId>www.zfoo.com</groupId>
-            <artifactId>util</artifactId>
-            <version>${zfoo.util.version}</version>
-        </dependency>
-
         <!-- 依赖的日志系统，使用Log4j+SLF4J -->
         <dependency>
             <groupId>log4j</groupId>
@@ -196,24 +215,31 @@
 
         <!-- 依赖的测试库 -->
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
         <sourceDirectory>src/main/java</sourceDirectory>
         <testSourceDirectory>src/test/java</testSourceDirectory>
 
         <plugins>
 
+            <!-- 清理插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${maven-clean-plugin.version}</version>
+            </plugin>
+
+            <!-- 编译插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.plugin.version}</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -222,10 +248,11 @@
             </plugin>
 
 
+            <!-- resource资源管理插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven.resources.plugin.version}</version>
+                <version>${maven-resources-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
@@ -248,31 +275,36 @@
             </plugin>
 
 
+            <!-- 测试插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven.surefire.plugin.version}</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <forkMode>once</forkMode>
                     <threadCount>10</threadCount>
-                    <argLine>-Dfile.encoding=UTF-8</argLine><!--argLine传入JVM选项-->
+                    <argLine>-Dfile.encoding=${file.encoding}</argLine>
                 </configuration>
             </plugin>
 
-
+            <!-- 打包插件-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>${maven.shade.plugin.version}</version>
+                <version>${maven-shade-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
                         </goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                        </configuration>
                     </execution>
                 </executions>
                 <configuration>
+
                     <transformers>
                         <transformer
                                 implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
@@ -291,34 +323,23 @@
             </plugin>
 
 
+            <!-- maven帮助插件 -->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>${build.helper.maven.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>src/override</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-help-plugin</artifactId>
+                <version>${maven-help-plugin.version}</version>
             </plugin>
 
 
+            <!-- 外部的程序运行插件 -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>${exec.maven.plugin.version}</version>
+                <version>${exec-maven-plugin.version}</version>
                 <executions>
                     <execution>
-                        <phase>package</phase>
+                        <phase>test</phase>
+                        <!--运行前先编译代码，exec：java不会自动编译代码，你需要手动执行mvn compile来完成编译-->
                         <goals>
                             <goal>java</goal>
                         </goals>
@@ -334,8 +355,37 @@
                     </arguments>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
+
+
+    <!-- 用于生成javadoc文档，测试报告等等 -->
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${maven-site-plugin.version}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${maven-project-info-reports-plugin.version}</version>
+            </plugin>
+
+            <!--必须设置环境变量：JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8 -Dfile.decoding=UTF-8-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+                <configuration>
+                    <encoding>${file.encoding}</encoding>
+                    <docencoding>${file.encoding}</docencoding>
+                    <charset>${file.encoding}</charset>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>

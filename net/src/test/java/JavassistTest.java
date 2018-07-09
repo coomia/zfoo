@@ -1,5 +1,6 @@
 import javassist.*;
-import org.testng.annotations.Test;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.io.IOException;
 import java.lang.reflect.*;
@@ -313,6 +314,7 @@ public class JavassistTest {
     }
 
 
+    @Ignore
     @Test
     public void test() throws NotFoundException, CannotCompileException, IOException, IllegalAccessException, InstantiationException {
         ClassPool cp = ClassPool.getDefault();

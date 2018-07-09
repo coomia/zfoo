@@ -7,13 +7,11 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * Assertion utility class that assists in validating arguments.
- * <p>
- * <p>This class is similar to JUnit's assertion library. If an argument value is
+ * Assertion utility class that assists in validating arguments.<p>
+ * This class is similar to JUnit's assertion library. If an argument value is
  * deemed invalid, an {@link IllegalArgumentException} is thrown (typically).
  * <p>
- * For example:
- * <p>
+ * For example:<p>
  * <pre class="code">
  * Assert.notNull(clazz, "The class must not be null");
  * Assert.isTrue(i > 0, "The value must be greater than zero");</pre>
@@ -40,11 +38,11 @@ public abstract class AssertionUtils {
     }
 
     /**
-     * 可支持带参数format的类型："类{}的成员变量：{}不能有set方法：{}"
+     * 可支持带参数format的类型：类{}的成员变量：{}不能有set方法：{}
      *
-     * @param expression
-     * @param format
-     * @param args
+     * @param expression 表达式
+     * @param format     格式
+     * @param args       参数
      */
     public static void isTrue(boolean expression, String format, Object... args) {
         if (!expression) {

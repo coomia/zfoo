@@ -3,6 +3,7 @@ package com.zfoo.orm;
 import com.zfoo.orm.entity.PlayerEnt;
 import com.zfoo.orm.model.cache.IEntityCaches;
 import org.apache.commons.dbcp.BasicDataSource;
+import org.junit.Ignore;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -16,6 +17,7 @@ import java.util.List;
  * @version 1.0
  * @since 2017-12-08 15:13
  */
+@Ignore
 public class TestInsertAndUpdate {
 
     private static final Logger logger = LoggerFactory.getLogger(TestInsertAndUpdate.class);

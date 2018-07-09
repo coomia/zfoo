@@ -52,6 +52,8 @@ public abstract class StringUtils {
 
     public static final String DOLLAR = "$";// 美元符号
 
+    public static final String MULTIPLE_HYPHENS = "-----------------------------------------------------------------------";
+
 
     public static final int INDEX_NOT_FOUND = -1;//Represents a failed index search.
 

@@ -1,6 +1,7 @@
 package expression.js;
 
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 import javax.script.Invocable;
 import javax.script.ScriptEngine;
@@ -29,7 +30,7 @@ public class ScriptFunTest {
         engine.eval(scriptText);
         Invocable invocable = (Invocable) engine;
         Object result = invocable.invokeFunction("sum", 99, 99);
-        System.out.println(result);
+        Assert.assertEquals(result, 198.0);
     }
 
     @Test
@@ -39,8 +40,8 @@ public class ScriptFunTest {
         String scriptText = "function sum(a,b) { return a+b; } ";
         engine.eval(scriptText);
         Invocable invocable = (Invocable) engine;
-        Object result = invocable.invokeFunction("sum", "hello ", "world!");
-        System.out.println(result);
+        Object result = invocable.invokeFunction("sum", "Hello ", "world!");
+        Assert.assertEquals(result,"Hello world!");
     }
 
 }

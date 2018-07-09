@@ -1,8 +1,9 @@
 package com.zfoo.orm;
 
 import com.zfoo.orm.entity.PlayerEnt;
+import org.junit.Ignore;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,6 +14,7 @@ import java.util.List;
  * @version 1.0
  * @since 2017 11 14 13 22
  */
+@Ignore
 public class AccessorTest {
 
     @Test

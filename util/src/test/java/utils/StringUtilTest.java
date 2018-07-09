@@ -1,7 +1,8 @@
 package utils;
 
 import com.zfoo.util.StringUtils;
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 /**
  * @author jaysunxiao
@@ -12,19 +13,19 @@ public class StringUtilTest {
 
     @Test
     public void isEmpty() {
-        System.out.println(StringUtils.isEmpty("  "));
+        Assert.assertEquals(StringUtils.isEmpty("  "), false);
     }
 
     @Test
     public void capitalize() {
         String str = "hello world!";
-        System.out.println(StringUtils.capitalize(str));
+        Assert.assertEquals(StringUtils.capitalize(str), "Hello world!");
     }
 
     @Test
     public void unCapitalize() {
         String str = "Hello world!";
-        System.out.println(StringUtils.uncapitalize(str));
+        Assert.assertEquals(StringUtils.uncapitalize(str), "hello world!");
     }
 
 }

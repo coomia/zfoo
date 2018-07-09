@@ -7,7 +7,7 @@ import com.zfoo.game.gameserver.module.core.condition.AndCondition;
 import com.zfoo.game.gameserver.module.core.consume.AndConsume;
 import com.zfoo.game.gameserver.module.core.reward.AndReward;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 /**
  * @author jaysunxiao

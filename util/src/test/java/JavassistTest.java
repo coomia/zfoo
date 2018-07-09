@@ -1,4 +1,4 @@
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,13 +12,6 @@ public class JavassistTest {
 
     @Test
     public void test() {
-        Set<Integer> s1 = new HashSet<>();
-        Set<Integer> s2 = new HashSet<>();
-        s1.add(1);
-        s1.add(2);
-        s2.add(3);
-        System.out.println(s1.retainAll(s2));
-        System.out.println(s1.size());
     }
 
 }

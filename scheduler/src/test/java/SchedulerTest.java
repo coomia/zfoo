@@ -1,5 +1,6 @@
+import org.junit.Ignore;
+import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.testng.annotations.Test;
 
 /**
  * cron（译为克龙）代表100万年，是英文单词中最大的时间单位。
@@ -9,9 +10,12 @@ import org.testng.annotations.Test;
  * @version 1.0
  * @since 2017-12-21 16:18
  */
+
+@Ignore
 public class SchedulerTest {
 
-    public static void main(String[] args) {
+    @Test
+    public void test() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("test_scheduler.xml");
         while (true) {
 

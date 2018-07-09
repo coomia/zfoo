@@ -1,7 +1,8 @@
 package utils;
 
 import com.zfoo.util.JsonUtils;
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.*;
 
@@ -16,7 +17,7 @@ public class JsonUtilTest {
 
     public static String id = "\"id\":\"1000\"";
     public static String name = "\"name\":\"jaysunxiao\"";
-    public static String sex = "\"sex\":\"boy\"";
+    public static String sex = "\"sex\":\"man\"";
     public static String age = "\"age\":22";
     public static String list = "\"list\":[1,2,3]";
     public static String map = "\"map\":{\"1\":1,\"2\":2,\"3\":3}";
@@ -27,7 +28,11 @@ public class JsonUtilTest {
     @Test
     public void string2Object() {
         User user = JsonUtils.string2Object(userJson, User.class);
-        System.out.println(user);
+        Assert.assertEquals(user.getId(), "1000");
+        Assert.assertEquals(user.getName(), "jaysunxiao");
+        Assert.assertEquals(user.getSex(), "man");
+        Assert.assertEquals(user.getList().size(), 3);
+        Assert.assertEquals(user.getMap().size(), 3);
     }
 
     @Test
@@ -35,7 +40,7 @@ public class JsonUtilTest {
         User user = new User();
         user.setId("1000");
         user.setName("jaysunxiao");
-        user.setSex("boy");
+        user.setSex("man");
         user.setAge(22);
         //数组，链表，list
         List<Integer> list = new ArrayList<>();
@@ -49,51 +54,47 @@ public class JsonUtilTest {
         map.put(2, 2);
         map.put(3, 3);
         user.setMap(map);
-        System.out.println(JsonUtils.object2String(user));
+
+        Assert.assertEquals(JsonUtils.object2String(user), userJson);
     }
 
     @Test
     public void string2List() {
-        String str = "[1,2,3,4,5,1,1,1,1]";
+        String str = "[1,2,3]";
         List<Integer> list = JsonUtils.string2List(str, Integer.class);
-        System.out.println(list);
+
+        Assert.assertEquals(list.size(), 3);
     }
 
     @Test
     public void string2Set() {
-        String str = "[1,2,3,4,5,1,1,1,1]";
+        String str = "[1,2,3]";
         Set<Integer> set = JsonUtils.string2Set(str, Integer.class);
-        System.out.println(set);
+
+        Assert.assertEquals(set.size(), 3);
     }
 
     @Test
     public void string2Map() {
-        String str = "{\"1\":2,\"2\":3,\"3\":4}";
+        String str = "{\"1\":1,\"2\":2,\"3\":3}";
         Map<Integer, Integer> map = JsonUtils.string2Map(str, Integer.class, Integer.class);
-        System.out.println(map);
+
+        Assert.assertEquals(map.size(), 3);
     }
 
     @Test
     public void string2Array() {
         String str = "[1,2,3]";
         Integer[] list = JsonUtils.string2Array(str, Integer.class);
-        for(Integer integer : list){
-            System.out.println(integer);
-        }
+
+        Assert.assertEquals(list.length, 3);
     }
 
     @Test
     public void testGetNode() {
-        System.out.println(JsonUtils.getNode(userJson, "id"));
+        Assert.assertEquals(JsonUtils.getNode(userJson, "id").getTextValue(), "1000");
     }
 
-
-    @Test
-    public void test() {
-        Integer[] list =new Integer[4];
-        Class<?> clazz=JsonUtilTest[].class;
-        System.out.println(clazz.getName());
-    }
 
 }
 

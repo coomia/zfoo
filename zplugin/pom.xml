@@ -5,8 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.zfoo</groupId>
-    <artifactId>storage</artifactId>
+    <artifactId>zplugin</artifactId>
     <version>1.0</version>
+
+    <packaging>maven-plugin</packaging>
 
     <properties>
         <!-- 本项目的其它module版本号 -->
@@ -89,46 +91,20 @@
         <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding>
     </properties>
 
-
     <dependencies>
-        <!-- 依赖的utils类库 -->
         <dependency>
-            <groupId>com.zfoo</groupId>
-            <artifactId>util</artifactId>
-            <version>${zfoo.util.version}</version>
+            <groupId>org.apache.maven</groupId>
+            <artifactId>maven-plugin-api</artifactId>
+            <version>${maven-plugin-api.version}</version>
         </dependency>
 
-        <!-- 依赖的Spring模块类库 -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-
-        <!-- excel，world，ppt,xml操作库 -->
-        <!--Apache POI是用Java编写的免费开源的跨平台的 Java API，提供对Microsoft Office格式档案读和写的功能。
-            POI为“Poor Obfuscation Implementation”的首字母缩写，意为“可怜的模糊实现”。-->
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi</artifactId>
-            <version>${poi.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.poi</groupId>
-            <artifactId>poi-ooxml</artifactId>
-            <version>${poi.version}</version>
-        </dependency>
-
-
-        <!-- 依赖的测试库 -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
-            <scope>test</scope>
+            <groupId>org.apache.maven.plugin-tools</groupId>
+            <artifactId>maven-plugin-annotations</artifactId>
+            <version>${maven-plugin-annotations.version}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
-
 
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
@@ -295,5 +271,4 @@
             </plugin>
         </plugins>
     </reporting>
-
 </project>

@@ -7,8 +7,8 @@ import com.zfoo.test.*;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.testng.Assert;
-import org.testng.annotations.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,8 +52,8 @@ public class ProtocolTest {
         writeBuff.readerIndex(ProtocolManager.PROTOCOL_HEAD_LENGTH);// 信息头的长度
 
         Object object = protocolService.read(writeBuff);
-        System.out.println(object);
 
+        // System.out.println(object);
         Assert.assertEquals(object, cm);
     }
 
@@ -74,8 +74,9 @@ public class ProtocolTest {
         writeBuff.readerIndex(ProtocolManager.PROTOCOL_HEAD_LENGTH);// 信息头的长度
 
         Object object = protocolService.read(writeBuff);
-        System.out.println(object);
 
+
+        // System.out.println(object);
         Assert.assertEquals(object, sm);
     }
 
@@ -93,8 +94,8 @@ public class ProtocolTest {
         writeBuff.readerIndex(ProtocolManager.PROTOCOL_HEAD_LENGTH);// 信息头的长度
 
         Object object = protocolService.read(writeBuff);
-        System.out.println(object);
 
+        // System.out.println(object);
         Assert.assertEquals(object, cm);
     }
 
@@ -114,8 +115,8 @@ public class ProtocolTest {
         writeBuff.readerIndex(ProtocolManager.PROTOCOL_HEAD_LENGTH);// 信息头的长度
 
         Object object = protocolService.read(writeBuff);
-        System.out.println(object);
 
+        // System.out.println(object);
         Assert.assertEquals(object, cm);
     }
 
@@ -135,8 +136,8 @@ public class ProtocolTest {
         writeBuff.readerIndex(ProtocolManager.PROTOCOL_HEAD_LENGTH);// 信息头的长度
 
         Object object = protocolService.read(writeBuff);
-        System.out.println(object);
 
+        // System.out.println(object);
         Assert.assertEquals(object, cm);
     }
 
@@ -177,8 +178,8 @@ public class ProtocolTest {
         writeBuff.readerIndex(ProtocolManager.PROTOCOL_HEAD_LENGTH);// 信息头的长度
 
         Object object = protocolService.read(writeBuff);
-        System.out.println(object);
 
+        // System.out.println(object);
         Assert.assertEquals(object, cm);
     }
 
@@ -198,8 +199,8 @@ public class ProtocolTest {
         writeBuff.readerIndex(ProtocolManager.PROTOCOL_HEAD_LENGTH);// 信息头的长度
 
         Object object = protocolService.read(writeBuff);
-        System.out.println(object);
 
+        // System.out.println(object);
         Assert.assertEquals(object, cm);
     }
 
@@ -236,8 +237,8 @@ public class ProtocolTest {
         writeBuff.readerIndex(ProtocolManager.PROTOCOL_HEAD_LENGTH);// 信息头的长度
 
         Object object = protocolService.read(writeBuff);
-        System.out.println(object);
 
+        // System.out.println(object);
         Assert.assertEquals(object, cm);
     }
 

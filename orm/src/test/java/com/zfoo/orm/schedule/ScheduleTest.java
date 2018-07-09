@@ -1,6 +1,7 @@
 package com.zfoo.orm.schedule;
 
-import org.testng.annotations.Test;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -11,10 +12,12 @@ import java.util.concurrent.TimeUnit;
  * @version 1.0
  * @since 2017-12-07 17:47
  */
+@Ignore
 public class ScheduleTest {
 
     private final static ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
 
+    @Test
     public void test() {
         scheduler.scheduleAtFixedRate(new Runnable() {
             @Override

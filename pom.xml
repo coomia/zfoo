@@ -4,11 +4,33 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>www.zfoo.com</groupId>
+
+    <groupId>com.zfoo</groupId>
     <artifactId>zfoo</artifactId>
     <packaging>pom</packaging>
     <version>1.0</version>
 
+
+    <description>The root project of zfoo</description>
+    <url>https://github.com/jaysunxiao/zfoo</url>
+    <inceptionYear>2016</inceptionYear>
+
+    <organization>
+        <name>The ZFOO company</name>
+        <url>https:www.zfoo.com</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+
+    <!-- 没有用<dependencyManagement>来管理这个root，是为了让下面的module不依赖于任何parent，复制出来就可以用 -->
+    <!-- 聚合，把下面的几个module一起打包，packaging必须为pom -->
     <modules>
         <module>event</module>
         <module>hotswap</module>
@@ -19,26 +41,24 @@
         <module>util</module>
         <module>game</module>
         <module>web</module>
+        <module>zplugin</module>
         <module>ztest</module>
     </modules>
 
 
-    <!-- jar包版本号 -->
     <properties>
-        <file.encoding>UTF-8</file.encoding><!-- 编码格式 -->
-        <project.build.sourceEncoding>${file.encoding}</project.build.sourceEncoding><!-- 文件拷贝时的编码 -->
-        <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding><!-- 输出的编码 -->
-        <maven.compiler.encoding>${file.encoding}</maven.compiler.encoding><!-- 编译时的编码 -->
-        <maven.compiler.plugin.version>3.5</maven.compiler.plugin.version><!-- 用于编译java代码 -->
-        <maven.resources.plugin.version>3.0.0</maven.resources.plugin.version><!-- 用于自定义拷贝资源文件 -->
-        <maven.surefire.plugin.version>2.20</maven.surefire.plugin.version><!-- 用于测试 -->
-        <maven.shade.plugin.version>3.0.0</maven.shade.plugin.version><!-- 用于打包 -->
-        <build.helper.maven.plugin.version>3.0.0</build.helper.maven.plugin.version><!-- 用于添加override文件，覆盖别的包 -->
-        <exec.maven.plugin.version>1.5.0</exec.maven.plugin.version><!-- 用于批量运行java main方法 -->
+        <!-- 本项目的其它module版本号 -->
+        <zfoo.event.version>1.0</zfoo.event.version>
+        <zfoo.hotswap.version>1.0</zfoo.hotswap.version>
+        <zfoo.net.version>1.0</zfoo.net.version>
+        <zfoo.orm.version>1.0</zfoo.orm.version>
+        <zfoo.scheduler.version>1.0</zfoo.scheduler.version>
+        <zfoo.storage.version>1.0</zfoo.storage.version>
+        <zfoo.util.version>1.0</zfoo.util.version>
+        <zfoo.web.version>1.0</zfoo.web.version>
+        <zfoo.zplugin.version>1.0</zfoo.zplugin.version>
 
-
-        <java.version>1.8</java.version>
-
+        <!-- 依赖的jar包版本号 -->
         <commons-codec.version>1.9</commons-codec.version>
         <commons-dbcp.version>1.4</commons-dbcp.version>
         <commons-io.version>2.5</commons-io.version>
@@ -46,14 +66,16 @@
         <commons-lang.version>3.6</commons-lang.version>
         <commons-fileupload.version>1.2.1</commons-fileupload.version>
 
+
+        <google.guava.version>22.0</google.guava.version>
+
+
         <zookeeper.version>3.4.10</zookeeper.version>
         <curator-framework.version>4.0.0</curator-framework.version>
         <curator-recipes.version>4.0.0</curator-recipes.version>
 
-        <google.guava.version>22.0</google.guava.version>
 
         <spring.version>4.2.2.RELEASE</spring.version>
-        <testng.version>6.8.7</testng.version>
 
         <jackson.version>1.9.13</jackson.version>
 
@@ -76,14 +98,33 @@
         <slf4j.version>1.7.25</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
 
-        <zfoo.event.version>1.0</zfoo.event.version>
-        <zfoo.hotswap.version>1.0</zfoo.hotswap.version>
-        <zfoo.net.version>1.0</zfoo.net.version>
-        <zfoo.orm.version>1.0</zfoo.orm.version>
-        <zfoo.scheduler.version>1.0</zfoo.scheduler.version>
-        <zfoo.storage.version>1.0</zfoo.storage.version>
-        <zfoo.util.version>1.0</zfoo.util.version>
-        <zfoo.web.version>1.0</zfoo.web.version>
+        <junit.version>4.12</junit.version>
+
+
+        <!-- plugin相关版本号 -->
+        <java.version>1.8</java.version>
+        <file.encoding>UTF-8</file.encoding>
+
+        <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
+        <maven-compiler-plugin.version>3.7.0</maven-compiler-plugin.version>
+        <maven-resources-plugin.version>3.0.0</maven-resources-plugin.version>
+        <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
+        <maven-shade-plugin.version>3.0.0</maven-shade-plugin.version>
+        <maven-site-plugin.version>3.7</maven-site-plugin.version>
+        <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>
+        <maven-javadoc-plugin.version>3.0.0</maven-javadoc-plugin.version>
+
+        <maven-plugin-api.version>3.5.0</maven-plugin-api.version>
+        <maven-plugin-annotations.version>3.5</maven-plugin-annotations.version>
+
+        <maven-help-plugin.version>3.0.0</maven-help-plugin.version>
+
+        <exec-maven-plugin.version>1.5.0</exec-maven-plugin.version><!-- 用于批量运行java main方法 -->
+
+        <!-- site中javadoc输出格式配置 -->
+        <dependency.locations.enabled>false</dependency.locations.enabled>
+        <project.build.sourceEncoding>${file.encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding>
     </properties>
 
 
@@ -108,13 +149,21 @@
         <!--</resources>-->
 
         <plugins>
-            <!-- 为了使项目结构更为清晰，Maven区别对待Java代码文件和资源文件，maven-compiler-plugin用来编译Java代码，
-            maven-resources-plugin则用来处理资源文件。默认的主资源文件目录是src/main/resources，很多用户会需要添加额外的资源文件目录，这个时候就可以通过配置maven-resources-plugin来实现。此外，资源文件过滤也是Maven的一大特性，你可以在资源文件中使用${propertyName}形式的Maven属性，然后配置maven-resources-plugin开启对资源文件的过滤，之后就可以针对不同环境通过命令行或者Profile传入属性的值，以实现更为灵活的构建。 -->
-            <!-- 指定编码格式，否则在DOS下运行mvn compile命令时会出现莫名的错误，因为系统默认使用GBK编码 -->
+
+            <!-- 清理插件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${maven-clean-plugin.version}</version>
+            </plugin>
+
+            <!-- 为了使项目结构更为清晰，Maven区别对待Java代码文件和资源文件，maven-compiler-plugin用来编译Java代码，maven-resources-plugin则用来处理资源文件。-->
+
+            <!-- 编译插件 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>${maven.compiler.plugin.version}</version>
+                <version>${maven-compiler-plugin.version}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -123,14 +172,15 @@
             </plugin>
 
 
-            <!-- 指定编码格式，否则在DOS下运行mvn命令时当发生文件资源copy时将使用系统默认使用GBK编码
-            Maven区别对待Java代码文件和资源文件，maven-compiler-plugin用来编译Java代码，
-            maven-resources-plugin则用来处理资源文件。默认的主资源文件目录是src/main/resources，
-            很多用户会需要添加额外的资源文件目录，这个时候就可以通过配置maven-resources-plugin来实现。-->
+            <!-- resource资源管理插件 -->
+
+            <!-- 默认的主资源文件目录是src/main/resources，很多用户会需要添加额外的资源文件目录，这个时候就可以通过配置maven-resources-plugin来实现。
+            资源文件过滤也是Maven的一大特性，你可以在资源文件中使用${propertyName}形式的Maven属性，然后配置maven-resources-plugin开启对资源文件的过滤，
+            之后就可以针对不同环境通过命令行或者Profile传入属性的值，以实现更为灵活的构建。-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-resources-plugin</artifactId>
-                <version>${maven.resources.plugin.version}</version>
+                <version>${maven-resources-plugin.version}</version>
                 <executions>
                     <execution>
                         <id>copy-resources</id>
@@ -144,7 +194,6 @@
                             <!-- 指定resources插件处理资源文件到哪个目录下 -->
                             <outputDirectory>${project.build.directory}/resource</outputDirectory>
                             <!-- 也可以用下面这样的方式（指定相对url的方式指定outputDirectory） <outputDirectory>target/classes</outputDirectory> -->
-                            <!-- 待处理的资源定义 -->
                             <resources>
                                 <resource>
                                     <!-- 指定resources插件处理哪个目录下的资源文件 -->
@@ -162,82 +211,67 @@
             </plugin>
 
 
+            <!-- 测试插件 -->
             <!-- forkMode 可设置值有 “never”， “once”， “always” 和 “pertest”。
-            pretest： 每一个测试创建一个新进程，为每个测试创建新的JVM是单独测试的最彻底方式，但也是最慢的，不适合hudson上持续回归。
             once：在一个进程中进行所有测试。once为默认设置，在Hudson上持续回归时建议使用默认设置。
+            pretest： 每一个测试创建一个新进程，为每个测试创建新的JVM是单独测试的最彻底方式，但也是最慢的，不适合hudson上持续回归。
             always：在一个进程中并行的运行脚本，Junit4.7以上版本才可以使用，surefire的版本要在2.6以上提供这个功能
             threadCount：执行时，指定可分配的线程数量。 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>${maven.surefire.plugin.version}</version>
+                <version>${maven-surefire-plugin.version}</version>
                 <configuration>
                     <forkMode>once</forkMode>
                     <threadCount>10</threadCount>
-                    <argLine>-Dfile.encoding=UTF-8</argLine><!--argLine传入JVM选项-->
+                    <argLine>-Dfile.encoding=${file.encoding}</argLine><!--argLine传入JVM选项-->
                     <!--<skipTests>true</skipTests>-->
                 </configuration>
             </plugin>
 
-
-            <!-- 配置完成后，执行mvn package即可打包。在target目录下会生成两个jar包，注意不是original-xxx.jar文件，而是另外一个。
-            和maven-assembly-plugin一样，生成的jar文件包含了所有依赖，所以可以直接运行。
-            如果项目中用到了Spring Framework，将依赖打到一个jar包中，运行时会出现读取XML schema文件出错。
-            原因是Spring Framework的多个jar包中包含相同的文件spring.handlers和spring.schemas，如果生成一个jar包会互相覆盖。
-            为了避免互相影响，可以使用AppendingTransformer来对文件内容追加合并 -->
+            <!-- 打包插件-->
+            <!--在target目录下会生成两个jar包，一个是包含了所有依赖的jar文件，所以可以直接运行；另一个original-xxx.jar文件，而是另外一个，生成的jar文件包含了所有依赖，所以可以直接运行。
+            如果项目中用到了Spring Framework，将依赖打到一个jar包中，运行时会出现读取XML schema文件出错。原因是Spring Framework的多个jar包中包含相同的文件spring.handlers和spring.schemas，
+            如果生成一个jar包会互相覆盖。为了避免互相影响，可以使用AppendingTransformer来对文件内容追加合并 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>${maven.shade.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <transformers>
-                        <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <!--<mainClass>com.xxg.Main</mainClass>-->
-                        </transformer>
-                        <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                            <resource>META-INF/spring.handlers</resource>
-                        </transformer>
-                        <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                            <resource>META-INF/spring.schemas</resource>
-                        </transformer>
-                    </transformers>
-                </configuration>
+                <version>${maven-shade-plugin.version}</version>
+                <!--<executions>-->
+                <!--<execution>-->
+                <!--<phase>package</phase>-->
+                <!--<goals>-->
+                <!--<goal>shade</goal>-->
+                <!--</goals>-->
+                <!--<configuration>-->
+                <!--<createDependencyReducedPom>false</createDependencyReducedPom>-->
+                <!--</configuration>-->
+                <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                <!--<transformers>-->
+                <!--<transformer-->
+                <!--implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">-->
+                <!--&lt;!&ndash;<mainClass>com.xxg.Main</mainClass>&ndash;&gt;-->
+                <!--</transformer>-->
+                <!--<transformer-->
+                <!--implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">-->
+                <!--<resource>META-INF/spring.handlers</resource>-->
+                <!--</transformer>-->
+                <!--<transformer-->
+                <!--implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">-->
+                <!--<resource>META-INF/spring.schemas</resource>-->
+                <!--</transformer>-->
+                <!--</transformers>-->
+                <!--</configuration>-->
             </plugin>
 
 
-            <!-- Maven默认只允许指定一个主Java代码目录和一个测试Java代码目录，虽然这其实是个应当尽量遵守的约定，
-            但偶尔你还是会希望能够指定多个源码目录（例如为了应对遗留项目），build-helper-maven-plugin的add-source目标就是服务于这个目的，
-            通常它被绑定到默认生命周期的generate-sources阶段以添加额外的源码目录。
-            需要强调的是，这种做法还是不推荐的，因为它破坏了Maven的约定，而且可能会遇到其他严格遵守约定的插件工具无法正确识别额外的源码目录。 -->
+            <!-- maven帮助插件 -->
             <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>${build.helper.maven.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>src/override</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-help-plugin</artifactId>
+                <version>${maven-help-plugin.version}</version>
             </plugin>
 
 
@@ -249,7 +283,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
-                <version>${exec.maven.plugin.version}</version>
+                <version>${exec-maven-plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>test</phase>
@@ -272,4 +306,33 @@
         </plugins>
     </build>
 
+
+    <!-- 用于生成javadoc文档，测试报告等等 -->
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${maven-site-plugin.version}</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${maven-project-info-reports-plugin.version}</version>
+            </plugin>
+
+            <!--必须设置环境变量：JAVA_TOOL_OPTIONS: -Dfile.encoding=UTF-8 -Dfile.decoding=UTF-8-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+                <configuration>
+                    <encoding>${file.encoding}</encoding>
+                    <docencoding>${file.encoding}</docencoding>
+                    <charset>${file.encoding}</charset>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 </project>

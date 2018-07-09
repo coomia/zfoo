@@ -1,7 +1,8 @@
 package utils;
 
 import com.zfoo.util.FileUtils;
-import org.testng.annotations.Test;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,25 +13,31 @@ import java.util.List;
  * @version 1.0
  * @since 2017 07.17 12:03
  */
+@Ignore
 public class FileUtilTest {
 
-    //    @Test
+    @Test
+    public void test() {
+        System.out.println("[amazing]");
+    }
+
+    @Test
     public void createFile() throws IOException {
         FileUtils.createFile(FileUtils.getProAbsPath() + File.separator + "hello", "hhh");
     }
 
-    //    @Test
+    @Test
     public void deleteFile() throws IOException {
         FileUtils.deleteFile(new File(FileUtils.getProAbsPath() + File.separator + "hello"));
     }
 
-    //    @Test
+    @Test
     public void writeFile() {
         FileUtils.writeStringToFile(new File(FileUtils.getProAbsPath() + File.separator + "test.txt"), "hello world!");
     }
 
 
-    //    @Test
+    @Test
     public void readFile() {
         String str = FileUtils.readFileToString(new File(FileUtils.getProAbsPath() + File.separator + "test.txt"));
         System.out.println(str);

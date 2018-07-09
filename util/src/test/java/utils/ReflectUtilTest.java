@@ -1,7 +1,8 @@
 package utils;
 
 import com.zfoo.util.ReflectionUtils;
-import org.testng.annotations.Test;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.lang.reflect.Field;
 
@@ -15,6 +16,7 @@ import java.lang.reflect.Field;
 }
 
 
+@Ignore
 public class ReflectUtilTest {
 
     @Test

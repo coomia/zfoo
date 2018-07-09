@@ -1,6 +1,6 @@
 package utils;
 
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 /**
  * @author jaysunxiao
@@ -12,7 +12,6 @@ public class AssertionUtilsTest {
 
     @Test
     public void classLocation() {
-        System.out.println("[AssertionUtilsTest]");
     }
 
 }

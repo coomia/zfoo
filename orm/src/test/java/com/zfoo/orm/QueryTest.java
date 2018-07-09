@@ -2,8 +2,9 @@ package com.zfoo.orm;
 
 import com.zfoo.orm.entity.PlayerEnt;
 import com.zfoo.orm.model.query.Page;
+import org.junit.Ignore;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @version 1.0
  * @since 2017-11-29 18:23
  */
+@Ignore
 public class QueryTest {
 
     @Test

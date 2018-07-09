@@ -1,9 +1,10 @@
 package com.zfoo.pathmatch;
 
+import org.junit.Ignore;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
-import org.testng.annotations.Test;
+import org.junit.Test;
 
 import java.io.IOException;
 
@@ -12,6 +13,7 @@ import java.io.IOException;
  * @version 1.0
  * @since 2017 08.29 10:53
  */
+@Ignore
 public class PathMatchTest {
 
     @Test
