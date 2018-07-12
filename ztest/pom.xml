@@ -95,7 +95,7 @@
     <dependencies>
         <!-- 依赖的utils类库 -->
         <dependency>
-            <groupId>www.zfoo.com</groupId>
+            <groupId>com.zfoo</groupId>
             <artifactId>util</artifactId>
             <version>${zfoo.util.version}</version>
         </dependency>
@@ -105,6 +105,13 @@
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>
             <version>${netty.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.mongodb/mongo-java-driver -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.8.0</version>
         </dependency>
 
 
@@ -182,7 +189,7 @@
         <plugins>
             <!--自定义插件-->
             <plugin>
-                <groupId>www.zfoo.com</groupId>
+                <groupId>com.zfoo</groupId>
                 <artifactId>zplugin</artifactId>
                 <version>${zfoo.zplugin.version}</version>
                 <!-- 自定义插件的参数 -->
