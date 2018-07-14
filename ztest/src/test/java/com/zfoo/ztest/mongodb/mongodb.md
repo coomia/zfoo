@@ -64,44 +64,82 @@ db.student.drop()
 简介说就是在分布式系统中可以在本机产生全局唯一id。
 db.student.insert(
 {
-   _id: 1,
-   name: "sun1"
+   "_id": 1,
+   "name": "sun1"
 })
 
 
 批量插入
 db.student.insert([
 {
-   _id: 2,
-   name: "sun2"
+   "_id": 1,
+   "name": "sun1"
 },
 {
-   _id: 3,
-   name: "sun3"
+   "_id": 2,
+   "name": "sun2"
+},
+{
+   "_id": 3,
+   "name": "sun3"
+},
+{
+   "_id": 4,
+   "name": "sun4"
+},
+{
+   "_id": 5,
+   "name": "sun5"
+},
+{
+   "_id": 6,
+   "name": "sun6"
+},
+{
+   "_id": 7,
+   "name": "sun7"
+},
+{
+   "_id": 8,
+   "name": "sun8"
+},
+{
+   "_id": 9,
+   "name": "sun9"
+},
+{
+   "_id": 10,
+   "name": "sun10"
 }
 ])
 
 
 ###查询文档
-find( query, fields, limit, skip)  
+find( query, fields)  
 query 查询条件，相当于sql的where
-fields 查询的结果  
-limit 限制查询结果的数量  
-skip 跳过多少个文档  
+fields 查询的结果，字段映射
 
-db.student.find()
+limit() 限制查询结果的数量  
+skip() 设置第一个文档的偏移量  
+sort() 排序，1升序，-1降序  
+pretty() 格式化输出结果，使得查询出来的数据在命令行中更加美观的显示，不至于太紧凑  
+db.student.find(  
+{},  
+{  
+    "name":"1"  
+})  
+.limit(9)  
+.skip(5)  
+.sort({"name":-1})  
+.pretty()  
 
-查询and条件
-db.student.find(
-{
-    "_id":3,
-    "name":"sun2"
-}).pretty()
+**$in条件**  
+db.student.find(  
+{ "name":{ $in:["sun1", "sun2"] } }  
+).pretty()
 
-文档排序，1用于升序，而-1是用于降序
-db.student.find().sort({"name":-1})
 
-查询or条件
+**$and, $or条件**  
 db.student.find(
 {
 $or:
@@ -110,6 +148,100 @@ $or:
         {"name":"sun1"}
     ]
 }).pretty()
+
+**$not取反，$exist存在这个值**    
+
+**内嵌文档查询：**   
+假如文档类型为下面这种结构，则下面两种类型都是等价的
+db.student.insert(
+{
+   "_id": 1,
+   "name": "sun1",
+   "address":
+   {
+        "city":"ShangHai",
+        "room":"hong mei lu 1701"
+   }
+})
+
+db.student.find(  
+{ 
+    "address":
+    {
+        "city":"ShangHai" 
+    }
+})
+ 
+db.student.find({ "address.city":"ShangHai" })
+
+**数组文档查询：**  
+假如文档类型为下面这种结构
+db.student.insert(
+{
+   "_id": 1,
+   "name": "sun1",
+   "course":["math", "history", "cs", "pe"],
+   "rank":[30, 50, 100]
+})
+
+查询数组中含有某一个值：
+db.student.find(  
+{ 
+    "course":"math"
+})
+
+按照指定的数组索引查询数组元素的值：
+db.student.find(  
+{ 
+    "course.1":"math"
+})
+
+查询数组中含有某一个值：
+db.student.find(  
+{ 
+    "course":"math"
+})
+
+$all查询数组中含有全部值：
+db.student.find(  
+{ 
+    "rank":
+    {
+        $all:[30, 50]
+    }
+})
+
+$all查询数组中含有全部值：
+db.student.find(  
+{ 
+    "rank":
+    {
+        $all:[30, 50]
+    }
+})
+
+$elementMatch, $gt, $lt，至少有一个元素满足$elementMatch列出的所有条件
+db.student.find(  
+{ 
+    "rank":
+    {
+        $elementMatch:{ $gt:60, $lt:100 }
+    }
+})
+
+$size, 返回具有指定长度的数组
+db.student.find(  
+{ 
+    "rank":{ $size:2 }
+})
+
+$slice, 对数组的索引做映射
+db.student.find(  
+{ 
+    "rank":{ $slice:[1, 2] }
+})
+
+
 
 
 ###更新文档
