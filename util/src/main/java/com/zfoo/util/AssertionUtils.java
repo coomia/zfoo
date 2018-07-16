@@ -97,6 +97,12 @@ public abstract class AssertionUtils {
         notNull(object, "[Assertion failed] - this argument is required; it must not be null");
     }
 
+    public static void notNull(Object... objects) {
+        for (int i = 0; i < objects.length; i++) {
+            notNull(objects[i], "the [index:{}] of objects must not be null", i);
+        }
+    }
+
     /**
      * Assert that a collection has elements; that is, it must not be
      * {@code null} and must have at least one element.
