@@ -73,43 +73,53 @@ db.student.insert(
 db.student.insert([
 {
    "_id": 1,
-   "name": "sun1"
+   "name": "sun1",
+   "age": 10
 },
 {
    "_id": 2,
-   "name": "sun2"
+   "name": "sun2",
+   "age": 20
 },
 {
    "_id": 3,
-   "name": "sun3"
+   "name": "sun3",
+   "age": 30
 },
 {
    "_id": 4,
-   "name": "sun4"
+   "name": "sun4",
+   "age": 40
 },
 {
    "_id": 5,
-   "name": "sun5"
+   "name": "sun5",
+   "age": 50
 },
 {
    "_id": 6,
-   "name": "sun6"
+   "name": "sun6",
+   "age": 60
 },
 {
    "_id": 7,
-   "name": "sun7"
+   "name": "sun7",
+   "age": 70
 },
 {
    "_id": 8,
-   "name": "sun8"
+   "name": "sun8",
+   "age": 80
 },
 {
    "_id": 9,
-   "name": "sun9"
+   "name": "sun9",
+   "age": 90
 },
 {
    "_id": 10,
-   "name": "sun10"
+   "name": "sun10",
+   "age": 100
 }
 ])
 
@@ -117,16 +127,19 @@ db.student.insert([
 ###查询文档
 find( query, fields)  
 query 查询条件，相当于sql的where
-fields 查询的结果，字段映射
+fields 查询的结果，字段映射,0不显示，1显示
 
 limit() 限制查询结果的数量  
 skip() 设置第一个文档的偏移量  
 sort() 排序，1升序，-1降序  
 pretty() 格式化输出结果，使得查询出来的数据在命令行中更加美观的显示，不至于太紧凑  
+explain("allPlansExecution")  返回查询计划信息和查询计划的执行统计信息   
+
 db.student.find(  
 {},  
 {  
-    "name":"1"  
+    "_id":0,
+    "name":1
 })  
 .limit(9)  
 .skip(5)  
@@ -271,5 +284,15 @@ db.student.remove(
 
 
 ###索引
-db.student.ensureIndex({"name":1})
+db.student.ensureIndex({"name":1})  
+db.student.droplndex({"name":1})  
 
+
+###管道模式查询  
+db.student.aggregate([
+{
+  $match:{
+    "age":{ $gt:60 }
+  }
+}
+])  
