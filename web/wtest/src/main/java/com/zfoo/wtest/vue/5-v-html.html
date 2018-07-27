@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-html</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <!--有时候我们想输出HTML，而不是数据解释后的纯文本，可以使用v-html,link里的内容会被渲染成a标签-->
+    <span v-html="link"></span>
+    <hr/>
+    <!--要显示{{}}标签而不进行替换，使用v-pre即可跳过这个元素和它的子元素的编译过程-->
+    <span v-pre>{{这里的内容是不会被编译的}}</span>
+</div>
+<script>
+
+    var app = new Vue({
+        el: '#app',
+
+        data: {
+            link: '<a href="https:www.baidu.com">这是一个链接</a>'
+        }
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>lifecycle</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <h1>你好，{{name}}</h1>
+</div>
+<script>
+
+    var app = new Vue({
+        el: '#app',
+
+        data: {
+            name: '000'
+        },
+
+        // vue实例创建完成后调用，但尚未挂载，$el还不可用，需要初始化一些数据时比较有用
+        created: function () {
+            console.log('created');
+        },
+
+        // 挂载到实例上后调用，一般我们第一个业务逻辑会在这里开始
+        mounted: function () {
+            console.log('mounted');
+        },
+
+        // 实例销毁之前调用，主要解绑一些使用addEvenlistener监听的事件等
+        beforeDestory: function () {
+            console.log('beforeDestory');
+        }
+    });
+
+</script>
+</body>
+</html>

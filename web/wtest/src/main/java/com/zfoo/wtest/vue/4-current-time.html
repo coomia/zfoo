@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>current time</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <h1>当前时间：{{date}}</h1>
+</div>
+<script>
+
+    var app = new Vue({
+        el: '#app',
+
+        data: {
+            date: new Date()
+        },
+
+        // 挂载到实例上后调用，一般我们第一个业务逻辑会在这里开始
+        mounted: function () {
+            var _this = this; // 声明一个变量指向Vue实例this，保证作用域一致
+            this.timer = setInterval(function () {
+                _this.date = new Date();
+            }, 1000);
+        },
+
+        // 实例销毁之前调用，主要解绑一些使用addEvenlistener监听的事件等
+        beforeDestory: function () {
+            if (this.timer) {// this.timer != null
+                clearInterval(this.timer);
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

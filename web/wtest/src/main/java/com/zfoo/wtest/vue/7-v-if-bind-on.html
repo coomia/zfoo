@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml" xmlns:v-bind="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>v-if</title>
+</head>
+<body>
+
+<div id="app">
+    <p v-if="show">显示这段文本</p>
+
+    <!--绑定事件-->
+    <button v-on:click="handClose">点击隐藏</button>
+
+    <!--绑定数据-->
+    <a v-bind:href="url">链接</a>
+
+    <!--****************************class类绑定*************************-->
+
+    <!--:class=v-bind:class是语法糖，类名称active数据依赖于isActive，当其为true，div会拥有类名active，为false时则没有。-->
+    <!--:class可以与普通class共存-->
+    <div class="static" :class="{'active':isActive, 'error':isError}">a</div>
+
+    <!--绑定计算属性-->
+    <div :class="classes">b</div>
+
+    <!--class数组语法-->
+    <div :class="[classA, classB]">c</div>
+    <div :class="[classA, {'active':isActive}]">d</div>
+
+
+    <!--****************************style类绑定*************************-->
+    <div :style="styles1">e</div>
+
+    <div :style="[styles1, styles2]">f</div>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            show: true,
+            url: 'https:www.baidu.com',
+            isActive: true,
+            isError: false,
+
+            classA: 'classA',
+            classB: 'classB',
+
+            styles1: {
+                color: 'red',
+                fontSize: 99 + 'px'
+            },
+
+            styles2: {
+                fontStyle: 'italic'
+            }
+        },
+        methods: {
+            handClose: function () {
+                // 函数内的this指向vue实例对象本身
+                this.show = false;
+            }
+        },
+        computed: {
+            classes: function () {
+                return this.isActive ? {'active': this.isActive} : {'error': this.isError};
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
