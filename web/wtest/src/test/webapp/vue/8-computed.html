@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>computed</title>
+</head>
+<body>
+
+<div id="app">
+    <p>{{fullName}}</p>
+    <p v-once>{{fullName}}</p>
+    <button v-on:click="changeFirstName">点我</button>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            firstName: 'Jeremy',
+            lastName: 'Lin'
+        },
+
+        methods: {
+            changeFirstName: function () {
+                // 函数内的this指向vue实例对象本身
+                this.firstName = "aaa";
+            }
+        },
+
+        // 计算属性
+        computed: {
+            fullName: function () {
+                return this.firstName + ' ' + this.lastName;
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

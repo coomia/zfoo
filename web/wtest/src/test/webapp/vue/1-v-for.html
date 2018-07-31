@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue 示例</title>
+</head>
+<body>
+
+<div id="app">
+    <ul>
+        <li v-for="book in books">{{book.name}}</li>
+    </ul>
+
+    <hr/>
+
+    <!--in前使用括号，第一项代表值，第二项代表索引-->
+    <ul>
+        <li v-for="(book, index) in books">{{index}}->{{book.name}}</li>
+    </ul>
+
+    <hr/>
+
+    <!--用在<template>标签上-->
+    <ul>
+        <template v-for="(book, index) in books">
+            <h4>{{index}}</h4>
+            <li>book:{{book.name}}</li>
+            <li>auhor:{{book.author}}</li>
+        </template>
+    </ul>
+
+    <hr/>
+
+    <!--遍历对象的属性-->
+    <p v-for="value in user">{{value}}</p>
+
+    <hr/>
+
+    <!--遍历对象的属性，有两个可选参数分别是键名和索引-->
+    <template v-for="(value, key, index) in user">
+        <h4>{{index}}</h4>
+        <p>key:{{key}}</p>
+        <p>value:{{value}}</p>
+    </template>
+
+    <!--迭代整数-->
+    <span v-for="i in 10">{{i}},</span>
+
+
+    <hr/>
+    <button v-on:click="changeArray">改变数组第一个元素</button>
+    <button v-on:click="changeArray1">在数组最后添加一个元素</button>
+    <button v-on:click="changeArray2">移除数组的最后一个元素</button>
+    <button v-on:click="changeArray3">移除数组的第一个元素</button>
+    <button v-on:click="changeArray4">在数组的开始添加第一个元素</button>
+    <button v-on:click="changeArray5">数组的更新和匹配</button>
+    <button v-on:click="changeArray6">数组的中单个元素的更新</button>
+    <button v-on:click="changeArray7">数组的中元素的排序</button>
+    <hr/>
+    <hr/>
+
+    <!--v-on:click=@click，这个是语法糖，click后的函数名称可以写括号，也可以不写括号-->
+    <div>
+        <a href="https:www.baidu.com" @click="prevent('这个$event事件是原生DOM事件', $event)">阻止链接打开</a>
+    </div>
+    <div>
+        <a v-on:click.stop="hello">阻止单击事件继续传播</a>
+    </div>
+    <div>
+        <!--监听键盘事件时，我们经常需要检查常见的键值-->
+        <input v-on:keyup.enter="hello">
+        <!-- 缩写语法 -->
+        <!--<input @keyup.enter="hello">-->
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app', // 或者是：document.getElementById('app')
+        data: {
+            books: [
+                {
+                    name: 'Vue',
+                    author: 'aaa'
+                },
+                {
+                    name: 'Java',
+                    author: 'bbb'
+                },
+                {
+                    name: 'hello world',
+                    author: 'ccc'
+                }
+            ],
+
+            user: {
+                name: 'jaysunxiao',
+                password: '111111'
+            }
+        },
+
+        methods: {
+            changeArray: function () {
+                this.books[0] = {
+                    name: 'ddd',
+                    author: 'ddd'
+                };
+                // 将数组的内容更新到视图
+                this.books.push();
+            },
+            changeArray1: function () {
+                // 在数组的最后添加一个新的元素，并且更新到视图
+                this.books.push({
+                    name: 'ddd',
+                    author: 'ddd'
+                });
+            },
+            changeArray2: function () {
+                // 移除数组的最后一个元素，并且更新到视图
+                this.books.pop();
+            },
+            changeArray3: function () {
+                // 移除数组的第一个元素，并且更新到视图
+                this.books.shift();
+            },
+            changeArray4: function () {
+                // 在数组的开始添加第一个元素，并且更新到视图
+                this.books.unshift({
+                    name: 'ddd',
+                    author: 'ddd'
+                });
+            },
+            changeArray5: function () {
+                // vue检测到数组变化的时候，并不是直接渲染整个列表，而是最大化的复用dom元素。
+                // 替换的数组中，含有相同元素的项目不会重新渲染，因此可以大胆地使用新数组来替换旧数组，不用担心性能问题。
+                this.books = this.books.filter(function (item) {
+                    return item.name.match("ddd")
+                });
+            },
+            changeArray6: function () {
+                // 注意：直接赋值this.books[0] = {name: 'ddd', author: 'ddd'};，这个vue不能检测到，也不会触发视图更新。
+                // 可以使用下面的set方法改变
+                Vue.set(this.books, 0, {
+                    name: 'ddd',
+                    author: 'ddd'
+                });
+            },
+            changeArray7: function () {
+                // 排序
+                this.books = this.books.sort(function (a, b) {
+                    return a.name.length >= b.name.length;
+                });
+            },
+            prevent: function (message, event) {
+                event.preventDefault();
+                window.alert(message);
+            },
+            hello: function () {
+                window.alert('Hello World!');
+            }
+        },
+    })
+</script>
+
+</body>
+</html>

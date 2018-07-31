@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>v-if-else-show</title>
+</head>
+<body>
+
+<div id="app">
+    <p v-if="show && active">当show和active同时为true时，显示这段文本</p>
+    <p v-else-if="show">当show为true时，显示这段文本</p>
+    <p v-else-if="active">当active为true时，显示这段文本</p>
+    <template v-else>
+        <p>当show和active同时为false时，显示这段文本</p>
+        <p>这也是一个template模板</p>
+        <input placeholder="你的名字"/>
+    </template>
+
+    <hr/>
+
+    <!--vue在渲染的时候，出于效率的考虑会尽可能地复用已有的元素而非重新渲染。-->
+    <!--如果不希望复用，可以添加一个vue的key属性，key必须唯一-->
+    <template v-if="show">
+        <input type="text" placeholder="你的名字"/>
+        <input type="text" placeholder="你的名字"/>
+    </template>
+    <template v-else>
+        <input type="text" placeholder="我是谁"/>
+        <input type="text" placeholder="我是谁" key="aaa"/>
+    </template>
+
+    <hr/>
+
+    <!--v-if和v-show用法基本上相似，只不过v-show是改变元素的CSS属性display。当v-show表达式的值为false时元素display属性为none-->
+    <!--v-if是真正的渲染，它会根据表达式适当地创建或销毁绑定的事件或子组件，适合不经常改变的场景，因为开销巨大；而v-show相反，适用于频繁切换的场景-->
+    <p v-show="show">当show为true时，显示这段文本</p>
+
+    <button @click="showChanged">show</button>
+    <button @click="activeChanded">active</button>
+
+
+</div>
+<script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            show: true,
+            active: true,
+        },
+        methods: {
+            showChanged: function () {
+                // 函数内的this指向vue实例对象本身
+                this.show = !this.show;
+            },
+            activeChanded: function () {
+                // 函数内的this指向vue实例对象本身
+                this.active = !this.active;
+            }
+        },
+    })
+</script>
+
+</body>
+</html>

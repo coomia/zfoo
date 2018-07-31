@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>cart demo</title>
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+
+<!--当网速较慢，vue.js文件还没有加载完成时，在页面会显示{{message}}的字样，直到vue创建实例，编译模板，DOM才会替换，屏幕会有闪动-->
+<!--解决办法是加一个v-cloak属性，当vue编译完之前设置display属性为none，当编译完成后vue会移除全部的cloak属性-->
+<!--cloak  [kləʊk]  n.斗蓬; 掩护; 宽大外衣  v.遮掩, 披斗蓬, 隐匿-->
+<div id="app" v-cloak>
+
+    <template v-if="list.length > 0">
+        <caption><b>cart demo</b></caption>
+        <thead>
+        <tr>
+            <th></th>
+            <th>商品名称</th>
+            <th>商品单价</th>
+            <th>购买数量</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+
+        <tbody>
+            <tr v-for="(item, index) in list">
+                <td>{{index+1}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+                <td>
+                    <button @click="reduce(index)" :disabled="item.count === 1">
+                        <span>-</span>
+                    </button>
+                    <span>{{item.count}}</span>
+                    <button @click="increase(index)">
+                        <span>+</span>
+                    </button>
+                </td>
+                <td>
+                    <button @click="remove(index)">
+                        <span>移除</span>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="5" style="text-align:right">总价：{{totalPrice}}</td>
+            </tr>
+        </tfoot>
+
+    </template>
+    <div v-else>
+        <p>购物车为空！</p>
+    </div>
+
+</div>
+
+<script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+<script src="index.js"></script>
+
+</body>
+</html>
