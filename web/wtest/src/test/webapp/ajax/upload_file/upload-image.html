@@ -25,10 +25,10 @@
         }
     }
 
-
+    // 下面可能有跨域的请求
     function uploadImage() {
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', 'http://localhost', true);
+        xhr.open('POST', 'http://172.25.49.120:8080/uploadImage', true);
         xhr.send(image);
     }
 
