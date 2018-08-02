@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>upload-image</title>
+</head>
+<body>
+
+<input type="file" onchange="selectImage(this)"/>
+<hr/>
+<input type="button" onclick="uploadImage()" value="上传文件"/>
+
+<script>
+    var image = '';
+
+    function selectImage(file) {
+        if (!file.files || !file.files[0]) {
+            return;
+        }
+
+        var reader = new FileReader();
+        reader.readAsDataURL(file.files[0]);
+        reader.onload = function (event) {
+            image = this.result;
+        }
+    }
+
+
+    function uploadImage() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'http://localhost', true);
+        xhr.send(image);
+    }
+
+</script>
+
+</body>
+</html>

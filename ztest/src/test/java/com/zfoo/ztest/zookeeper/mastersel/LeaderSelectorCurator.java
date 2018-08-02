@@ -20,7 +20,7 @@ package com.zfoo.ztest.zookeeper.mastersel;
 
 import com.google.common.collect.Lists;
 
-import com.zfoo.ztest.zookeeper.constant.AbstractConstant;
+import com.zfoo.ztest.zookeeper.Constant;
 import org.apache.curator.utils.CloseableUtils;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -45,7 +45,7 @@ public class LeaderSelectorCurator {
 
         try {
             for (int i = 0; i < CLIENT_QTY; ++i) {
-                CuratorFramework client = CuratorFrameworkFactory.newClient(AbstractConstant.IP, new ExponentialBackoffRetry(1000, 3));
+                CuratorFramework client = CuratorFrameworkFactory.newClient(Constant.IP, new ExponentialBackoffRetry(1000, 3));
                 WorkServer workServer = new WorkServer(client, PATH, "Client #" + i);
 
                 workServer.setListener(new RunningListener() {

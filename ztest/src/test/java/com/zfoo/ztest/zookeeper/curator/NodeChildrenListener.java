@@ -1,6 +1,6 @@
 package com.zfoo.ztest.zookeeper.curator;
 
-import com.zfoo.ztest.zookeeper.constant.AbstractConstant;
+import com.zfoo.ztest.zookeeper.Constant;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -17,7 +17,7 @@ public class NodeChildrenListener {
 
         CuratorFramework client = CuratorFrameworkFactory
                 .builder()
-                .connectString(AbstractConstant.IP)
+                .connectString(Constant.IP)
                 .sessionTimeoutMs(5000)
                 .connectionTimeoutMs(5000)
                 .retryPolicy(retryPolicy)
@@ -25,6 +25,8 @@ public class NodeChildrenListener {
 
         client.start();
 
+        // PathChildrenCache用于监听指定Zookeeper数据节点的子节点变换的情况。
+        // 注意：Zookeeper无法对二级子节点监听
         final PathChildrenCache cache = new PathChildrenCache(client, "/jike", true);
         cache.start();
         cache.getListenable().addListener(new PathChildrenCacheListener() {
