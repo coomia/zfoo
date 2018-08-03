@@ -24,6 +24,6 @@ package com.zfoo.ztest.zookeeper;
 
 public class Constant {
 
-    public static String IP = "192.168.238.128:2181";
+    public static String IP = "localhost:2181";
 
 }

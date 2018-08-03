@@ -1,4 +1,4 @@
-package com.zfoo.ztest.zookeeper.curator;
+package com.zfoo.ztest.zookeeper.recipes.nodecache;
 
 import com.zfoo.ztest.zookeeper.Constant;
 import org.apache.curator.RetryPolicy;
