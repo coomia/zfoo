@@ -30,7 +30,7 @@ ACID
 2.一致性（Consistency）事务的执行不能破坏数据库的完整性和一致性  
 3.隔离性（Isolation）[ˌaɪsəˈleʃən] 在标准的SQL规范中有4个事务隔离级别  
 未授权读取，授权读取，可重复读取，串行化。
-![Image text](isolation.png)
+![Image text](image/isolation.png)
 4.持久性（Durability）[djʊərə'bɪlətɪ] 事务一旦提交，它对数据库的状态变更就应该是永久性的。
 
 
@@ -67,7 +67,7 @@ Eventually consistency（最终一致性），系统中的副本，在经过一�
 当一个事务需要跨多个分布式节点的时候，为了保持事务处理的ACID特性，就需要引入一个称为“协调者”的组件来统一调度所有分布式节点的执行逻辑，来保证一致性。   
 
 2PC：Two Phase Commit，二段提交协议，大多数关系型数据库都是采用的这个协议来完成分布式事务的   
-![Image text](transaction.png)
+![Image text](image/transaction.png)
 
 3PC：Three Phase Commit，三阶段提交协议  
 
@@ -79,11 +79,11 @@ ZAB：Zookeeper Atomic Broadcast，原子消息广播协议，Zookeeper分布式
 
 Paxos和ZAB的本质区别在于两者的设计目标不太一样。前者用于构建一个分布式的一致性状态机系统，而后者用于构建一个高可用的分布式数据主备系统。  
 
-![Image text](zookeeper-process.png)
+![Image text](image/zookeeper-process.png)
 
 ###Zookeeper可以保证的分布式一致性特性：  
 分布式应用可以基于Zookeeper实现如数据发布/订阅，负载均衡，命名服务，分布式协调/通知,集群管理，Master选举，分布式锁，分布式队列   
-![Image text](zookeeper-function.png)   
+![Image text](image/zookeeper-function.png)   
 高性能：Zookeeper将全量数据存储在内存中，并直接服务于客户端的所有非事务请求，因此它尤其适用于以读操作为主的应用场景。Zookeeper性能压测在100%读请求的场景下可以达到12-13W的QPS。  
 顺序访问：对于每一个客户端的请求，Zookeeper都会生成一个全局唯一的递增序号，这个序号反映了所有事务操作的先后顺序，应用程序可以使用这个特性来实现更高层次的同步原语。  
 Leader服务器在产生一个新的事务的时候，会生成一个序列号ZXID，Zookeeper Transaction ID，这个ID有64位，前32位代表事务编号，每个事务加1，后32位代表发给客户端的计数器，每发给客户端计数器加1
