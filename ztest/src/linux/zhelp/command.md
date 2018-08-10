@@ -275,7 +275,7 @@ w：(modify contents of directory)
 x：(access directory)
 要开放目录给任何人浏览时，应该至少也要给予r及x的权限，但w权限不可随便给
 
-![Image text](image/linux-dir.png)
+![Image text](../image/linux-dir.png)
 
   / (root, 根目录)：与开机系统有关；
   /usr (unix software resource)：与软件安装/执行有关；
@@ -396,14 +396,14 @@ o  POSTROUTING：已经经过路由了，然后才进行的过滤规则。(SNAT/
 o  OUTPUT：离开主机的封包传送过程；
 
 Secure SHell protocol  SSH安全的壳程序协议=shell + ftp  
-![Image text](image/iptable.png)
+![Image text](../image/iptable.png)
 
-![Image text](image/tcp.png)
-![Image text](image/net-structure.png)
+![Image text](../image/tcp.png)
+![Image text](../image/net-structure.png)
 
 
 ###########################################################################
-![Image text](image/ip.png)
+![Image text](../image/ip.png)
 
   IP:设定为 192.168.100.1~192.168.100.253 ，但 IP 不可重复；
   Netmask：255.255.255.0
@@ -460,6 +460,6 @@ Broadcast: 192.168.0.255 <==最后一个 IP
 可用以设定成为主机的 IP 数：
 192.168.0.1 ~ 192.168.0.254
 
-![Image text](image/apache-license.png)
+![Image text](../image/apache-license.png)
 
 

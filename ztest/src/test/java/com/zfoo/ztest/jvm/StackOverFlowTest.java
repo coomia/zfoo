@@ -16,7 +16,7 @@ public class StackOverFlowTest {
      * VM Args: -Xss128k
      * <p>
      * 设置栈空间的大小。
-     * 方法栈调用过深导致soe
+     * 方法栈调用过深导致soe，Stack Overflow Exception，栈溢出
      */
     @Test
     public void testStack() {

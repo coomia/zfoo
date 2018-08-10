@@ -25,7 +25,11 @@ public class IOUtils {
     public static final int BITS_PER_BYTE = ONE_BYTE * 8;
     public static final int BITS_PER_KB = BYTES_PER_KB * 8;
     public static final int BITS_PER_MB = BYTES_PER_MB * 8;
-    public static final long BITS_PER_GB = BYTES_PER_GB * 8;
+    public static final long BITS_PER_GB = BYTES_PER_GB * 8L;
+
+    public static void main(String[] args) {
+        System.out.println(BITS_PER_GB);
+    }
 
 
     /**
@@ -48,7 +52,7 @@ public class IOUtils {
             count += n;
         }
 
-        if (count > BYTES_PER_GB * 2) {
+        if (count > BYTES_PER_GB * 2L) {
             return -1;
         }
         return (int) count;
