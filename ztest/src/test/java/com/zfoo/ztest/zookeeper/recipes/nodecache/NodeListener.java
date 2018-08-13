@@ -11,6 +11,10 @@ import org.apache.curator.retry.RetryUntilElapsed;
 
 /**
  * recipe [rec·i·pe || 'resɪpɪ] n.  食谱; 处方; 烹饪法; 制作法
+ *
+ * 数据发布/订阅（Publish/Subscribe）系统，一般有两种方式推（Push）模式；客户端定时轮询，发现有改变就拉（Pull）。
+ *
+ * Zookeeper采用两者相结合，客户端订阅，节点有变化服务器就推送
  */
 public class NodeListener {
 

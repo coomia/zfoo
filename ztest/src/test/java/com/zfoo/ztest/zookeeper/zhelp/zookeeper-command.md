@@ -1,29 +1,35 @@
+####Zookeeper监控工具
 netflix:exhibitor   监控zookeeper，增删改查  
 zabbix
 
+####1.连接
 /opt/zookeeper/bin/zkCli.sh -timeout 5000 -server 192.168.238.128:2181   启动zookeeper的客户端  
 
+####2.查看
 h 查看zookeeper的所有数据结构  
 
 ls /  列出根目录得所有节点  
 ls2 / ls+stat  
 
+get /node_1    查询/node_1节点的信息
+
 stat /node_1  查看/node_1节点的状态  
-cZxid        创建事务的id，create zookeeper transaction id zookeeper中每一次对数据的操作的是一个事务，会分配一个事务的id  
-ctime
-mZxid         Mofify 节点最新一次更新发生时的zxid  
-mtime
-pZxid          是与该节点的子节点（或该节点）的最近一次创建/删除子节点的事务id，修改子节点的数据内容不算  
-cversion  
-dateVersion  
-aclVersion  
-ephemeralOwner    ephemeral adj.  朝生暮死的, 短暂的, 短命的  临时节点 如果该节点为ephemeral节点, ephemeralOwner值表示与该节点绑定的session id. 如果该节点不是ephemeral节点, ephemeralOwner值为0.   
-dataLength  
-numChildren  
+
+    cZxid        创建事务的id，create zookeeper transaction id zookeeper中每一次对数据的操作的是一个事务，会分配一个事务的id  
+    ctime
+    mZxid         Mofify 节点最新一次更新发生时的zxid  
+    mtime
+    pZxid          是与该节点的子节点（或该节点）的最近一次创建/删除子节点的事务id，修改子节点的数据内容不算  
+    cversion  
+    dateVersion  
+    aclVersion  
+    ephemeralOwner    ephemeral adj.  朝生暮死的, 短暂的, 短命的  临时节点 如果该节点为ephemeral节点, ephemeralOwner值表示与该节点绑定的session id. 如果该节点不是ephemeral节点, ephemeralOwner值为0.   
+    dataLength  
+    numChildren  
 
 
-get /node_1    查询/node_1节点的信息  
  
+####3.更新
 set /node_1 "set Method"    更新节点的信息  
 
 create -e /node_2 "hello node_2"     创建一个node_2的临时节点  

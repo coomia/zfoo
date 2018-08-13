@@ -129,7 +129,7 @@ public abstract class ByteBufUtils {
         }
     }
 
-    public static int readVarint(ByteBuf byteBuf) {
+    private static int readVarint(ByteBuf byteBuf) {
         int x = 0;
         int y = 0;
         int count = 0;
@@ -138,7 +138,7 @@ public abstract class ByteBufUtils {
             x = byteBuf.readByte();
             y = y | ((x & 0x7F) << count);
             count += 7;
-        } while ((x & ~0x7F) != 0 && count < 28);
+        } while ((x & ~0x7F) != 0 && count < 31);
 
         if ((x & ~0x7F) == 0) {
             return y;
