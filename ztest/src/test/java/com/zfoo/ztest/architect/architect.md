@@ -55,3 +55,7 @@ n.建筑师; 缔造者, 创造者; 设计师
 时间换空间：降低单次请求时间，这样在单位时间内系统并发就会提升。  
 空间换时间：拉长整体处理业务时间，换取后台系统容量空间  
 ![Image text](image/time-space.png)
+
+
+###在线商城的架构图
+![Image text](image/online-shop-architect.png)
