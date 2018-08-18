@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>props-bind</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <!--父组件-->
+    <input type="text" v-model="parentMessage"/>
+
+    <!--不能绑定任何东西，只向子组件传递了一个字符串“parentMessage”-->
+    <my-component message="parentMessage"></my-component>
+
+    <hr/>
+
+    <!--动态绑定到parentMessage属性-->
+    <my-component :message="parentMessage"></my-component>
+</div>
+<script>
+
+    Vue.component('my-component', {
+        props: ['message'],
+
+        template: '\
+        <div>\
+            <div>{{computedMessage}}</div>\
+            <button @click="handleClick">子组件改变数据不会影响到父组件</button>\
+        </div>\
+        ',
+
+        computed: {
+            computedMessage: function () {
+                return this.message + "!!!!!!!!!";
+            }
+        },
+
+        methods: {
+            handleClick: function () {
+                this.message = 'hello';
+            }
+        }
+    });
+
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            parentMessage: '000'
+        }
+    });
+
+</script>
+</body>
+</html>

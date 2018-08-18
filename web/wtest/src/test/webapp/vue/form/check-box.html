@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>check-box</title>
+</head>
+<body>
+<div id="app">
+    <label for="html">HTML</label>
+    <input id="html" type="checkbox" v-model="picked" value="html">
+    <br/>
+
+    <label for="js">JS</label>
+    <input id="js" type="checkbox" v-model="picked" value="js">
+    <br/>
+
+    <label for="css">CSS</label>
+    <input id="css" type="checkbox" v-model="picked" value="css">
+    <br/>
+
+    <p>选择的项目是：{{picked}}</p>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            picked: ['html','js']
+        }
+    });
+</script>
+
+</body>
+</html>

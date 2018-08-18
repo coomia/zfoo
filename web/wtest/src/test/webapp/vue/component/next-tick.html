@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>next-tick</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <div id="div" v-if="showDiv">这是一段文本</div>
+    <button @click="getText">获取div的内容</button>
+</div>
+<script>
+    var app = new Vue({
+        el: '#app',
+
+        data: {
+            showDiv: false
+        },
+
+        // vue的异步更新：Vue观察到数据变化时并不直接更新DOM，而是开启一个缓冲队列，并进行去重操作，从而避免不必要的渲染。
+        // 然后Vue在下一个tick循环拿出缓冲队列里的操作，去执行（去重）。
+        // 因为在很多业务中需要使用第三方的库都有自己的一套组件生命周期，这时候可以利用好$nextTick
+        methods: {
+            getText: function () {
+                this.showDiv = true;
+                this.$nextTick(function () {
+                    var text = document.getElementById('div').innerText;
+                    alert(text);
+                });
+            }
+        }
+    });
+
+</script>
+</body>
+</html>

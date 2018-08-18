@@ -34,6 +34,7 @@ var app = new Vue({
             this.list[index].count++;
         },
         remove: function (index) {
+            // index:要删除数组的起始元素，howmany:要删除的数量
             this.list.splice(index, 1);
         }
     },

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>watch</title>
+</head>
+<body>
+<div id="app">
+    <p>{{fullName}}</p>
+    <button @click="changeFirstName">点我</button>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            firstName: 'Jeremy',
+            fullName: "000"
+        },
+
+        methods: {
+            changeFirstName: function () {
+                this.firstName = Date().toString();
+            }
+        },
+
+        watch: {
+            firstName: function (newValue, oldValue) {
+                this.fullName = newValue;
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

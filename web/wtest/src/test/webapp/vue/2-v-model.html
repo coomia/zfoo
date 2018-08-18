@@ -8,7 +8,9 @@
 <body>
 
 <div id="app">
-    <input type="text" v-model="name" placeholder="你的名字"/>
+    <!--v-model=@input-->
+    <input type="text" v-model="name" placeholder="非实时刷新"/>
+
     <h1>你好，{{name}}</h1>
 
     <button id="button0">点我</button>
@@ -22,7 +24,7 @@
         // el用于指定一个页面中已存在的DOM元素来挂载Vue实例，挂载成功后就可以通过app.$el来访问该元素
         el: '#app',
         data: obj
-    })
+    });
 
     // 通过v-model可以实现双向的数据绑定
 

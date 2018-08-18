@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>my-component</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-component></my-component>
+</div>
+<script>
+    Vue.component('my-component', {
+        template: '<div>{{message}}</div>',
+
+        // 全局注册的组件可以和局部Vue实例那样使用data，computed，methods，但是全局组件的data返回值必须是function
+        data: function () {
+            return {
+                message: '这里是组件的内容'
+            };
+        }
+    });
+
+    var app = new Vue({
+        el: '#app'
+    });
+</script>
+</body>
+</html>

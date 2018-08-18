@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>data</title>
+    <script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <input type="text" v-model="name" placeholder="非实时刷新"/>
+    <h1>你好，{{name}}</h1>
+
+    <hr/>
+
+    <input type="text" @input="handleInput" placeholder="实时刷新"/>
+
+</div>
+<script>
+    var app = new Vue({
+        // el用于指定一个页面中已存在的DOM元素来挂载Vue实例，挂载成功后就可以通过app.$el来访问该元素
+        el: '#app',
+        data: {
+            name: '000'
+        },
+        methods: {
+            handleInput: function (e) {
+                this.name= e.target.value;
+            }
+        }
+    });
+
+
+</script>
+</body>
+</html>
