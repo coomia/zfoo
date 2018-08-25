@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>tab</title>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<div id="app" v-cloak>
+    <!--v-model会默认的绑定标签里值为value的属性-->
+    <tabs v-model="activeKey" @on-click="onClick">
+        <pane label="标签一" name="1">
+            这里是标签一的内容
+        </pane>
+        <pane label="标签二" name="2">
+            这里是标签二的内容
+        </pane>
+        <pane label="标签三" name="3">
+            这里是标签三的内容
+        </pane>
+    </tabs>
+
+</div>
+
+<script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+<script src="pane.js"></script>
+<script src="tabs.js"></script>
+
+<script type="text/javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            activeKey: '1'
+        },
+
+        methods: {
+            onClick: function (name) {
+                // alert(name);
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

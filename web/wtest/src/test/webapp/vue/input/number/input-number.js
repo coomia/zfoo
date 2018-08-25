@@ -6,11 +6,6 @@ function isIntNum(val) {
     return true;
 }
 
-function onUpdateInput(val, obj, event) {
-    obj.currentValue = val;
-    event.target.value = val;
-}
-
 
 Vue.component('input-number', {
     template: '\
@@ -67,20 +62,25 @@ Vue.component('input-number', {
             // 输入的必须是数字类型
             if (!isIntNum(event.target.value.trim())) {
                 // 输入不合法时时重置输入框
-                onUpdateInput(this.min, this, event);
+                this.onUpdateInput(this.min, this, event);
                 return;
             }
 
             var val = parseInt(event.target.value.trim());
 
             if (val > this.max) {
-                onUpdateInput(this.max, this, event);
+                this.onUpdateInput(this.max, this, event);
             } else if (val < this.min) {
-                onUpdateInput(this.min, this, event);
+                this.onUpdateInput(this.min, this, event);
             } else {
-                onUpdateInput(val, this, event);
+                this.onUpdateInput(val, this, event);
             }
 
+        },
+
+        onUpdateInput: function (val, obj, event) {
+            obj.currentValue = val;
+            event.target.value = val;
         },
 
 

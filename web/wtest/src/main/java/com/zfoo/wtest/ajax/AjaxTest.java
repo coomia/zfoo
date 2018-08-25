@@ -13,13 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("")
 public class AjaxTest {
 
-    @RequestMapping("login")
-    public String home(Model model) {
-        return "login/login";
+    // 测试地址:localhost:8080/ajax-test
+    @RequestMapping("ajax-test")
+    public String ajaxTest() {
+        return "ajax/ajax-test";
     }
 
 
-    public static void main(String[] args) {
-        System.out.println("sdfsaf");
-    }
 }

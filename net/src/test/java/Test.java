@@ -1,3 +1,5 @@
+import com.zfoo.util.security.MD5Utils;
+
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -16,23 +18,7 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        for (int j = 0; j < 31; j++) {
-            int size = 64;
-            // hash = 0;
-            int[] indexArray = new int[ size ];
-            for (int i = 0; i < size; i++) {
-                indexArray[ i ] = nextHashCode() & (size - 1);
-            }
-            for (int a = 0; a < size; a++) {
-                int temp = indexArray[ a ];
-                for (int b = 0; b < size; b++) {
-                    if (a != b && temp == indexArray[ b ]) {
-                        System.out.println("error:a -- b" + a + "," + b);
-                    }
-                }
-            }
-            System.out.println("indexs = " + Arrays.toString(indexArray));
-        }
+        System.out.println(MD5Utils.bytesToMD5("account=jaysunxiao@gmail.com&adult_flag=1&country=*&game_id=346&game_time=0&ip=172.25.49.158&lang=en-us&sid=2625420002&time=1534498328&uuzu_op_id=590Dn5lbIjEhyFnrPL5".getBytes()).toLowerCase());
     }
 
 }
