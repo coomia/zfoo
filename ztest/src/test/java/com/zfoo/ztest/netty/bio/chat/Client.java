@@ -1,4 +1,4 @@
-package com.zfoo.ztest.netty.bio;
+package com.zfoo.ztest.netty.bio.chat;
 
 import java.io.*;
 import java.net.Socket;

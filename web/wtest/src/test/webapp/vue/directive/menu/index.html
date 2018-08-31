@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>drop menu</title>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div id="app" v-cloak>
+    <div v-click-outside="handClose">
+        <button @click="show = !show">点击显示下拉菜单</button>
+        <div v-show="show">
+            <p>下拉框的内容，点击外面区域可以关闭</p>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.2.6/vue.min.js"></script>
+<script src="click-outside.js"></script>
+<script>
+    // 局部注册
+    var app = new Vue({
+        el: '#app',
+        data: {
+            show: false
+        },
+        methods: {
+            handClose: function (e) {
+                this.show = false;
+                console.log(e)
+            }
+        }
+    });
+</script>
+</body>
+</html>
