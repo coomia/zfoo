@@ -29,7 +29,6 @@ jstack -l 15485
     1).如果大于的话，直接执行minorGC
     2).如果小于，判断是否开启HandlerPromotionFailure，没有开启直接FullGC
     3).如果开启了HanlerPromotionFailure, JVM会判断老年代的最大连续内存空间是否大于历次晋升的大小，如果小于直接执行FullGC
-    4).如果大于的话，执行minorGC
 
 2.触发FullGC
 

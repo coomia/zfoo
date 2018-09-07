@@ -1,6 +1,6 @@
 #查询系统状态相关指令：
-uname -a     #显示所有系统相关的信息   
-localectl        #系统语系
+uname -a             //显示所有系统相关的信息   
+localectl        //系统语系
 dmidecode -t 1  #秀出整个系统的硬件信息，例如主板型号等等
 lspci          #查阅您系统内的 PCI 总线相关设备
 iostat         #显示一下目前整个系统的 CPU 与储存设备的状态
@@ -463,3 +463,17 @@ Broadcast: 192.168.0.255 <==最后一个 IP
 ![Image text](../image/apache-license.png)
 
 
+
+
+
+npm install --save vue
+npm install --save-dev vue-loader
+npm install --save-dev vue-style-loader
+npm install --save-dev vue-template-compiler
+npm install --save-dev vue-hot-reload-api
+npm install --save-dev babel
+npm install --save-dev babel-loader
+npm install --save-dev babel-core
+npm install --save-dev babel-plugin-transform-runtime
+npm install --save-dev babel-preset-es2015
+npm install --save-dev babel-runtime
