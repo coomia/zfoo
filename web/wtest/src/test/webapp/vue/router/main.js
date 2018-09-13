@@ -1,8 +1,15 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
+import Vuex from 'vuex';
+import VueBus from './bus/vue-bus';
 import App from './app.vue';
 
 Vue.use(VueRouter);
+Vue.use(Vuex);
+Vue.use(VueBus);
+
+
+// ************************************************Router相关配置******************************************************
 
 // 在ES6中，使用let和const命令来声明变量和常亮，let和const作用域是块
 // 路由配置，path指定当前匹配的路径，component是映射的组件，webpack会把每一个路由都打包为一个js文件，在请求到该页面时，才去异步加载这个页面的js文件
@@ -37,6 +44,27 @@ const Routers = [
         },
         component: (resolve) => require(['./views/final.vue'], resolve)
     },
+
+    // ************************************这个是vuex的测试地址****************************************
+    // http://localhost:8080/vuex-test
+    {
+        path: '/vuex-test',
+        meta: {
+            title: 'vuex测试'
+        },
+        component: (resolve) => require(['./views/vuex-test.vue'], resolve)
+    },
+
+    // ************************************这个是vue-bus-test的测试地址****************************************
+    // http://localhost:8080/vue-bus-test
+    {
+        path: '/vue-bus-test',
+        meta: {
+            title: 'vue-bus-test测试'
+        },
+        component: (resolve) => require(['./views/vue-bus-test.vue'], resolve)
+    },
+
     // 当访问的路径不存在时，从定向到首页
     {
         path: '*',
@@ -61,9 +89,53 @@ router.afterEach((to, from, next) => {
     window.scrollTo(0, 0);
 });
 
+
+// ************************************************vuex相关配置******************************************************
+
+// store包含了应用的数据和操作的过程，只要store数据变化，对应的组件也会立即更新
+const store = new Vuex.Store({
+    state: {
+        count: 0,
+        list: [1, 5, 8, 10, 30, 50]
+    },
+    getters: {
+        filteredList: state => {
+            return state.list.filter(item => item < 10);
+        },
+        listCount: (state, getters) => {
+            return getters.filteredList.length;
+        }
+    },
+
+    // 在组件内，来自store的数据只能读取，不能手动改变，改变store中的数据的唯一途径就是显示的提交mutations
+    mutations: {
+        increment(state, n = 1) {
+            state.count += n;
+        },
+        decrease(state) {
+            state.count--;
+        }
+    },
+    actions: {
+        increment(context) {
+            context.commit('increment');
+        },
+        asyncIncrement(context) {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    context.commit('increment');
+                    resolve();
+                }, 1000)
+            });
+        }
+    }
+});
+
+
 new Vue({
     el: '#app',
     router: router,
+    store: store,
     render: h => {
         return h(App)
     }

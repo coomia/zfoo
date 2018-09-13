@@ -45,7 +45,7 @@
 
         <javassist.version>3.12.1.GA</javassist.version>
 
-        <netty.version>4.1.6.Final</netty.version>
+        <netty.version>4.1.25.Final</netty.version>
 
         <jdom.version>1.1</jdom.version>
 
@@ -90,6 +90,17 @@
         <project.build.sourceEncoding>${file.encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding>
     </properties>
+
+    <!-- 版本号限定原则，锁定版本，reactivestreams-1.0.2；拒绝使用Maven默认的第一声明原则和路径就近原则，这样的话会用红线，强迫症不能接受 -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.reactivestreams</groupId>
+                <artifactId>reactive-streams</artifactId>
+                <version>1.0.2</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 
     <dependencies>
@@ -153,6 +164,46 @@
             <artifactId>kafka-clients</artifactId>
             <version>2.0.0</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.asynchttpclient/async-http-client -->
+        <!-- https://github.com/AsyncHttpClient/async-http-client -->
+        <dependency>
+            <groupId>org.asynchttpclient</groupId>
+            <artifactId>async-http-client</artifactId>
+            <version>2.5.0</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty-codec-http</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty-handler</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty-codec-socks</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty-handler-proxy</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty-transport-native-epoll</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty-resolver-dns</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.netty</groupId>
+                    <artifactId>netty-buffer</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+
 
 
         <!-- https://mvnrepository.com/artifact/org.apache.zookeeper/zookeeper -->
