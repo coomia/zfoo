@@ -2,11 +2,15 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Vuex from 'vuex';
 import VueBus from './bus/vue-bus';
+import Ajax from './ajax/vue-axios'
 import App from './app.vue';
+
+import './views/daily/daily-style.css';
 
 Vue.use(VueRouter);
 Vue.use(Vuex);
 Vue.use(VueBus);
+Vue.use(Ajax);
 
 
 // ************************************************Router相关配置******************************************************
@@ -42,7 +46,7 @@ const Routers = [
         meta: {
             title: '最后一页'
         },
-        component: (resolve) => require(['./views/final.vue'], resolve)
+        component: (resolve) => require(['./views/component/final.vue'], resolve)
     },
 
     // ************************************这个是vuex的测试地址****************************************
@@ -62,7 +66,17 @@ const Routers = [
         meta: {
             title: 'vue-bus-test测试'
         },
-        component: (resolve) => require(['./views/vue-bus-test.vue'], resolve)
+        component: (resolve) => require(['./views/bus/vue-bus-test.vue'], resolve)
+    },
+
+    // ************************************知乎日报和axios的测试地址****************************************
+    // http://localhost:8080/main-daily
+    {
+        path: '/main-daily',
+        meta: {
+            title: '知乎日报'
+        },
+        component: (resolve) => require(['./views/daily/main-daily.vue'], resolve)
     },
 
     // 当访问的路径不存在时，从定向到首页

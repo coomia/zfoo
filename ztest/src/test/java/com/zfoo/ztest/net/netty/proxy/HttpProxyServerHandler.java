@@ -42,6 +42,7 @@ public class HttpProxyServerHandler extends SimpleChannelInboundHandler<FullHttp
                     .thenApply(proxyResponse -> {
                         FullHttpResponse response = new DefaultFullHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
                         response.headers().set(HttpHeaderNames.CONTENT_TYPE, HttpHeaderNames.CONTENT_TYPE);
+                        response.headers().set(HttpHeaderNames.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
 
                         ByteBuf buffer = Unpooled.copiedBuffer(proxyResponse.getResponseBodyAsBytes());
                         response.content().writeBytes(buffer);

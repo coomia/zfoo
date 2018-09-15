@@ -229,6 +229,7 @@ yum info mdadm  #找出mdadm这个软件的功能为何
 yum repolist all   	#yellowdog updater modified，列出yum服务器上面提供的所有软件名称
 yum clean all     #删除已下载过的所有容器的相关数据 (含软件本身与列表)
 yum list updates  #列出目前服务器上可供本机进行升级的软件有哪些
+yum list java*    #查看云端所有可用的java版本
 yum install madam     #安装madam
 yum remove madam   #移除madam
 yum grouplist    #目前软件库与本机上面的可用与安装过的软件群组有哪些

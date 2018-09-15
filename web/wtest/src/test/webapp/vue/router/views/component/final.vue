@@ -3,13 +3,13 @@
         <v-title title="Vue组件化"></v-title>
         <v-button @click="handleClick">跳回到首页</v-button>
         <p>
-            <img src="../images/image.png" style="width: 200px;">
+            <img src="../../images/image.png" style="width: 200px;">
         </p>
     </div>
 </template>
 <script>
-    import vTitle from './component/title.vue';
-    import vButton from './component/button.vue';
+    import vTitle from './title.vue';
+    import vButton from './button.vue';
 
     export default {
         components: {
