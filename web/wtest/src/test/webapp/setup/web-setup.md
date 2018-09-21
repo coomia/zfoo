@@ -11,12 +11,6 @@
 
 2.安装git： 一路默认安装  
 win+R，cmd进入控制台，查看git是否安装成功：git --version 
-https://blog.csdn.net/xst686/article/details/46593923/
-出现 Bower : ENOGIT git is not installed or not in the PATH错误，则需要配置你的Git到path，具体如下
-
-方法一：假如你的git安装目录是”C:\Program Files (x86)\Git”，在path中( 系统属性中)加入git的bin和cmd目录，如C:\Program Files (x86)\Git\bin;C:\Program Files (x86)\Git\cmd
-备注： 如果方法一不起作用是因为，你修改的path没有生效， 你需要重新启动电脑  
-
 ![Image text](image/git-installation.png)
 
 
@@ -29,7 +23,9 @@ https://blog.csdn.net/xst686/article/details/46593923/
 ![Image text](image/nodejs-command-2.png)
 
 
-在Idea中集成nodejs开发环境，在plugins中安装nodejs插件。在pakage.json右键Run npm install即可安装对应的包。  
-在Idea中集成vue语法识别功能，在plugins中安装vue插件。  
+- 在Idea中集成nodejs开发环境，在plugins中安装nodejs插件。在pakage.json右键Run npm install即可安装对应的包。  
+- 在Idea中集成vue语法识别功能，在plugins中安装vue插件。 
+- 在Idea中集成eslint语法识别功能，在plugins中安装eslint插件，如果不能安装则下载到本地安装。 
 ![Image text](image/idea-plugin-nodejs-1.png)  
 ![Image text](image/idea-plugin-nodejs-2.png)
+![Image text](image/idea-plugin-eslint.png)

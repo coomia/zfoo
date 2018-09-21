@@ -4,6 +4,8 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 // webpack必选的两项是Entry（入口）和Output（出口）。入口的作用告诉webpack从哪里开始寻找依赖，并编译，出口则用来配置编译后的文件存储位置和文件名。
 var config = {
 
+    devtool: '#source-map',
+
     // webpack会从main.js开始工作
     entry: {
         main: './main'
