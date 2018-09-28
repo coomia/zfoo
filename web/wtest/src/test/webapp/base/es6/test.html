@@ -6,12 +6,14 @@
 </head>
 <body>
 <script>
-    for (let codePoint of 'foo') {
-        console.log(codePoint)
+    class Bar {
+        doStuff() {
+            console.log('stuff');
+        }
     }
-    // "f"
-    // "o"
-    // "o"
+
+    var b = new Bar();
+    b.doStuff() // "stuff"
 </script>
 </body>
 </html>

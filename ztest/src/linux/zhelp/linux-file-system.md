@@ -1,3 +1,154 @@
+##Linux文件系统和相关指令
+####1.搜索文件指令
+```
+find / -mtime 0 #0代表目前的时间
+find /etc -newer /etc/passwd  
+                #-newer file ：列出比 file 还要新的文件名
+find /home -user jaysunxiao   
+                #搜寻/home底下属于jaysunxiao的文件
+find / -nouser  #搜寻系统中不属亍任何人的文件
+find / -name testfile          
+                #搜寻某个文件名，'*httpd*'可以使用通配符
+find / -size +1000k           
+                #找出系统中，大于1MB的文件
+find . -type f | xargs -n 10 grep "dir"   
+                #当前文件夹下，包含dir关键字的文档，每次取10个
+find . -type f | xargs -n 10 grep -l "dir"  
+                #只取出文件的名称
+                
+```
+
+####2.创建/删除文件指令
+
+```
+mkdir -p test1/test2/test3 
+                #如果没有test2，则创建。没有-p选项则不创建
+mkdir -m 711 test2      
+                #建立权限为rwx--x--x的目录
+rmdir -p test1/test2/test3 
+                #全部删除
+cp  ~/.bashrc  /tmp/bashrc    
+                #将家目录下的 .bashrc复制到/tmp下，并更名为bashrc
+cp  -i  ~/.bashrc  /tmp/bashrc  
+                #-i ：若目标文件已经存在时，会先询问是否进行(常用)
+cp  -a ~/.bashrc  /tmp/bashrc  
+                #-a将文件的所有特性都一起复制过来
+rm  -i  bashrc*
+                #将/tmp底下开头为bashrcde的文件和目录通通删除
+rm  -R  /tmp/etc       
+                # 将/tmp/etc/这个目录删除掉，如果不加-r删除不掉
+mv mvtest mvtest2      
+                #将目录名称mvtest更名为mvtest2	
+rename testfile newfile testfile    
+                #将testfile文件重命名为newfile
+cd /tmp         #change directory，所有人都可以工作的/tmp目录中建立文件
+mkdir testdir   #建立新目录
+chmod 744 testdir       
+                #变更权限r:4，w:2，x:1
+touch testdir/testfile     
+                #建立空的文件
+chmod 600 testdir/testfile
+su - jaysunxiao 
+                #switch user
+chown jaysunxiao testdir  
+                #改变档案拥有者，-R递归，文件夹下全部的归属都改变
+chgrp           #改变档案所属群组
+
+umask 002       #umask的分数是默认值需要减掉的权限，文件：666，文件夹：777
+chattr +a testfile   
+                #-a:文件将只能增加数据，不能删除也不能修改数据，root才能设定
+                #-i:让文件不能被删除、改名、无法写入或新增资料！』root才能设定
+lsattr testfile   
+                #显示文件的隐藏属性
+file testfile   #观察文件的类型
+whereis testfile
+locate testfile #会从数据库中查找，所以速度比较快
+updatedb        #updatedb指令会去读取 /etc/updatedb.conf的配置去更新
+
+ln /tmp/testdir 
+                #hard link链接
+ln -s /tmp/testdir  
+                #建立一个符号链接，类似windows下的快捷方式类似
+
+```
+
+####3.查看文件指令
+```
+pwd             #显示当前目录print working directory
+ls -al ~        #列出/home/jaysunxiao目录下的所有文件，-l，包括文件夹下的文件夹和文件
+cat testfile    #concatenate  [kɒn'kætɪneɪt]，使连续，显示文件内容
+cat -n testfile  
+                #显示文件内容，包括行号
+tac testfile    #从最后一行开始显示，可以看出tac是cat倒着写
+nl testfile     #类似cat -n testfile
+more testfile   #一页一页的显示文件内容，space向下翻页
+less            #和more类似，但是比more更好的是可以往前翻页，pagedown，pageup
+                #/ ：向下搜寻字符串的功能；? ：向上搜寻字符串的功能；
+head -n 20 testfile  
+                #显示文件的头几行，默认显示10行
+tail -n 20 testfile    
+                #显示末尾几行
+od testfile     #以二进制的方式读取文件内容
+od -t x testfile  
+                # d：十进制；f ：浮点float；o ：八进制；x：十六进制
+test -e testfile && echo "exist" || echo "Not exist"  
+                #存在，-f文件，-d文件夹，-e两者之和
+                
+#对文件来说，权限的效能为：
+r：可读取此一档案的实际内容，如读取文本文件的文字内容等；
+w：可以编辑、新增戒者是修改该文件的内容(但不能删除该文件)；
+x：该档案具有可以被系统执行的权限。
+对目录来说，权限的效能为：
+r：(read contents in directory)
+w：(modify contents of directory)
+x：(access directory)
+要开放目录给任何人浏览时，应该至少也要给予r及x的权限，但w权限不可随便给
+```
+
+####4.vim指令
+```
+vim /etc/vimrc  #vim的配置文件
+vim testfile    #用vim打开testfile
+:set nu         #在vim中打开行号
+:u              #回复到原始状态
+:q!             #不存储直接离开
+:sp testfile    #在新窗口中打开testfile文件，同时打开两个窗口
+#G第一行，gg最后一行，yy复制当前行，p粘贴，dd删除当前行
+#删除全部：Gdgg
+#ctrl+v选择，y复制，p粘贴，通用的规则
+```
+
+####5.文件压缩/解压
+```
+gzip -v file    #压缩file文件
+gzip -d file.gz  
+                #解压缩file的压缩文件file.gz
+tar -jpcv -f dir.tar.bz2 dir > /tmp/log.txt 2>&1  
+                #将dir文件夹压缩名为dir.tar.bz2的压缩文件，2>&1，指将标准输出、标准错误指定为同一输出路径
+tar -jxv -f dir.tar.bz2 -C /tmp/testdir/dir  
+                #将压缩文件dir.tar.bz2解压到/tmp/testdir/dir
+```
+
+####6.文件下载和上传,linxu to windows
+```
+#lrzsz包安装完成后包括上传rz、下载sz命令。yum install -y lrzsz
+
+#从Windows上传文件到Linux，输入rz命令后会弹出对话框，选择你要上传的文件，选择打开就上传到Linux主机。上传完可以使用ls 查看；
+rz             
+
+#从Linux主机下载文件，下载命令为sz，后面跟要下载的文件名；可以选择下载的保存文件夹；
+sz myfile.sh
+
+```
+
+####7.文件其它
+```
+unix2dos -k testfile  
+                #转换为dos换行格式
+dos2unix -k testfile
+                #转换为unix的换行格式
+```
+
 ![Image text](image/linux-dir.png)
 ```
 / (root, 根目录)：与开机系统有关；
@@ -18,6 +169,8 @@
 2. 对该partition进行格式化( format )，以建立系统可用的filesystem；
 3. 若想要仔细一点，则可对刚刚建立好的filesystem进行检验；
 4. 在Linux系统上，需要建立挂载点(亦即是目录)，并将他挂载上来；
+
+
 fsck /dev/sda7  #检查磁盘
 df              #查看filesystem discription
 df -h           #将容量结果以易读的容量格式显示出来
