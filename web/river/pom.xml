@@ -10,10 +10,10 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>news</artifactId>
+    <artifactId>river</artifactId>
     <version>1.0</version>
-
     <packaging>war</packaging>
+
 
     <properties>
         <!-- 本项目的其它module版本号 -->
