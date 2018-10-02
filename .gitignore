@@ -4,7 +4,7 @@
 # Log file
 *.log
 *.log*
-**/logs/**
+**/logs/
 
 # BlueJ files
 *.ctxt
@@ -28,14 +28,15 @@ hs_err_pid*
 # 忽略IntelliJ IDEA生成的项目描述文件
 .idea
 *.iml
+**/target/
 
 # 忽略npm生成的package描述文件
 package-lock.json
 
 
 # 忽略web前端前端package.json，bower.json所有依赖的包
-**/node_modules/**
-**/bower_components/**
+**/node_modules/
+**/bower_components/
 
 # 忽略npm编译后的文件
-**/dist/**
+**/dist/

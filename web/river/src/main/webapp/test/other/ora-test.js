@@ -1,5 +1,5 @@
-// 测试方法：在控制台Terminal中用命令 -> node ./test/other/ora-test.js
 'use strict';
+// 测试方法：在控制台Terminal中用命令 -> node ./test/other/ora-test.js
 // 主要用来实现node.js命令行环境的loading效果，和显示各种状态的图标等
 const Ora = require('ora');
 const spinner = new Ora({

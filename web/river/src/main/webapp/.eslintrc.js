@@ -67,7 +67,7 @@ module.exports = {
         'semi': [2, 'always'],                     // 语句强制分号结尾
         'semi-spacing': [2, {
             'before': false,
-            'after': false
+            'after': true
         }],                                       // 分号前后空格
 
         'accessor-pairs': 2,                      // 在对象中使用getter/setter

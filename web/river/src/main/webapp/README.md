@@ -1,11 +1,6 @@
 ###.babelrc文件
 webpack会依赖.babelrc配置文件编译ES6代码
 
-
-###lint-staged
-提交代码前执行npm run precommit，lint-staged中配置["eslint --fix", "git add"]，会自动修复错误。
-package.json中的lint-staged依赖husky和lint-staged扩展包。
-
 ###cross-env————使Vue项目如何分环境打包
 1.在config/目录下添加test.env.js、pre.env.js。修改prod.env.js里的内容，修改后的内容如下：
 ```
