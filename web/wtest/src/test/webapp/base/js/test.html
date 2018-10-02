@@ -15,21 +15,21 @@
 <hr/>
 <script type="text/javascript">
 
-    var email = document.getElementById("email");
-    var emailLabel = document.getElementById("email-label");
+    var email = document.getElementById('email');
+    var emailLabel = document.getElementById('email-label');
 
-    email.oninput = function () {
+    email.oninput = function() {
         var keyword = this.value;
         var xhr = new XMLHttpRequest();
         xhr.open('GET', 'hello/ajax?keyword=' + 'world', true);
-        xhr.onreadystatechange = function () {
+        xhr.onreadystatechange = function() {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 emailLabel.innerText = xhr.responseText;
             }
         };
         // 4. send操作发出请求
         xhr.send();
-    }
+    };
 
 </script>
 </body>
