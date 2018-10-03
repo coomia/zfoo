@@ -1,23 +1,39 @@
 'use strict';
 require('./check-versions')();
 
-const ora = require('ora');
+const Ora = require('ora');
 const rm = require('rimraf');
 const path = require('path');
 const chalk = require('chalk');
 const webpack = require('webpack');
-const config = require('../config');
+const config = require('../config');// require一个文件夹，会优先加载index.js
 const webpackConfig = require('./webpack.prod.conf');
 const connect = require('connect');
 const serveStatic = require('serve-static');
 
-const spinner = ora(
-    'building for ' + process.env.env_config + ' environment...'
-);
+const spinner = new Ora({
+    text: 'building for ' + process.env.env_config + ' environment...',
+    spinner: {
+        'interval': 120,
+        'frames': [
+            '▹▹▹▹▹',
+            '▸▹▹▹▹',
+            '▹▸▹▹▹',
+            '▹▹▸▹▹',
+            '▹▹▹▸▹',
+            '▹▹▹▹▸'
+        ]
+    }
+});
+
 spinner.start();
 
+// 先删除上次build后的文件，再build
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
-    if (err) throw err;
+    if (err != null) {
+        throw err;
+    }
+
     webpack(webpackConfig, (err, stats) => {
         spinner.stop();
         if (err) throw err;

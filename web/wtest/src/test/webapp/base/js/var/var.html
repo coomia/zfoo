@@ -7,20 +7,20 @@
 <body>
 
 <script type="text/javascript">
-    var a = 1;// int
-    var b = "1";// String
+    const a = 1;// int
+    const b = '1';// String
 
-    var c = 1.1;// float
-    var d = "1.1";// String
+    const c = 1.1;// float
+    const d = '1.1';// String
 
-    var e = true; //boolean
+    const e = true; //boolean
 
-    var f = [0, 1, 2, 3];// Array
-    var g = new Array(0, 1, 2, 3);// Array
+    const f = [0, 1, 2, 3];// Array
+    const g = new Array(0, 1, 2, 3);// Array
 
     // null==undefined将返回true。如果要精确区分null和undefined，应该考虑使用精确等于符（===）
-    var h;// undefined类型：专门用来确定一个已经创建但是没有初值的变量。
-    var i = null;// 用于表明某个变量的值为空，可以通过赋值为null的方式清除变量
+    let h;// undefined类型：专门用来确定一个已经创建但是没有初值的变量。
+    const i = null;// 用于表明某个变量的值为空，可以通过赋值为null的方式清除变量
 
     // 1.任何数值除以非数值（字符串、undefined、object）都会返回NaN。
     // 2.NaN与任何值都不相等，包括NaN自身。
@@ -33,14 +33,14 @@
     // parseFloat()：将字符串、布尔值等转换成浮点数。
 
     // 定义全局变量
-    var scope = "全局变量";
+    var scope = '全局变量';
 
     function test() {
         // 因此全局变量被局部变量覆盖，而此时scope局部变量尚未赋值，故此处输出undefined，会从上下文搜索。
-        document.writeln(scope + "<br />");
+        document.writeln(scope + '<br />');
         // 定义scope的局部变量，其作用范围为整个函数内
-        var scope = "局部变量";
-        document.writeln(scope + "<br />");
+        var scope = '局部变量';
+        document.writeln(scope + '<br />');
 
         // 定义变量用var和不用var实际上是存在差异的：
         // 如果使用var定义变量，那么程序会强制定义一个新变量。
@@ -62,8 +62,17 @@
     document.writeln(typeof(g));// object
     document.writeln(typeof(h));// undefined
     document.writeln(typeof(i));
-    document.writeln(typeof(j));
-    document.writeln(typeof(k));
+
+    // 空指针检测，如果j为undefined，或数字零，或false，也会得到与null相同的结果，虽然null和二者不一样。
+    let j = null;
+    if (!j) {
+        console.log('null---->' + j);
+    }
+
+    // j为undefined时，也会得到与null相同的结果，虽然null和undefined不一样。
+    if (j == null) {
+        console.log('null---->' + j);
+    }
 </script>
 
 </body>

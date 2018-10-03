@@ -11,12 +11,12 @@ const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const env = require('../config/' + process.env.env_config + '.env');
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir);
 }
 
-const env = require('../config/' + process.env.env_config + '.env');
 
 // For NamedChunksPlugin
 const seen = new Set();

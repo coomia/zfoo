@@ -1,8 +1,8 @@
-var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 // webpack必选的两项是Entry（入口）和Output（出口）。入口的作用告诉webpack从哪里开始寻找依赖，并编译，出口则用来配置编译后的文件存储位置和文件名。
-var config = {
+const config = {
 
     devtool: '#source-map',
 
@@ -13,6 +13,7 @@ var config = {
 
     // path用来指定打包后输出的目录
     // publicPath指定资源文件引用的目录
+    // filename用于指定输出文件的名称
     output: {
         path: path.join(__dirname, './dist'),
         publicPath: '/dist/',
