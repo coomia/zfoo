@@ -117,7 +117,7 @@ const webpackConfig = merge(baseWebpackConfig, {
                 },
                 commons: {
                     name: 'chunk-commons',
-                    test: resolve('src/components'), // 可自定义拓展你的规则
+                    test: resolve('src/common/component'), // 可自定义拓展你的规则
                     minChunks: 3, // 最小公用次数
                     priority: 5,
                     reuseExistingChunk: true

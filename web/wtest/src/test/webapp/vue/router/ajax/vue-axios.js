@@ -1,13 +1,13 @@
-const install = function (Vue) {
+const install = function(Vue) {
     const Ajax = new Vue({
         methods: {
-            emit (event, ...args) {
+            emit(event, ...args) {
                 this.$emit(event, ...args);
             },
-            on (event, callback) {
+            on(event, callback) {
                 this.$on(event, callback);
             },
-            off (event, callback) {
+            off(event, callback) {
                 this.$off(event, callback);
             }
         }
