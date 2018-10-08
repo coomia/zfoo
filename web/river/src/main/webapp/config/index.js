@@ -6,8 +6,9 @@ const path = require('path');
 
 module.exports = {
     dev: {
-        // Paths
+        // 编译输出的二级目录
         assetsSubDirectory: 'static',
+        // 编译发布的根目录，可配置为资源服务器域名或者cdn域名
         assetsPublicPath: '/',
         proxyTable: {},
 
@@ -18,8 +19,9 @@ module.exports = {
         host: 'localhost',
         port: 9527, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
         autoOpenBrowser: true,
-        errorOverlay: true,
-        notifyOnErrors: false,
+        // 下面两个都是浏览器展示错误的方式
+        errorOverlay: true, // 在浏览器是否展示错误蒙层
+        notifyOnErrors: false, // 是否展示错误的通知
         poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
         // Use Eslint Loader?
@@ -28,7 +30,7 @@ module.exports = {
         useEslint: true,
         // If true, eslint errors and warnings will also be shown in the error overlay
         // in the browser.
-        showEslintErrorsInOverlay: false,
+        showEslintErrorsInOverlay: false, // 如果设置为true，在浏览器中，eslint的错误和警告会以蒙层的方式展现。
 
         /**
          * Source Maps
@@ -46,7 +48,7 @@ module.exports = {
     },
 
     build: {
-        // Template for index.html
+        // html文件的生成的地方
         index: path.resolve(__dirname, '../dist/index.html'),
 
         // Paths

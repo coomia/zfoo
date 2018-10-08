@@ -13,9 +13,13 @@ exports.assetsPath = function(_path) {
     return path.posix.join(assetsSubDirectory, _path);
 };
 
+
+// 为不同的css预处理器提供一个统一的生成方式，也就是统一处理各种css类型的打包问题。
+// 这个是为在vue文件中的style中使用的css类型
 exports.cssLoaders = function(options) {
     options = options || {};
 
+    // 打包css模块
     const cssLoader = {
         loader: 'css-loader',
         options: {
@@ -23,6 +27,7 @@ exports.cssLoaders = function(options) {
         }
     };
 
+    // 使用postcss-loader来打包postcss模块
     const postcssLoader = {
         loader: 'postcss-loader',
         options: {
@@ -34,8 +39,7 @@ exports.cssLoaders = function(options) {
     function generateLoaders(loader, loaderOptions) {
         const loaders = [];
 
-        // Extract CSS when that option is specified
-        // (which is the case during production build)
+        // Extract CSS when that option is specified (which is the case during production build)
         if (options.extract) {
             loaders.push(MiniCssExtractPlugin.loader);
         } else {
@@ -90,7 +94,9 @@ exports.styleLoaders = function(options) {
     return output;
 };
 
+
 exports.createNotifierCallback = () => {
+    // node-notifier是一个跨平台的包，以类似浏览器的通知的形式展示信息。
     const notifier = require('node-notifier');
 
     return (severity, errors) => {

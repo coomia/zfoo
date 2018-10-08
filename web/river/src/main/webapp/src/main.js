@@ -7,7 +7,7 @@ import Element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import '@/common/resource/style/index.scss'; // global css
-import App from './app';
+import App from './App';
 import router from '@/common/router/router.js';
 import store from '@/common/store/store.js';
 

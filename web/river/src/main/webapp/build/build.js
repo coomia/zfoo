@@ -34,9 +34,14 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
         throw err;
     }
 
+    // 进行打包
     webpack(webpackConfig, (err, stats) => {
+        // 打包完成
         spinner.stop();
-        if (err) throw err;
+        if (err) {
+            throw err;
+        }
+        // 输出打包的状态
         process.stdout.write(
             stats.toString({
                 colors: true,
@@ -47,11 +52,14 @@ rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
             }) + '\n\n'
         );
 
+        // 如果打包出现错误
         if (stats.hasErrors()) {
             console.log(chalk.red(' Build failed with errors.\n'));
             process.exit(1);
         }
 
+
+        // 打包完成
         console.log(chalk.cyan(' Build complete.\n'));
         console.log(
             chalk.yellow(

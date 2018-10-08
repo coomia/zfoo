@@ -30,8 +30,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     // these devServer options should be customized in /config/index.js
     devServer: {
         clientLogLevel: 'warning',
+        // 表示当使用html5的history api的时候，任意的404响应都需要被替代为index.html
         historyApiFallback: true,
-        hot: true,
+        hot: true, // 启用webpack的热替换特性
+        // 一切服务都需要使用gzip压缩，可以在js，css等文件的response header中发现有Content-Encoding:gzip响应头
         compress: true,
         host: HOST || config.dev.host,
         port: PORT || config.dev.port,
@@ -57,7 +59,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
             template: 'index.html',
             inject: true,
             favicon: resolve('favicon.ico'),
-            title: 'vue-element-admin',
+            title: 'river',
             path: config.dev.assetsPublicPath + config.dev.assetsSubDirectory
         })
     ]
