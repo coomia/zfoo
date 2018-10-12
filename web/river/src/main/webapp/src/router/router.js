@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 /* Layout */
-import Layout from '@/model/layout/Layout';
+import Layout from '@/module/layout/Layout';
 /* Router Modules */
 // import componentsRouter from './modules/components';
 // import chartsRouter from './modules/charts';
@@ -32,28 +32,28 @@ export const constantRouterMap = [
         children: [
             {
                 path: '/redirect/:path*',
-                component: () => import('@/model/redirect/index')
+                component: () => import('@/module/redirect/index')
             }
         ]
     },
     {
         path: '/login',
-        component: () => import('@/model/login/index'),
+        component: () => import('@/module/login/index'),
         hidden: true
     },
     {
         path: '/auth-redirect',
-        component: () => import('@/model/login/authredirect'),
+        component: () => import('@/module/login/authredirect'),
         hidden: true
     },
     {
         path: '/404',
-        component: () => import('@/model/error/view/404'),
+        component: () => import('@/module/error/view/404'),
         hidden: true
     },
     {
         path: '/401',
-        component: () => import('@/model/error/view/401'),
+        component: () => import('@/module/error/view/401'),
         hidden: true
     },
     {
@@ -63,7 +63,7 @@ export const constantRouterMap = [
         children: [
             {
                 path: 'clipboard',
-                component: () => import('@/model/clipboard/index.vue'),
+                component: () => import('@/module/clipboard/index.vue'),
                 name: 'ClipboardDemo',
                 meta: { title: 'clipboardDemo', icon: 'clipboard', noCache: true }
             }

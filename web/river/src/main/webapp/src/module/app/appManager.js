@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 
-const app = {
+const appManager = {
     state: {
         sidebar: {
             opened: !+Cookies.get('sidebarStatus'),
@@ -53,7 +53,13 @@ const app = {
         setSize({ commit }, size) {
             commit('SET_SIZE', size);
         }
+    },
+    getters: {
+        sidebar: state => state.sidebar,
+        language: state => state.language,
+        size: state => state.size,
+        device: state => state.device
     }
 };
 
-export default app;
+export default appManager;

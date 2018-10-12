@@ -1,4 +1,4 @@
-const errorLog = {
+const errorLogManager = {
     state: {
         logs: []
     },
@@ -11,7 +11,10 @@ const errorLog = {
         addErrorLog({ commit }, log) {
             commit('ADD_ERROR_LOG', log);
         }
+    },
+    getters: {
+        errorLogs: state => state.logs
     }
 };
 
-export default errorLog;
+export default errorLogManager;

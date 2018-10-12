@@ -1,4 +1,4 @@
-const tagsView = {
+const tagsViewManager = {
     state: {
         visitedViews: [],
         cachedViews: []
@@ -156,7 +156,11 @@ const tagsView = {
         updateVisitedView({ commit }, view) {
             commit('UPDATE_VISITED_VIEW', view);
         }
+    },
+    getters: {
+        visitedViews: state => state.visitedViews,
+        cachedViews: state => state.cachedViews
     }
 };
 
-export default tagsView;
+export default tagsViewManager;

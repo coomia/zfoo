@@ -59,6 +59,10 @@ const permissionManager = {
                 resolve();
             });
         }
+    },
+    getters: {
+        permission_routers: state => state.routers,
+        addRouters: state => state.addRouters
     }
 };
 

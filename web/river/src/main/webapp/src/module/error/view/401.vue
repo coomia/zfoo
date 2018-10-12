@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import errGif from '@/model/error/resource/img/401.gif';
+import errGif from '@/module/error/resource/img/401.gif';
 
 export default {
     name: 'Page401',

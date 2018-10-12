@@ -13,8 +13,8 @@ import storeManager from '@/store/storeManager.js';
 
 import i18n from '@/common/resource/lang'; // Internationalization
 import '@/common/resource/icon'; // icon
-import '@/log/errorLog.js'; // error log
-import '@/model/permission/service/permissionService.js'; // permission control
+import '@/module/log/service/errorLogService.js'; // error log
+import '@/module/permission/service/permissionService.js'; // permission control
 import '@/mock'; // simulation data
 import * as filters from '@/common/filter/filter.js'; // global filters
 
@@ -30,6 +30,7 @@ Object.keys(filters).forEach(key => {
 
 Vue.config.productionTip = false;
 
+// make $store = $storeManager
 Vue.prototype.$storeManager = storeManager;
 Vue.prototype.$store = storeManager;
 

@@ -40,7 +40,7 @@ export default {
     },
     computed: {
         visitedViews() {
-            return this.$storeManager.state.tagsView.visitedViews;
+            return this.$storeManager.state.tagsViewManager.visitedViews;
         }
     },
     watch: {

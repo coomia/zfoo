@@ -1,7 +1,7 @@
 export default {
     computed: {
         device() {
-            return this.$storeManager.state.app.device;
+            return this.$storeManager.state.appManager.device;
         }
     },
     mounted() {

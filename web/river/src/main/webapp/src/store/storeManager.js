@@ -1,23 +1,21 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import app from './modules/app';
-import errorLog from './modules/errorLog';
-import permissionManager from '@/model/permission/manager/permissionManager.js';
-import tagsView from './modules/tagsView';
-import user from './modules/user';
-import getters from './getters';
+import appManager from '@/module/app/appManager.js';
+import errorLogManager from '@/module/log/manager/errorLogManager.js';
+import permissionManager from '@/module/permission/manager/permissionManager.js';
+import tagsViewManager from '@/module/app/tagsViewManager.js';
+import userManager from '@/module/app/userManager.js';
 
 Vue.use(Vuex);
 
 const storeManager = new Vuex.Store({
     modules: {
-        app,
-        errorLog,
+        appManager,
+        errorLogManager,
         permissionManager,
-        tagsView,
-        user
-    },
-    getters
+        tagsViewManager,
+        userManager
+    }
 });
 
 
