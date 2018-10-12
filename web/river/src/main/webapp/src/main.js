@@ -1,25 +1,25 @@
 import Vue from 'vue';
+import App from './App';
 
-import Cookies from 'js-cookie';
+import cookies from 'js-cookie';
 
 import 'normalize.css/normalize.css'; // A modern alternative to CSS resets
 import Element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 
 import '@/common/resource/style/index.scss'; // global css
-import App from './App';
-import router from '@/common/router/router.js';
-import store from '@/common/store/store.js';
+import router from '@/router/router.js';
+import storeManager from '@/store/storeManager.js';
 
 import i18n from '@/common/resource/lang'; // Internationalization
 import '@/common/resource/icon'; // icon
-import '@/log/errorLog'; // error log
-import '@/permission/permission.js'; // permission control
-import './mock'; // simulation data
-import * as filters from './filters'; // global filters
+import '@/log/errorLog.js'; // error log
+import '@/model/permission/service/permissionService.js'; // permission control
+import '@/mock'; // simulation data
+import * as filters from '@/common/filter/filter.js'; // global filters
 
 Vue.use(Element, {
-    size: Cookies.get('size') || 'medium', // set element-ui default size
+    size: cookies.get('size') || 'medium', // set element-ui default size
     i18n: (key, value) => i18n.t(key, value)
 });
 
@@ -30,10 +30,13 @@ Object.keys(filters).forEach(key => {
 
 Vue.config.productionTip = false;
 
+Vue.prototype.$storeManager = storeManager;
+Vue.prototype.$store = storeManager;
+
 new Vue({
     el: '#app',
     router,
-    store,
+    storeManager,
     i18n,
     render: h => h(App)
 });

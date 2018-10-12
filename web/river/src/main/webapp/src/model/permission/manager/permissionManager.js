@@ -1,4 +1,4 @@
-import { asyncRouterMap, constantRouterMap } from '@/common/router/router.js';
+import { asyncRouterMap, constantRouterMap } from '@/router/router.js';
 
 /**
  * 通过meta.role判断是否与当前用户权限匹配
@@ -34,7 +34,7 @@ function filterAsyncRouter(routes, roles) {
     return res;
 }
 
-const permission = {
+const permissionManager = {
     state: {
         routers: constantRouterMap,
         addRouters: []
@@ -62,4 +62,4 @@ const permission = {
     }
 };
 
-export default permission;
+export default permissionManager;

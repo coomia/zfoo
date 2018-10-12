@@ -1,9 +1,17 @@
 import Vue from 'vue';
-import Router from 'vue-router';
+import VueRouter from 'vue-router';
 
-import App from './App';
+// Nprogress测试：浏览器地址栏加载进度条测试
+import nprogress from 'nprogress';
+import 'nprogress/nprogress.css';
 
-Vue.use(Router);
+// Mock测试：模拟后端返回数据
+import '@/model/mock/mock.js';
+
+
+import App from './App.vue';
+
+Vue.use(VueRouter);
 
 const constantRouterMap = [
     {
@@ -11,15 +19,33 @@ const constantRouterMap = [
         component: () => import('@/model/HelloWorld.vue')
     },
     {
+        path: '/mock-test',
+        component: () => import('@/model/mock/MockTest.vue') // localhost:9527/#/mock-test
+    },
+    {
+        path: '/cookie-test',
+        component: () => import('@/model/cookie/CookieTest.vue') // localhost:9527/#/cookie-test
+    },
+    {
         path: '*',
         redirect: '/hello-world'
     }
 ];
 
-const router = new Router({
+const router = new VueRouter({
     // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRouterMap
+});
+
+router.beforeEach((to, from, next) => {
+    nprogress.start();
+    next();
+});
+
+router.afterEach((to, from, next) => {
+    nprogress.done();
+    window.scrollTo(0, 0);
 });
 
 new Vue({

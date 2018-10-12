@@ -15,13 +15,13 @@
 export default {
     computed: {
         size() {
-            return this.$store.getters.size;
+            return this.$storeManager.getters.size;
         }
     },
     methods: {
         handleSetSize(size) {
             this.$ELEMENT.size = size;
-            this.$store.dispatch('setSize', size);
+            this.$storeManager.dispatch('setSize', size);
             this.refreshView();
             this.$message({
                 message: 'Switch Size Success',
@@ -30,7 +30,7 @@ export default {
         },
         refreshView() {
             // In order to make the cached page re-rendered
-            this.$store.dispatch('delAllCachedViews', this.$route);
+            this.$storeManager.dispatch('delAllCachedViews', this.$route);
 
             const { fullPath } = this.$route;
 

@@ -40,7 +40,7 @@ export default {
     },
     computed: {
         visitedViews() {
-            return this.$store.state.tagsView.visitedViews;
+            return this.$storeManager.state.tagsView.visitedViews;
         }
     },
     watch: {
@@ -67,7 +67,7 @@ export default {
         addViewTags() {
             const { name } = this.$route;
             if (name) {
-                this.$store.dispatch('addView', this.$route);
+                this.$storeManager.dispatch('addView', this.$route);
             }
             return false;
         },
@@ -80,7 +80,7 @@ export default {
 
                         // when query is different then update
                         if (tag.to.fullPath !== this.$route.fullPath) {
-                            this.$store.dispatch('updateVisitedView', this.$route);
+                            this.$storeManager.dispatch('updateVisitedView', this.$route);
                         }
 
                         break;
@@ -89,7 +89,7 @@ export default {
             });
         },
         refreshSelectedTag(view) {
-            this.$store.dispatch('delCachedView', view).then(() => {
+            this.$storeManager.dispatch('delCachedView', view).then(() => {
                 const { fullPath } = view;
                 this.$nextTick(() => {
                     this.$router.replace({
@@ -99,7 +99,7 @@ export default {
             });
         },
         closeSelectedTag(view) {
-            this.$store.dispatch('delView', view).then(({ visitedViews }) => {
+            this.$storeManager.dispatch('delView', view).then(({ visitedViews }) => {
                 if (this.isActive(view)) {
                     const latestView = visitedViews.slice(-1)[0];
                     if (latestView) {
@@ -112,12 +112,12 @@ export default {
         },
         closeOthersTags() {
             this.$router.push(this.selectedTag);
-            this.$store.dispatch('delOthersViews', this.selectedTag).then(() => {
+            this.$storeManager.dispatch('delOthersViews', this.selectedTag).then(() => {
                 this.moveToCurrentTag();
             });
         },
         closeAllTags() {
-            this.$store.dispatch('delAllViews');
+            this.$storeManager.dispatch('delAllViews');
             this.$router.push('/');
         },
         openMenu(tag, e) {

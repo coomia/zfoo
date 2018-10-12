@@ -13,9 +13,6 @@ function resolve(dir) {
     return path.join(__dirname, '..', dir);
 }
 
-const HOST = process.env.HOST;
-const PORT = process.env.PORT && Number(process.env.PORT);
-
 const devWebpackConfig = merge(baseWebpackConfig, {
     mode: 'development',
     module: {
@@ -35,12 +32,10 @@ const devWebpackConfig = merge(baseWebpackConfig, {
         hot: true, // 启用webpack的热替换特性
         // 一切服务都需要使用gzip压缩，可以在js，css等文件的response header中发现有Content-Encoding:gzip响应头
         compress: true,
-        host: HOST || config.dev.host,
-        port: PORT || config.dev.port,
+        host: config.dev.host,
+        port: config.dev.port,
         open: config.dev.autoOpenBrowser,
-        overlay: config.dev.errorOverlay
-            ? { warnings: false, errors: true }
-            : false,
+        overlay: config.dev.errorOverlay ? { warnings: false, errors: true } : false,
         publicPath: config.dev.assetsPublicPath,
         proxy: config.dev.proxyTable,
         quiet: true, // necessary for FriendlyErrorsPlugin

@@ -127,7 +127,7 @@ export default {
             this.$refs.loginForm.validate(valid => {
                 if (valid) {
                     this.loading = true;
-                    this.$store.dispatch('LoginByUsername', this.loginForm).then(() => {
+                    this.$storeManager.dispatch('LoginByUsername', this.loginForm).then(() => {
                         this.loading = false;
                         this.$router.push({ path: this.redirect || '/' });
                     }).catch(() => {
@@ -152,7 +152,7 @@ export default {
             // if (!codeName) {
             //   alert('第三方登录失败')
             // } else {
-            //   this.$store.dispatch('LoginByThirdparty', codeName).then(() => {
+            //   this.$storeManager.dispatch('LoginByThirdparty', codeName).then(() => {
             //     this.$router.push({ path: '/' })
             //   })
             // }

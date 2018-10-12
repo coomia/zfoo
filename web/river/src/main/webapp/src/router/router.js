@@ -55,6 +55,19 @@ export const constantRouterMap = [
         path: '/401',
         component: () => import('@/model/error/view/401'),
         hidden: true
+    },
+    {
+        path: '',
+        component: Layout,
+        redirect: 'clipboard',
+        children: [
+            {
+                path: 'clipboard',
+                component: () => import('@/model/clipboard/index.vue'),
+                name: 'ClipboardDemo',
+                meta: { title: 'clipboardDemo', icon: 'clipboard', noCache: true }
+            }
+        ]
     }
 ];
 
@@ -65,20 +78,6 @@ export default new Router({
 });
 
 export const asyncRouterMap = [
-    {
-        path: '/clipboard',
-        component: Layout,
-        redirect: 'noredirect',
-        children: [
-            {
-                path: 'index',
-                component: () => import('@/model/clipboard/index'),
-                name: 'ClipboardDemo',
-                meta: { title: 'clipboardDemo', icon: 'clipboard' }
-            }
-        ]
-    },
-
     { path: '*', redirect: '/404', hidden: true }
     /** When your routing table is too long, you can split it into small modules**/
     // componentsRouter,
