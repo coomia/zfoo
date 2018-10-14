@@ -28,7 +28,7 @@ export default {
         lineChart: '折线图',
         mixChart: '混合图表',
         example: '综合实例',
-        ment: '路由嵌套',
+        menu: '菜单',
         menu1: '菜单1',
         'menu1-1': '菜单1-1',
         'menu1-2': '菜单1-2',
