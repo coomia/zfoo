@@ -6,6 +6,17 @@ import permissionFacade from '@/module/permission/facade/permissionFacade.js';
 import tabFacade from '@/module/tab/facade/tabFacade.js';
 import errorFacade from '@/module/error/facade/errorFacade.js';
 import exampleFacade from '@/module/example/facade/exampleFacade.js';
+import excelFacade from '@/module/excel/facade/excelFacade.js';
+import dashboardFacade from '@/module/dashboard/facade/dashboardFacade.js';
+import chartFacade from '@/module/chart/facade/chartFacade.js';
+import demoFacade from '@/module/demo/facade/demoFacade.js';
+import guideFacade from '@/module/guide/facade/guideFacade.js';
+import iconFacade from '@/module/icon/facade/iconFacade.js';
+import tableFacade from '@/module/table/facade/tableFacade.js';
+import zipFacade from '@/module/zip/facade/zipFacade.js';
+import themeFacade from '@/module/theme/facade/themeFacade.js';
+import i18nFacade from '@/module/i18n/facade/i18nFacade.js';
+import menuFacade from '@/module/menu/facade/menuFacade.js';
 /* Router Modules */
 // import componentsRouter from './modules/components';
 // import chartsRouter from './modules/charts';
@@ -35,6 +46,17 @@ export const constantRouterMap = [
     permissionFacade,
     tabFacade,
     exampleFacade,
+    excelFacade,
+    dashboardFacade,
+    chartFacade,
+    demoFacade,
+    guideFacade,
+    iconFacade,
+    tableFacade,
+    zipFacade,
+    themeFacade,
+    i18nFacade,
+    menuFacade,
     errorFacade.error404,
     errorFacade.error401
 ];
@@ -46,6 +68,16 @@ export default new Router({
 });
 
 export const asyncRouterMap = [
+    {
+        path: 'external-link',
+        component: import('@/module/layout/Layout'),
+        children: [
+            {
+                path: 'https://github.com/jaysunxiao/zfoo',
+                meta: { title: 'externalLink', icon: 'link' }
+            }
+        ]
+    },
     { path: '*', redirect: '/404', hidden: true }
     /** When your routing table is too long, you can split it into small modules**/
     // componentsRouter,

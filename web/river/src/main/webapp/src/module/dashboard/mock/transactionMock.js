@@ -13,11 +13,12 @@ for (let i = 0; i < count; i++) {
     }));
 }
 
-export default {
-    getList: () => {
-        return {
-            total: List.length,
-            items: List
-        };
-    }
+const getList = () => {
+    return {
+        total: List.length,
+        items: List
+    };
 };
+
+// 账单相关
+Mock.mock(/\/transaction\/list/, 'get', getList);
