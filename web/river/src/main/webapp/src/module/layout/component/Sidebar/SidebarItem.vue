@@ -36,8 +36,8 @@
 
 <script>
 import path from 'path';
-import { generateTitle } from '@/utils/i18n';
-import { validateURL } from '@/utils/validate';
+import { generateTitle } from '@/utils/i18nUtils.js';
+import { validateURL } from '@/utils/validateUtils.js';
 import Item from './Item';
 import AppLink from './Link';
 import FixiOSBug from './FixiOSBug';

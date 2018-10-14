@@ -1,17 +1,17 @@
 // Inspired by https://github.com/Inndy/vue-clipboard2
-const Clipboard = require('clipboard');
-if (!Clipboard) {
+const Clip = require('clipboard');
+if (!Clip) {
     throw new Error('you should npm install `clipboard` --save at first ');
 }
 
-export default {
+const clipboard = {
     bind(el, binding) {
         if (binding.arg === 'success') {
             el._v_clipboard_success = binding.value;
         } else if (binding.arg === 'error') {
             el._v_clipboard_error = binding.value;
         } else {
-            const clipboard = new Clipboard(el, {
+            const clipboard = new Clip(el, {
                 text() {
                     return binding.value;
                 },
@@ -55,3 +55,17 @@ export default {
         }
     }
 };
+
+
+const install = function(Vue) {
+    Vue.directive('Clipboard', clipboard);
+};
+
+if (window.Vue) {
+    window.clipboard = clipboard;
+    Vue.use(install); // eslint-disable-line
+}
+
+clipboard.install = install;
+export default clipboard;
+

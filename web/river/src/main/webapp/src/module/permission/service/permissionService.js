@@ -3,7 +3,7 @@ import storeManager from '@/store/storeManager.js';
 import { Message } from 'element-ui';
 import NProgress from 'nprogress'; // progress bar
 import 'nprogress/nprogress.css'; // progress bar style
-import { getToken } from '@/utils/auth'; // getToken from cookie
+import { getToken } from '@/utils/authUtils.js'; // getToken from cookie
 
 NProgress.configure({ showSpinner: false });// NProgress Configuration
 
@@ -14,7 +14,31 @@ function hasPermission(roles, permissionRoles) {
     return roles.some(role => permissionRoles.indexOf(role) >= 0);
 }
 
-const whiteList = ['/login', '/auth-redirect'];// no redirect whitelist
+/**
+ * @param {Array} value
+ * @returns {Boolean}
+ * @example see @/views/permission/DirectivePermission.vue
+ */
+export function checkPermission(value) {
+    if (value && value instanceof Array && value.length > 0) {
+        const roles = storeManager.getters && storeManager.getters.roles;
+        const permissionRoles = value;
+
+        const hasPermission = roles.some(role => {
+            return permissionRoles.includes(role);
+        });
+
+        if (!hasPermission) {
+            return false;
+        }
+        return true;
+    } else {
+        console.error(`need roles! Like v-permission="['admin','editor']"`);
+        return false;
+    }
+}
+
+const whiteList = ['/login'];// no redirect whitelist
 
 router.beforeEach((to, from, next) => {
     NProgress.start(); // start progress bar

@@ -1,21 +1,21 @@
 import Vue from 'vue';
 import App from './App';
 
-import cookies from 'js-cookie';
 
 import 'normalize.css/normalize.css'; // A modern alternative to CSS resets
 import Element from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-
 import '@/common/resource/style/index.scss'; // global css
+import '@/common/resource/icon'; // icon
+
+import cookies from 'js-cookie';
 import router from '@/router/router.js';
 import storeManager from '@/store/storeManager.js';
 
 import i18n from '@/common/resource/lang'; // Internationalization
-import '@/common/resource/icon'; // icon
 import '@/module/log/service/errorLogService.js'; // error log
 import '@/module/permission/service/permissionService.js'; // permission control
-import '@/mock'; // simulation data
+import '@/mock/mock.js'; // simulation data
 import * as filters from '@/common/filter/filter.js'; // global filters
 
 Vue.use(Element, {

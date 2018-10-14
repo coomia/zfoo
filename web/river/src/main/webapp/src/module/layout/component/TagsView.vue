@@ -26,7 +26,7 @@
 
 <script>
 import ScrollPane from '@/common/component/ScrollPane';
-import { generateTitle } from '@/utils/i18n';
+import { generateTitle } from '@/utils/i18nUtils.js';
 
 export default {
     components: { ScrollPane },

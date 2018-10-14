@@ -1,7 +1,11 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-/* Layout */
-import Layout from '@/module/layout/Layout';
+import loginFacade from '@/module/login/facade/loginFacade.js';
+import clipboardFacade from '@/module/clipboard/facade/clipboardFacade.js';
+import permissionFacade from '@/module/permission/facade/permissionFacade.js';
+import tabFacade from '@/module/tab/facade/tabFacade.js';
+import errorFacade from '@/module/error/facade/errorFacade.js';
+import exampleFacade from '@/module/example/facade/exampleFacade.js';
 /* Router Modules */
 // import componentsRouter from './modules/components';
 // import chartsRouter from './modules/charts';
@@ -25,50 +29,14 @@ Vue.use(Router);
   }
  **/
 export const constantRouterMap = [
-    {
-        path: '/redirect',
-        component: Layout,
-        hidden: true,
-        children: [
-            {
-                path: '/redirect/:path*',
-                component: () => import('@/module/redirect/index')
-            }
-        ]
-    },
-    {
-        path: '/login',
-        component: () => import('@/module/login/index'),
-        hidden: true
-    },
-    {
-        path: '/auth-redirect',
-        component: () => import('@/module/login/authredirect'),
-        hidden: true
-    },
-    {
-        path: '/404',
-        component: () => import('@/module/error/view/404'),
-        hidden: true
-    },
-    {
-        path: '/401',
-        component: () => import('@/module/error/view/401'),
-        hidden: true
-    },
-    {
-        path: '',
-        component: Layout,
-        redirect: 'clipboard',
-        children: [
-            {
-                path: 'clipboard',
-                component: () => import('@/module/clipboard/index.vue'),
-                name: 'ClipboardDemo',
-                meta: { title: 'clipboardDemo', icon: 'clipboard', noCache: true }
-            }
-        ]
-    }
+    loginFacade,
+    // 这个定义的是首页
+    clipboardFacade,
+    permissionFacade,
+    tabFacade,
+    exampleFacade,
+    errorFacade.error404,
+    errorFacade.error401
 ];
 
 export default new Router({

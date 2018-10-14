@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { validateURL } from '@/utils/validate';
+import { validateURL } from '@/utils/validateUtils.js';
 
 export default {
     props: {
