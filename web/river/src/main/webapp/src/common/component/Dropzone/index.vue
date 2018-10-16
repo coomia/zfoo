@@ -1,7 +1,7 @@
 <template>
-  <div :ref="id" :action="url" :id="id" class="dropzone">
-    <input type="file" name="file">
-  </div>
+    <div :ref="id" :action="url" :id="id" class="dropzone">
+        <input type="file" name="file">
+    </div>
 </template>
 
 <script>

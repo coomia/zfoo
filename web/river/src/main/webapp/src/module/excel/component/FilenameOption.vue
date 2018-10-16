@@ -1,9 +1,9 @@
 <template>
-  <div style="display:inline-block;">
-    <!-- $t is vue-i18n global function to translate lang -->
-    <label class="radio-label" style="padding-left:0;">Filename: </label>
-    <el-input :placeholder="$t('excel.placeholder')" v-model="filename" style="width:340px;" prefix-icon="el-icon-document"/>
-  </div>
+    <div style="display:inline-block;">
+        <!-- $t is vue-i18n global function to translate lang -->
+        <label class="radio-label" style="padding-left:0;">Filename: </label>
+        <el-input :placeholder="$t('excel.placeholder')" v-model="filename" style="width:340px;" prefix-icon="el-icon-document"/>
+    </div>
 </template>
 
 <script>

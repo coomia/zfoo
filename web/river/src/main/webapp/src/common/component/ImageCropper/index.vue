@@ -1,109 +1,109 @@
 <template>
-  <div v-show="value" class="vue-image-crop-upload">
-    <div class="vicp-wrap">
-      <div class="vicp-close" @click="off">
-        <i class="vicp-icon4"/>
-      </div>
-
-      <div v-show="step == 1" class="vicp-step1">
-        <div class="vicp-drop-area" @dragleave="preventDefault" @dragover="preventDefault" @dragenter="preventDefault" @click="handleClick" @drop="handleChange">
-          <i v-show="loading != 1" class="vicp-icon1">
-            <i class="vicp-icon1-arrow"/>
-            <i class="vicp-icon1-body"/>
-            <i class="vicp-icon1-bottom"/>
-          </i>
-          <span v-show="loading !== 1" class="vicp-hint">{{ lang.hint }}</span>
-          <span v-show="!isSupported" class="vicp-no-supported-hint">{{ lang.noSupported }}</span>
-          <input v-show="false" v-if="step == 1" ref="fileinput" type="file" @change="handleChange">
-        </div>
-        <div v-show="hasError" class="vicp-error">
-          <i class="vicp-icon2"/> {{ errorMsg }}
-        </div>
-        <div class="vicp-operate">
-          <a @click="off" @mousedown="ripple">{{ lang.btn.off }}</a>
-        </div>
-      </div>
-
-      <div v-if="step == 2" class="vicp-step2">
-        <div class="vicp-crop">
-          <div v-show="true" class="vicp-crop-left">
-            <div class="vicp-img-container">
-              <img
-                ref="img"
-                :src="sourceImgUrl"
-                :style="sourceImgStyle"
-                class="vicp-img"
-                draggable="false"
-                @drag="preventDefault"
-                @dragstart="preventDefault"
-                @dragend="preventDefault"
-                @dragleave="preventDefault"
-                @dragover="preventDefault"
-                @dragenter="preventDefault"
-                @drop="preventDefault"
-                @touchstart="imgStartMove"
-                @touchmove="imgMove"
-                @touchend="createImg"
-                @touchcancel="createImg"
-                @mousedown="imgStartMove"
-                @mousemove="imgMove"
-                @mouseup="createImg"
-                @mouseout="createImg">
-              <div :style="sourceImgShadeStyle" class="vicp-img-shade vicp-img-shade-1"/>
-              <div :style="sourceImgShadeStyle" class="vicp-img-shade vicp-img-shade-2"/>
+    <div v-show="value" class="vue-image-crop-upload">
+        <div class="vicp-wrap">
+            <div class="vicp-close" @click="off">
+                <i class="vicp-icon4"/>
             </div>
 
-            <div class="vicp-range">
-              <input :value="scale.range" type="range" step="1" min="0" max="100" @input="zoomChange">
-              <i class="vicp-icon5" @mousedown="startZoomSub" @mouseout="endZoomSub" @mouseup="endZoomSub"/>
-              <i class="vicp-icon6" @mousedown="startZoomAdd" @mouseout="endZoomAdd" @mouseup="endZoomAdd"/>
+            <div v-show="step == 1" class="vicp-step1">
+                <div class="vicp-drop-area" @dragleave="preventDefault" @dragover="preventDefault" @dragenter="preventDefault" @click="handleClick" @drop="handleChange">
+                    <i v-show="loading != 1" class="vicp-icon1">
+                        <i class="vicp-icon1-arrow"/>
+                        <i class="vicp-icon1-body"/>
+                        <i class="vicp-icon1-bottom"/>
+                    </i>
+                    <span v-show="loading !== 1" class="vicp-hint">{{ lang.hint }}</span>
+                    <span v-show="!isSupported" class="vicp-no-supported-hint">{{ lang.noSupported }}</span>
+                    <input v-show="false" v-if="step == 1" ref="fileinput" type="file" @change="handleChange">
+                </div>
+                <div v-show="hasError" class="vicp-error">
+                    <i class="vicp-icon2"/> {{ errorMsg }}
+                </div>
+                <div class="vicp-operate">
+                    <a @click="off" @mousedown="ripple">{{ lang.btn.off }}</a>
+                </div>
             </div>
 
-            <div v-if="!noRotate" class="vicp-rotate">
-              <i @mousedown="startRotateLeft" @mouseout="endRotate" @mouseup="endRotate">↺</i>
-              <i @mousedown="startRotateRight" @mouseout="endRotate" @mouseup="endRotate">↻</i>
-            </div>
-          </div>
-          <div v-show="true" class="vicp-crop-right">
-            <div class="vicp-preview">
-              <div v-if="!noSquare" class="vicp-preview-item">
-                <img :src="createImgUrl" :style="previewStyle">
-                <span>{{ lang.preview }}</span>
-              </div>
-              <div v-if="!noCircle" class="vicp-preview-item vicp-preview-item-circle">
-                <img :src="createImgUrl" :style="previewStyle">
-                <span>{{ lang.preview }}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="vicp-operate">
-          <a @click="setStep(1)" @mousedown="ripple">{{ lang.btn.back }}</a>
-          <a class="vicp-operate-btn" @click="prepareUpload" @mousedown="ripple">{{ lang.btn.save }}</a>
-        </div>
-      </div>
+            <div v-if="step == 2" class="vicp-step2">
+                <div class="vicp-crop">
+                    <div v-show="true" class="vicp-crop-left">
+                        <div class="vicp-img-container">
+                            <img
+                                ref="img"
+                                :src="sourceImgUrl"
+                                :style="sourceImgStyle"
+                                class="vicp-img"
+                                draggable="false"
+                                @drag="preventDefault"
+                                @dragstart="preventDefault"
+                                @dragend="preventDefault"
+                                @dragleave="preventDefault"
+                                @dragover="preventDefault"
+                                @dragenter="preventDefault"
+                                @drop="preventDefault"
+                                @touchstart="imgStartMove"
+                                @touchmove="imgMove"
+                                @touchend="createImg"
+                                @touchcancel="createImg"
+                                @mousedown="imgStartMove"
+                                @mousemove="imgMove"
+                                @mouseup="createImg"
+                                @mouseout="createImg">
+                            <div :style="sourceImgShadeStyle" class="vicp-img-shade vicp-img-shade-1"/>
+                            <div :style="sourceImgShadeStyle" class="vicp-img-shade vicp-img-shade-2"/>
+                        </div>
 
-      <div v-if="step == 3" class="vicp-step3">
-        <div class="vicp-upload">
-          <span v-show="loading === 1" class="vicp-loading">{{ lang.loading }}</span>
-          <div class="vicp-progress-wrap">
-            <span v-show="loading === 1" :style="progressStyle" class="vicp-progress"/>
-          </div>
-          <div v-show="hasError" class="vicp-error">
-            <i class="vicp-icon2"/> {{ errorMsg }}
-          </div>
-          <div v-show="loading === 2" class="vicp-success">
-            <i class="vicp-icon3"/> {{ lang.success }}
-          </div>
+                        <div class="vicp-range">
+                            <input :value="scale.range" type="range" step="1" min="0" max="100" @input="zoomChange">
+                            <i class="vicp-icon5" @mousedown="startZoomSub" @mouseout="endZoomSub" @mouseup="endZoomSub"/>
+                            <i class="vicp-icon6" @mousedown="startZoomAdd" @mouseout="endZoomAdd" @mouseup="endZoomAdd"/>
+                        </div>
+
+                        <div v-if="!noRotate" class="vicp-rotate">
+                            <i @mousedown="startRotateLeft" @mouseout="endRotate" @mouseup="endRotate">↺</i>
+                            <i @mousedown="startRotateRight" @mouseout="endRotate" @mouseup="endRotate">↻</i>
+                        </div>
+                    </div>
+                    <div v-show="true" class="vicp-crop-right">
+                        <div class="vicp-preview">
+                            <div v-if="!noSquare" class="vicp-preview-item">
+                                <img :src="createImgUrl" :style="previewStyle">
+                                <span>{{ lang.preview }}</span>
+                            </div>
+                            <div v-if="!noCircle" class="vicp-preview-item vicp-preview-item-circle">
+                                <img :src="createImgUrl" :style="previewStyle">
+                                <span>{{ lang.preview }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="vicp-operate">
+                    <a @click="setStep(1)" @mousedown="ripple">{{ lang.btn.back }}</a>
+                    <a class="vicp-operate-btn" @click="prepareUpload" @mousedown="ripple">{{ lang.btn.save }}</a>
+                </div>
+            </div>
+
+            <div v-if="step == 3" class="vicp-step3">
+                <div class="vicp-upload">
+                    <span v-show="loading === 1" class="vicp-loading">{{ lang.loading }}</span>
+                    <div class="vicp-progress-wrap">
+                        <span v-show="loading === 1" :style="progressStyle" class="vicp-progress"/>
+                    </div>
+                    <div v-show="hasError" class="vicp-error">
+                        <i class="vicp-icon2"/> {{ errorMsg }}
+                    </div>
+                    <div v-show="loading === 2" class="vicp-success">
+                        <i class="vicp-icon3"/> {{ lang.success }}
+                    </div>
+                </div>
+                <div class="vicp-operate">
+                    <a @click="setStep(2)" @mousedown="ripple">{{ lang.btn.back }}</a>
+                    <a @click="off" @mousedown="ripple">{{ lang.btn.close }}</a>
+                </div>
+            </div>
+            <canvas v-show="false" ref="canvas" :width="width" :height="height"/>
         </div>
-        <div class="vicp-operate">
-          <a @click="setStep(2)" @mousedown="ripple">{{ lang.btn.back }}</a>
-          <a @click="off" @mousedown="ripple">{{ lang.btn.close }}</a>
-        </div>
-      </div>
-      <canvas v-show="false" ref="canvas" :width="width" :height="height"/>
     </div>
-  </div>
 </template>
 
 <script>

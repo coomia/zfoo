@@ -1,76 +1,76 @@
 <template>
-  <div class="createPost-container">
-    <el-form ref="postForm" :model="postForm" :rules="rules" class="form-container">
+    <div class="createPost-container">
+        <el-form ref="postForm" :model="postForm" :rules="rules" class="form-container">
 
-      <sticky :class-name="'sub-navbar '+postForm.status">
-        <CommentDropdown v-model="postForm.comment_disabled" />
-        <PlatformDropdown v-model="postForm.platforms" />
-        <SourceUrlDropdown v-model="postForm.source_uri" />
-        <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm">发布
-        </el-button>
-        <el-button v-loading="loading" type="warning" @click="draftForm">草稿</el-button>
-      </sticky>
+            <sticky :class-name="'sub-navbar '+postForm.status">
+                <CommentDropdown v-model="postForm.comment_disabled" />
+                <PlatformDropdown v-model="postForm.platforms" />
+                <SourceUrlDropdown v-model="postForm.source_uri" />
+                <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm">发布
+                </el-button>
+                <el-button v-loading="loading" type="warning" @click="draftForm">草稿</el-button>
+            </sticky>
 
-      <div class="createPost-main-container">
-        <el-row>
+            <div class="createPost-main-container">
+                <el-row>
 
-          <Warning />
+                    <Warning />
 
-          <el-col :span="24">
-            <el-form-item style="margin-bottom: 40px;" prop="title">
-              <MDinput v-model="postForm.title" :maxlength="100" name="name" required>
-                标题
-              </MDinput>
-            </el-form-item>
+                    <el-col :span="24">
+                        <el-form-item style="margin-bottom: 40px;" prop="title">
+                            <MDinput v-model="postForm.title" :maxlength="100" name="name" required>
+                                标题
+                            </MDinput>
+                        </el-form-item>
 
-            <div class="postInfo-container">
-              <el-row>
-                <el-col :span="8">
-                  <el-form-item label-width="45px" label="作者:" class="postInfo-container-item">
-                    <el-select v-model="postForm.author" :remote-method="getRemoteUserList" filterable remote placeholder="搜索用户">
-                      <el-option v-for="(item,index) in userListOptions" :key="item+index" :label="item" :value="item"/>
-                    </el-select>
-                  </el-form-item>
-                </el-col>
+                        <div class="postInfo-container">
+                            <el-row>
+                                <el-col :span="8">
+                                    <el-form-item label-width="45px" label="作者:" class="postInfo-container-item">
+                                        <el-select v-model="postForm.author" :remote-method="getRemoteUserList" filterable remote placeholder="搜索用户">
+                                            <el-option v-for="(item,index) in userListOptions" :key="item+index" :label="item" :value="item"/>
+                                        </el-select>
+                                    </el-form-item>
+                                </el-col>
 
-                <el-col :span="10">
-                  <el-form-item label-width="80px" label="发布时间:" class="postInfo-container-item">
-                    <el-date-picker v-model="postForm.display_time" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期时间"/>
-                  </el-form-item>
-                </el-col>
+                                <el-col :span="10">
+                                    <el-form-item label-width="80px" label="发布时间:" class="postInfo-container-item">
+                                        <el-date-picker v-model="postForm.display_time" type="datetime" format="yyyy-MM-dd HH:mm:ss" placeholder="选择日期时间"/>
+                                    </el-form-item>
+                                </el-col>
 
-                <el-col :span="6">
-                  <el-form-item label-width="60px" label="重要性:" class="postInfo-container-item">
-                    <el-rate
-                      v-model="postForm.importance"
-                      :max="3"
-                      :colors="['#99A9BF', '#F7BA2A', '#FF9900']"
-                      :low-threshold="1"
-                      :high-threshold="3"
-                      style="margin-top:8px;"/>
-                  </el-form-item>
-                </el-col>
-              </el-row>
+                                <el-col :span="6">
+                                    <el-form-item label-width="60px" label="重要性:" class="postInfo-container-item">
+                                        <el-rate
+                                            v-model="postForm.importance"
+                                            :max="3"
+                                            :colors="['#99A9BF', '#F7BA2A', '#FF9900']"
+                                            :low-threshold="1"
+                                            :high-threshold="3"
+                                            style="margin-top:8px;"/>
+                                    </el-form-item>
+                                </el-col>
+                            </el-row>
+                        </div>
+                    </el-col>
+                </el-row>
+
+                <el-form-item style="margin-bottom: 40px;" label-width="45px" label="摘要:">
+                    <el-input :rows="1" v-model="postForm.content_short" type="textarea" class="article-textarea" autosize placeholder="请输入内容"/>
+                    <span v-show="contentShortLength" class="word-counter">{{ contentShortLength }}字</span>
+                </el-form-item>
+
+                <div class="editor-container">
+                    <Tinymce ref="editor" :height="400" v-model="postForm.content" />
+                </div>
+
+                <div style="margin-bottom: 20px;">
+                    <Upload v-model="postForm.image_uri" />
+                </div>
             </div>
-          </el-col>
-        </el-row>
+        </el-form>
 
-        <el-form-item style="margin-bottom: 40px;" label-width="45px" label="摘要:">
-          <el-input :rows="1" v-model="postForm.content_short" type="textarea" class="article-textarea" autosize placeholder="请输入内容"/>
-          <span v-show="contentShortLength" class="word-counter">{{ contentShortLength }}字</span>
-        </el-form-item>
-
-        <div class="editor-container">
-          <Tinymce ref="editor" :height="400" v-model="postForm.content" />
-        </div>
-
-        <div style="margin-bottom: 20px;">
-          <Upload v-model="postForm.image_uri" />
-        </div>
-      </div>
-    </el-form>
-
-  </div>
+    </div>
 </template>
 
 <script>

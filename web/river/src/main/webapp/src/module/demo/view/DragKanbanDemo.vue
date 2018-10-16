@@ -1,9 +1,9 @@
 <template>
-  <div class="components-container board">
-    <Kanban :key="1" :list="list1" :options="options" class="kanban todo" header-text="Todo"/>
-    <Kanban :key="2" :list="list2" :options="options" class="kanban working" header-text="Working"/>
-    <Kanban :key="3" :list="list3" :options="options" class="kanban done" header-text="Done"/>
-  </div>
+    <div class="components-container board">
+        <Kanban :key="1" :list="list1" :options="options" class="kanban todo" header-text="Todo"/>
+        <Kanban :key="2" :list="list2" :options="options" class="kanban working" header-text="Working"/>
+        <Kanban :key="3" :list="list3" :options="options" class="kanban done" header-text="Done"/>
+    </div>
 </template>
 <script>
 import Kanban from '@/common/component/Kanban';

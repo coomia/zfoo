@@ -62,6 +62,12 @@ module.exports = {
             'markers': ['global', 'globals', 'eslint', 'eslint-disable', '*package', '!', ',']
         }],                                       // 注释风格要不要有空格什么的
         'template-curly-spacing': [2, 'never'],
+        'vue/html-indent': [2, 4, {               // vue中的html和css空格
+            "attribute": 1,
+            "closeBracket": 0,
+            "alignAttributesVertically": true,
+            "ignores": []
+        }],
 
         // 分号设置
         'semi': [2, 'always'],                     // 语句强制分号结尾

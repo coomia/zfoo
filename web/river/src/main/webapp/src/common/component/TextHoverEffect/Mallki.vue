@@ -1,9 +1,9 @@
 <template>
-  <a :class="className" class="link--mallki" href="#">
-    {{ text }}
-    <span :data-letters="text"/>
-    <span :data-letters="text"/>
-  </a>
+    <a :class="className" class="link--mallki" href="#">
+        {{ text }}
+        <span :data-letters="text"/>
+        <span :data-letters="text"/>
+    </a>
 </template>
 
 <script>

@@ -1,17 +1,17 @@
 <template>
-  <div class="board-column">
-    <div class="board-column-header">
-      {{ headerText }}
+    <div class="board-column">
+        <div class="board-column-header">
+            {{ headerText }}
+        </div>
+        <draggable
+            :list="list"
+            :options="options"
+            class="board-column-content">
+            <div v-for="element in list" :key="element.id" class="board-item">
+                {{ element.name }} {{ element.id }}
+            </div>
+        </draggable>
     </div>
-    <draggable
-      :list="list"
-      :options="options"
-      class="board-column-content">
-      <div v-for="element in list" :key="element.id" class="board-item">
-        {{ element.name }} {{ element.id }}
-      </div>
-    </draggable>
-  </div>
 </template>
 <script>
 import draggable from 'vuedraggable';

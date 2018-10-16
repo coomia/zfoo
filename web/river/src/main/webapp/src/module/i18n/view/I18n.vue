@@ -1,51 +1,51 @@
 <template>
-  <div>
-    <el-card class="box-card" style="margin-top:40px;">
-      <div slot="header" class="clearfix">
-        <svg-icon icon-class="international" />
-        <span style="margin-left:10px;">{{ $t('i18nView.title') }}</span>
-      </div>
-      <div>
-        <el-radio-group v-model="lang" size="small">
-          <el-radio label="zh" border>简体中文</el-radio>
-          <el-radio label="en" border>English</el-radio>
-        </el-radio-group>
-        <el-tag style="margin-top:15px;display:block;" type="info">{{ $t('i18nView.note') }}</el-tag>
-      </div>
-    </el-card>
+    <div>
+        <el-card class="box-card" style="margin-top:40px;">
+            <div slot="header" class="clearfix">
+                <svg-icon icon-class="international" />
+                <span style="margin-left:10px;">{{ $t('i18nView.title') }}</span>
+            </div>
+            <div>
+                <el-radio-group v-model="lang" size="small">
+                    <el-radio label="zh" border>简体中文</el-radio>
+                    <el-radio label="en" border>English</el-radio>
+                </el-radio-group>
+                <el-tag style="margin-top:15px;display:block;" type="info">{{ $t('i18nView.note') }}</el-tag>
+            </div>
+        </el-card>
 
-    <el-row :gutter="20" style="margin:100px 15px 50px;">
-      <el-col :span="12" :xs="24">
-        <div class="block">
-          <el-date-picker v-model="date" :placeholder="$t('i18nView.datePlaceholder')" type="date"/>
-        </div>
-        <div class="block">
-          <el-select v-model="value" :placeholder="$t('i18nView.selectPlaceholder')">
-            <el-option
-              v-for="item in options"
-              :key="item.value"
-              :label="item.label"
-              :value="item.value"/>
-          </el-select>
-        </div>
-        <div class="block">
-          <el-button class="item-btn" size="small">{{ $t('i18nView.default') }}</el-button>
-          <el-button class="item-btn" size="small" type="primary">{{ $t('i18nView.primary') }}</el-button>
-          <el-button class="item-btn" size="small" type="success">{{ $t('i18nView.success') }}</el-button>
-          <el-button class="item-btn" size="small" type="info">{{ $t('i18nView.info') }}</el-button>
-          <el-button class="item-btn" size="small" type="warning">{{ $t('i18nView.warning') }}</el-button>
-          <el-button class="item-btn" size="small" type="danger">{{ $t('i18nView.danger') }}</el-button>
-        </div>
-      </el-col>
-      <el-col :span="12" :xs="24">
-        <el-table :data="tableData" fit highlight-current-row border style="width: 100%">
-          <el-table-column :label="$t('i18nView.tableName')" prop="name" width="100" align="center"/>
-          <el-table-column :label="$t('i18nView.tableDate')" prop="date" width="120" align="center"/>
-          <el-table-column :label="$t('i18nView.tableAddress')" prop="address"/>
-        </el-table>
-      </el-col>
-    </el-row>
-  </div>
+        <el-row :gutter="20" style="margin:100px 15px 50px;">
+            <el-col :span="12" :xs="24">
+                <div class="block">
+                    <el-date-picker v-model="date" :placeholder="$t('i18nView.datePlaceholder')" type="date"/>
+                </div>
+                <div class="block">
+                    <el-select v-model="value" :placeholder="$t('i18nView.selectPlaceholder')">
+                        <el-option
+                            v-for="item in options"
+                            :key="item.value"
+                            :label="item.label"
+                            :value="item.value"/>
+                    </el-select>
+                </div>
+                <div class="block">
+                    <el-button class="item-btn" size="small">{{ $t('i18nView.default') }}</el-button>
+                    <el-button class="item-btn" size="small" type="primary">{{ $t('i18nView.primary') }}</el-button>
+                    <el-button class="item-btn" size="small" type="success">{{ $t('i18nView.success') }}</el-button>
+                    <el-button class="item-btn" size="small" type="info">{{ $t('i18nView.info') }}</el-button>
+                    <el-button class="item-btn" size="small" type="warning">{{ $t('i18nView.warning') }}</el-button>
+                    <el-button class="item-btn" size="small" type="danger">{{ $t('i18nView.danger') }}</el-button>
+                </div>
+            </el-col>
+            <el-col :span="12" :xs="24">
+                <el-table :data="tableData" fit highlight-current-row border style="width: 100%">
+                    <el-table-column :label="$t('i18nView.tableName')" prop="name" width="100" align="center"/>
+                    <el-table-column :label="$t('i18nView.tableDate')" prop="date" width="120" align="center"/>
+                    <el-table-column :label="$t('i18nView.tableAddress')" prop="address"/>
+                </el-table>
+            </el-col>
+        </el-row>
+    </div>
 </template>
 
 <script>
