@@ -3,7 +3,7 @@ import Layout from '@/module/layout/Layout';
 const permissionFacade = {
     path: '/permission',
     component: Layout,
-    redirect: '/permission/index',
+    redirect: '/permission/page',
     alwaysShow: true, // will always show the root menu
     meta: {
         title: 'permission',

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Message } from 'element-ui';
-import storeManager from '@/store/storeManager.js';
+import store from '@/store/store.js';
 import { getToken } from '@/utils/authUtils.js';
 
 // create an axios instance
@@ -12,15 +12,16 @@ const service = axios.create({
 // request interceptor
 service.interceptors.request.use(
     config => {
-    // Do something before request is sent
-        if (storeManager.getters.token) {
+        // Do something before request is sent
+        if (store.getters.token) {
+            // 平时开发里，先请求一个 token ，然后后面的请求都要带上这个 token 来进行认证或者授权，是一个常见的需求
             // 让每个请求携带token-- ['X-Token']为自定义key 请根据实际情况自行修改
             config.headers['X-Token'] = getToken();
         }
         return config;
     },
     error => {
-    // Do something with request error
+        // Do something with request error
         console.log(error); // for debug
         Promise.reject(error);
     }
@@ -30,11 +31,11 @@ service.interceptors.request.use(
 service.interceptors.response.use(
     response => response,
     /**
-   * 下面的注释为通过在response里，自定义code来标示请求状态
-   * 当code返回如下情况则说明权限有问题，登出并返回到登录页
-   * 如想通过 xmlhttprequest 来状态码标识 逻辑可写在下面error中
-   * 以下代码均为样例，请结合自生需求加以修改，若不需要，则可删除
-   */
+     * 下面的注释为通过在response里，自定义code来标示请求状态
+     * 当code返回如下情况则说明权限有问题，登出并返回到登录页
+     * 如想通过 xmlhttprequest 来状态码标识 逻辑可写在下面error中
+     * 以下代码均为样例，请结合自生需求加以修改，若不需要，则可删除
+     */
     // response => {
     //   const res = response.data
     //   if (res.code !== 20000) {

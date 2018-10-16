@@ -8,7 +8,7 @@ import userManager from '@/module/login/manager/userManager.js';
 
 Vue.use(Vuex);
 
-const storeManager = new Vuex.Store({
+const store = new Vuex.Store({
     modules: {
         appManager,
         errorLogManager,
@@ -19,4 +19,4 @@ const storeManager = new Vuex.Store({
 });
 
 
-export default storeManager;
+export default store;

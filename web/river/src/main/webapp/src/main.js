@@ -10,7 +10,7 @@ import '@/common/resource/icon'; // icon
 
 import cookies from 'js-cookie';
 import router from '@/router/router.js';
-import storeManager from '@/store/storeManager.js';
+import store from '@/store/store.js';
 
 import i18n from '@/common/resource/lang'; // Internationalization
 import '@/module/log/service/errorLogService.js'; // error log
@@ -30,14 +30,11 @@ Object.keys(filters).forEach(key => {
 
 Vue.config.productionTip = false;
 
-// make $store = $storeManager
-Vue.prototype.$storeManager = storeManager;
-Vue.prototype.$store = storeManager;
 
 new Vue({
     el: '#app',
     router,
-    storeManager,
+    store,
     i18n,
     render: h => h(App)
 });

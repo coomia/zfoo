@@ -1,9 +1,9 @@
-import storeManager from '@/store/storeManager.js';
+import store from '@/store/store.js';
 
 const permission = {
     inserted(el, binding, vnode) {
         const { value } = binding;
-        const roles = storeManager.getters && storeManager.getters.roles;
+        const roles = store.getters && store.getters.roles;
 
         if (value && value instanceof Array && value.length > 0) {
             const permissionRoles = value;

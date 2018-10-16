@@ -60,7 +60,7 @@ export default {
     },
     computed: {
         errorLogs() {
-            return this.$storeManager.getters.errorLogs;
+            return this.$store.getters.errorLogs;
         }
     }
 };

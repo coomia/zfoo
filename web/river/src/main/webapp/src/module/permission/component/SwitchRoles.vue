@@ -20,7 +20,7 @@ export default {
                 return this.roles[0];
             },
             set(val) {
-                this.$storeManager.dispatch('ChangeRoles', val).then(() => {
+                this.$store.dispatch('ChangeRoles', val).then(() => {
                     this.$emit('change');
                 });
             }

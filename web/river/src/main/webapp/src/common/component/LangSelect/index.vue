@@ -14,13 +14,13 @@
 export default {
     computed: {
         language() {
-            return this.$storeManager.getters.language;
+            return this.$store.getters.language;
         }
     },
     methods: {
         handleSetLanguage(lang) {
             this.$i18n.locale = lang;
-            this.$storeManager.dispatch('setLanguage', lang);
+            this.$store.dispatch('setLanguage', lang);
             this.$message({
                 message: 'Switch Language Success',
                 type: 'success'

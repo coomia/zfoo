@@ -1,4 +1,4 @@
-import storeManager from '@/store/storeManager.js';
+import store from '@/store/store.js';
 
 const { body } = document;
 const WIDTH = 1024;
@@ -8,7 +8,7 @@ export default {
     watch: {
         $route(route) {
             if (this.device === 'mobile' && this.sidebar.opened) {
-                storeManager.dispatch('closeSideBar', { withoutAnimation: false });
+                store.dispatch('closeSideBar', { withoutAnimation: false });
             }
         }
     },
@@ -18,8 +18,8 @@ export default {
     mounted() {
         const isMobile = this.isMobile();
         if (isMobile) {
-            storeManager.dispatch('toggleDevice', 'mobile');
-            storeManager.dispatch('closeSideBar', { withoutAnimation: true });
+            store.dispatch('toggleDevice', 'mobile');
+            store.dispatch('closeSideBar', { withoutAnimation: true });
         }
     },
     methods: {
@@ -30,10 +30,10 @@ export default {
         resizeHandler() {
             if (!document.hidden) {
                 const isMobile = this.isMobile();
-                storeManager.dispatch('toggleDevice', isMobile ? 'mobile' : 'desktop');
+                store.dispatch('toggleDevice', isMobile ? 'mobile' : 'desktop');
 
                 if (isMobile) {
-                    storeManager.dispatch('closeSideBar', { withoutAnimation: true });
+                    store.dispatch('closeSideBar', { withoutAnimation: true });
                 }
             }
         }

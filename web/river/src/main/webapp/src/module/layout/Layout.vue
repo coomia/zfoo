@@ -25,10 +25,10 @@ export default {
     mixins: [ResizeMixin],
     computed: {
         sidebar() {
-            return this.$storeManager.state.appManager.sidebar;
+            return this.$store.state.appManager.sidebar;
         },
         device() {
-            return this.$storeManager.state.appManager.device;
+            return this.$store.state.appManager.device;
         },
         classObj() {
             return {
@@ -41,7 +41,7 @@ export default {
     },
     methods: {
         handleClickOutside() {
-            this.$storeManager.dispatch('closeSideBar', { withoutAnimation: false });
+            this.$store.dispatch('closeSideBar', { withoutAnimation: false });
         }
     }
 };

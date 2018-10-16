@@ -79,9 +79,10 @@ module.exports = {
         productionGzipExtensions: ['js', 'css'],
 
         // Run the build command with an extra argument to
-        // View the bundle analyzer report after build finishes:
-        // `npm run build:prod --report`
+        // View the bundle analyzer report after build finishes: `npm run build:prod --report`
         // Set to `true` or `false` to always turn it on or off
+        // ebpack-bundle-analyzer 一个模块分析的东西，可以装逼
+        // "build:sit": "cross-env NODE_ENV=production env_config=sit npm_config_preview=true  npm_config_report=true node build/build.js"
         bundleAnalyzerReport: process.env.npm_config_report || false,
 
         // `npm run build:prod --generate_report`

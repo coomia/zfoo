@@ -84,11 +84,11 @@ export default {
     computed: {
         lang: {
             get() {
-                return this.$storeManager.state.appManager.language;
+                return this.$store.state.appManager.language;
             },
             set(lang) {
                 this.$i18n.locale = lang;
-                this.$storeManager.dispatch('setLanguage', lang);
+                this.$store.dispatch('setLanguage', lang);
             }
         }
     },

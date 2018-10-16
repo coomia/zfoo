@@ -13,7 +13,7 @@ export default {
     name: 'AppMain',
     computed: {
         cachedViews() {
-            return this.$storeManager.state.tagsViewManager.cachedViews;
+            return this.$store.state.tagsViewManager.cachedViews;
         },
         key() {
             return this.$route.fullPath;
