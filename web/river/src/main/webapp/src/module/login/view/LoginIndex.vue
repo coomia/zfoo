@@ -191,9 +191,6 @@ export default {
 
     /* reset element-ui css */
     .login-container {
-        // CSS loader会把把非根路径的url解释为相对路径， 加~前缀才会解释成模块路径。
-        background: url("~@/module/login/resource/hello-world.jpg") no-repeat center center fixed;
-        background-size: cover;
         .el-input {
             display: inline-block;
             height: 47px;
@@ -223,15 +220,16 @@ export default {
 </style>
 
 <style rel="stylesheet/scss" lang="scss" scoped>
-    $bg: #2d3a4b;
     $dark_gray: #889aa4;
     $light_gray: #eee;
 
     .login-container {
-        position: fixed;
+
+        // CSS loader会把把非根路径的url解释为相对路径， 加~前缀才会解释成模块路径。
+        background: url("~@/module/login/resource/login-bg.jpg") no-repeat center center fixed;
+        background-size: cover;
         height: 100%;
         width: 100%;
-        background-color: $bg;
         .login-form {
             position: absolute;
             left: 0;

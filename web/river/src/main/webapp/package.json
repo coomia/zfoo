@@ -15,7 +15,6 @@
     "build:prod": "cross-env NODE_ENV=production env_config=prod node build/build.js",
     "build:sit": "cross-env NODE_ENV=production env_config=sit node build/build.js",
     "lint": "eslint --fix --ext .js,.vue src",
-    "test": "cross-env BABEL_ENV=development webpack-dev-server --inline --progress --config test/webpack.test.conf.js",
     "test:cross": "cross-env NODE_ENV=aaa env_config=bbb node ./test/other/cross-env-test.js",
     "svgo": "svgo -f src/icons/svg --config=src/icons/svgo.yml"
   },
