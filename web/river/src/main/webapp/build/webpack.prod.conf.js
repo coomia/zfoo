@@ -56,7 +56,9 @@ const webpackConfig = merge(baseWebpackConfig, {
             inject: true,
             favicon: resolve('favicon.ico'),
             title: 'river',
-            path: config.build.assetsPublicPath + config.build.assetsSubDirectory,
+            templateParameters: {
+                BASE_URL: config.build.assetsPublicPath + config.build.assetsSubDirectory
+            },
             minify: {
                 removeComments: true,
                 collapseWhitespace: true,
@@ -138,7 +140,15 @@ const webpackConfig = merge(baseWebpackConfig, {
             }),
             // Compress extracted CSS. We are using this plugin so that possible
             // duplicated CSS from different components can be deduped.
-            new OptimizeCSSAssetsPlugin()
+            new OptimizeCSSAssetsPlugin({
+                assetNameRegExp: /\.optimize\.css$/g,
+                cssProcessor: require('cssnano'),
+                cssProcessorOptions: {
+                    safe: true,
+                    discardComments: { removeAll: true }
+                },
+                canPrint: true
+            })
         ]
     }
 });
