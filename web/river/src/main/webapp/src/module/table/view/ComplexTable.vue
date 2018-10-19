@@ -80,9 +80,7 @@
             </el-table-column>
         </el-table>
 
-        <div class="pagination-container">
-            <el-pagination v-show="total>0" :current-page="listQuery.page" :page-sizes="[10,20,30, 50]" :page-size="listQuery.limit" :total="total" background layout="total, sizes, prev, pager, next, jumper" @size-change="handleSizeChange" @current-change="handleCurrentChange"/>
-        </div>
+        <pagination v-show="total>0" :total="total" :page.sync="listQuery.page" :limit.sync="listQuery.limit" @pagination="getList" />
 
         <el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible">
             <el-form ref="dataForm" :rules="rules" :model="temp" label-position="left" label-width="70px" style="width: 400px; margin-left:50px;">
@@ -132,6 +130,8 @@
 import { fetchList, fetchPv, createArticle, updateArticle } from '@/module/article/api/articleApi.js';
 import waves from '@/common/directive/waves'; // 水波纹指令
 import { parseTime } from '@/utils/timeUtils.js';
+import Pagination from '@/common/component/Pagination'; // Secondary package based on el-pagination
+
 
 const calendarTypeOptions = [
     { key: 'CN', display_name: 'China' },
@@ -148,6 +148,7 @@ const calendarTypeKeyValue = calendarTypeOptions.reduce((acc, cur) => {
 
 export default {
     name: 'ComplexTable',
+    components: { Pagination },
     directives: {
         waves
     },
@@ -168,7 +169,7 @@ export default {
         return {
             tableKey: 0,
             list: null,
-            total: null,
+            total: 0,
             listLoading: true,
             listQuery: {
                 page: 1,
@@ -226,14 +227,6 @@ export default {
         },
         handleFilter() {
             this.listQuery.page = 1;
-            this.getList();
-        },
-        handleSizeChange(val) {
-            this.listQuery.limit = val;
-            this.getList();
-        },
-        handleCurrentChange(val) {
-            this.listQuery.page = val;
             this.getList();
         },
         handleModifyStatus(row, status) {

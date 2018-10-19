@@ -37,7 +37,7 @@
 <script>
 import path from 'path';
 import { generateTitle } from '@/utils/i18nUtils.js';
-import { validateURL } from '@/utils/validateUtils.js';
+import { isExternal } from '@/utils/validateUtils.js';
 import Item from './Item';
 import AppLink from './Link';
 import FixiOSBug from './FixiOSBug';
@@ -98,7 +98,7 @@ export default {
             return path.resolve(this.basePath, routePath);
         },
         isExternalLink(routePath) {
-            return validateURL(routePath);
+            return isExternal(routePath);
         },
         generateTitle
     }
