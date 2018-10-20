@@ -40,3 +40,8 @@ package-lock.json
 
 # 忽略npm编译后的文件
 **/dist/
+
+# 忽略webapp中部署的文件
+**/webapp/static/
+**/webapp/index.html
+**/webapp/favicon.ico
