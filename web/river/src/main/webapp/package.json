@@ -7,7 +7,8 @@
   "thanksTo": [
     {
       "github": "https://github.com/PanJiaChen",
-      "email": "Pan <panfree23@gmail.com>"
+      "email": "Pan <panfree23@gmail.com>",
+      "params": "from https://github.com/PanJiaChen/vue-element-admin and from version 2018-10-19"
     }
   ],
   "scripts": {

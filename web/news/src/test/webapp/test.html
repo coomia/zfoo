@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <script src='https://devpreview.tiny.cloud/demo/tinymce.min.js'></script>
-    <script>
-        tinymce.init({
-            selector: '#mytextarea'
-        });
-    </script>
+    <meta charset="UTF-8">
+    <title>test</title>
 </head>
-
 <body>
-<h1>TinyMCE Quick Start Guide</h1>
-<form method="post">
-    <textarea id="mytextarea">Hello, World!</textarea>
-</form>
+<button type="button" id="bt1">Ajax!</button>
 </body>
+
+<script>
+    var button = document.getElementById("bt1");
+    button.onclick = function () {
+        const url = window.location.href;
+        if(url.startsWith("https")){
+
+        }
+    };
+
+</script>
 </html>
