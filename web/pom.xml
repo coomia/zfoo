@@ -12,7 +12,6 @@
 
 
     <modules>
-        <module>news</module>
         <module>wtest</module>
         <module>river</module>
     </modules>

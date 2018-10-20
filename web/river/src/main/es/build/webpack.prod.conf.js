@@ -54,8 +54,8 @@ const webpackConfig = merge(baseWebpackConfig, {
             filename: config.build.index,
             template: 'index.html',
             inject: true,
-            favicon: resolve('favicon.ico'),
-            title: 'river',
+            favicon: resolve('favicon.ico'), // 标签栏的图片
+            title: 'river', // 标签栏的名称
             templateParameters: {
                 BASE_URL: config.build.assetsPublicPath + config.build.assetsSubDirectory
             },
