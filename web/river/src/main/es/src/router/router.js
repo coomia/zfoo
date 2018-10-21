@@ -61,11 +61,6 @@ export const constantRouterMap = [
     errorFacade.error401
 ];
 
-export default new Router({
-    // mode: 'history', // require service support
-    scrollBehavior: () => ({ y: 0 }),
-    routes: constantRouterMap
-});
 
 export const asyncRouterMap = [
     {
@@ -85,3 +80,10 @@ export const asyncRouterMap = [
     // nestedRouter,
     // tableRouter,
 ];
+
+
+export default new Router({
+    mode: 'history', // require service support
+    scrollBehavior: () => ({ y: 0 }),
+    routes: constantRouterMap
+});

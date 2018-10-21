@@ -14,22 +14,22 @@ import javax.persistence.*;
 @Cache(size = "hundred", persister = @Persister("3s"))
 @Entity
 @NamedQueries({@NamedQuery(name = "selectAllUser", query = "from UserEntity")})
-public class UserEntity implements IEntity<Integer> {
+public class UserEntity implements IEntity<Long> {
 
     @Id
     @Column
-    private int id;
+    private long id;
 
     private String name;
 
     private String password;
 
     @Override
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
