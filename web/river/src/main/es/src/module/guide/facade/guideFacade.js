@@ -1,4 +1,4 @@
-import Layout from '@/module/layout/Layout';
+import Layout from '@/module/layout/view/Layout.vue';
 
 const guideFacade = {
     path: '/guide',

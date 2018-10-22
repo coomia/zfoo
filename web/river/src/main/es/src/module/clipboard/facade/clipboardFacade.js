@@ -1,15 +1,15 @@
-import Layout from '@/module/layout/Layout';
+import Layout from '@/module/layout/view/Layout.vue';
 
 const clipboardFacade = {
-    path: '',
+    path: '/clipboard',
     component: Layout,
     redirect: 'clipboard',
     children: [
         {
-            path: 'clipboard',
+            path: 'index',
             component: () => import('@/module/clipboard/view/ClipboardIndex.vue'),
-            name: 'ClipboardDemo',
-            meta: { title: 'clipboardDemo', icon: 'clipboard', noCache: true }
+            name: 'Clipboard',
+            meta: { title: 'clipboard', icon: 'clipboard', noCache: true }
         }
     ]
 };

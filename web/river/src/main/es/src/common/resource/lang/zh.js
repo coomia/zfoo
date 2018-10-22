@@ -59,8 +59,9 @@ export default {
         zip: 'Zip',
         exportZip: 'Export Zip',
         theme: '换肤',
-        clipboardDemo: 'Clipboard',
+        clipboard: '粘贴板',
         i18n: '国际化',
+        link: '跳转页',
         externalLink: '外链'
     },
     navbar: {

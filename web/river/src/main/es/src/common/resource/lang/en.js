@@ -59,8 +59,9 @@ export default {
         zip: 'Zip',
         exportZip: 'Export Zip',
         theme: 'Theme',
-        clipboardDemo: 'Clipboard',
+        clipboard: 'Clipboard',
         i18n: 'I18n',
+        link: 'Web Page Redirect',
         externalLink: 'External Link'
     },
     navbar: {

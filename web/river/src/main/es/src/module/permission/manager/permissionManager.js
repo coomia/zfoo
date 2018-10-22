@@ -61,7 +61,7 @@ const permissionManager = {
         }
     },
     getters: {
-        permission_routers: state => state.routers,
+        permissionRouters: state => state.routers,
         addRouters: state => state.addRouters
     }
 };

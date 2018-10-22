@@ -3,7 +3,7 @@ import App from './App';
 
 
 import 'normalize.css/normalize.css'; // A modern alternative to CSS resets
-import Element from 'element-ui';
+import ElementUi from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 import '@/common/resource/style/index.scss'; // global css
 import '@/common/resource/icon'; // icon
@@ -18,7 +18,7 @@ import '@/module/permission/service/permissionService.js'; // permission control
 import '@/mock/mock.js'; // simulation data
 import * as filters from '@/common/filter/filter.js'; // global filters
 
-Vue.use(Element, {
+Vue.use(ElementUi, {
     size: cookies.get('size') || 'medium', // set element-ui default size
     i18n: (key, value) => i18n.t(key, value)
 });
