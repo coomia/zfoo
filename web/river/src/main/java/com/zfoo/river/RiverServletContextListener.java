@@ -1,6 +1,9 @@
 package com.zfoo.river;
 
 import com.mysql.jdbc.AbandonedConnectionCleanupThread;
+import com.zfoo.event.EventContext;
+import com.zfoo.orm.OrmContext;
+import com.zfoo.scheduler.SchedulerContext;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -23,10 +26,10 @@ public class RiverServletContextListener implements ServletContextListener {
     }
 
     @Override
-    public void contextDestroyed(ServletContextEvent event) {
+    public void contextDestroyed(ServletContextEvent servletContext) {
         System.out.println(this.getClass().getSimpleName() + "-->contextDestroyed()");
 
-        ServletContext ctx = event.getServletContext();
+        ServletContext ctx = servletContext.getServletContext();
 
 
         Enumeration<Driver> drivers = DriverManager.getDrivers();
@@ -43,10 +46,30 @@ public class RiverServletContextListener implements ServletContextListener {
         try {
             AbandonedConnectionCleanupThread.shutdown();
         } catch (InterruptedException e) {
-            ctx.log("SEVERE problem cleaning up: " + e.getMessage());
+            ctx.log("Mysql problem cleaning up: " + e.getMessage());
             e.printStackTrace();
         }
 
+        try {
+            EventContext.shutdown();
+        } catch (Exception e) {
+            ctx.log("Event problem cleaning up: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        try {
+            OrmContext.shutdown();
+        } catch (Exception e) {
+            ctx.log("Orm problem cleaning up: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        try {
+            SchedulerContext.shutdown();
+        } catch (Exception e) {
+            ctx.log("Scheduler problem cleaning up: " + e.getMessage());
+            e.printStackTrace();
+        }
 
     }
 

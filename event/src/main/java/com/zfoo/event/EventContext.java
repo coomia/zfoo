@@ -2,12 +2,16 @@ package com.zfoo.event;
 
 import com.zfoo.event.manager.EventBusManager;
 import com.zfoo.event.manager.IEventBusManager;
+import com.zfoo.util.ReflectionUtils;
 import com.zfoo.util.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.Ordered;
+
+import java.lang.reflect.Field;
+import java.util.concurrent.ExecutorService;
 
 /**
  * @author jaysunxiao
@@ -36,6 +40,21 @@ public class EventContext extends InstantiationAwareBeanPostProcessorAdapter imp
 
     public static IEventBusManager getEventBusManager() {
         return instance.eventBusManager;
+    }
+
+    public static void shutdown() throws NoSuchFieldException {
+        IEventBusManager event = instance.eventBusManager;
+        if (event == null) {
+            return;
+        }
+        Field field = EventBusManager.class.getDeclaredField("executors");
+        ReflectionUtils.makeAccessible(field);
+        ExecutorService[] executors = (ExecutorService[]) ReflectionUtils.getField(field, event);
+        if (executors != null) {
+            for (ExecutorService executor : executors) {
+                executor.shutdown();
+            }
+        }
     }
 
     @Override

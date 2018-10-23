@@ -4,12 +4,16 @@ import com.zfoo.scheduler.manager.ISchedulerManager;
 import com.zfoo.scheduler.manager.SchedulerManager;
 import com.zfoo.scheduler.service.ISchedulerService;
 import com.zfoo.scheduler.service.SchedulerService;
+import com.zfoo.util.ReflectionUtils;
 import com.zfoo.util.StringUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessorAdapter;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.Ordered;
+
+import java.lang.reflect.Field;
+import java.util.concurrent.ScheduledExecutorService;
 
 /**
  * @author jaysunxiao
@@ -42,6 +46,19 @@ public class SchedulerContext extends InstantiationAwareBeanPostProcessorAdapter
 
     public static ISchedulerService getSchedulerService() {
         return instance.schedulerService;
+    }
+
+    public static void shutdown() throws NoSuchFieldException {
+        ISchedulerService scheduler = instance.schedulerService;
+        if (scheduler == null) {
+            return;
+        }
+        Field field = SchedulerService.class.getDeclaredField("executor");
+        ReflectionUtils.makeAccessible(field);
+        ScheduledExecutorService executor = (ScheduledExecutorService) ReflectionUtils.getField(field, scheduler);
+        if (executor != null) {
+            executor.shutdown();
+        }
     }
 
     @Override

@@ -11,6 +11,7 @@ import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpRequestDecoder;
 import io.netty.handler.codec.http.HttpResponseEncoder;
 import io.netty.handler.stream.ChunkedWriteHandler;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
@@ -18,6 +19,7 @@ import org.junit.Test;
  * @version 1.0
  * @since 2018-09-12 10:58
  */
+@Ignore
 public class ProxyServerTest {
     // localhost:9999/img/https://pic3.zhimg.com/v2-473b053a376f6752da5d5b06a31b7304_b.jpg
 

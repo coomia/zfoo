@@ -9,6 +9,7 @@ import com.zfoo.orm.model.query.IQuery;
 import com.zfoo.orm.schema.OrmDefinitionParser;
 import com.zfoo.orm.service.IOrmService;
 import com.zfoo.orm.service.OrmService;
+import com.zfoo.util.ReflectionUtils;
 import com.zfoo.util.StringUtils;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.BeansException;
@@ -16,6 +17,9 @@ import org.springframework.beans.factory.config.InstantiationAwareBeanPostProces
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.Ordered;
+
+import java.lang.reflect.Field;
+import java.util.concurrent.ScheduledExecutorService;
 
 /**
  * @author jaysunxiao
@@ -78,6 +82,19 @@ public class OrmContext extends InstantiationAwareBeanPostProcessorAdapter imple
 
     public static IOrmService getOrmService() {
         return instance.ormService;
+    }
+
+    public static void shutdown() throws NoSuchFieldException {
+        IOrmService orm = instance.ormService;
+        if (orm == null) {
+            return;
+        }
+        Field field = OrmService.class.getDeclaredField("executor");
+        ReflectionUtils.makeAccessible(field);
+        ScheduledExecutorService executor = (ScheduledExecutorService) ReflectionUtils.getField(field, orm);
+        if (executor != null) {
+            executor.shutdown();
+        }
     }
 
     @Override
