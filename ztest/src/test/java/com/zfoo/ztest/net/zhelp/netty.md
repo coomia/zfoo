@@ -15,3 +15,55 @@
     4.SO_KEEPALIVE
     　　解释：是否使用TCP的心跳机制； 
     　　使用建议：心跳机制由应用层自己实现；
+    
+    
+##netty最佳的Boss线程连接数
+```
+没有固定的连接数，一切还是看你的场景，连接数在满足传输吞吐量的情况下，越少越好。
+
+2条连接时，只能有40k QPS。
+
+48条连接，升到62k QPS，CPU烧了28%
+
+4条连接，QPS反而上升到68k ，而且CPU降到20%。
+```
+
+##netty线程池
+```
+Boss Group用于服务端处理建立连接的请求，WorkGroup用于处理I/O。
+EventLoopGroup的默认大小都是是2倍的CPU核数，但这并不是一个恒定的最佳数量，为了避免线程上下文切换，只要能满足要求，这个值其实越少越好。
+如果都是长连接，Boss Group平时很闲，好在它也只有忙起来才会多起线程，平时就只占1条。
+
+
+Netty线程的数量一般固定且较少，所以很怕线程被堵塞，比如同步的数据库查询，
+比如下游的服务调用（又来罗嗦，future.get()式的异步在执行future.get()时还是堵住当前线程的啊）。
+所以，此时就要把处理放到一个业务线程池里操作，即使要付出线程上下文切换的代价
+```
+
+
+##NioEventLoop原理
+```
+Netty的线程池理念有点像ForkJoinPool，都不是一个线程大池子并发等待一条任务队列，而是每条线程自己一个任务队列。
+NioEventLoop里面使用了MpscLinkedQueue，替换了父类中默认的LinkedBlockingQueue队列。
+LinkedBlockingQueue也是一个高效的线程安全的队列，它使用了takeLock和putLock两个锁分别作用与消费线程和生产线程，避免了消费者和生产者直接的竞争。
+因为可以保证每个任务队列只有一个线程消费，所以只要在插入的时候使用CAS操作即可实现这个无锁队列。
+```
+
+##netty参数
+```
+-Dio.netty.leakDetectionLevel=disabled把检测关掉
+堆外内存大小
+```
+
+
+##netty注意事项
+```
+1. ctx.writeAndFlush() 与 channel.writeAndFlush()的区别在于，channel要经过整条Pipeline，而ctx直接找下一个outboundHandler。
+
+2. channel.writeAndFlush(buf, channel.voidPromise() )
+writeAndFlush不管你用不用默认构造返回一个Promise(Future)，有点浪费内存。没有用的话，用一个公共的 voidPromise ，减少大家花费。不过低版本的Netty不能用。
+
+3. 空闲连接管理，因为刚才说的ctx.writeAndFlush()不经Pipeline，所以只监控读空闲就够了。否则每次请求都要READ/WRITE/ALL IDEL三个值算一遍，白白消耗。
+
+4. Handler能共用就标上Shareable Annotation然后共用，不要每个Channel建一个。
+```
