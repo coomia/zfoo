@@ -1,96 +1,68 @@
 ##Linux文件系统和相关指令
 ####1.搜索文件指令
 ```
-find / -mtime 0 #0代表目前的时间
-find /etc -newer /etc/passwd  
-                #-newer file ：列出比 file 还要新的文件名
-find /home -user jaysunxiao   
-                #搜寻/home底下属于jaysunxiao的文件
-find / -nouser  #搜寻系统中不属亍任何人的文件
-find / -name testfile          
-                #搜寻某个文件名，'*httpd*'可以使用通配符
-find / -size +1000k           
-                #找出系统中，大于1MB的文件
-find . -type f | xargs -n 10 grep "dir"   
-                #当前文件夹下，包含dir关键字的文档，每次取10个
-find . -type f | xargs -n 10 grep -l "dir"  
-                #只取出文件的名称
-                
+find / -mtime 0                 #0代表目前的时间
+find /etc -newer /etc/passwd    #-newer file ：列出比 file 还要新的文件名
+find /home -user jaysunxiao     #搜寻/home底下属于jaysunxiao的文件
+find / -nouser                  #搜寻系统中不属亍任何人的文件
+find / -name testfile           #搜寻某个文件名，'*httpd*'可以使用通配符
+find / -size +1000k             #找出系统中，大于1MB的文件
+find . -type f | xargs -n 10 grep "dir"     #当前文件夹下，包含dir关键字的文档，每次取10个
+find . -type f | xargs -n 10 grep -l "dir"  #只取出文件的名称
 ```
 
 ####2.创建/删除文件指令
 
 ```
-mkdir -p test1/test2/test3 
-                #如果没有test2，则创建。没有-p选项则不创建
-mkdir -m 711 test2      
-                #建立权限为rwx--x--x的目录
-rmdir -p test1/test2/test3 
-                #全部删除
-cp  ~/.bashrc  /tmp/bashrc    
-                #将家目录下的 .bashrc复制到/tmp下，并更名为bashrc
-cp  -i  ~/.bashrc  /tmp/bashrc  
-                #-i ：若目标文件已经存在时，会先询问是否进行(常用)
-cp  -a ~/.bashrc  /tmp/bashrc  
-                #-a将文件的所有特性都一起复制过来
-rm  -i  bashrc*
-                #将/tmp底下开头为bashrcde的文件和目录通通删除
-rm  -R  /tmp/etc       
-                # 将/tmp/etc/这个目录删除掉，如果不加-r删除不掉
-mv mvtest mvtest2      
-                #将目录名称mvtest更名为mvtest2	
-rename testfile newfile testfile    
-                #将testfile文件重命名为newfile
-cd /tmp         #change directory，所有人都可以工作的/tmp目录中建立文件
-mkdir testdir   #建立新目录
-chmod 744 testdir       
-                #变更权限r:4，w:2，x:1
-touch testdir/testfile     
-                #建立空的文件
+mkdir -p test1/test2/test3      #如果没有test2，则创建。没有-p选项则不创建
+mkdir -m 711 test2              #建立权限为rwx--x--x的目录
+rmdir -p test1/test2/test3      #全部删除
+cp  ~/.bashrc  /tmp/bashrc      #将家目录下的 .bashrc复制到/tmp下，并更名为bashrc
+cp  -i  ~/.bashrc  /tmp/bashrc  #-i ：若目标文件已经存在时，会先询问是否进行(常用)
+cp  -a ~/.bashrc  /tmp/bashrc   #-a将文件的所有特性都一起复制过来
+rm  -i  test*                   #将当前文件夹底下开头为test的文件和目录通通删除
+rm  -r  /tmp/etc                # 将/tmp/etc/这个目录删除掉，如果不加-r删除不掉
+rm  -rf ./test                  #将test文件夹强制删除，不询问
+rm  -f  test.txt                #将test.txt文件强制删除
+mv mvtest mvtest2               #将目录名称mvtest更名为mvtest2	
+rename testfile newfile testfile    #将testfile文件重命名为newfile
+cd /tmp                         #change directory，所有人都可以工作的/tmp目录中建立文件
+mkdir testdir                   #建立新目录
+chmod 744 testdir               #变更权限r:4，w:2，x:1
+touch testdir/testfile          #建立空的文件
 chmod 600 testdir/testfile
-su - jaysunxiao 
-                #switch user
-chown jaysunxiao testdir  
-                #改变档案拥有者，-R递归，文件夹下全部的归属都改变
-chgrp           #改变档案所属群组
+su - jaysunxiao                 #switch user
+chown jaysunxiao testdir        #改变档案拥有者，-R递归，文件夹下全部的归属都改变
+chgrp                           #改变档案所属群组
 
-umask 002       #umask的分数是默认值需要减掉的权限，文件：666，文件夹：777
-chattr +a testfile   
-                #-a:文件将只能增加数据，不能删除也不能修改数据，root才能设定
-                #-i:让文件不能被删除、改名、无法写入或新增资料！』root才能设定
-lsattr testfile   
-                #显示文件的隐藏属性
-file testfile   #观察文件的类型
+umask 002                       #umask的分数是默认值需要减掉的权限，文件：666，文件夹：777
+chattr +a testfile              #-a:文件将只能增加数据，不能删除也不能修改数据，root才能设定
+                                    #-i:让文件不能被删除、改名、无法写入或新增资料！』root才能设定
+lsattr testfile                 #显示文件的隐藏属性
+file testfile                   #观察文件的类型
 whereis testfile
-locate testfile #会从数据库中查找，所以速度比较快
-updatedb        #updatedb指令会去读取 /etc/updatedb.conf的配置去更新
+locate testfile                 #会从数据库中查找，所以速度比较快
+updatedb                        #updatedb指令会去读取 /etc/updatedb.conf的配置去更新
 
-ln /tmp/testdir 
-                #hard link链接
-ln -s /tmp/testdir  
-                #建立一个符号链接，类似windows下的快捷方式类似
-
+ln /tmp/testdir                 #hard link链接
+ln -s /tmp/testdir              #建立一个符号链接，类似windows下的快捷方式类似
 ```
 
 ####3.查看文件指令
 ```
-pwd             #显示当前目录print working directory
-ls -al ~        #列出/home/jaysunxiao目录下的所有文件，-l，包括文件夹下的文件夹和文件
-cat testfile    #concatenate  [kɒn'kætɪneɪt]，使连续，显示文件内容
-cat -n testfile  
-                #显示文件内容，包括行号
-tac testfile    #从最后一行开始显示，可以看出tac是cat倒着写
-nl testfile     #类似cat -n testfile
-more testfile   #一页一页的显示文件内容，space向下翻页
+pwd                             #显示当前目录print working directory
+ls -al ~                        #列出/home/jaysunxiao目录下的所有文件，-l，包括文件夹下的文件夹和文件
+cat testfile                    #concatenate  [kɒn'kætɪneɪt]，使连续，显示文件内容
+cat -n testfile                 #显示文件内容，包括行号
+tac testfile                    #从最后一行开始显示，可以看出tac是cat倒着写
+nl testfile                     #类似cat -n testfile
+more testfile                   #一页一页的显示文件内容，space向下翻页
 less            #和more类似，但是比more更好的是可以往前翻页，pagedown，pageup
                 #/ ：向下搜寻字符串的功能；? ：向上搜寻字符串的功能；
-head -n 20 testfile  
-                #显示文件的头几行，默认显示10行
-tail -n 20 testfile    
-                #显示末尾几行
-od testfile     #以二进制的方式读取文件内容
-od -t x testfile  
-                # d：十进制；f ：浮点float；o ：八进制；x：十六进制
+head -n 20 testfile             #显示文件的头几行，默认显示10行
+tail -n 20 testfile             #显示末尾几行
+od testfile                     #以二进制的方式读取文件内容
+od -t x testfile                # d：十进制；f ：浮点float；o ：八进制；x：十六进制
 test -e testfile && echo "exist" || echo "Not exist"  
                 #存在，-f文件，-d文件夹，-e两者之和
                 
@@ -120,9 +92,8 @@ vim testfile    #用vim打开testfile
 
 ####5.文件压缩/解压
 ```
-gzip -v file    #压缩file文件
-gzip -d file.gz  
-                #解压缩file的压缩文件file.gz
+gzip -v file        #压缩file文件
+gzip -d file.gz     #解压缩file的压缩文件file.gz
 tar -jpcv -f dir.tar.bz2 dir > /tmp/log.txt 2>&1  
                 #将dir文件夹压缩名为dir.tar.bz2的压缩文件，2>&1，指将标准输出、标准错误指定为同一输出路径
 tar -jxv -f dir.tar.bz2 -C /tmp/testdir/dir  
@@ -141,7 +112,25 @@ sz myfile.sh
 
 ```
 
-####7.文件其它
+
+####7.文件同步
+- Rsync（remote synchronize）是一个远程数据同步工具，可通过LAN/WAN快速同步多台主机间的文件。
+  Rsync使用所谓的“Rsync算法”来使本地和远 程两个主机之间的文件达到同步，这个算法只传送两个文件的不同部分，而不是每次都整份传送，因此速度相当快。
+
+- 本地间同步
+```
+mkdir src
+touch src/{1,2,3,4}
+mkdir dest
+rsync -av src/ dest/    #将src目录里的所有的文件同步至dest目录（目录带/，表示不包含src本身）
+rsync -av src dest/     #将src目录包括自己整个同步至dest目录
+```
+- 不同主机之间同步
+```
+rsync -av 10.16.41.128:/app/b/ '-e ssh -l root -p 22' /app/a/
+                        #通过ssh同步文件夹，将本机/app/a/文件夹下的文件同步到ip为128:/app/b路径下
+```
+####8.其它
 ```
 unix2dos -k testfile  
                 #转换为dos换行格式

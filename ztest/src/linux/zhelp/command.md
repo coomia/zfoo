@@ -115,9 +115,11 @@ type ifconfig   #type更强大，可以取代which
 alias           #命令别名
 
 history         #历史输入命令的记录，echo $HISTSIZE
+history -c      #清空历史命令
 history -w      #立刻将目前的资料写入~/.bash_history当中
-history  >>  testfile  
-                #>, >> 数据流重导向：输出，分别是覆盖和追加
+history  >>  testfile     #>, >> 数据流重导向：输出，分别是覆盖和追加
+!n              #执行history的n条命令
+                
                 
 tab             #接在一串指令的第一个字的后面，则为命令补全
 ctrl+c          #cancel
