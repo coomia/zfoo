@@ -24,7 +24,8 @@
             border
             fit
             highlight-current-row
-            style="width: 100%;">
+            style="width: 100%;"
+            @sort-change="sortChange">
             <el-table-column :label="$t('table.id')" align="center" width="65">
                 <template slot-scope="scope">
                     <span>{{ scope.row.id }}</span>
@@ -235,6 +236,20 @@ export default {
                 type: 'success'
             });
             row.status = status;
+        },
+        sortChange(data) {
+            const { prop, order } = data;
+            if (prop === 'id') {
+                this.sortByID(order);
+            }
+        },
+        sortByID(order) {
+            if (order === 'ascending') {
+                this.listQuery.sort = '+id';
+            } else {
+                this.listQuery.sort = '-id';
+            }
+            this.handleFilter();
         },
         resetTemp() {
             this.temp = {
