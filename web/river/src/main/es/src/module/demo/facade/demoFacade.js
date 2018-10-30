@@ -77,6 +77,12 @@ const demoFacade = {
             meta: { title: 'dragDialog' }
         },
         {
+            path: 'drag-select',
+            component: () => import('@/module/demo/view/DragSelect.vue'),
+            name: 'DragSelectDemo',
+            meta: { title: 'dragSelect' }
+        },
+        {
             path: 'dnd-list',
             component: () => import('@/module/demo/view/DndListDemo.vue'),
             name: 'DndListDemo',
