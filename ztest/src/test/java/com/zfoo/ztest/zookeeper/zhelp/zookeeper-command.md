@@ -41,7 +41,18 @@ rmr /node_1     循环删除/node_1
 setquota -n 2 /node_1   -n设置子节点的数目为2，如果超过了，会记录日志在bin/zookeeper.out中；-b，设置数据长度值（包括子节点）  
 delquota -n /node_1    删除配额  
 
-###zookeeper安装
+###Zookeeper安装
+
+
+####1.Windows下的安装
+```
+1.下载windows下的zookeeper安装包并解压到任意目录
+2.加入conf目录，重命名zoo_sample.cfg为zoo.cfg
+3.编辑zoo.cfg，编辑dataDir=D:\\zookeeper-3.4.9\\tmp，这个目录为zookeeper存储数据的目录
+```
+
+####2.Linux下的安装
+```
 将zookeeper-3.4.10.tar.gz下载到/opt目录，这个目录是专门放下载的第三方软件的目录  
 tar -xzvf zookeeper-3.4.10.tar.gz   解压  
 mv zookeeper-3.4.10 zookeeper      换一个好记一点的目录  
@@ -76,28 +87,4 @@ cd /opt/zookeeper/bin
 
 yum install telnet  
 telnet 192.168.238.128 2181  
-
-
-
-
-安装jdk  
-yum install java-1.8.0-openjdk-devel.x86_64  
-vi  /etc/profile   让系统上的所有用户使用java(openjdk) ,则要进行下面的操作：  
-
-
-将下面的三行粘贴到 /etc/profile 中：  
-
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.71-2.b15.el7_2.x86_64  
-export PATH=$PATH:$JAVA_HOME/bin  
-
-
-输入以下命令，来确认这三个变量是否设成了我们想要的：  
-
-echo $JAVA_HOME  
-echo $PATH  
-
-
-如果通过官网下载的.tar.gz文件，需要拷贝到/opt目录  
-tar -xzvf jdk-8u40-linux-i586.tar.gz  
-export JAVA_HOME=/opt/jdk1.8.0/   
-export PATH=$JAVA_HOME/bin  
+```
