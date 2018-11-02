@@ -8,6 +8,9 @@
     <artifactId>storage</artifactId>
     <version>1.0</version>
 
+    <packaging>jar</packaging>
+
+
     <properties>
         <!-- 本项目的其它module版本号 -->
         <zfoo.event.version>1.0</zfoo.event.version>

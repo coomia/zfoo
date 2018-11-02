@@ -6,9 +6,9 @@
 
     <groupId>com.zfoo</groupId>
     <artifactId>web</artifactId>
+    <packaging>pom</packaging>
     <version>1.0</version>
 
-    <packaging>pom</packaging>
 
 
     <modules>

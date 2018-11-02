@@ -8,6 +8,9 @@
     <artifactId>ztest</artifactId>
     <version>1.0</version>
 
+    <packaging>jar</packaging>
+
+
     <description>ztest = zfoo + test，是一个整个zfoo的test工程</description>
 
     <properties>

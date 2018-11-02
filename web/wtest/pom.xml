@@ -13,9 +13,10 @@
     <artifactId>wtest</artifactId>
     <version>1.0</version>
 
+    <packaging>war</packaging>
+
     <description>wtest = web + test，是一个web的test工程</description>
 
-    <packaging>war</packaging>
 
     <properties>
         <!-- 本项目的其它module版本号 -->

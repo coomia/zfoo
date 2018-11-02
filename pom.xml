@@ -7,9 +7,9 @@
 
     <groupId>com.zfoo</groupId>
     <artifactId>zfoo</artifactId>
-    <packaging>pom</packaging>
     <version>1.0</version>
 
+    <packaging>pom</packaging>
 
     <description>The root project of zfoo</description>
     <url>https://github.com/jaysunxiao/zfoo</url>
