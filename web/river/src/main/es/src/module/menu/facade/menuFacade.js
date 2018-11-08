@@ -27,7 +27,7 @@ const menuFacade = {
                     path: 'menu1-2',
                     component: () => import('@/module/menu/view//menu1/menu1-2'),
                     name: 'Menu1-2',
-                    redirect: '/nested/menu1/menu1-2/menu1-2-1',
+                    redirect: '/menu/menu1/menu1-2/menu1-2-1',
                     meta: { title: 'menu1-2' },
                     children: [
                         {
