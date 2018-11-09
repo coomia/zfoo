@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:resource="http://www.zfoo.com/schema/resource"
+
+       xsi:schemaLocation="
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+
+    http://www.zfoo.com/schema/resource
+    http://www.zfoo.com/schema/resource-1.0.xsd">
+
+
+    <resource:storage id="resourceManager">
+        <resource:scan package="com.zfoo.**.resource"/>
+        <resource:resource location="resource" suffix="xls"/>
+    </resource:storage>
+
+</beans>

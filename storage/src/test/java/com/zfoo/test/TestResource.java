@@ -4,6 +4,8 @@ import com.zfoo.storage.model.anno.ResInjection;
 import com.zfoo.storage.model.vo.Storage;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+
 /**
  * @author jaysunxiao
  * @version 1.0
@@ -21,4 +23,7 @@ public class TestResource {
         }
     }
 
+    public Collection<StudentResource> getAllStudentResource() {
+        return resources.getAll();
+    }
 }

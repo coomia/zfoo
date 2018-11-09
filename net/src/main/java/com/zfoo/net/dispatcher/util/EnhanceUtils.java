@@ -20,6 +20,21 @@ public abstract class EnhanceUtils {
     private static final AtomicInteger index = new AtomicInteger(0);
     private static final ClassPool classPool = ClassPool.getDefault();
 
+    static {
+        Class<?>[] classArray = new Class[]{
+                IPacket.class,
+                IPacketReceiver.class,
+                Session.class
+        };
+
+        for (Class<?> clazz : classArray) {
+            if (classPool.find(clazz.getCanonicalName()) == null) {
+                ClassClassPath classPath = new ClassClassPath(clazz);
+                classPool.insertClassPath(classPath);
+            }
+        }
+    }
+
     public static IPacketReceiver createPacketReciver(PacketReceiverDefinition definition) throws NotFoundException, CannotCompileException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Object bean = definition.getBean();
         Method method = definition.getMethod();

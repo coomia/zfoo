@@ -1,5 +1,7 @@
 package com.zfoo.river.module.login.facade;
 
+import com.zfoo.event.EventContext;
+import com.zfoo.river.module.login.event.LoginEvent;
 import com.zfoo.river.module.user.entity.UserEntity;
 import com.zfoo.river.module.user.manager.IUserManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,18 @@ public class LoginFacade {
 
     @RequestMapping("test")
     public String test() {
+        String name = "jaysunxiao";
+        String password = "admin";
+
+        // 入库
         UserEntity entity = new UserEntity();
         entity.setId(new Random().nextLong());
-        entity.setName("jaysunxiao");
-        entity.setPassword("admin");
+        entity.setName(name);
+        entity.setPassword(password);
         userManager.addUser(entity);
+
+        // 抛出一个同步事件
+        EventContext.getEventBusManager().syncSubmit(LoginEvent.valueOf(name ,password));
         return "test/test"; // test/test.jsp
     }
 }

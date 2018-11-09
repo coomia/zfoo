@@ -1,48 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:context="http://www.springframework.org/schema/context"
-
-       xmlns:event="http://www.zfoo.com/schema/event"
-       xmlns:net="http://www.zfoo.com/schema/net"
-       xmlns:scheduler="http://www.zfoo.com/schema/scheduler"
-       xmlns:resource="http://www.zfoo.com/schema/resource"
        xmlns:orm="http://www.zfoo.com/schema/orm"
 
        xsi:schemaLocation="
     http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
-    http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context-4.0.xsd
-
-    http://www.zfoo.com/schema/event
-    http://www.zfoo.com/schema/event-1.0.xsd
-
-    http://www.zfoo.com/schema/net
-    http://www.zfoo.com/schema/net-1.0.xsd
-
-    http://www.zfoo.com/schema/scheduler
-    http://www.zfoo.com/schema/scheduler-1.0.xsd
-
-    http://www.zfoo.com/schema/resource
-    http://www.zfoo.com/schema/resource-1.0.xsd
 
     http://www.zfoo.com/schema/orm
     http://www.zfoo.com/schema/orm-1.0.xsd">
-
-
-    <context:component-scan base-package="com.zfoo.river"/>
-
-    <event:event id="eventBus" event-bus-package="com.zfoo.river"/>
-
-    <!--<net:net id="net" protocol-location="protocol.xml" receiver-package="facade" host-address="127.0.0.1" port="9999"/>-->
-
-    <scheduler:scheduler id="schedulerManager" scheduler-package="com.zfoo.river"/>
-
-    <resource:storage id="resourceManager">
-        <resource:scan package="com.zfoo.**.resource"/>
-        <resource:resource location="resource" suffix="xls"/>
-    </resource:storage>
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="ignoreUnresolvablePlaceholders" value="true"/>

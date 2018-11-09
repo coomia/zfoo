@@ -8,6 +8,8 @@ import com.zfoo.storage.model.anno.ResInjection;
 import com.zfoo.storage.model.vo.Storage;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+
 /**
  * @author jaysunxiao
  * @version 1.0
@@ -26,5 +28,10 @@ public class UserManager implements IUserManager {
     @Override
     public void addUser(UserEntity entity) {
         userCaches.insert(entity);
+    }
+
+    @Override
+    public Collection<UserPrivilegeResource> getAllUserPrivilegeResource() {
+        return userPrivilegeResources.getAll();
     }
 }

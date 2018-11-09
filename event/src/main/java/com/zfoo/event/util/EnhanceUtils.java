@@ -21,6 +21,21 @@ public abstract class EnhanceUtils {
     private static final AtomicInteger index = new AtomicInteger(0);
     private static final ClassPool classPool = ClassPool.getDefault();
 
+    static {
+        // 适配Tomcat，因为Tomcat不是用的默认的类加载器，而Javaassist用的是默认的加载器
+        Class<?>[] classArray = new Class[]{
+                IEventReceiver.class,
+                IEvent.class
+        };
+
+        for (Class<?> clazz : classArray) {
+            if (classPool.find(clazz.getCanonicalName()) == null) {
+                ClassClassPath classPath = new ClassClassPath(clazz);
+                classPool.insertClassPath(classPath);
+            }
+        }
+    }
+
     public static IEventReceiver createEventReciver(EventReceiverDefintion definition) throws NotFoundException, CannotCompileException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         Object bean = definition.getBean();
         Method method = definition.getMethod();
