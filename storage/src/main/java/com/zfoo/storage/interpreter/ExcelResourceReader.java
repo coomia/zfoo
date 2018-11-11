@@ -4,7 +4,6 @@ import com.zfoo.storage.StorageContext;
 import com.zfoo.storage.model.anno.Id;
 import com.zfoo.util.ReflectionUtils;
 import com.zfoo.util.StringUtils;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.springframework.core.convert.TypeDescriptor;
 
@@ -140,8 +139,8 @@ public class ExcelResourceReader implements IResourceReader {
 
     // 如果单元格的格式不是String的，则设置成String的
     private String getCellContent(Cell cell) {
-        if (cell.getCellType() != Cell.CELL_TYPE_STRING) {
-            cell.setCellType(Cell.CELL_TYPE_STRING);
+        if (cell.getCellType() != CellType.STRING) {
+            cell.setCellType(CellType.STRING);
         }
         return cell.getStringCellValue();
     }
@@ -160,9 +159,6 @@ public class ExcelResourceReader implements IResourceReader {
         } catch (IOException e) {
             e.printStackTrace();
             throw new RuntimeException("静态资源[" + clazz.getSimpleName() + "]异常，无法读取文件");
-        } catch (InvalidFormatException e) {
-            e.printStackTrace();
-            throw new RuntimeException("静态资源[" + clazz.getSimpleName() + "]异常，无效的文件格式");
         }
     }
 

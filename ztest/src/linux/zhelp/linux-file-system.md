@@ -95,9 +95,10 @@ vim testfile    #用vim打开testfile
 gzip -v file        #压缩file文件
 gzip -d file.gz     #解压缩file的压缩文件file.gz
 tar -jpcv -f dir.tar.bz2 dir > /tmp/log.txt 2>&1  
-                #将dir文件夹压缩名为dir.tar.bz2的压缩文件，2>&1，指将标准输出、标准错误指定为同一输出路径
+                    #将dir文件夹压缩名为dir.tar.bz2的压缩文件，2>&1，指将标准输出、标准错误指定为同一输出路径
 tar -jxv -f dir.tar.bz2 -C /tmp/testdir/dir  
-                #将压缩文件dir.tar.bz2解压到/tmp/testdir/dir
+                    #将压缩文件dir.tar.bz2解压到/tmp/testdir/dir
+tar -zxvf file.gz   #z格式，x解压，v显示进度，f文件名
 ```
 
 ####6.文件下载和上传,linxu to windows

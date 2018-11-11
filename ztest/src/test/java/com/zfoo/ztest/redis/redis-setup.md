@@ -2,19 +2,19 @@
 集群中至少应该有奇数个节点，所以至少有三个节点，每个节点至少有一个备份节点，所以下面使用6节点（主节点、备份节点由redis-cluster集群确定）。
 
 #####1. 安装redis节点指定端口
-1. 安装的前提条件，需要安装gcc
+1). 安装的前提条件，需要安装gcc
 ```
 yum install gcc-c++
 ```
-2. 1、下载redis的源码包，把源码包上传到linux服务器，解压redis压缩包，编译安装
+2). 下载redis的源码包，把源码包上传到linux服务器，解压redis压缩包，编译安装
 ```
-    tar xzf redis-3.2.0.tar.gz
+    tar -zxvf redis-3.2.0.tar.gz
     cd redis-3.2.0
-    make
-    make install PREFIX=/usr/andy/redis-cluster
+    make                                    # 编译
+    make install PREFIX=/usr/local/redis    # 安装位置
 ```
 
-3. 在redis-cluster下 修改bin文件夹为redis01,复制redis.conf配置文件，配置redis的配置文件redis.conf
+3). 在redis-cluster下 修改bin文件夹为redis01,复制redis.conf配置文件，配置redis的配置文件redis.conf
 ```
 daemonize yes               #后台启动
 port 7001                   #修改端口号，从7001到7006
@@ -22,12 +22,18 @@ cluster-enabled yes         #如果是yes，表示启用集群，否则以单例
 cluster-config-file nodes.conf
 cluster-node-timeout 15000  #超时时间，集群节点不可用的最大时间
 appendonly yes
+database 16                 #单机版数据库分片，默认16，不同分片可以有不同的key；集群只有一个分片
 ```
 
-4. 复制六份，修改对应的端口号
+```
+dump.rdb为内存的快照文件，指定了appendonly则保存在其它文件的事用户输入的命令，这个效率低
+突然宕机dump.rdb丢失的数据会多一点，而appendonly最多丢失一秒钟
+```
+
+4). 复制六份，修改对应的端口号
 ![Image text](image/redis-replica.png)
 
-5. 启动方式
+5). 启动方式
 ```
 前台启动模式：
     /usr/local/redis/bin/redis-server
@@ -39,20 +45,7 @@ appendonly yes
 3）./redis-server redis.conf
 ```
 
-#####2. 安装redis-trib所需的 ruby脚本
-```
-1.复制redis解压文件src下的redis-trib.rb文件到redis-cluster目录
-    [root@localhost redis-cluster]# cp /usr/andy/redis/redis-3.2.0/src/redis-trib.rb ./
-    
-2.安装ruby环境：
-    [root@localhost redis-cluster]# yum install ruby
-    [root@localhost redis-cluster]# yum install rubygems
-    
-3.安装redis-trib.rb运行依赖的ruby的包redis-3.2.2.gem，这个包需要上传到linux服务
-    [root@localhost redis-cluster]# gem install redis-3.2.2.gem
-```
-
-#####3. 启动脚本，设置权限启动，启动所有的redis节点
+#####2. 启动脚本，设置权限启动，启动所有的redis节点
 ```
 写一个命令脚本start-all.sh
 
@@ -94,6 +87,19 @@ root       4840   4421  0 23:26 pts/1    00:00:00 grep --color=auto redis
 [root@localhost redis-cluster]# pkill -9 redis
 
 
+```
+
+#####3. 安装redis-trib所需的 ruby脚本
+```
+1.复制redis解压文件src下的redis-trib.rb文件到redis-cluster目录
+    [root@localhost redis-cluster]# cp /usr/andy/redis/redis-3.2.0/src/redis-trib.rb ./
+    
+2.安装ruby环境：
+    [root@localhost redis-cluster]# yum install ruby
+    [root@localhost redis-cluster]# yum install rubygems
+    
+3.安装redis-trib.rb运行依赖的ruby的包redis-3.2.2.gem，这个包需要上传到linux服务
+    [root@localhost redis-cluster]# gem install redis-3.2.2.gem
 ```
 
 #####4. 使用redis-trib.rb创建集群
@@ -141,12 +147,14 @@ root       4840   4421  0 23:26 pts/1    00:00:00 grep --color=auto redis
 ```
 单机连接
 ./redis-cli -h localhost -p 7001
-单机关闭
-./redis-cli -p 7001 shutdown
 ```
 
 ```
 集群连接
-./redis-cli -c -p 7001
-集群关闭，见redis.md
+./redis-cli -h localhost -c -p 7001
+```
+
+```
+集群关闭
+./redis-cli -p 7001 shutdown
 ```

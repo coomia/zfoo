@@ -101,6 +101,16 @@ systemctl status httpd
 firewall-cmd --add-service="http"  #防火墙
 firewall-cmd --permanent --add-service="http"
 firewall-cmd --list-all
+
+输入firewall-cmd --query-port=6379/tcp，如果返回结果为no，那么证明6379端口确实没有开启。
+
+输入firewall-cmd --add-port=6379/tcp，将6379端口开启，返回success。
+
+**由于linux防火墙默认开启，redis的服务端口6379并不在开放规则之内，所有需要将此端口开放访问或者关闭防火墙。
+
+**关闭防火墙命令：sevice iptables stop
+
+**如果是修改防火墙规则，可以修改：/etc/sysconfig/iptables文件
 ```
 
 

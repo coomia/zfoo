@@ -83,7 +83,6 @@
         <maven-site-plugin.version>3.7</maven-site-plugin.version>
         <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>
         <maven-javadoc-plugin.version>3.0.0</maven-javadoc-plugin.version>
-        <maven-war-plugin.version>3.0.0</maven-war-plugin.version>
 
         <maven-plugin-api.version>3.5.0</maven-plugin-api.version>
         <maven-plugin-annotations.version>3.5</maven-plugin-annotations.version>
@@ -309,37 +308,7 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-war-plugin -->
-        <dependency>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>${maven-war-plugin.version}</version>
-        </dependency>
     </dependencies>
-
-    <profiles>
-        <profile>
-            <id>qa</id>
-            <properties>
-                <package.environment>qa/conf</package.environment>
-                <package.webxml>qa</package.webxml>
-                <filtername>FNameQA</filtername>
-            </properties>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-        </profile>
-
-        <profile>
-            <id>dev</id>
-            <properties>
-                <package.environment>dev/conf</package.environment>
-                <package.webxml>dev</package.webxml>
-                <filtername>FNameDEV</filtername>
-            </properties>
-        </profile>
-    </profiles>
 
     <build>
         <sourceDirectory>src/main/java</sourceDirectory>
@@ -440,38 +409,6 @@
                 </configuration>
             </plugin>
 
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>${maven-war-plugin.version}</version>
-                <configuration>
-                    <archive>
-                        <!-- Whether the created archive will contain these two Maven files -->
-                        <addMavenDescriptor>false</addMavenDescriptor>
-                    </archive>
-                    <warName>river</warName>
-                    <webResources>
-                        <resource>
-                            <!-- this is relative to the pom.xml directory -->
-                            <directory>src/main/resources/</directory>
-                            <targetPath>WEB-INF/classes</targetPath>
-                            <filtering>true</filtering>
-                        </resource>
-                        <resource>
-                            <directory>src/main/webapp</directory>
-                            <targetPath>WEB-INF/classes</targetPath>
-                            <filtering>true</filtering>
-                        </resource>
-                    </webResources>
-
-                    <!--<warSourceExcludes>src/main/resources/applicationContext*</warSourceExcludes>-->
-                    <!--<packagingExcludes>-->
-                        <!--WEB-INF/conf/**,WEB-INF/classes/dev/**,WEB-INF/classes/qa/**,WEB-INF/test.txt,-->
-                        <!--WEB-INF/classes/test.txt,WEB-INF/classes/web.xml-->
-                    <!--</packagingExcludes>-->
-                </configuration>
-            </plugin>
 
             <!-- maven帮助插件 -->
             <plugin>

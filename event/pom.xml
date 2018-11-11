@@ -50,7 +50,7 @@
 
         <jdom.version>1.1</jdom.version>
 
-        <poi.version>3.10-FINAL</poi.version>
+        <poi.version>4.0.0</poi.version>
 
         <mysql.version>5.1.29</mysql.version>
         <spring.orm.version>4.2.2.RELEASE</spring.orm.version>
@@ -78,7 +78,7 @@
         <maven-site-plugin.version>3.7</maven-site-plugin.version>
         <maven-project-info-reports-plugin.version>2.9</maven-project-info-reports-plugin.version>
         <maven-javadoc-plugin.version>3.0.0</maven-javadoc-plugin.version>
-        <maven-war-plugin.version>3.0.0</maven-war-plugin.version>
+
 
         <maven-plugin-api.version>3.5.0</maven-plugin-api.version>
         <maven-plugin-annotations.version>3.5</maven-plugin-annotations.version>
