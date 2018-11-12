@@ -81,8 +81,17 @@ publish redisChannel "Redis is a great caching technique"
 multi           # 单个执行
 set myKey1 aaa
 set myKey2 bbb
-set myKey3 ccc
 exec            # 批量执行脚本，但批量指令并非原子化的操作，中间某条指令的失败不会导致前面已做指令的回滚，也不会造成后续的指令不做。
+```
+
+- 事务
+```
+watch myKey1 myKey2
+multi
+set myKey1 aaa
+set myKey2 bbb
+exec            # 如果执行命令的期间myKey1，myKey2任意一个改变，将全部回滚，一个都不执行；但是中间有语法错误或者运行错误不会回滚
+unwatch
 ```
 
 - 查看服务是否运行
