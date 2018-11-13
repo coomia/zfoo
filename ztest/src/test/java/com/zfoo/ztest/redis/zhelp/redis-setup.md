@@ -21,8 +21,6 @@ port 7001                   #修改端口号，从7001到7006
 cluster-enabled yes         #如果是yes，表示启用集群，否则以单例模式启动
 cluster-config-file nodes.conf
 cluster-node-timeout 15000  #超时时间，集群节点不可用的最大时间
-appendonly yes
-database 16                 #单机版数据库分片，默认16，不同分片可以有不同的key；集群只有一个分片
 ```
 
 ```
@@ -96,7 +94,7 @@ root       4840   4421  0 23:26 pts/1    00:00:00 grep --color=auto redis
     
 2.安装ruby环境：
     [root@localhost redis-cluster]# yum install ruby
-    [root@localhost redis-cluster]# yum install rubygems
+    [root@localhost redis-cluster]# yum install rubygems    # 安装rubygems
     
 3.安装redis-trib.rb运行依赖的ruby的包redis-3.2.2.gem，这个包需要上传到linux服务
     [root@localhost redis-cluster]# gem install redis-3.2.2.gem
@@ -146,12 +144,12 @@ root       4840   4421  0 23:26 pts/1    00:00:00 grep --color=auto redis
 #####5. redis客户端
 ```
 单机连接
-./redis-cli -h localhost -p 7001
+./redis-cli -h localhost -p 7001 -a password
 ```
 
 ```
 集群连接
-./redis-cli -h localhost -c -p 7001
+./redis-cli -h localhost -c -p 7001 -a password
 ```
 
 ```
