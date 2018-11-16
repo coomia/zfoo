@@ -18,6 +18,7 @@
 
     <context:component-scan base-package="com.zfoo.event"/>
 
+    <!-- event-bus-package这个参数现在并没有什么作用 -->
     <event:event id="eventBus" event-bus-package="com.zfoo.event"/>
 
 </beans>

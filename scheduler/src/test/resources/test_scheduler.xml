@@ -18,6 +18,7 @@
 
     <context:component-scan base-package="com.zfoo.scheduler.test"/>
 
+    <!-- scheduler-package这个参数现在并没有什么作用 -->
     <scheduler:scheduler id="schedulerManager" scheduler-package="com.zfoo.scheduler"/>
 
 </beans>

@@ -11,6 +11,6 @@
     http://www.zfoo.com/schema/event-1.0.xsd">
 
 
-    <event:event id="eventBus" event-bus-package="com.zfoo.river.event"/>
+    <event:event id="eventBus" event-bus-package="com.zfoo.river.**.facade"/>
 
 </beans>

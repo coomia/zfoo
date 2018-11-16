@@ -12,7 +12,7 @@
 
 
     <resource:storage id="resourceManager">
-        <resource:scan package="com.zfoo.**.resource"/>
+        <resource:scan package="com.zfoo.river.**.resource"/>
         <resource:resource location="resource" suffix="xls"/>
     </resource:storage>
 
