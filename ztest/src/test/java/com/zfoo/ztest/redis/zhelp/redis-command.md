@@ -136,4 +136,7 @@ auth admin                      # 用密码登录
 keys *      # 查找所有的key
 keys t??    # 三个字符以t开头
 keys *o*    # 中间含有o的字符，four，two，one
+
+flushall    # 清除所有库所有key数据
+flushdb     # 清除单个库所有key数据
 ```
