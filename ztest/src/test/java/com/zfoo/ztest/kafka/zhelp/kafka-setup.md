@@ -1,5 +1,4 @@
-###Kafka安装指南
-####Windows下安装
+##Windows下安装kafka
 - Kafka强依赖于Zookeeper，必须要先启动zookeeper
 ```
 1.下载，解压并进入Kafka目录，D:\Java\kafka_2.12-0.11.0.0
@@ -14,6 +13,3 @@ kafka-server-start.bat ../../config/server.properties
 9.创建生产者：.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic test
 10. 创建消费者：.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test --from-beginning
 ```
-
-
-
