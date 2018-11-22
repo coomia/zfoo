@@ -31,6 +31,29 @@ public class RiverServletContextListener implements ServletContextListener {
 
         ServletContext ctx = servletContext.getServletContext();
 
+        // 先关闭任务调度
+        try {
+            SchedulerContext.shutdown();
+        } catch (Exception e) {
+            ctx.log("Scheduler problem cleaning up: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        // 再关闭事件派发
+        try {
+            EventContext.shutdown();
+        } catch (Exception e) {
+            ctx.log("Event problem cleaning up: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        // 再关闭orm，关闭之前将所有的数据写回数据库
+        try {
+            OrmContext.shutdown();
+        } catch (Exception e) {
+            ctx.log("Orm problem cleaning up: " + e.getMessage());
+            e.printStackTrace();
+        }
 
         Enumeration<Driver> drivers = DriverManager.getDrivers();
         Driver driver = null;
@@ -47,27 +70,6 @@ public class RiverServletContextListener implements ServletContextListener {
             AbandonedConnectionCleanupThread.shutdown();
         } catch (InterruptedException e) {
             ctx.log("Mysql problem cleaning up: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        try {
-            EventContext.shutdown();
-        } catch (Exception e) {
-            ctx.log("Event problem cleaning up: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        try {
-            OrmContext.shutdown();
-        } catch (Exception e) {
-            ctx.log("Orm problem cleaning up: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        try {
-            SchedulerContext.shutdown();
-        } catch (Exception e) {
-            ctx.log("Scheduler problem cleaning up: " + e.getMessage());
             e.printStackTrace();
         }
 

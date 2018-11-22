@@ -20,6 +20,7 @@ import org.springframework.core.Ordered;
 
 import java.lang.reflect.Field;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author jaysunxiao
@@ -84,7 +85,7 @@ public class OrmContext extends InstantiationAwareBeanPostProcessorAdapter imple
         return instance.ormService;
     }
 
-    public static void shutdown() throws NoSuchFieldException {
+    public static void shutdown() throws NoSuchFieldException, InterruptedException {
         IOrmService orm = instance.ormService;
         if (orm == null) {
             return;
@@ -94,6 +95,10 @@ public class OrmContext extends InstantiationAwareBeanPostProcessorAdapter imple
         ScheduledExecutorService executor = (ScheduledExecutorService) ReflectionUtils.getField(field, orm);
         if (executor != null) {
             executor.shutdown();
+            // 确保所有的数据都回写到数据库
+            while (!executor.awaitTermination(1, TimeUnit.SECONDS)) {
+                // System.out.println("线程池没有关闭");
+            }
         }
     }
 

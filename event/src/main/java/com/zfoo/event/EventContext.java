@@ -12,6 +12,7 @@ import org.springframework.core.Ordered;
 
 import java.lang.reflect.Field;
 import java.util.concurrent.ExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author jaysunxiao
@@ -42,7 +43,7 @@ public class EventContext extends InstantiationAwareBeanPostProcessorAdapter imp
         return instance.eventBusManager;
     }
 
-    public static void shutdown() throws NoSuchFieldException {
+    public static void shutdown() throws NoSuchFieldException, InterruptedException {
         IEventBusManager event = instance.eventBusManager;
         if (event == null) {
             return;
@@ -53,6 +54,11 @@ public class EventContext extends InstantiationAwareBeanPostProcessorAdapter imp
         if (executors != null) {
             for (ExecutorService executor : executors) {
                 executor.shutdown();
+            }
+            for (ExecutorService executor : executors) {
+                while (!executor.awaitTermination(1, TimeUnit.SECONDS)) {
+                    // System.out.println("线程池没有关闭");
+                }
             }
         }
     }

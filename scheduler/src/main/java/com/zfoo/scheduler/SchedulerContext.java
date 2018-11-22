@@ -14,6 +14,7 @@ import org.springframework.core.Ordered;
 
 import java.lang.reflect.Field;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author jaysunxiao
@@ -48,7 +49,7 @@ public class SchedulerContext extends InstantiationAwareBeanPostProcessorAdapter
         return instance.schedulerService;
     }
 
-    public static void shutdown() throws NoSuchFieldException {
+    public static void shutdown() throws NoSuchFieldException, InterruptedException {
         ISchedulerService scheduler = instance.schedulerService;
         if (scheduler == null) {
             return;
@@ -58,6 +59,9 @@ public class SchedulerContext extends InstantiationAwareBeanPostProcessorAdapter
         ScheduledExecutorService executor = (ScheduledExecutorService) ReflectionUtils.getField(field, scheduler);
         if (executor != null) {
             executor.shutdown();
+            while (!executor.awaitTermination(1, TimeUnit.SECONDS)) {
+                // System.out.println("线程池没有关闭");
+            }
         }
     }
 
