@@ -5,6 +5,4 @@ Power Mode 2
 
 BashSupport
 
-ASM Bytecode Viewer
-
 Mongo Plugin
