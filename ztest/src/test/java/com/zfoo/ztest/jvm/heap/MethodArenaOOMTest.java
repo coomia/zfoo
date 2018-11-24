@@ -1,4 +1,4 @@
-package com.zfoo.ztest.jvm;
+package com.zfoo.ztest.jvm.heap;
 
 import javassist.*;
 import org.junit.Ignore;

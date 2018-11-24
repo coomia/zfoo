@@ -1,4 +1,4 @@
-package com.zfoo.ztest.jvm;
+package com.zfoo.ztest.jvm.heap;
 
 import com.zfoo.util.IOUtils;
 import org.junit.Ignore;
