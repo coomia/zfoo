@@ -226,7 +226,7 @@ export default {
     .login-container {
 
         // CSS loader会把把非根路径的url解释为相对路径， 加~前缀才会解释成模块路径。
-        background: url("~@/module/login/resource/login-bg.jpg") no-repeat center center fixed;
+        background: url("~@/module/login/resource/login-compressed-bg.jpg") no-repeat center center fixed;
         background-size: cover;
         height: 100%;
         width: 100%;
