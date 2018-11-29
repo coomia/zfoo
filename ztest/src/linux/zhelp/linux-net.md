@@ -58,6 +58,9 @@ dig -x 120.114.100.20
 whois baidu.com    
                 #查询领域管理者相关信息
 vim /etc/hosts  #增加ip对应的地址，如localhost
+
+ping ip         #ping通常是用来检查网络是否通畅或者网络连接速度的命令
+telnet ip port  #telnet是用来探测指定ip是否开放指定端口的
 ```
 
 

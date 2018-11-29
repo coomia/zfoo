@@ -1,6 +1,5 @@
 package com.zfoo.river;
 
-import com.mysql.jdbc.AbandonedConnectionCleanupThread;
 import com.zfoo.event.EventContext;
 import com.zfoo.orm.OrmContext;
 import com.zfoo.scheduler.SchedulerContext;
@@ -8,10 +7,6 @@ import com.zfoo.scheduler.SchedulerContext;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
-import java.sql.Driver;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.util.Enumeration;
 
 /**
  * @author jaysunxiao
@@ -55,20 +50,10 @@ public class RiverServletContextListener implements ServletContextListener {
             e.printStackTrace();
         }
 
-        Enumeration<Driver> drivers = DriverManager.getDrivers();
-        Driver driver = null;
-        while (drivers.hasMoreElements()) {
-            try {
-                driver = drivers.nextElement();
-                DriverManager.deregisterDriver(driver);
-                ctx.log(String.format("Driver %s deregistered", driver));
-            } catch (SQLException ex) {
-                ctx.log(String.format("Error deregistering driver %s", driver), ex);
-            }
-        }
+        // 关闭数据库连接池
         try {
-            AbandonedConnectionCleanupThread.shutdown();
-        } catch (InterruptedException e) {
+            OrmContext.shutdownDataSource();
+        } catch (Exception e) {
             ctx.log("Mysql problem cleaning up: " + e.getMessage());
             e.printStackTrace();
         }

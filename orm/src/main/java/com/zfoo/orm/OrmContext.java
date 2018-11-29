@@ -1,5 +1,6 @@
 package com.zfoo.orm;
 
+import com.mysql.jdbc.AbandonedConnectionCleanupThread;
 import com.zfoo.orm.manager.IOrmManager;
 import com.zfoo.orm.manager.OrmManager;
 import com.zfoo.orm.model.accessor.HibernateAccessor;
@@ -19,6 +20,10 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.Ordered;
 
 import java.lang.reflect.Field;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Enumeration;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
@@ -100,6 +105,15 @@ public class OrmContext extends InstantiationAwareBeanPostProcessorAdapter imple
                 // System.out.println("线程池没有关闭");
             }
         }
+    }
+
+    public static void shutdownDataSource() throws SQLException, InterruptedException {
+        Enumeration<Driver> drivers = DriverManager.getDrivers();
+        while (drivers.hasMoreElements()) {
+            Driver driver = drivers.nextElement();
+            DriverManager.deregisterDriver(driver);
+        }
+        AbandonedConnectionCleanupThread.shutdown();
     }
 
     @Override
