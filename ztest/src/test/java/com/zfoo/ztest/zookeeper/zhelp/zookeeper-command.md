@@ -48,7 +48,9 @@ delquota -n /node_1    删除配额
 ```
 1.下载windows下的zookeeper安装包并解压到任意目录
 2.加入conf目录，重命名zoo_sample.cfg为zoo.cfg
-3.编辑zoo.cfg，编辑dataDir=D:\\zookeeper-3.4.9\\tmp，这个目录为zookeeper存储数据的目录
+3.编辑zoo.cfg：
+    dataDir=D:\\Java\\zookeeper-3.4.10\\zookeeper-3.4.10\\data      # 存储数据的目录
+    dataLogDir=D:\\Java\\zookeeper-3.4.10\\zookeeper-3.4.10\\logs   # 日志目录
 ```
 
 ####2.Linux下的安装
