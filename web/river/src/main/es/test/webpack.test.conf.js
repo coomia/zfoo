@@ -157,7 +157,7 @@ const devWebpackConfig = {
             filename: 'index.html',
             template: 'index.html',
             inject: true,
-            favicon: resolve('favicon.ico'),
+            favicon: resolve('favicon.png'),
             title: 'river',
             path: '/static'
         })

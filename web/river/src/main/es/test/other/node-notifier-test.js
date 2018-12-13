@@ -6,6 +6,6 @@ const notifier = require('node-notifier');
 notifier.notify({
     title: 'My notification',
     message: 'Hello, there!',
-    icon: 'favicon.ico',
+    icon: 'favicon.png',
     sound: true
 });

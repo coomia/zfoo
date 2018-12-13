@@ -1,5 +1,5 @@
-##查询系统状态相关指令
-####1.计算机基础信息查询
+#查询系统状态
+##一、计算机基础信息查询
 ```
 uname -a        #显示所有系统相关的信息   
 localectl       #系统语系
@@ -8,18 +8,17 @@ lspci           #查阅您系统内的 PCI 总线相关设备
 ```
 
 
-####2.程序和服务相关
+##二、进程、程序、服务
+
+###1. 查看个人用户启动的程序
 ```
 jobs -l         #查看目前后台工作的程序
 fg %1           #取出第一个后台运行的程序
 bg %2           #让第二个后台程序运行
-kill -9 %3      #强制删除一个第3个不正常的工作，jobs里的程序
-kill -15 %2     #以正常的程序方式终止一个程序。和-9 是不一样的
-killall -9 httpd  
-                #强制终止所有以httpd启动的程序，killall -i -9 bash，每次询问
+```
 
-kill -9 4597    #完全终止一个程序PID，包括执行它的程序
-killall -9 cupsd   
+###2. 查看系统的程序
+```
 ps -l           #属于你自己这次登入的PID相关信息列示出来(只与自己的bash有关)
 ps aux          #列出目前所有的正在内存当中的程序
 ps axjf         #列出类似程序树的程序显示
@@ -31,9 +30,21 @@ top -d 2 -p $$  #$$当前程序的pid，观察当前程序
                 #输入r然后输入这个PID号，改变NI的值，让其优先执行
                 #P：以CPU的使用资源排序显示；M：以Memory的使用资源排序显示；
                 #T：由该Process使用的CPU时间累积(TIME+)排序。
-                
-free -m         #显示目前系统的内存容量，单位KB
-vmstat -d       #系统上面所有的磁盘的读写状态
+```
+
+###3. 程序/进程的终止
+```
+kill -9 %3      #强制删除一个第3个不正常的工作，jobs里的程序
+kill -15 %2     #以正常的程序方式终止一个程序。和-9 是不一样的
+killall -9 httpd  
+                #强制终止所有以httpd启动的程序，killall -i -9 bash，每次询问
+
+kill -9 4597    #完全终止一个程序PID，包括执行它的程序
+killall -9 cupsd   
+``` 
+
+###4. 程序和文件
+```
 fuser -mvu /proc  
                 #找到所有使用到/proc这个文件系统的程序吧
 lsof -u root | grep bash  
@@ -41,6 +52,71 @@ lsof -u root | grep bash
 pidof bash      #列出目前系统上面bash的pid
 ```
 
+
+##三、CPU
+
+###cpu负载
+- uptime                #查看系统平均负载命令
+```
+04:03:58 up 10 days, 13:19, 1 user, load average: 0.54, 0.40, 0.20
+
+当前时间 04:03:58
+系统已运行的时间 10 days, 13:19
+当前在线用户 1 user
+平均负载：0.54, 0.40, 0.20，最近1分钟、5分钟、15分钟系统的负载
+
+
+在linux系统中，有一种说法，当load avarage <3 系统良好，大于5 则有严重的性能问题。注意，这个值还应当除以CPU数目。
+如果load avarage=8 ,CPU=3,8/3=2.666，2.66这个值表示系统状态良好
+```
+
+- cat /proc/loadavg     #查看系统平均负载命令
+```
+0.10 0.06 0.01 1/72 29632
+
+除了前3个数字表示平均进程数量外，后面的1个分数，分母表示系统进程总数，分子表示正在运行的进程数；最后一个数字表示最近运行的进程ID
+
+```
+
+###cpu核数
+- 有问题的命令
+- cat /proc/cpuinfo| grep "physical id"| sort| uniq| wc -l      #查看物理CPU个数
+- cat /proc/cpuinfo| grep "cpu cores"| uniq                     #查看每个物理CPU中core的个数(即核数)
+- cat /proc/cpuinfo| grep "processor"| wc -l                    #查看逻辑CPU的个数
+```
+总核数 = 物理CPU个数 X 每颗物理CPU的核数 
+总逻辑CPU数 = 物理CPU个数 X 每颗物理CPU的核数 X 超线程数
+```
+
+
+
+##四、内存
+```
+free -m         #显示目前系统的内存容量，单位KB
+vmstat -d       #系统上面所有的磁盘的读写状态
+```
+
+##五、磁盘
+```
+df                  #查看filesystem discription
+df -h               #将容量结果以易读的容量格式显示出来
+
+iostat              #显示一下目前整个系统的 CPU 与储存设备的状态
+iostat -d 2 3 sda   #仅针对sda，每两秒钟侦测一次，并且共侦测三次储存设备
+```
+
+##六、性能分析
+```
+perf是一款Linux性能分析工具。Linux性能计数器是一个新的基于内核的子系统，它提供一个性能分析框架，比如硬件（CPU、PMU(Performance Monitoring Unit)）功能和软件(软件计数器、tracepoint)功能。
+通过perf，应用程序可以利用PMU、tracepoint和内核中的计数器来进行性能统计。它不但可以分析制定应用程序的性能问题（per thread），也可以用来分析内核的性能问题，当然也可以同事分析应用程序和内核，从而全面理解应用程序中的性能瓶颈。
+
+tracepoints是散落在内核源码中的一些hook，它们可以在特定的代码被执行到时触发，这一特定可以被各种trace/debug工具所使用。
+
+perf将tracepoint产生的时间记录下来，生成报告，通过分析这些报告，条有人缘便可以了解程序运行期间内核的各种细节，对性能症状做出准确的诊断。
+
+这些tracepint的对应的sysfs节点在/sys/kernel/debug/tracing/events目录下。
+
+```
 
 ##软件安装
 ```

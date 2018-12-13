@@ -44,4 +44,4 @@ package-lock.json
 # 忽略webapp中部署的文件
 **/webapp/static/
 **/webapp/index.html
-**/webapp/favicon.ico
+**/webapp/favicon.png

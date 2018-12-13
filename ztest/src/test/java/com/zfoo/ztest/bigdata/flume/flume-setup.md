@@ -3,7 +3,7 @@
 - flume 需要Java1.8以上版本，然后需要配置好Java环境变量
 
 
-##windows
+##Windows
 
 1. 到Flume官网上http://flume.apache.org/download.html下载软件包，并且解压
 
@@ -46,7 +46,16 @@ flume-ng.cmd  agent -conf ../conf  -conf-file ../conf/example.conf  -name a1  -p
 
 4. 在D:\\hello文件夹下新增文件，flume可以捕获到并且输出在控制台上
 
-###flume的其它配置
+5. 验证安装是否成功：flume-ng version
+
+##Linux
+1. 到Flume官网上http://flume.apache.org/download.html下载软件包，并上传到Linux服务器
+2. 解压
+3. 修改conf/flume-env.sh，文件中的JDK目录，注意：JAVA_OPTS 配置，如果我们传输文件过大，报内存溢出时，需要修改这个配置项
+4. 验证安装是否成功  ./flume-ng version
+5. 配置环境变量，export FLUME_HOME=/home/apache-flume-1.8.0-bin
+
+#flume的其它配置
 1. 监听一个指定的目录，即只要应用程序向这个指定的目录中添加新的文件，source组件就可以获取到该信息，并解析该文件的内容，然后写入到channle。
 写入完成后，标记该文件已完成或者删除该文件。其中 Sink：hdfs，Channel：file
 ```

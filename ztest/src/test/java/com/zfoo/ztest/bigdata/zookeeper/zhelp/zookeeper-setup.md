@@ -1,50 +1,52 @@
-####Zookeeper监控工具
-netflix:exhibitor   监控zookeeper，增删改查  
-zabbix
+#Zookeeper命令
 
-####1.连接
-/opt/zookeeper/bin/zkCli.sh -timeout 5000 -server 192.168.238.128:2181   启动zookeeper的客户端  
+##一、连接Zookeeper
+/opt/zookeeper/bin/zkCli.sh -timeout 5000 -server 192.168.238.128:2181   启动zookeeper的客户端
 
-####2.查看
-h 查看zookeeper的所有数据结构  
+##二、查看
+- h             # 查看zookeeper的所有数据结构
 
-ls /  列出根目录得所有节点  
-ls2 / ls+stat  
+- ls /          # 列出根目录得所有节点
+- ls2 / ls+stat
 
-get /node_1    查询/node_1节点的信息
+- get /node_1   # 查询/node_1节点的信息
 
-stat /node_1  查看/node_1节点的状态  
-
-    cZxid        创建事务的id，create zookeeper transaction id zookeeper中每一次对数据的操作的是一个事务，会分配一个事务的id  
-    ctime
-    mZxid         Mofify 节点最新一次更新发生时的zxid  
-    mtime
-    pZxid          是与该节点的子节点（或该节点）的最近一次创建/删除子节点的事务id，修改子节点的数据内容不算  
-    cversion  
-    dateVersion  
-    aclVersion  
-    ephemeralOwner    ephemeral adj.  朝生暮死的, 短暂的, 短命的  临时节点 如果该节点为ephemeral节点, ephemeralOwner值表示与该节点绑定的session id. 如果该节点不是ephemeral节点, ephemeralOwner值为0.   
-    dataLength  
-    numChildren  
-
-
+- stat /node_1  # 查看/node_1节点的状态
+```
+cZxid           # 创建事务的id，create zookeeper transaction id zookeeper中每一次对数据的操作的是一个事务，会分配一个事务的id
+ctime
+mZxid           # Mofify 节点最新一次更新发生时的zxid
+mtime
+pZxid           # 是与该节点的子节点（或该节点）的最近一次创建/删除子节点的事务id，修改子节点的数据内容不算
+cversion
+dateVersion
+aclVersion
+ephemeralOwner  # ephemeral adj.  朝生暮死的, 短暂的, 短命的  临时节点 如果该节点为ephemeral节点, ephemeralOwner值表示与该节点绑定的session id. 如果该节点不是ephemeral节点, ephemeralOwner值为0 
+dataLength
+numChildren
+```
  
-####3.更新
-set /node_1 "set Method"    更新节点的信息  
+##三、更新
+- set /node_1 "set Method"          # 更新节点的信息 
 
-create -e /node_2 "hello node_2"     创建一个node_2的临时节点  
-create -s /node_3 "hello node_3"     创建一个node_3的顺序节点，会自增主键  
+- create -e /node_2 "hello node_2"  # 创建一个node_2的临时节点
+- create -s /node_3 "hello node_3"  # 创建一个node_3的顺序节点，会自增主键
 
-delete /node_1  删除/node_1节点，如果节点下有另外的节点则不能删除  
-rmr /node_1     循环删除/node_1  
+- delete /node_1                    # 删除/node_1节点，如果节点下有另外的节点则不能删除
+- rmr /node_1                       # 循环删除/node_1
 
-setquota -n 2 /node_1   -n设置子节点的数目为2，如果超过了，会记录日志在bin/zookeeper.out中；-b，设置数据长度值（包括子节点）  
-delquota -n /node_1    删除配额  
-
-###Zookeeper安装
+- setquota -n 2 /node_1             # -n设置子节点的数目为2，如果超过了，会记录日志在bin/zookeeper.out中；-b，设置数据长度值（包括子节点）
+- delquota -n /node_1               # 删除配额
 
 
-####1.Windows下的安装
+#Zookeeper监控工具
+- netflix:exhibitor   监控zookeeper，增删改查  
+- zabbix
+
+
+#Zookeeper安装
+
+##一、Windows下的安装
 ```
 1.下载windows下的zookeeper安装包并解压到任意目录
 2.加入conf目录，重命名zoo_sample.cfg为zoo.cfg
@@ -53,7 +55,7 @@ delquota -n /node_1    删除配额
     dataLogDir=D:\\Java\\zookeeper-3.4.10\\zookeeper-3.4.10\\logs   # 日志目录
 ```
 
-####2.Linux下的安装
+##二、Linux下的安装
 ```
 将zookeeper-3.4.10.tar.gz下载到/opt目录，这个目录是专门放下载的第三方软件的目录  
 tar -xzvf zookeeper-3.4.10.tar.gz   解压  

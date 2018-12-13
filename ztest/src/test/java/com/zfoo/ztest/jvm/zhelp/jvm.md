@@ -7,53 +7,6 @@
 * 2011年7月	JavaSE7发布
 * 2014年3月	JavaSE8发布
 
-####安装jdk
-```
-yum install java-1.8.0-openjdk-devel.x86_64  
-vi  /etc/profile   让系统上的所有用户使用java(openjdk) ,则要进行下面的操作：  
-
-
-将下面的三行粘贴到 /etc/profile 中：  
-
-export JAVA_HOME=/usr/lib/jvm/java-1.8.0-openjdk-1.8.0.71-2.b15.el7_2.x86_64  
-export PATH=$PATH:$JAVA_HOME/bin  
-
-
-输入以下命令，来确认这三个变量是否设成了我们想要的：  
-
-echo $JAVA_HOME  
-echo $PATH  
-
-
-如果通过官网下载的.tar.gz文件，需要拷贝到/opt目录  
-tar -xzvf jdk-8u40-linux-i586.tar.gz  
-export JAVA_HOME=/opt/jdk1.8.0/   
-export PATH=$JAVA_HOME/bin  
-```
-
-####安装jps等工具
-```
-yum install -y java-1.8.0-openjdk-devel
-
-
-//l:输出主类的全名；v：输出jvm启动时的参数  
-jps -l
-
-
-
-//每250ms查询一次进程15485垃圾收集状况，一共查询20次   
-jstat -gc 15485 250 20
-
-
-//生成进程15485堆转储快照文件   
-jmap -dump:format=b,file=idea.dumpfile 15485
-
-
-
-//跟踪进程15485并打印堆栈信息   
-jstack -l 15485
-```
-
 ##二.JVM基础
 
 ####JVM如何运行Java字节码？

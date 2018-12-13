@@ -19,8 +19,8 @@ public class HeapOOMTest {
      * VM Args: -Xms20m -Xmx20m -XX:+HeapDumpOnOutOfMemoryError
      * <p>
      * 设置堆得最大最小空间，防止堆自动扩展。
-     * 不断的在堆中新建对象，导致OOM
-     * 使用Eclipse Memory Analyzer打开堆转存快照文件
+     * 不断的在堆中新建对象，导致OOM，使用Eclipse Memory Analyzer打开堆转存快照文件。
+     * 让JVM在遇到OutOfMemoryError时自动生成Dump文件。
      */
     @Test
     public void testHeapOOM() {
