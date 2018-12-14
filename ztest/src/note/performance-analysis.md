@@ -32,4 +32,24 @@ gate 1000M bit 上传和下载可以达到100MB/s
 gate的网卡是100Mb/s
 ```
 
+##数据中心日志服务器
+- 巅峰时，每天可以产生10GB的数据
 
+
+
+#开源项目
+- 使用过NetBeans编译过OpenJdk源码
+```
+首先安装一个带界面的Linux系统，在自己的windows电脑上装10次以上才算真正会装Linux，现在带界面的系统非常简单，直接选择Desktop选项就可以了。
+
+安装完成后，在命令行输入startx就可以启动界面系统。
+
+然后再按照官方指南装一个NetBeans Idea，下载openjdk，然后用NetBeans直接打开OpenJdk，Build这个项目就可以了，大概需要半个小时，看你电脑的配置。
+
+因为OpenJdk是C++，还要确保有C++的编译环境。
+
+OpenJdk中有一个Demo是Java写的，你可以直接运行，然后你可以在NetBeans里断点，从底层调试Java。
+
+全局搜索GCRoot，找到GCRoot的数据结构，还有使用的地方，断点，你就可以知道GCRoot到底是什么了。
+
+```
