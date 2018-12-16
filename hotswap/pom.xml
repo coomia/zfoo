@@ -105,6 +105,13 @@
             <version>${zfoo.util.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- 热更新依赖的类库 -->
         <dependency>
             <groupId>com.sun</groupId>

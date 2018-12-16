@@ -1,8 +1,14 @@
 package com.zfoo.hotswap;
 
+import com.sun.tools.attach.VirtualMachine;
+import com.sun.tools.attach.VirtualMachineDescriptor;
 import com.zfoo.hotswap.service.HotSwapServiceMBean;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.lang.management.ManagementFactory;
+import java.util.List;
 
 /**
  * @author jaysunxiao
@@ -21,6 +27,15 @@ public class TestMain {
             HotSwapServiceMBean.getSingleInstance().hotSwapByRelativePath("hotscript");
             a.print();
             Thread.sleep(3000);
+        }
+    }
+
+    // 列出当前本机上运行的所有jvm实例描述
+    @Test
+    public void test() {
+        List<VirtualMachineDescriptor> vmdList = VirtualMachine.list();
+        for (VirtualMachineDescriptor vmd : vmdList) {
+            System.out.println("pid:" + vmd.id() + ":" + vmd.displayName());
         }
     }
 

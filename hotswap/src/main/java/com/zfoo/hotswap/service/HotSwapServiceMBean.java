@@ -256,7 +256,9 @@ public class HotSwapServiceMBean implements IHotSwapServiceMBean {
     private void loadHotSwapAgent() throws Exception {
         VirtualMachine vm = null;
         try {
+            // 获取运行当前这个类的jvm的pid
             String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
+            // attach到这个pid建立通信管道，让jvm加载agent
             vm = VirtualMachine.attach(pid);
             vm.loadAgent(HOT_SWAP_AGENT);
         } catch (AgentInitializationException | AgentLoadException | AttachNotSupportedException | IOException e) {
