@@ -28,7 +28,7 @@
         <commons-io.version>2.5</commons-io.version>
         <commons-collections.version>3.2.2</commons-collections.version>
         <commons-lang.version>3.6</commons-lang.version>
-        <commons-fileupload.version>1.2.1</commons-fileupload.version>
+        <commons-fileupload.version>1.3.3</commons-fileupload.version>
 
 
         <google.guava.version>22.0</google.guava.version>
