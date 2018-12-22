@@ -204,16 +204,17 @@ ctrl+z          #暂停程序
 
 ##时间相关指令
 ```
-date            #软件时钟：Linux自己的系统时间，由 1970/01/01 开始记录的时间参数
-hwclock         #硬件时钟：计算机系统在 BIOS 记录的实际时间，这也是硬件所记录的
-hwclock -w      #将软件时钟写入 BIOS
-ntpdate time.servers.ip && hwclock -w  
-                #Linux 进行网络校时：最简单的方法即是使用
+date                                        #软件时钟：Linux自己的系统时间，由 1970/01/01 开始记录的时间参数
+date -s "2018-01-22 11:29"                  #设置软件时钟
+
+hwclock                                     #硬件时钟：计算机系统在 BIOS 记录的实际时间，这也是硬件所记录的
+hwclock -w                                  #将软件时钟写入 BIOS
+
+ntpdate time.servers.ip && hwclock -w       #Linux 进行网络校时：最简单的方法即是使用
+
 timedatectl     #查看时区
-timedatectl set-timezone "Asia/Taipei"    
-                #设置时区
-timedatectl set-time "2018-01-22 11:29"   
-                #设置时间,同事设置软件时钟和硬件时钟
+timedatectl set-timezone "Asia/Taipei"      #设置时区
+timedatectl set-time "2018-01-22 11:29"     #设置时间,同事设置软件时钟和硬件时钟
 ```
 
 

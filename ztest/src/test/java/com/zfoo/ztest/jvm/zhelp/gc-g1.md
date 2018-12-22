@@ -206,12 +206,3 @@ G1算法将堆划分为若干个区域（Region），它仍然属于分代收集
 -XX:+PrintHeapAtGC      # 在进行GC的前后打印出堆的信息
 -Xloggc:/var/gc.log     # 日志文件的输出路径
 ```
-
-####先项目的参数配置
-```
--Xms4g                          # 最小的堆大小
--XX:+UseG1GC                    # jdk8过后就不用设置，是默认值
--XX:MaxGCPauseMillis=250        # 默认200
--XX:MaxTenuringThreshold=2      # 对象晋升老年代的年龄阈值
--XX:ParallelGCThreads=20        # STW期间，并行GC线程数
-```

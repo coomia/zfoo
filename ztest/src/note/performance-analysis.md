@@ -62,6 +62,17 @@ AWS全球平均延迟300ms
 防⽌玩家数据丢失：数据容灾。
 ```
 
+- 项目的参数配置
+```
+-Xms4g                          # 最小的堆大小
+-XX:+UseG1GC                    # jdk8过后就不用设置，是默认值
+-XX:MaxGCPauseMillis=250        # 默认200
+-XX:MaxTenuringThreshold=2      # 对象晋升老年代的年龄阈值
+-XX:ParallelGCThreads=20        # STW期间，并行GC线程数
+```
+
+
+
 ##二、网关服
 - 三个网关服务器，可以横向扩展，理论上可以支持无限的流量
 ```
