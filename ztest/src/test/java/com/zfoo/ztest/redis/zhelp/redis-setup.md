@@ -132,11 +132,6 @@ select 1
 info
 ```
 
-- 同步master节点的数据到slave节点
-```
-sync
-```
-
 - 恢复数据，只需将备份文件(dump.rdb)移动到redis安装目录并启动服务即可
 ```
 config get dir      # 获取redis目录可以使用CONFIG命令
