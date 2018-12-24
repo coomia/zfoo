@@ -46,7 +46,7 @@ module.exports = {
         'no-irregular-whitespace': 2,
         'no-mixed-spaces-and-tabs': 2,            // 禁止混用tab和空格
         'no-multi-spaces': 2,                     // 不能用多余的空格
-        'no-trailing-spaces': 2,                  // 一行结束后面不要有空格
+        'no-trailing-spaces': 0,                  // 一行结束后面不要有空格
         'object-curly-spacing': [2, 'always', {
             objectsInObjects: false
         }],                                       // 大括号内是否允许不必要的空格
@@ -68,13 +68,13 @@ module.exports = {
             "alignAttributesVertically": true,
             "ignores": []
         }],
-
-        // 分号设置
-        'semi': [2, 'always'],                     // 语句强制分号结尾
         'semi-spacing': [2, {
             'before': false,
             'after': true
-        }],                                       // 分号前后空格
+        }],                                       // 分号前后是否有空格
+    
+        // 分号设置
+        'semi': [2, 'always'],                    // 语句强制分号结尾
 
         'accessor-pairs': 2,                      // 在对象中使用getter/setter
         'camelcase': [0, {

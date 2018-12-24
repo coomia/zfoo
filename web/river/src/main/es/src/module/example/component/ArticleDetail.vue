@@ -3,9 +3,9 @@
         <el-form ref="postForm" :model="postForm" :rules="rules" class="form-container">
 
             <sticky :class-name="'sub-navbar '+postForm.status">
-                <CommentDropdown v-model="postForm.comment_disabled" />
-                <PlatformDropdown v-model="postForm.platforms" />
-                <SourceUrlDropdown v-model="postForm.source_uri" />
+                <CommentDropdown v-model="postForm.comment_disabled"/>
+                <PlatformDropdown v-model="postForm.platforms"/>
+                <SourceUrlDropdown v-model="postForm.source_uri"/>
                 <el-button v-loading="loading" style="margin-left: 10px;" type="success" @click="submitForm">发布
                 </el-button>
                 <el-button v-loading="loading" type="warning" @click="draftForm">草稿</el-button>
@@ -14,7 +14,7 @@
             <div class="createPost-main-container">
                 <el-row>
 
-                    <Warning />
+                    <Warning/>
 
                     <el-col :span="24">
                         <el-form-item style="margin-bottom: 40px;" prop="title">
@@ -61,11 +61,11 @@
                 </el-form-item>
 
                 <el-form-item prop="content" style="margin-bottom: 30px;">
-                    <Tinymce ref="editor" :height="400" v-model="postForm.content" />
+                    <Tinymce ref="editor" :height="400" v-model="postForm.content"/>
                 </el-form-item>
 
                 <el-form-item prop="image_uri" style="margin-bottom: 30px;">
-                    <Upload v-model="postForm.image_uri" />
+                    <Upload v-model="postForm.image_uri"/>
                 </el-form-item>
             </div>
         </el-form>
@@ -234,24 +234,25 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 @import "~@/common/resource/style/mixin.scss";
+
 .createPost-container {
-  position: relative;
-  .createPost-main-container {
-    padding: 40px 45px 20px 50px;
-    .postInfo-container {
-      position: relative;
-      @include clearfix;
-      margin-bottom: 10px;
-      .postInfo-container-item {
-        float: left;
-      }
+    position: relative;
+    .createPost-main-container {
+        padding: 40px 45px 20px 50px;
+        .postInfo-container {
+            position: relative;
+            @include clearfix;
+            margin-bottom: 10px;
+            .postInfo-container-item {
+                float: left;
+            }
+        }
     }
-  }
-  .word-counter {
-    width: 40px;
-    position: absolute;
-    right: -10px;
-    top: 0px;
-  }
+    .word-counter {
+        width: 40px;
+        position: absolute;
+        right: -10px;
+        top: 0px;
+    }
 }
 </style>

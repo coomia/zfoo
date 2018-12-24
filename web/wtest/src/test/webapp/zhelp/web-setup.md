@@ -44,3 +44,7 @@
 
 2. JSON格式设置
 ![Image text](image/idea-setting-json.png)
+
+3. HTML格式设置
+![Image text](image/idea-setting-html-0.png)
+![Image text](image/idea-setting-html-1.png)
