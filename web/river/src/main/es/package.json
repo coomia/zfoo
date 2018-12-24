@@ -8,7 +8,7 @@
     {
       "github": "https://github.com/PanJiaChen",
       "email": "Pan <panfree23@gmail.com>",
-      "params": "from https://github.com/PanJiaChen/vue-element-admin and from version 2018-11-28"
+      "date": "https://github.com/PanJiaChen/vue-element-admin from version 2018-12-20"
     }
   ],
   "scripts": {
@@ -32,7 +32,7 @@
     "clipboard": "1.7.1",
     "codemirror": "5.39.2",
     "connect": "3.6.6",
-    "driver.js": "0.5.2",
+    "driver.js": "0.8.1",
     "dropzone": "5.2.0",
     "echarts": "4.1.0",
     "element-ui": "2.4.6",
