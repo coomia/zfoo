@@ -44,7 +44,7 @@ public class MethodHandlerTest {
 
     }
 
-    //12244 12893 12434 12647 12473
+    //900ms
     @Test
     public void testReflect() throws Exception{
         MethodHandlerTest test = new MethodHandlerTest();
@@ -65,7 +65,7 @@ public class MethodHandlerTest {
         System.out.println("reflect : " + between.toMillis());
     }
 
-    //10785 11093 10923 11002 11125
+    //1300ms
     @Test
     public void testMethodHandle() throws Throwable {
         MethodHandlerTest test = new MethodHandlerTest();
