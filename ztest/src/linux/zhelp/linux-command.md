@@ -213,6 +213,7 @@ hwclock -w                                  #将软件时钟写入 BIOS
 ntpdate time.servers.ip && hwclock -w       #Linux 进行网络校时：最简单的方法即是使用
 
 timedatectl     #查看时区
+timedatectl set-ntp no                      #取消时间同步
 timedatectl set-timezone "Asia/Taipei"      #设置时区
 timedatectl set-time "2018-01-22 11:29"     #设置时间,同事设置软件时钟和硬件时钟
 ```
