@@ -1,10 +1,13 @@
 package com.zfoo.excel;
 
 import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.ss.usermodel.*;
 import org.junit.Test;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Iterator;
 
 /**
  * @author jaysunxiao
@@ -56,6 +59,28 @@ public class ExcelTest {
         }
 
         System.out.println("Excel文件生成成功...");
+    }
+
+    @Test
+    public void readExcelTest() throws IOException {
+        Workbook wb = WorkbookFactory.create(new File("target.xls"));
+
+        // 只读取第一个工作簿
+        Sheet sheet = wb.getSheetAt(0);
+
+        Iterator<Row> iterator = sheet.iterator();
+        while (iterator.hasNext()) {
+            Row row = iterator.next();
+
+            StringBuilder builder = new StringBuilder();
+            builder.append(row.getCell(0));
+            builder.append(" - ");
+            builder.append(row.getCell(1));
+
+            System.out.println(builder.toString());
+        }
+
+        System.out.println("Excel文件读取成功");
     }
 
 }
