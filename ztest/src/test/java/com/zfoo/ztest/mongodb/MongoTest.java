@@ -35,7 +35,7 @@ public class MongoTest {
             System.out.println(name);
         }
 
-        // 查找并且便利集合student的所有文档
+        // 查找并且遍历集合student的所有文档
         MongoCollection<Document> collection = mongodb.getCollection("student");
         System.out.println("Collection created successfully");
         for (Document doc : collection.find()) {

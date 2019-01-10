@@ -34,7 +34,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/*"/>
-            <bean class="com.zfoo.wtest.ajax.AllRequestInterceptor"/>
+            <bean class="com.zfoo.wtest.AllRequestInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
 </beans>

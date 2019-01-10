@@ -1,4 +1,4 @@
-package com.zfoo.wtest.ajax;
+package com.zfoo.wtest;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

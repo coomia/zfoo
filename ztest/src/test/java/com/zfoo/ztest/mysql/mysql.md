@@ -73,6 +73,10 @@ Server 层包括连接器、查询缓存、分析器、优化器、执行器等�
 ```
 mysql -h127.0.0.1 -ujaysunxiao -p123456     # 登录
 show processlist                            # 列出目前登录数据库的进程
+
+use mysql
+update user set host = '%' where user = 'root'  # 开放root用户的远程连接的权限
+flush privileges                                # flush更改的权限
 ```
 
 ##二、查询缓存
