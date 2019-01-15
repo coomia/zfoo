@@ -1,10 +1,12 @@
 package com.zfoo.ztest.bigdata.zookeeper.recipes.distributedlock;
 
-import com.zfoo.ztest.bigdata.zookeeper.Constant;
+import com.zfoo.ztest.bigdata.zookeeper.ZookeeperConstantTest;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.apache.curator.retry.ExponentialBackoffRetry;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,18 +18,20 @@ import java.util.concurrent.CountDownLatch;
  * @version 1.0
  * @since 2018-08-03 15:47
  */
-public class DistributedLock {
+@Ignore
+public class DistributedLockTest {
 
     static String lock_path = "/node";
-    static CuratorFramework client = CuratorFrameworkFactory
+    static CuratorFramework curator = CuratorFrameworkFactory
             .builder()
-            .connectString(Constant.IP)
+            .connectString(ZookeeperConstantTest.URL)
             .retryPolicy(new ExponentialBackoffRetry(1000, 3))
             .build();
 
-    public static void main(String[] args) throws Exception {
-        client.start();
-        final InterProcessMutex lock = new InterProcessMutex(client, lock_path);
+    @Test
+    public void test() {
+        curator.start();
+        final InterProcessMutex lock = new InterProcessMutex(curator, lock_path);
         final CountDownLatch down = new CountDownLatch(1);
         for (int i = 0; i < 30; i++) {
             new Thread(new Runnable() {
@@ -36,6 +40,7 @@ public class DistributedLock {
                         down.await();
                         lock.acquire();
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
 
                     SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss|SSS");
@@ -45,6 +50,7 @@ public class DistributedLock {
                     try {
                         lock.release();
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }).start();

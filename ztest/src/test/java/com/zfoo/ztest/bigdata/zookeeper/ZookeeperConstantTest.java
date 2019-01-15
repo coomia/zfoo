@@ -22,8 +22,8 @@ package com.zfoo.ztest.bigdata.zookeeper;
  * @since 2018-04-03 15:29
  */
 
-public class Constant {
+public abstract class ZookeeperConstantTest {
 
-    public static String IP = "localhost:2181";
+    public static String URL = "localhost:2181";
 
 }

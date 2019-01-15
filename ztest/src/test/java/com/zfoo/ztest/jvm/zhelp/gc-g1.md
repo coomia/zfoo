@@ -19,8 +19,11 @@
 可达性分析可以解决引用计数法所不能解决的循环引用问题。
 举例来说，即便对象 a 和 b 相互引用，只要从 GC Roots 出发无法到达 a 或者 b，那么可达性分析便不会将它们加入存活对象合集之中。
 ```
+
 ![Image text](image/jvm-memory.jpg)
-    
+####
+1. 堆大小可用 -Xmx1024m 控制
+2. 方法区（本地方法）可用 -XX:MaxMetaspaceSize=1024m 控制     
     
 ####Stop-the-world 以及安全点
 ```

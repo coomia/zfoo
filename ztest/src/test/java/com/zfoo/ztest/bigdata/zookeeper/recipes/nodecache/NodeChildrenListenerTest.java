@@ -1,6 +1,6 @@
 package com.zfoo.ztest.bigdata.zookeeper.recipes.nodecache;
 
-import com.zfoo.ztest.bigdata.zookeeper.Constant;
+import com.zfoo.ztest.bigdata.zookeeper.ZookeeperConstantTest;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -8,16 +8,19 @@ import org.apache.curator.framework.recipes.cache.PathChildrenCache;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheEvent;
 import org.apache.curator.framework.recipes.cache.PathChildrenCacheListener;
 import org.apache.curator.retry.RetryUntilElapsed;
+import org.junit.Ignore;
+import org.junit.Test;
 
-public class NodeChildrenListener {
+@Ignore
+public class NodeChildrenListenerTest {
 
-
-    public static void main(String[] args) throws Exception {
+    @Test
+    public void test() throws Exception {
         RetryPolicy retryPolicy = new RetryUntilElapsed(5000, 1000);
 
         CuratorFramework client = CuratorFrameworkFactory
                 .builder()
-                .connectString(Constant.IP)
+                .connectString(ZookeeperConstantTest.URL)
                 .sessionTimeoutMs(5000)
                 .connectionTimeoutMs(5000)
                 .retryPolicy(retryPolicy)
@@ -27,7 +30,7 @@ public class NodeChildrenListener {
 
         // PathChildrenCache用于监听指定Zookeeper数据节点的子节点变换的情况。
         // 注意：Zookeeper无法对二级子节点监听
-        final PathChildrenCache cache = new PathChildrenCache(client, "/jike", true);
+        final PathChildrenCache cache = new PathChildrenCache(client, "/node_test", true);
         cache.start();
         cache.getListenable().addListener(new PathChildrenCacheListener() {
 
@@ -50,7 +53,6 @@ public class NodeChildrenListener {
         });
 
         Thread.sleep(Integer.MAX_VALUE);
-
     }
 
 }

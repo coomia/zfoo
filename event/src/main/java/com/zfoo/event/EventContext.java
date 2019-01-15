@@ -27,18 +27,6 @@ public class EventContext extends InstantiationAwareBeanPostProcessorAdapter imp
 
     private IEventBusManager eventBusManager;
 
-    @Override
-    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        if (EventContext.instance != null) {
-            return;
-        }
-
-        // 初始化上下文
-        EventContext.instance = this;
-        instance.applicationContext = applicationContext;
-        instance.eventBusManager = (IEventBusManager) applicationContext.getBean(StringUtils.uncapitalize(EventBusManager.class.getSimpleName()));
-    }
-
     public static IEventBusManager getEventBusManager() {
         return instance.eventBusManager;
     }
@@ -61,6 +49,18 @@ public class EventContext extends InstantiationAwareBeanPostProcessorAdapter imp
                 }
             }
         }
+    }
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        if (EventContext.instance != null) {
+            return;
+        }
+
+        // 初始化上下文
+        EventContext.instance = this;
+        instance.applicationContext = applicationContext;
+        instance.eventBusManager = (IEventBusManager) applicationContext.getBean(StringUtils.uncapitalize(EventBusManager.class.getSimpleName()));
     }
 
     @Override

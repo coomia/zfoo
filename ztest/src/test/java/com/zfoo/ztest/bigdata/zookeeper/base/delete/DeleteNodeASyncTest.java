@@ -1,40 +1,44 @@
 package com.zfoo.ztest.bigdata.zookeeper.base.delete;
 
-import java.io.IOException;
-import java.util.concurrent.CountDownLatch;
-
-import com.zfoo.ztest.bigdata.zookeeper.Constant;
+import com.zfoo.ztest.bigdata.zookeeper.ZookeeperConstantTest;
 import org.apache.zookeeper.AsyncCallback;
-import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.Watcher.Event.EventType;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
 import org.apache.zookeeper.ZooKeeper;
+import org.junit.Ignore;
+import org.junit.Test;
 
-public class DeleteNodeASync implements Watcher {
+import java.io.IOException;
+import java.util.concurrent.CountDownLatch;
+
+@Ignore
+public class DeleteNodeASyncTest {
 
 
     private static CountDownLatch connectedSemaphore = new CountDownLatch(1);
 
-
-    public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
-        ZooKeeper zooKeeper = new ZooKeeper(Constant.IP, 5000, new DeleteNodeASync());
+    @Test
+    public void test() throws IOException, InterruptedException {
+        ZooKeeper zooKeeper = new ZooKeeper(ZookeeperConstantTest.URL, 5000, new DeleteNodeASyncWatcher());
         System.out.println(zooKeeper.getState().toString());
 
         connectedSemaphore.await();
 
-        zooKeeper.delete("/node_1", -1, new IVoidCallback(), null);
+        zooKeeper.delete("/node_test", -1, new IVoidCallback(), null);
 
         Thread.sleep(Integer.MAX_VALUE);
     }
 
 
-    @Override
-    public void process(WatchedEvent event) {
-        if (event.getState() == KeeperState.SyncConnected) {
-            if (event.getType() == EventType.None && null == event.getPath()) {
-                connectedSemaphore.countDown();
+    static class DeleteNodeASyncWatcher implements Watcher {
+        @Override
+        public void process(WatchedEvent event) {
+            if (event.getState() == KeeperState.SyncConnected) {
+                if (event.getType() == EventType.None && null == event.getPath()) {
+                    connectedSemaphore.countDown();
+                }
             }
         }
     }

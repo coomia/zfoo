@@ -1,10 +1,12 @@
 package com.zfoo.ztest.bigdata.zookeeper.recipes.distributedbarrier;
 
-import com.zfoo.ztest.bigdata.zookeeper.Constant;
+import com.zfoo.ztest.bigdata.zookeeper.ZookeeperConstantTest;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.barriers.DistributedBarrier;
 import org.apache.curator.retry.ExponentialBackoffRetry;
+import org.junit.Ignore;
+import org.junit.Test;
 
 /**
  * 使用Curator实现分布式Barrier
@@ -13,13 +15,14 @@ import org.apache.curator.retry.ExponentialBackoffRetry;
  * @version 1.0
  * @since 2018-08-03 16:16
  */
-
+@Ignore
 public class DistributedBarrierTest {
 
-    static String barrier_path = "/curator_recipes_barrier_path";
-    static org.apache.curator.framework.recipes.barriers.DistributedBarrier barrier;
+    private static String barrier_path = "/curator_recipes_barrier_path";
+    private static org.apache.curator.framework.recipes.barriers.DistributedBarrier barrier;
 
-    public static void main(String[] args) throws Exception {
+    @Test
+    public void test() throws Exception {
         for (int i = 0; i < 5; i++) {
             new Thread(new Runnable() {
                 public void run() {
@@ -27,7 +30,7 @@ public class DistributedBarrierTest {
 
                         CuratorFramework client = CuratorFrameworkFactory
                                 .builder()
-                                .connectString(Constant.IP)
+                                .connectString(ZookeeperConstantTest.URL)
                                 .retryPolicy(new ExponentialBackoffRetry(1000, 3))
                                 .build();
                         client.start();
@@ -38,6 +41,7 @@ public class DistributedBarrierTest {
                         System.err.println("启动...");
 
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
             }).start();

@@ -1,7 +1,9 @@
 #Zookeeper命令
 
+
 ##一、连接Zookeeper
 /opt/zookeeper/bin/zkCli.sh -timeout 5000 -server 192.168.238.128:2181   启动zookeeper的客户端
+
 
 ##二、查看
 - h             # 查看zookeeper的所有数据结构
@@ -26,6 +28,7 @@ dataLength
 numChildren
 ```
  
+ 
 ##三、更新
 - set /node_1 "set Method"          # 更新节点的信息 
 
@@ -38,6 +41,40 @@ numChildren
 - setquota -n 2 /node_1             # -n设置子节点的数目为2，如果超过了，会记录日志在bin/zookeeper.out中；-b，设置数据长度值（包括子节点）
 - delquota -n /node_1               # 删除配额
 
+
+##四、权限控制
+
+###1. auth的授权方式
+- addauth digest 用户名:密码明文      # 增加一个认证用户
+- setAcl /path auth:用户名:密码明文:crwda    # 设置权限
+- getAcl /path                      # 查看Acl设置
+```
+ZK的节点有5种操作权限：
+CREATE、READ、WRITE、DELETE、ADMIN 也就是 增、删、改、查、管理权限，这5种权限简写为crwda(即：每个单词的首字符缩写)
+注：
+这5种权限中，delete是指对子节点的删除权限，其它4种权限指对自身节点的操作权限
+Zookeeper对权限的控制是znode级别的，不继承即对父节点设置权限，其子节点不继承父节点的权限。
+
+身份的认证有4种方式：
+world：默认方式，相当于全世界都能访问
+auth：代表已经认证通过的用户(cli中可以通过addauth digest user:pwd 来添加当前上下文中的授权用户)
+digest：即用户名:密码这种方式认证，这也是业务系统中最常用的
+ip：使用Ip地址认证
+```
+
+###2. digest授权方式
+- create /digest digest
+- setAcl /digest digest:jaysunxiao:F+YQy2Gee3i3tusJucURoYZKurE=:crwda   # digest:用户名:密码明文:crwda
+- addauth digest jaysunxiao:123456
+- get /digest
+
+```
+digest:jaysunxiao:F+YQy2Gee3i3tusJucURoYZKurE=:crwda
+setAcl /digest digest:jaysunxiao:123456:crwda
+上下两个只能用编码后的字符串设置密码，避免明文操作，增强安全性。
+设置密码需要自己手动去编码，把密码先自己进行sha1编码然后吧结果进行base64编码。
+
+```
 
 #Zookeeper监控工具
 - netflix:exhibitor   监控zookeeper，增删改查  

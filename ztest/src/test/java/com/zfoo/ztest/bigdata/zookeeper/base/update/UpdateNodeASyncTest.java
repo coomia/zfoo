@@ -1,38 +1,43 @@
 package com.zfoo.ztest.bigdata.zookeeper.base.update;
 
-import java.io.IOException;
-
-import com.zfoo.ztest.bigdata.zookeeper.Constant;
+import com.zfoo.ztest.bigdata.zookeeper.ZookeeperConstantTest;
 import org.apache.zookeeper.AsyncCallback;
-import org.apache.zookeeper.KeeperException;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.Watcher.Event.EventType;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
 import org.apache.zookeeper.ZooKeeper;
 import org.apache.zookeeper.data.Stat;
+import org.junit.Ignore;
+import org.junit.Test;
 
-public class UpdateNodeASync implements Watcher {
+import java.io.IOException;
+
+@Ignore
+public class UpdateNodeASyncTest {
 
 
     private static ZooKeeper zooKeeper;
 
-    public static void main(String[] args) throws IOException, InterruptedException, KeeperException {
-        zooKeeper = new ZooKeeper(Constant.IP, 5000, new UpdateNodeASync());
+    @Test
+    public void test() throws IOException, InterruptedException {
+        zooKeeper = new ZooKeeper(ZookeeperConstantTest.URL, 5000, new UpdateNodeASyncWatcher());
         System.out.println(zooKeeper.getState().toString());
         Thread.sleep(Integer.MAX_VALUE);
     }
 
-    private void doSomething(WatchedEvent event) {
-        String updateContent = "new content!!!";
-        zooKeeper.setData("/node_1", updateContent.getBytes(), -1, new IStatCallback(), null);
-    }
+    static class UpdateNodeASyncWatcher implements Watcher {
+        private void doSomething(WatchedEvent event) {
+            String updateContent = "new content!!!";
+            zooKeeper.setData("/node_test", updateContent.getBytes(), -1, new IStatCallback(), null);
+        }
 
-    @Override
-    public void process(WatchedEvent event) {
-        if (event.getState() == KeeperState.SyncConnected) {
-            if (event.getType() == EventType.None && null == event.getPath()) {
-                doSomething(event);
+        @Override
+        public void process(WatchedEvent event) {
+            if (event.getState() == KeeperState.SyncConnected) {
+                if (event.getType() == EventType.None && null == event.getPath()) {
+                    doSomething(event);
+                }
             }
         }
     }

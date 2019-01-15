@@ -1,6 +1,6 @@
 package com.zfoo.ztest.bigdata.zookeeper.curator.query;
 
-import com.zfoo.ztest.bigdata.zookeeper.Constant;
+import com.zfoo.ztest.bigdata.zookeeper.ZookeeperConstantTest;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
@@ -8,20 +8,24 @@ import org.apache.curator.framework.api.BackgroundCallback;
 import org.apache.curator.framework.api.CuratorEvent;
 import org.apache.curator.retry.RetryUntilElapsed;
 import org.apache.zookeeper.data.Stat;
+import org.junit.Ignore;
+import org.junit.Test;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Checkexists {
+@Ignore
+public class NodeExistsTest {
 
-    public static void main(String[] args) throws Exception {
+    @Test
+    public void test() throws Exception {
         ExecutorService es = Executors.newFixedThreadPool(5);
 
         RetryPolicy retryPolicy = new RetryUntilElapsed(5000, 1000);
 
         CuratorFramework client = CuratorFrameworkFactory
                 .builder()
-                .connectString(Constant.IP)
+                .connectString(ZookeeperConstantTest.URL)
                 .sessionTimeoutMs(5000)
                 .connectionTimeoutMs(5000)
                 .retryPolicy(retryPolicy)
@@ -32,12 +36,12 @@ public class Checkexists {
         client.checkExists().inBackground(new BackgroundCallback() {
 
             @Override
-            public void processResult(CuratorFramework arg0, CuratorEvent arg1) throws Exception {
+            public void processResult(CuratorFramework arg0, CuratorEvent arg1) {
                 Stat stat = arg1.getStat();
                 System.out.println(stat);
                 System.out.println(arg1.getContext());
             }
-        }, "123", es).forPath("/jike");
+        }, "Hello Zookeeper!", es).forPath("/node_test");
 
         Thread.sleep(Integer.MAX_VALUE);
     }

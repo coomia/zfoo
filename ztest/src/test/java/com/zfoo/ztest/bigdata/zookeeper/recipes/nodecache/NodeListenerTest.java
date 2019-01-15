@@ -1,12 +1,14 @@
 package com.zfoo.ztest.bigdata.zookeeper.recipes.nodecache;
 
-import com.zfoo.ztest.bigdata.zookeeper.Constant;
+import com.zfoo.ztest.bigdata.zookeeper.ZookeeperConstantTest;
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.recipes.cache.NodeCache;
 import org.apache.curator.framework.recipes.cache.NodeCacheListener;
 import org.apache.curator.retry.RetryUntilElapsed;
+import org.junit.Ignore;
+import org.junit.Test;
 
 
 /**
@@ -16,24 +18,26 @@ import org.apache.curator.retry.RetryUntilElapsed;
  *
  * Zookeeper采用两者相结合，客户端订阅，节点有变化服务器就推送
  */
-public class NodeListener {
+@Ignore
+public class NodeListenerTest {
 
-    public static void main(String[] args) throws Exception {
+    @Test
+    public void test() throws Exception {
         RetryPolicy retryPolicy = new RetryUntilElapsed(5000, 1000);
 
-        CuratorFramework client = CuratorFrameworkFactory
+        CuratorFramework curator = CuratorFrameworkFactory
                 .builder()
-                .connectString(Constant.IP)
+                .connectString(ZookeeperConstantTest.URL)
                 .sessionTimeoutMs(5000)
                 .connectionTimeoutMs(5000)
                 .retryPolicy(retryPolicy)
                 .build();
 
-        client.start();
+        curator.start();
 
         // Cache是Curator中对事件监听的包装，其对事件的监听其实可以看做本地缓存视图和远程Zookeeper视图的对比过程。
         // 同时Recipes能够反复注册监听，从而大大简化了原生API开发的繁琐程度。
-        final NodeCache cache = new NodeCache(client, "/jike");
+        final NodeCache cache = new NodeCache(curator, "/node_test");
         cache.start();
 
         // 节点创建，数据改变都能检测到；如果节点被删除则不能检测。
@@ -46,7 +50,6 @@ public class NodeListener {
         });
 
         Thread.sleep(Integer.MAX_VALUE);
-
     }
 
 }
