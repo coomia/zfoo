@@ -57,7 +57,7 @@ router.beforeEach((to, from, next) => {
                     });
                 }).catch((err) => {
                     store.dispatch('FedLogOut').then(() => {
-                        Message.error(err || 'Verification failed, please login again');
+                        Message.error(err);
                         next({ path: '/' });
                     });
                 });

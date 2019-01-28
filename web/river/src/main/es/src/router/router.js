@@ -17,6 +17,7 @@ import zipFacade from '@/module/zip/facade/zipFacade.js';
 import themeFacade from '@/module/theme/facade/themeFacade.js';
 import i18nFacade from '@/module/i18n/facade/i18nFacade.js';
 import menuFacade from '@/module/menu/facade/menuFacade.js';
+import pdfFacade from '@/module/pdf/facade/pdfFacade.js';
 /* Router Modules */
 // import componentsRouter from './modules/components';
 // import chartsRouter from './modules/charts';
@@ -33,10 +34,11 @@ Vue.use(Router);
  * redirect: noredirect           if `redirect:noredirect` will no redirect in the breadcrumb
  * name:'router-name'             the name is used by <keep-alive> (must set!!!)
  * meta : {
-    roles: ['admin','editor']     will control the page roles (you can set multiple roles)
+    roles: ['admin','editor']    will control the page roles (you can set multiple roles)
     title: 'title'               the name show in submenu and breadcrumb (recommend set)
-    icon: 'svg-name'             the icon show in the sidebar,
-    noCache: true                if true ,the page will no be cached(default is false)
+    icon: 'svg-name'             the icon show in the sidebar
+    noCache: true                if true, the page will no be cached(default is false)
+    breadcrumb: false            if false, the item will hidden in breadcrumb(default is true)
   }
  **/
 // 代表那些不需要动态判断权限的路由，如登录页、404、等通用页面。
@@ -58,6 +60,8 @@ export const constantRouterMap = [
     themeFacade,
     i18nFacade,
     menuFacade,
+    pdfFacade.pdfIndex,
+    pdfFacade.pdfDownload,
     errorFacade.error404,
     errorFacade.error401
 ];
