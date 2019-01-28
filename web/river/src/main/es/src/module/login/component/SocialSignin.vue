@@ -47,8 +47,7 @@ export default {
       font-size: 24px;
       margin-top: 8px;
     }
-    .wx-svg-container,
-    .qq-svg-container {
+    .wx-svg-container, .qq-svg-container {
       display: inline-block;
       width: 40px;
       height: 40px;

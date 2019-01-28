@@ -73,7 +73,7 @@
 <script>
 import { isvalidUsername } from '@/utils/validateUtils.js';
 import LangSelect from '@/common/component/LangSelect';
-import SocialSign from '../component/SocialSignin';
+import SocialSign from '@/module/login/component/SocialSignin.vue';
 
 export default {
     name: 'LoginIndex',
