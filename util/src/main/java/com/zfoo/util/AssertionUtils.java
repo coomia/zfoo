@@ -23,6 +23,7 @@ import java.util.Map;
  */
 public abstract class AssertionUtils {
 
+    // ----------------------------------bool----------------------------------
     /**
      * Assert a boolean expression, throwing {@code IllegalArgumentException}
      * if the test result is {@code false}.
@@ -56,6 +57,84 @@ public abstract class AssertionUtils {
     }
 
 
+    // ----------------------------------long----------------------------------
+    /**
+     * lt 参数1是否小于参数2
+     * le 参数1是否小于等于参数2
+     * gt 参数1是否大于参数2
+     * ge 参数1是否大于等于参数2
+     */
+    public static void ge(long x, long y, String format, Object... args) {
+        if(x < y) {
+            FormattingTuple message = MessageFormatter.arrayFormat(format, args);
+            throw new IllegalArgumentException(message.getMessage());
+        }
+    }
+
+    public static void le(long x, long y, String format, Object... args) {
+        if(x > y) {
+            FormattingTuple message = MessageFormatter.arrayFormat(format, args);
+            throw new IllegalArgumentException(message.getMessage());
+        }
+    }
+
+    public static void ge0(long x) {
+        ge(x, 1, "[Assertion failed] - the param x must greater or equal 0");
+    }
+
+    public static void ge1(long x) {
+        ge(x, 1, "[Assertion failed] - the param x must greater or equal 1");
+    }
+
+    public static void le0(long x) {
+        ge(x, 1, "[Assertion failed] - the param x must less or equal 0");
+    }
+
+    public static void le1(long x) {
+        ge(x, 1, "[Assertion failed] - the param x must less or equal 1");
+    }
+
+
+    // ----------------------------------collection----------------------------------
+    /**
+     * Assert that a collection has elements; that is, it must not be
+     * {@code null} and must have at least one element.
+     *
+     * @param collection the collection to check
+     * @param message    the exception message to use if the assertion fails
+     * @throws IllegalArgumentException if the collection is {@code null} or has no elements
+     */
+    public static void notEmpty(Collection<?> collection, String message) {
+        if (collection == null || collection.isEmpty()) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    public static void notEmpty(Collection<?> collection) {
+        notEmpty(collection,
+                "[Assertion failed] - this collection must not be empty: it must contain at least 1 element");
+    }
+
+    /**
+     * Assert that a Map has entries; that is, it must not be {@code null}
+     * and must have at least one entry.
+     *
+     * @param map     the map to check
+     * @param message the exception message to use if the assertion fails
+     * @throws IllegalArgumentException if the map is {@code null} or has no entries
+     */
+    public static void notEmpty(Map<?, ?> map, String message) {
+        if (map == null || map.isEmpty()) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    public static void notEmpty(Map<?, ?> map) {
+        notEmpty(map, "[Assertion failed] - this map must not be empty; it must contain at least one entry");
+    }
+
+
+    // ----------------------------------object----------------------------------
     /**
      * Assert that an object is {@code null} .
      *
@@ -101,43 +180,6 @@ public abstract class AssertionUtils {
         for (int i = 0; i < objects.length; i++) {
             notNull(objects[i], "the [index:{}] of objects must not be null", i);
         }
-    }
-
-    /**
-     * Assert that a collection has elements; that is, it must not be
-     * {@code null} and must have at least one element.
-     *
-     * @param collection the collection to check
-     * @param message    the exception message to use if the assertion fails
-     * @throws IllegalArgumentException if the collection is {@code null} or has no elements
-     */
-    public static void notEmpty(Collection<?> collection, String message) {
-        if (collection == null || collection.isEmpty()) {
-            throw new IllegalArgumentException(message);
-        }
-    }
-
-    public static void notEmpty(Collection<?> collection) {
-        notEmpty(collection,
-                "[Assertion failed] - this collection must not be empty: it must contain at least 1 element");
-    }
-
-    /**
-     * Assert that a Map has entries; that is, it must not be {@code null}
-     * and must have at least one entry.
-     *
-     * @param map     the map to check
-     * @param message the exception message to use if the assertion fails
-     * @throws IllegalArgumentException if the map is {@code null} or has no entries
-     */
-    public static void notEmpty(Map<?, ?> map, String message) {
-        if (map == null || map.isEmpty()) {
-            throw new IllegalArgumentException(message);
-        }
-    }
-
-    public static void notEmpty(Map<?, ?> map) {
-        notEmpty(map, "[Assertion failed] - this map must not be empty; it must contain at least one entry");
     }
 
     /**
