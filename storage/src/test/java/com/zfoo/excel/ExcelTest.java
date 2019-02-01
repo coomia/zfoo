@@ -2,11 +2,13 @@ package com.zfoo.excel;
 
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.*;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Iterator;
 
 /**
@@ -14,6 +16,7 @@ import java.util.Iterator;
  * @version 1.0
  * @since 2018/12/18
  */
+@Ignore
 public class ExcelTest {
 
     @Test
@@ -81,6 +84,37 @@ public class ExcelTest {
         }
 
         System.out.println("Excel文件读取成功");
+    }
+
+    /**
+     * 默认poi返回的为DOUBLE，某些单元格是整型，需要先转为Long判断下，再返回string
+     * @param cell
+     * @return
+     */
+    public String cellToString(Cell cell) {
+        // 返回布尔类型的值
+        if (cell.getCellType() == CellType.BOOLEAN) {
+            return String.valueOf(cell.getBooleanCellValue());
+        } else if (cell.getCellType() == CellType.NUMERIC) {
+            // 返回数值类型的值
+            Object inputValue;
+            Long longVal = Math.round(cell.getNumericCellValue());
+            Double doubleVal = cell.getNumericCellValue();
+            // 判断是否含有小数位.0
+            if (Double.parseDouble(longVal + ".0") == doubleVal) {
+                inputValue = longVal;
+            } else {
+                inputValue = doubleVal;
+            }
+
+            //格式化为四位小数，按自己需求选择；
+            DecimalFormat df = new DecimalFormat("#.####");
+            //返回String类型
+            return df.format(inputValue);
+        } else {
+            // 返回字符串类型的值
+            return String.valueOf(cell.getStringCellValue());
+        }
     }
 
 }

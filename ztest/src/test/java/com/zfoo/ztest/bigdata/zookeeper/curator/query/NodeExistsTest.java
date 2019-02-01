@@ -46,4 +46,26 @@ public class NodeExistsTest {
         Thread.sleep(Integer.MAX_VALUE);
     }
 
+
+    @Test
+    public void testNodeExist() throws Exception {
+        RetryPolicy retryPolicy = new RetryUntilElapsed(5000, 1000);
+
+        CuratorFramework client = CuratorFrameworkFactory
+                .builder()
+                .connectString(ZookeeperConstantTest.URL)
+                .sessionTimeoutMs(5000)
+                .connectionTimeoutMs(5000)
+                .retryPolicy(retryPolicy)
+                .build();
+
+        client.start();
+
+        // 如果没有这个节点，则stat返回空
+        Stat stat = client.checkExists().forPath("/node_test");
+        System.out.println(stat);
+
+        Thread.sleep(Integer.MAX_VALUE);
+    }
+
 }
