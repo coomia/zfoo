@@ -1,4 +1,4 @@
-package expression.js;
+package com.zfoo.utils.expression.js;
 
 import org.junit.Assert;
 import org.junit.Test;

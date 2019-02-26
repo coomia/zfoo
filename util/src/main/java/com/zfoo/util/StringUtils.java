@@ -86,8 +86,8 @@ public abstract class StringUtils {
      * StringUtils.isBlank("    ")=true
      * StringUtils.isBlank(" b ")=false
      *
-     * @param cs
-     * @return
+     * @param cs 要检查的字符串
+     * @return 是否为空的字符串
      */
     public static boolean isBlank(final CharSequence cs) {
         if (isEmpty(cs)) {
@@ -151,13 +151,13 @@ public abstract class StringUtils {
      * 从第一个分隔符开始分割
      * <p>Gets the substring before the first occurrence of a separator.
      * The separator is not returned.</p>
-     * <p>
+     *
      * <p>A {@code null} string input will return {@code null}.
      * An empty ("") string input will return the empty string.
      * A {@code null} separator will return the input string.</p>
-     * <p>
+     *
      * <p>If nothing is found, the string input is returned.</p>
-     * <p>
+     *
      * <pre>
      * StringUtils.substringBefore(null, *)      = null
      * StringUtils.substringBefore("", *)        = ""
@@ -204,14 +204,14 @@ public abstract class StringUtils {
      * 从第一个分隔符开始分割
      * <p>Gets the substring after the first occurrence of a separator.
      * The separator is not returned.</p>
-     * <p>
+     *
      * <p>A {@code null} string input will return {@code null}.
      * An empty ("") string input will return the empty string.
      * A {@code null} separator will return the empty string if the
      * input string is not {@code null}.</p>
-     * <p>
+     *
      * <p>If nothing is found, the empty string is returned.</p>
-     * <p>
+     *
      * <pre>
      * StringUtils.substringAfter(null, *)      = null
      * StringUtils.substringAfter("", *)        = ""
@@ -246,7 +246,6 @@ public abstract class StringUtils {
     /**
      * <p>Gets the substring after the last occurrence of a separator.
      * The separator is not returned.</p>
-     * <p>
      *
      * @param str       the String to get a substring from, may be null
      * @param separator the String to search for, may be null

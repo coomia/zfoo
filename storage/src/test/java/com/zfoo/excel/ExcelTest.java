@@ -86,10 +86,8 @@ public class ExcelTest {
         System.out.println("Excel文件读取成功");
     }
 
-    /**
-     * 默认poi返回的为DOUBLE，某些单元格是整型，需要先转为Long判断下，再返回string
-     * @param cell
-     * @return
+    /*
+     默认poi返回的为DOUBLE，某些单元格是整型，需要先转为Long判断下，再返回string
      */
     public String cellToString(Cell cell) {
         // 返回布尔类型的值

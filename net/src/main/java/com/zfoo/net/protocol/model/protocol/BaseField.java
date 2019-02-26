@@ -5,7 +5,7 @@ import com.zfoo.net.protocol.model.serializer.ISerializer;
 import java.lang.reflect.Field;
 
 /**
- * 一个包里所包含的变量还有这个变量的序列化器</hr>
+ * 一个包里所包含的变量还有这个变量的序列化器
  * 描述boolean，byte，short，int，long，float，double，char，String等基本序列化器
  *
  * @author jaysunxiao

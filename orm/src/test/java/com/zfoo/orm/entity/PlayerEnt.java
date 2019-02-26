@@ -17,9 +17,9 @@ import javax.persistence.*;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "testQuery", query = "select e from PlayerEnt"),
-        @NamedQuery(name = "indexQuery", query = "from PlayerEnt where a = ?"),
-        @NamedQuery(name = "uniqueQuery", query = "from PlayerEnt where b = ?"),
-        @NamedQuery(name = "pagedQuery", query = "from PlayerEnt where id >= ?")
+        @NamedQuery(name = "indexQuery", query = "from PlayerEnt where a = ?0"),
+        @NamedQuery(name = "uniqueQuery", query = "from PlayerEnt where b = ?0"),
+        @NamedQuery(name = "pagedQuery", query = "from PlayerEnt where id >= ?0")
 })
 public class PlayerEnt implements IEntity<Long> {
 

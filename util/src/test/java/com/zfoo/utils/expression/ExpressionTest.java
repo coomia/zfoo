@@ -1,4 +1,4 @@
-package expression;
+package com.zfoo.utils.expression;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -179,50 +179,6 @@ public class ExpressionTest {
         String expression = "UserName == 'tom'? Credits+10:Credits";
         Integer credits = parser.parseExpression(expression).getValue(context, Integer.class);
         Assert.assertEquals(credits.intValue(), 110);
-    }
-
-    @Test
-    public void objectTest() {
-        User user = new User();
-        user.setUserName("tom");
-        ExpressionParser parser = new SpelExpressionParser();
-        EvaluationContext context = new StandardEvaluationContext(user);
-
-        // 赋值
-        context.setVariable("newUserName", "jony");
-        parser.parseExpression("userName=#newUserName").getValue(context);
-        Assert.assertEquals(user.getUserName(), "jony");
-
-        // 集合过滤
-        Map<String, Integer> creditsMap = new HashMap();
-        creditsMap.put("aTom", 95);
-        creditsMap.put("bJony", 110);
-        creditsMap.put("cMorin", 85);
-        creditsMap.put("dMose", 120);
-        creditsMap.put("eMorrow", 60);
-        context.setVariable("credits", creditsMap);
-
-        // 返回全部
-        List<Integer> creditsGreater100Map =
-                (List<Integer>) parser.parseExpression("#credits.![value>90]").getValue(context);
-        // 获得第一个匹配值
-        Object value = parser.parseExpression("#credits.^[value>90]").getValue(context);
-        // 获得最后一个匹配值
-        Object value2 = parser.parseExpression("#credits.$[value>90]").getValue(context);
-
-        parser.parseExpression("userName='anyli'").getValue(context);
-        Assert.assertEquals(user.getUserName(), "anyli");
-
-        // 构造器
-        user = parser.parseExpression("new expression.User()").getValue(User.class);
-        Assert.assertEquals(user.getUserName(), null);
-
-        // 操作类型
-        Class<?> dateClass = parser.parseExpression("T(java.util.Date)").getValue(Class.class);
-        Class<?> stringClass = parser.parseExpression("T(java.lang.String)").getValue(Class.class);
-        Class<?> userClass = parser.parseExpression("T(expression.User)").getValue(Class.class);
-        Assert.assertTrue(dateClass == java.util.Date.class);
-        Assert.assertTrue(stringClass == java.lang.String.class);
     }
 
 }

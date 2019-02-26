@@ -39,10 +39,10 @@ public class MethodArenaOOMTest {
         System.out.println(resultClazz);
     }
 
-    /**
-     * VM Args: -XX:PermSize=10M -XX:MaxPermSize=10M
-     *
-     * 设置永久代的大小，JDK7以后不再适用
+    /*
+     VM Args: -XX:PermSize=10M -XX:MaxPermSize=10M
+
+     设置永久代的大小，JDK7以后不再适用
      */
     @Test
     public void testMethodArenaOOM() throws NotFoundException, CannotCompileException {

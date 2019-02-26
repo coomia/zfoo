@@ -12,10 +12,8 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD})
 public @interface Scheduler {
 
-    /**
-     * 任务调度器的名称，这个名称必须全局唯一，不能重复
-     *
-     * @return
+    /*
+     任务调度器的名称，这个名称必须全局唯一，不能重复
      */
     String value();
 

@@ -1,6 +1,7 @@
 package com.zfoo.game.gameserver.module.repository.model;
 
-import org.codehaus.jackson.annotate.JsonProperty;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * 一个格子节点，如果有其它不同类型的节点可以自己再定义

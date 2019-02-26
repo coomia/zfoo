@@ -1,4 +1,4 @@
-package utils;
+package com.zfoo.utils;
 
 import com.zfoo.util.ClassUtils;
 import com.zfoo.util.StringUtils;

@@ -4,11 +4,12 @@ import java.io.*;
 import java.util.Properties;
 
 /**
- * Properties 作用：读写资源配置文件 键与值只能是字符串 该类继承与HashTable，用法和Map相似<br/>
  * <p>
- * 存储配置文件：<br/>
- * 1.store()，存储的文件名后缀：.properties 加载配置文件：load() <br/>
- * 2.store()，存储的文件名后缀：.xml 加载配置文件：loadFromXML() <br/>
+ * Properties 作用：读写资源配置文件 键与值只能是字符串 该类继承与HashTable，用法和Map相似
+ * </p>
+ * 存储配置文件：
+ * 1.store()，存储的文件名后缀：.properties 加载配置文件：load()
+ * 2.store()，存储的文件名后缀：.xml 加载配置文件：loadFromXML()
  *
  * @author jaysunxiao
  * @version 1.0

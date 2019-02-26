@@ -33,31 +33,26 @@ public abstract class ClassUtils {
 
     public static final char FILE_SEPARATOR = '/';
 
-    /**
-     * 1.FileTest.class.getResource("")
-     * 得到的是当前类FileTest.class文件的URI目录。不包括自己！
-     * 如：file:/D:/java/eclipse32/workspace/jbpmtest3/bin/com/test/
-     * 2.FileTest.class.getResource("/")
-     * 　　得到的是当前的classpath的绝对URI路径。
-     * 　　如：file:/D:/java/eclipse32/workspace/jbpmtest3/bin/
-     * 3.Thread.currentThread().getContextClassLoader().getResource("")
-     * 得到的也是当前ClassPath的绝对URI路径。
-     * 　　 如：file:/D:/java/eclipse32/workspace/jbpmtest3/bin/
-     * 4.FileTest.class.getClassLoader().getResource("")
-     * 　　得到的也是当前ClassPath的绝对URI路径。
-     * 　　 如：file:/D:/java/eclipse32/workspace/jbpmtest3/bin/
-     * 5.ClassLoader.getSystemResource("")
-     * 　   得到的也是当前ClassPath的绝对URI路径。
-     * 　　 如：file:/D:/java/eclipse32/workspace/jbpmtest3/bin/
-     * 　我推荐使用Thread.currentThread().getContextClassLoader().getResource("")来得到当前的classpath的绝对路径的URI表示法。
+    /*
+     find the location of the class come from
+     1.FileTest.class.getResource("")
+     得到的是当前类FileTest.class文件的URI目录。不包括自己！
+     如：file:/D:/java/eclipse32/workspace/jbpmtest3/bin/com/test/
+     2.FileTest.class.getResource("/")
+     　　得到的是当前的classpath的绝对URI路径。
+     　　如：file:/D:/java/eclipse32/workspace/jbpmtest3/bin/
+     3.Thread.currentThread().getContextClassLoader().getResource("")
+     得到的也是当前ClassPath的绝对URI路径。
+     　　 如：file:/D:/java/eclipse32/workspace/jbpmtest3/bin/
+     4.FileTest.class.getClassLoader().getResource("")
+     　　得到的也是当前ClassPath的绝对URI路径。
+     　　 如：file:/D:/java/eclipse32/workspace/jbpmtest3/bin/
+     5.ClassLoader.getSystemResource("")
+     　   得到的也是当前ClassPath的绝对URI路径。
+     　　 如：file:/D:/java/eclipse32/workspace/jbpmtest3/bin/
+     　我推荐使用Thread.currentThread().getContextClassLoader().getResource("")来得到当前的classpath的绝对路径的URI表示法。
      */
 
-    /**
-     * find the location of the class come from
-     *
-     * @param cls
-     * @return
-     */
     public static String classLocation(final Class<?> cls) {
         AssertionUtils.notNull(cls);
         URL result = null;
@@ -97,8 +92,8 @@ public abstract class ClassUtils {
      * 获取指定包下的所有类，只能搜索当前项目路径和maven项目路径
      *
      * @param packageName 形如"org.hotswap"，不能带有斜线/，以为java格式为主
-     * @return
-     * @throws Exception
+     * @return 当前项目下的所有Java类
+     * @throws Exception 异常
      */
     public static Set<Class<?>> getAllClasses(String packageName) throws Exception {
         Set<Class<?>> classSet = new LinkedHashSet<>();

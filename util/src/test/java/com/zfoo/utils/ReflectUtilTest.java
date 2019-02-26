@@ -1,4 +1,4 @@
-package utils;
+package com.zfoo.utils;
 
 import com.zfoo.util.ReflectionUtils;
 import org.junit.Ignore;

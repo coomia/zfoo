@@ -1,10 +1,11 @@
 #查询系统状态
 ##一、计算机基础信息查询
 ```
-uname -a        #显示所有系统相关的信息   
-localectl       #系统语系
+uname -a        #查看内核版本  
+lsb_release -a  #查看Linux版本
 dmidecode -t 1  #显示出整个系统的硬件信息，例如主板型号等等
 lspci           #查阅您系统内的 PCI 总线相关设备
+localectl       #系统语系
 ```
 
 

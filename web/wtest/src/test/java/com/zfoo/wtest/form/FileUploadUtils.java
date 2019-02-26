@@ -48,7 +48,7 @@ public class FileUploadUtils {
      *
      * body
      * ----------------------------681395766232748508178371--
-     * @throws IOException
+     * @throws IOException IO异常
      */
     @Test
     public void test() throws IOException {

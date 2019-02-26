@@ -1,4 +1,4 @@
-package utils;
+package com.zfoo.utils;
 
 import com.zfoo.util.JsonUtils;
 import org.junit.Assert;
@@ -92,7 +92,7 @@ public class JsonUtilTest {
 
     @Test
     public void testGetNode() {
-        Assert.assertEquals(JsonUtils.getNode(userJson, "id").getTextValue(), "1000");
+        Assert.assertEquals(JsonUtils.getNode(userJson, "id").asText(), "1000");
     }
 
 

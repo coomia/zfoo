@@ -7,15 +7,9 @@ import java.util.Collection;
 import java.util.Map;
 
 /**
- * Assertion utility class that assists in validating arguments.<p>
+ * Assertion utility class that assists in validating arguments.
  * This class is similar to JUnit's assertion library. If an argument value is
  * deemed invalid, an {@link IllegalArgumentException} is thrown (typically).
- * <p>
- * For example:<p>
- * <pre class="code">
- * Assert.notNull(clazz, "The class must not be null");
- * Assert.isTrue(i > 0, "The value must be greater than zero");</pre>
- * <p>
  *
  * @author jaysunxiao
  * @version 1.0
@@ -58,11 +52,11 @@ public abstract class AssertionUtils {
 
 
     // ----------------------------------long----------------------------------
-    /**
-     * lt 参数1是否小于参数2
-     * le 参数1是否小于等于参数2
-     * gt 参数1是否大于参数2
-     * ge 参数1是否大于等于参数2
+    /*
+     lt 参数1是否小于参数2
+     le 参数1是否小于等于参数2
+     gt 参数1是否大于参数2
+     ge 参数1是否大于等于参数2
      */
     public static void ge(long x, long y, String format, Object... args) {
         if(x < y) {

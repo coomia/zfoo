@@ -3,7 +3,7 @@ package com.zfoo.storage.model.anno;
 import java.lang.annotation.*;
 
 /**
- * 索引，用HaspMap<>实现
+ * 索引，用HaspMap实现
  *
  * @author jaysunxiao
  * @version 1.0

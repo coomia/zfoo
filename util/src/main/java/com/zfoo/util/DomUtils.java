@@ -1,9 +1,20 @@
 package com.zfoo.util;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.zfoo.util.exception.ExceptionUtils;
+import org.slf4j.helpers.FormattingTuple;
+import org.slf4j.helpers.MessageFormatter;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -20,6 +31,48 @@ import java.util.List;
  * @since 2017-11-14 16:23
  */
 public abstract class DomUtils {
+
+    private static final XmlMapper MAPPER = new XmlMapper();
+
+    static {
+        MAPPER.setDefaultUseWrapper(false);
+
+        //反序列化
+        //当反序列化有未知属性则抛异常，true打开这个设置
+        MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
+    }
+
+    public static <T> T string2Object(String xml, Class<T> clazz) {
+        try {
+            return MAPPER.readValue(xml, clazz);
+        } catch (IOException e) {
+            FormattingTuple message = MessageFormatter.arrayFormat("将xml字符串[xml:{}]转换为对象[class:{}]异常[error:{}]",
+                    new Object[]{xml, clazz, ExceptionUtils.getStackTrace(e)});
+            throw new RuntimeException(message.getMessage());
+        }
+    }
+
+    public static <T> T file2Object(File xmlFile, Class<T> clazz) {
+        try {
+            XMLInputFactory f = XMLInputFactory.newFactory();
+            XMLStreamReader sr = f.createXMLStreamReader(new FileInputStream(xmlFile));
+            return MAPPER.readValue(sr, clazz);
+        } catch (Exception e) {
+            FormattingTuple message = MessageFormatter.arrayFormat("将xml文件[xml:{}]转换为对象[class:{}]异常[error:{}]",
+                    new Object[]{xmlFile, clazz, ExceptionUtils.getStackTrace(e)});
+            throw new RuntimeException(message.getMessage());
+        }
+    }
+
+    public static <T> T inputStream2Object(InputStream xmlInputStream, Class<T> clazz) {
+        try {
+            return MAPPER.readValue(xmlInputStream, clazz);
+        } catch (Exception e) {
+            FormattingTuple message = MessageFormatter
+                    .format("将xmlInputStream转换为对象[class:{}]异常[error:{}]", clazz, ExceptionUtils.getStackTrace(e));
+            throw new RuntimeException(message.getMessage());
+        }
+    }
 
     /**
      * 只返回第一层的孩子节点，不返回第一层孩子节点的孩子节点
@@ -93,8 +146,8 @@ public abstract class DomUtils {
         return null;
     }
 
-    /**
-     * Namespace-aware equals comparison.
+    /*
+     Namespace-aware equals comparison.
      */
     public static boolean nodeNameEquals(Node node, String desiredName) {
         AssertionUtils.notNull(node, "Node must not be null");
@@ -102,15 +155,15 @@ public abstract class DomUtils {
         return nodeNameMatch(node, desiredName);
     }
 
-    /**
-     * Matches the given node's name and local name against the given desired names.
+    /*
+     Matches the given node's name and local name against the given desired names.
      */
     private static boolean nodeNameMatch(Node node, Collection<?> desiredNames) {
         return (desiredNames.contains(node.getNodeName()) || desiredNames.contains(node.getLocalName()));
     }
 
-    /**
-     * Matches the given node's name and local name against the given desired name.
+    /*
+     Matches the given node's name and local name against the given desired name.
      */
     private static boolean nodeNameMatch(Node node, String desiredName) {
         return (desiredName.equals(node.getNodeName()) || desiredName.equals(node.getLocalName()));

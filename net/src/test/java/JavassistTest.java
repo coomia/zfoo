@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.lang.reflect.*;
 import java.lang.reflect.Modifier;
 
-/**
- * 测试javassist生成的类和普通用new关键字创建出来的类之间的区别<hr/>
- * 测试发现两者从访问方法和访问变量的速度几乎没有什么区别，可以方向的用javassist代理其它的类，不会影响速度<hr/>
+/*
+ 测试javassist生成的类和普通用new关键字创建出来的类之间的区别<hr/>
+ 测试发现两者从访问方法和访问变量的速度几乎没有什么区别，可以方向的用javassist代理其它的类，不会影响速度<hr/>
  */
 
 interface DGet {
@@ -164,14 +164,8 @@ public class JavassistTest {
         System.out.println(count);
     }
 
-    /**
-     * 通过反射直接操作属性访问变量的速度
-     *
-     * @throws NoSuchFieldException
-     * @throws IllegalAccessException
-     * @throws InstantiationException
-     * @throws NoSuchMethodException
-     * @throws InvocationTargetException
+    /*
+     通过反射直接操作属性访问变量的速度
      */
     public static void testC() throws NoSuchFieldException, IllegalAccessException, InstantiationException, NoSuchMethodException, InvocationTargetException {
         Field aField = C.class.getDeclaredField("a");
@@ -188,7 +182,7 @@ public class JavassistTest {
         Method cSetMethod = C.class.getDeclaredMethod("setC", int.class);
         cSetMethod.setAccessible(true);
 
-        Constructor<?> constructor = C.class.getConstructor(null);
+        Constructor<?> constructor = C.class.getConstructor((Class<?>) null);
         constructor.setAccessible(true);
 
         long start = System.currentTimeMillis();
@@ -208,15 +202,8 @@ public class JavassistTest {
         System.out.println(count);
     }
 
-    /**
-     * 通过javassist访问成员变量的速度
-     *
-     * @throws NotFoundException
-     * @throws CannotCompileException
-     * @throws NoSuchMethodException
-     * @throws IllegalAccessException
-     * @throws InvocationTargetException
-     * @throws InstantiationException
+    /*
+     通过javassist访问成员变量的速度
      */
     public static void testD() throws NotFoundException, CannotCompileException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         ClassPool classPool = ClassPool.getDefault();

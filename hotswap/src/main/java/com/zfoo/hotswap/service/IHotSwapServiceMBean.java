@@ -20,7 +20,7 @@ public interface IHotSwapServiceMBean {
     /**
      * 热更新绝对路径的文件
      *
-     * @param absolutePath
+     * @param absolutePath 热更新文件的绝对路径
      */
     void hotSwapByAbsolutePath(String absolutePath);
 

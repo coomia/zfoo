@@ -4,11 +4,10 @@ import com.zfoo.net.NetContext;
 import com.zfoo.net.protocol.model.packet.IPacket;
 import com.zfoo.net.protocol.model.protocol.*;
 import com.zfoo.net.protocol.model.serializer.*;
+import com.zfoo.net.protocol.model.xml.XmlProtocolDefinition;
+import com.zfoo.net.protocol.model.xml.XmlProtocols;
+import com.zfoo.util.DomUtils;
 import com.zfoo.util.ReflectionUtils;
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;
 import org.springframework.context.ApplicationContext;
@@ -75,16 +74,11 @@ public class ProtocolManager implements IProtocolManager {
         ApplicationContext applicationContext = NetContext.getApplicationContext();
 
         Resource resource = applicationContext.getResource(protocolLocation);
-        SAXBuilder builder = new SAXBuilder();
-        Document document = null;
-
         try {
-            document = builder.build(resource.getInputStream());
-            Element rootElement = document.getRootElement();
-            List<Element> childs = rootElement.getChildren(CHILD_ELEMENT_NAME);
-            for (Element child : childs) {
-                short id = Short.valueOf(child.getAttributeValue(ID));
-                String location = child.getAttributeValue(LOCATION);
+            XmlProtocols xmlProtocols = DomUtils.inputStream2Object(resource.getInputStream(), XmlProtocols.class);
+            for(XmlProtocolDefinition definition : xmlProtocols.getProtocols()) {
+                short id = definition.getId();
+                String location = definition.getLocation();
                 Class<?> clazz = Class.forName(location);
                 if (protocolList.get(id) != null) {
                     FormattingTuple message = MessageFormatter.format("duplicate defintion [id:{}] Exception!", id);
@@ -93,7 +87,8 @@ public class ProtocolManager implements IProtocolManager {
                 // 注册协议
                 protocolList.set(id, parseProtocolRegistration(id, clazz));
             }
-        } catch (JDOMException | IOException | IllegalAccessException | ClassNotFoundException | InstantiationException | NoSuchFieldException | NoSuchMethodException | InvocationTargetException e) {
+
+        } catch (IOException | IllegalAccessException | ClassNotFoundException | InstantiationException | NoSuchFieldException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
     }

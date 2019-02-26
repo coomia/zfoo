@@ -22,15 +22,12 @@ public class HotSwapAgent {
     private static final String EXCEPTION = "exception";
 
 
-    /**
-     * Java SE6开始，提供了在应用程序的VM启动后在动态添加代理的方式，即agentmain方式。 与Permain类似，agent方式同样需要提供一个agent jar，并且这个jar需要满足：
-     * 在manifest中指定Agent-Class属性，值为代理类全路径
-     * 代理类需要提供public static void agentmain(String args, Instrumentation inst)或public static void agentmain(String args)方法。并且再二者同时存在时以前者优先。args和inst和premain中的一致。
-     * 不过如此设计的再运行时进行代理有个问题——如何在应用程序启动之后再开启代理程序呢？ JDK6中提供了Java Tools API，其中Attach API可以满足这个需求。
-     * Attach API中的VirtualMachine代表一个运行中的VM。其提供了loadAgent()方法，可以在运行时动态加载一个代理jar。
-     *
-     * @param args
-     * @param inst
+    /*
+     Java SE6开始，提供了在应用程序的VM启动后在动态添加代理的方式，即agentmain方式。 与Permain类似，agent方式同样需要提供一个agent jar，并且这个jar需要满足：
+     在manifest中指定Agent-Class属性，值为代理类全路径
+     代理类需要提供public static void agentmain(String args, Instrumentation inst)或public static void agentmain(String args)方法。并且再二者同时存在时以前者优先。args和inst和premain中的一致。
+     不过如此设计的再运行时进行代理有个问题——如何在应用程序启动之后再开启代理程序呢？ JDK6中提供了Java Tools API，其中Attach API可以满足这个需求。
+     Attach API中的VirtualMachine代表一个运行中的VM。其提供了loadAgent()方法，可以在运行时动态加载一个代理jar。
      */
     public static void agentmain(String args, Instrumentation inst) {
         Class<?> clazz = null;

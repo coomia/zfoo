@@ -23,10 +23,11 @@ public class QueryTest {
         System.out.println(list);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testNamedQuery() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("test_orm.xml");
-        List<PlayerEnt> list = (List<PlayerEnt>) OrmContext.getQuery().namedQuery("testQuery", null);
+        List<PlayerEnt> list = (List<PlayerEnt>) OrmContext.getQuery().namedQuery("testQuery");
         System.out.println(list);
     }
 
@@ -37,6 +38,7 @@ public class QueryTest {
         System.out.println(player);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testIndexNamedQuery() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("test_orm.xml");
@@ -44,6 +46,7 @@ public class QueryTest {
         System.out.println(list);
     }
 
+    @SuppressWarnings("unchecked")
     @Test
     public void testPageQuery() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("test_orm.xml");

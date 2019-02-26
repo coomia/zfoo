@@ -47,7 +47,7 @@ public abstract class TimeUtils {
      *
      * @param dateString 日期字符串，如：2018-02-12 10:12:50
      * @return <code>Date</code>
-     * @throws ParseException
+     * @throws ParseException 解析异常
      */
     public static Date stringToDate(String dateString) throws ParseException {
         return dateFormat.get().parse(dateString);
@@ -71,7 +71,7 @@ public abstract class TimeUtils {
 
     /**
      * <p>Checks if two date objects are on the same day ignoring time.</p>
-     * <p>
+     *
      * <p>28 Mar 2002 13:45 and 28 Mar 2002 06:01 would return true.
      * 28 Mar 2002 13:45 and 12 Mar 2002 13:45 would return false.
      * </p>
@@ -94,7 +94,7 @@ public abstract class TimeUtils {
 
     /**
      * <p>Checks if two calendar objects are on the same day ignoring time.</p>
-     * <p>
+     *
      * <p>28 Mar 2002 13:45 and 28 Mar 2002 06:01 would return true.
      * 28 Mar 2002 13:45 and 12 Mar 2002 13:45 would return false.
      * </p>
@@ -113,15 +113,11 @@ public abstract class TimeUtils {
                 cal1.get(Calendar.DAY_OF_YEAR) == cal2.get(Calendar.DAY_OF_YEAR);
     }
 
-    /**
-     * 判断两个日期是否是同一周，设置周一为一周的第一天
-     * <p>
-     * 2004-12-25”是星期六，也就是说它是2004年中第52周的星期六，那么“2004-12-26”到底是2004年的第几周哪，java中经测试取得的它的Week值是1，
-     * 那么也就是说它被看作2005年的第一周了，这个处理是比较好的。可以用来判断“2004-12-26”和“2005-1-1”是同一周。
-     *
-     * @param time1
-     * @param time2
-     * @return
+    /*
+      判断两个日期是否是同一周，设置周一为一周的第一天
+
+      2004-12-25”是星期六，也就是说它是2004年中第52周的星期六，那么“2004-12-26”到底是2004年的第几周哪，java中经测试取得的它的Week值是1，
+      那么也就是说它被看作2005年的第一周了，这个处理是比较好的。可以用来判断“2004-12-26”和“2005-1-1”是同一周。
      */
     public static boolean isSameWeek(long time1, long time2) {
         Calendar cal1 = Calendar.getInstance();
@@ -162,11 +158,8 @@ public abstract class TimeUtils {
 
     // --------------------------------------获取相关时间戳--------------------------------------
 
-    /**
-     * 获取给定时间戳对应的日期的0点时间戳
-     *
-     * @param time
-     * @return
+    /*
+     获取给定时间戳对应的日期的0点时间戳
      */
     public static long getZeroTimeOfDay(long time) {
         Calendar cal = Calendar.getInstance();

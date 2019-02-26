@@ -1,12 +1,16 @@
 package com.zfoo.util;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.codehaus.jackson.map.type.ArrayType;
-import org.codehaus.jackson.map.type.CollectionType;
-import org.codehaus.jackson.map.type.MapType;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.ArrayType;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import com.fasterxml.jackson.databind.type.MapType;
+import com.zfoo.util.exception.ExceptionUtils;
+import org.slf4j.helpers.FormattingTuple;
+import org.slf4j.helpers.MessageFormatter;
 
 import java.io.IOException;
 import java.util.*;
@@ -20,27 +24,27 @@ public abstract class JsonUtils {
 
     //只要在各个类方法中不调用configure方法，则MAPPER都是线程安全的
     private static final ObjectMapper MAPPER = new ObjectMapper();
-    private static JsonNode pollNode;
 
     static {
         //序列化
-        MAPPER.setSerializationInclusion(JsonSerialize.Inclusion.NON_NULL);
-        //MAPPER.configure(SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS, false);
+        MAPPER.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+        // MAPPER.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
         //序列化枚举是以toString()来输出，默认false，即默认以name()来输出
-        //MAPPER.configure(SerializationConfig.Feature.WRITE_ENUMS_USING_INDEX, true);
+        // MAPPER.configure(SerializationFeature.WRITE_ENUMS_USING_INDEX, true);
 
 
         //反序列化
-        //当反序列化有未知属性则抛异常，ture打开这个设置
-        MAPPER.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, true);
+        //当反序列化有未知属性则抛异常，true打开这个设置
+        MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
     }
 
-    public static <E> E string2Object(String js, Class<E> clazz) {//js=json string
+    public static <T> T string2Object(String json, Class<T> clazz) {//json=json string
         try {
-            return MAPPER.readValue(js, clazz);
+            return MAPPER.readValue(json, clazz);
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("将json字符串转换为对象时异常:" + js + "-->" + "{" + clazz + "}");
+            FormattingTuple message = MessageFormatter.arrayFormat("将json字符串[json:{}]转换为对象[class:{}]时异常[error:{}]"
+                    , new Object[]{json, clazz, ExceptionUtils.getStackTrace(e)});
+            throw new RuntimeException(message.getMessage());
         }
     }
 
@@ -48,60 +52,69 @@ public abstract class JsonUtils {
         try {
             return MAPPER.writeValueAsString(object);
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("将对象转换为json字符串时异常:{" + object + "}");
+            FormattingTuple message = MessageFormatter
+                    .format("将对象[object:{}]转换为json字符串时异常[error:{}]", object, e.getMessage());
+            throw new RuntimeException(message.getMessage());
         }
     }
 
-
-    public static <E> List<E> string2List(String js, Class<E> clazz) {
+    @SuppressWarnings("unchecked")
+    public static <T> List<T> string2List(String json, Class<T> clazz) {
         CollectionType collectionType = MAPPER.getTypeFactory().constructCollectionType(ArrayList.class, clazz);
         try {
-            return (List<E>) MAPPER.readValue(js, collectionType);
+            return (List<T>) MAPPER.readValue(json, collectionType);
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("将json字符串转换为list异常:" + js + ",-->" + "{" + clazz + "}");
+            FormattingTuple message = MessageFormatter
+                    .format("将json字符串[json:{}]转换为list异常[error:{}]", json, e.getMessage());
+            throw new RuntimeException(message.getMessage());
         }
     }
 
     //元素不可重复
-    public static <E> Set<E> string2Set(String js, Class<E> clazz) {
+    @SuppressWarnings("unchecked")
+    public static <T> Set<T> string2Set(String json, Class<T> clazz) {
         CollectionType collectionType = MAPPER.getTypeFactory().constructCollectionType(HashSet.class, clazz);
         try {
-            return (Set<E>) MAPPER.readValue(js, collectionType);
+            return (Set<T>) MAPPER.readValue(json, collectionType);
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("将json字符串转换为Set异常:" + js + ",-->" + "{" + clazz + "}");
+            FormattingTuple message = MessageFormatter.arrayFormat("将json字符串[json:{}]转换为Set[set:{}]异常[error:{}]",
+                    new Object[]{json, clazz, ExceptionUtils.getStackTrace(e)});
+            throw new RuntimeException(message.getMessage());
         }
     }
 
-    public static <C extends Collection<E>, E> C string2Collection(String js, Class<C> collectionType, Class<E> elementType) {
+    public static <C extends Collection<T>, T> C string2Collection(String json, Class<C> collectionType, Class<T> elementType) {
         try {
             CollectionType e = MAPPER.getTypeFactory().constructCollectionType(collectionType, elementType);
-            return MAPPER.readValue(js, e);
-        } catch (IOException e1) {
-            e1.printStackTrace();
-            throw new RuntimeException("将json字符串转换为Collection异常:" + js + ",-->" + "{" + collectionType + "," + elementType + "}");
+            return MAPPER.readValue(json, e);
+        } catch (IOException e) {
+            FormattingTuple message = MessageFormatter.arrayFormat("将json字符串[json:{}]转换为Collection[collection:{}]异常[error:{}]",
+                    new Object[]{json, collectionType, ExceptionUtils.getStackTrace(e)});
+            throw new RuntimeException(message.getMessage());
         }
     }
 
-    public static <K, V> Map<K, V> string2Map(String js, Class<K> kClazz, Class<V> vClazz) {
+    @SuppressWarnings("unchecked")
+    public static <K, V> Map<K, V> string2Map(String json, Class<K> kClazz, Class<V> vClazz) {
         MapType mapType = MAPPER.getTypeFactory().constructMapType(HashMap.class, kClazz, vClazz);
         try {
-            return (Map<K, V>) MAPPER.readValue(js, mapType);
+            return (Map<K, V>) MAPPER.readValue(json, mapType);
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("将json字符串转换为map异常:" + js + ",-->" + "key:" + kClazz + "," + "value:" + vClazz);
+            FormattingTuple message = MessageFormatter.arrayFormat("将json字符串[json:{}]转换为map[key:{},value:{}]异常[error:{}]",
+                    new Object[]{json, kClazz, vClazz, ExceptionUtils.getStackTrace(e)});
+            throw new RuntimeException(message.getMessage());
         }
     }
 
-    public static <E> E[] string2Array(String js, Class<E> clazz) {
+    @SuppressWarnings("unchecked")
+    public static <T> T[] string2Array(String json, Class<T> clazz) {
         ArrayType arrayType = MAPPER.getTypeFactory().constructArrayType(clazz);
         try {
-            return (E[]) MAPPER.readValue(js, arrayType);
+            return (T[]) MAPPER.readValue(json, arrayType);
         } catch (Exception e) {
-            e.printStackTrace();
-            throw new RuntimeException("将json字符串转换为array异常:" + js + ",-->" + "{" + clazz + "}");
+            FormattingTuple message = MessageFormatter.arrayFormat("将json字符串[{}]转换为array[element:{}]异常[error:{}]",
+                    new Object[]{json, clazz, ExceptionUtils.getStackTrace(e)});
+            throw new RuntimeException(message.getMessage());
         }
     }
 
@@ -110,31 +123,32 @@ public abstract class JsonUtils {
      * <p>
      * 只遍历树的第一层节点
      *
-     * @param js       json string
+     * @param json     json string
      * @param nodeName 节点名称
      * @return 节点名称为nodeName的json节点，没有返回空
      */
-    public static JsonNode getNode(String js, String nodeName) {
+    public static JsonNode getNode(String json, String nodeName) {
         try {
             Queue<JsonNode> queue = new ArrayDeque<>();
-            JsonNode rootNode = MAPPER.readTree(js);//将Json串以树状结构读入内存
-            JsonNode resultNode = null;
+            JsonNode rootNode = MAPPER.readTree(json);//将Json串以树状结构读入内存
+            JsonNode resultNode;
             queue.add(rootNode);
             while (!queue.isEmpty()) {//深度优先遍历算法
-                pollNode = queue.poll();
+                JsonNode pollNode = queue.poll();
                 resultNode = pollNode.get(nodeName);
                 if (resultNode != null) {
                     return resultNode;
                 }
-                Iterator<JsonNode> iterator = pollNode.getElements();
+                Iterator<JsonNode> iterator = pollNode.elements();
                 while (iterator.hasNext()) {//循环遍历子节点下的信息
                     JsonNode node = iterator.next();
                     queue.add(node);
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("json字符串转换为jsonTree异常:" + js + ",-->" + "nodeName:" + nodeName);
+            FormattingTuple message = MessageFormatter.arrayFormat("将json字符串[json:{}]转换为jsonTree[nodeName:{}]异常[error:{}]",
+                    new Object[]{json, nodeName, ExceptionUtils.getStackTrace(e)});
+            throw new RuntimeException(message.getMessage());
         }
         return null;
     }

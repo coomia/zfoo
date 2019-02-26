@@ -1,10 +1,10 @@
 package com.zfoo.orm.model.query;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Query;
+import org.hibernate.query.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate5.HibernateCallback;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import java.util.List;
 
@@ -21,7 +21,16 @@ public class HibernateQuery extends HibernateDaoSupport implements IQuery {
 
     @Override
     public List<?> namedQuery(String queryName, Object... params) {
-        return getHibernateTemplate().findByNamedQuery(queryName, params);
+        return getHibernateTemplate().executeWithNativeSession(new HibernateCallback<List<?>>() {
+            @Override
+            public List<?> doInHibernate(Session session) throws HibernateException {
+                Query query = session.getNamedQuery(queryName);
+                for (int i = 0; i < params.length; i++) {
+                    query.setParameter(i, params[i]);
+                }
+                return query.list();
+            }
+        });
     }
 
     @Override

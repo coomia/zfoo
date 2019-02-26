@@ -130,6 +130,8 @@ public abstract class FileUtils {
      *
      * @param absPath  绝对路径
      * @param fileName 文件名
+     * @return 新创建的File
+     * @throws IOException IO异常
      */
     public static File createFile(String absPath, String fileName) throws IOException {
         File file = new File(absPath);
@@ -163,6 +165,7 @@ public abstract class FileUtils {
      * Deletes a file. If file is a directory, delete it and all sub-directories.
      *
      * @param file file or directory to delete, must not be null
+     * @throws IOException IO异常
      */
     public static void deleteFile(final File file) throws IOException {
         if (file.isDirectory()) {

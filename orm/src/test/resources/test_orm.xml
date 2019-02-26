@@ -29,7 +29,7 @@
     </bean>
 
     <!-- 为bean提供close方法关闭数据源，以便Spring容器关闭时，数据源能够正常关闭 -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClassName}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
@@ -47,14 +47,12 @@
         <property name="testWhileIdle" value="true"/>
         <!-- 连接池初始化时创建的连接数量 -->
         <property name="initialSize" value="10"/>
-        <!-- 最大连接数量 -->
-        <property name="maxActive" value="50"/>
         <!-- 连接池中容许保持空闲状态的最大连接数量,超过的空闲连接将被释放,如果设置为负数表示不限制 -->
         <property name="maxIdle" value="5"/>
         <property name="minIdle" value="1"/>
     </bean>
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="packagesToScan" value="com.zfoo.orm"/>
         <!--<property name="packagesToScan" value="com.zfoo.orm**.entity"/> 扫描全部entity包下的entity-->
@@ -64,10 +62,8 @@
                 <prop key="current_session_context_class">thread</prop>
                 <prop key="hibernate.cache.use_query_cache">false</prop>
                 <!--hibernate.dialect 只是Hibernate使用的数据库方言,就是要用Hibernate连接那种类型的数据库服务器。-->
-                <!--<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop> 对应default-storage-engine=INNODB-->
                 <!--<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop> 对应default-storage-engine=MyISAM-->
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
-                <prop key="cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
                 <prop key="hibernate.cache.use_second_level_cache">false</prop>
                 <!--最常用的属性，第一次加载hibernate时根据model类会自动建立起表的结构 -->
                 <!--以后加载hibernate时根据 model类自动更新表结构，即使表结构改变了但表中的行仍然存在不会删除以前的行 -->

@@ -1,4 +1,4 @@
-package utils.security;
+package com.zfoo.utils.security;
 
 import com.zfoo.util.StringUtils;
 import com.zfoo.util.security.ZipUtils;

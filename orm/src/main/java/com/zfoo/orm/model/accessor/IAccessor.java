@@ -26,14 +26,8 @@ public interface IAccessor {
 
     <E extends IEntity<?>> void batchDelete(List<E> entities);
 
-    /**
-     * 只有这一个不需要事务
-     *
-     * @param entityClass
-     * @param pk
-     * @param <PK>
-     * @param <E>
-     * @return
+    /*
+     只有这一个不需要事务
      */
     <PK extends Serializable, E extends IEntity> E load(Class<E> entityClass, PK pk);
 

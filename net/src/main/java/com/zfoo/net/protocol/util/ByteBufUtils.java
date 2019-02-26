@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf;
 
 /**
  * “可变长字节码算法”的压缩数据的算法，以达到压缩数据，减少磁盘IO。
- * <br/>
+ *
  * google的ProtocolBuffer和Facebook的thrift底层的通信协议都是由这个算法实现
  * @author jaysunxiao
  * @version 1.0

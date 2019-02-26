@@ -15,7 +15,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
- * FactoryBean，在某些情况下，实例化Bean非常复杂，如果按照传统的方式，则需要在<bean>标签中配置大量的信息，
+ * FactoryBean，在某些情况下，实例化Bean非常复杂，如果按照传统的方式，则需要在bean标签中配置大量的信息，
  * 配置方式的灵活性是受到限制的，这时采用编码的方式可能会获得一个简单的方案
  *
  * @author jaysunxiao

@@ -2,8 +2,9 @@ package com.zfoo.orm;
 
 import com.zfoo.orm.entity.PlayerEnt;
 import com.zfoo.orm.model.cache.IEntityCaches;
-import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSource;
 import org.junit.Ignore;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -25,21 +26,19 @@ public class TestDelete {
 
     private static final Logger logger = LoggerFactory.getLogger(TestInsert.class);
 
-    public static final String CONFIG_LOCATION = "test_orm.xml";
+    private static final String CONFIG_LOCATION = "test_orm.xml";
 
-    public static final int PLAYENT_NUM = 1000;
+    private static final int PLAYENT_NUM = 1000;
 
-    public static final int MAILENT_NUM = 1000;
+    private static final int SLEEP_TIME = 10;
 
-    public static final int SLEEP_TIME = 10;
-
-    public static void reportConn(AbstractApplicationContext context) {
+    private static void reportConn(AbstractApplicationContext context) {
         BasicDataSource basicDataSource = (BasicDataSource) context.getBean("dataSource");
         logger.debug("连接[active:{}]，[idle:{}]", basicDataSource.getNumActive(), basicDataSource.getNumIdle());
 
     }
 
-    public static void sleep() {
+    private static void sleep() {
         try {
             Thread.sleep(SLEEP_TIME);
         } catch (InterruptedException e) {
@@ -47,7 +46,9 @@ public class TestDelete {
         }
     }
 
-    public static void main(String[] args) throws InterruptedException {
+    @SuppressWarnings("unchecked")
+    @Test
+    public void test() throws InterruptedException {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(CONFIG_LOCATION);
 
 
@@ -84,6 +85,7 @@ public class TestDelete {
 
         thread1.start();
         thread2.start();
+        Thread.sleep(SLEEP_TIME * 4000);
     }
 
 

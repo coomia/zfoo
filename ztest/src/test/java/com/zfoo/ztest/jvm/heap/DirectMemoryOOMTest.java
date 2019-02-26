@@ -15,10 +15,9 @@ import java.lang.reflect.Field;
 @Ignore
 public class DirectMemoryOOMTest {
 
-    /**
-     * VM Args: -Xms20m -Xmx20m -XX:MaxDirectMemorySize=10M -XX:+HeapDumpOnOutOfMemoryError
-     * <p>
-     * DirectMemory导致内存溢出，一个明显的特征是在Heap Dump File中找不到什么明显的异常，也不会生成这个文件
+    /*
+    VM Args: -Xms20m -Xmx20m -XX:MaxDirectMemorySize=10M -XX:+HeapDumpOnOutOfMemoryError
+    DirectMemory导致内存溢出，一个明显的特征是在Heap Dump File中找不到什么明显的异常，也不会生成这个文件
      */
     @Test
     public void testDirectMemoryOOM() throws IllegalAccessException {

@@ -14,7 +14,7 @@ import javax.persistence.*;
  */
 @Cache(size = "hundred", persister = @Persister("0s"))
 @Entity
-@NamedQueries({@NamedQuery(name = "mailEntIndexQuery", query = "from MailEnt where playName = ?")})
+@NamedQueries({@NamedQuery(name = "mailEntIndexQuery", query = "from MailEnt where playName = ?0")})
 public class MailEnt implements IEntity<String> {
 
     @Id
@@ -22,16 +22,16 @@ public class MailEnt implements IEntity<String> {
     private String mailId;
 
     @Index(namedQuery = "uniqueQuery")
-    private String playName;
+    private String playerName;
 
     private String content;
 
     public MailEnt() {
     }
 
-    public MailEnt(String mailId, String playName, String content) {
+    public MailEnt(String mailId, String playerName, String content) {
         this.mailId = mailId;
-        this.playName = playName;
+        this.playerName = playerName;
         this.content = content;
     }
 
@@ -49,12 +49,12 @@ public class MailEnt implements IEntity<String> {
         this.mailId = mailId;
     }
 
-    public String getPlayName() {
-        return playName;
+    public String getPlayerName() {
+        return playerName;
     }
 
-    public void setPlayName(String playName) {
-        this.playName = playName;
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 
     public String getContent() {
@@ -69,7 +69,7 @@ public class MailEnt implements IEntity<String> {
     public String toString() {
         return "MailEnt{" +
                 "mailId='" + mailId + '\'' +
-                ", playName='" + playName + '\'' +
+                ", playName='" + playerName + '\'' +
                 ", content='" + content + '\'' +
                 '}';
     }

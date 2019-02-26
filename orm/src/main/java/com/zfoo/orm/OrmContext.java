@@ -1,6 +1,6 @@
 package com.zfoo.orm;
 
-import com.mysql.jdbc.AbandonedConnectionCleanupThread;
+import com.mysql.cj.jdbc.AbandonedConnectionCleanupThread;
 import com.zfoo.orm.manager.IOrmManager;
 import com.zfoo.orm.manager.OrmManager;
 import com.zfoo.orm.model.accessor.HibernateAccessor;
@@ -113,7 +113,7 @@ public class OrmContext extends InstantiationAwareBeanPostProcessorAdapter imple
             Driver driver = drivers.nextElement();
             DriverManager.deregisterDriver(driver);
         }
-        AbandonedConnectionCleanupThread.shutdown();
+        AbandonedConnectionCleanupThread.checkedShutdown();
     }
 
     @Override

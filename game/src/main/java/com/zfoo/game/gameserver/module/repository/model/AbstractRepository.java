@@ -1,10 +1,10 @@
 package com.zfoo.game.gameserver.module.repository.model;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.zfoo.game.gameserver.module.core.reward.AndReward;
 import com.zfoo.util.StringUtils;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 import java.util.*;
 

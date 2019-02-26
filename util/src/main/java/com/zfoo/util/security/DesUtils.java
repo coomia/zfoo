@@ -38,11 +38,8 @@ public abstract class DesUtils {
         }
     }
 
-    /**
-     * 对str进行DES加密
-     *
-     * @param str
-     * @return
+    /*
+     对str进行DES加密
      */
     public static String getEncryptString(String str) {
         BASE64Encoder base64en = new BASE64Encoder();
@@ -57,11 +54,8 @@ public abstract class DesUtils {
         }
     }
 
-    /**
-     * 对str进行DES解密
-     *
-     * @param str
-     * @return
+    /*
+     对str进行DES解密
      */
     public static String getDecryptString(String str) {
         BASE64Decoder base64De = new BASE64Decoder();

@@ -1,5 +1,6 @@
 package com.zfoo.ztest.redis;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -14,6 +15,7 @@ import java.util.HashSet;
  * @version 1.0
  * @since 2018/11/13
  */
+@Ignore
 public class JedisClusterTest {
 
     @Test

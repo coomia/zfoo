@@ -9,21 +9,13 @@ import java.util.concurrent.ScheduledFuture;
  */
 public interface ISchedulerService {
 
-    /**
-     * 用cron表达式执行的任务
-     *
-     * @param runnable
-     * @param cronExpression
-     * @return
+    /*
+     用cron表达式执行的任务
      */
     ScheduledFuture<?> schedule(Runnable runnable, String cronExpression);
 
-    /**
-     * 固定延迟执行的任务
-     *
-     * @param runnable
-     * @param delay
-     * @return
+    /*
+     固定延迟执行的任务
      */
     ScheduledFuture<?> schedule(Runnable runnable, long delay);
 
@@ -31,9 +23,9 @@ public interface ISchedulerService {
     /**
      * 固定周期执行的任务
      *
-     * @param runnable
+     * @param runnable 任务
      * @param period   默认毫秒
-     * @return
+     * @return 完成是的future
      */
     ScheduledFuture<?> scheduleAtFixRate(Runnable runnable, long period);
 
