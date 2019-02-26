@@ -8,6 +8,8 @@ import org.bson.Document;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import java.util.function.Consumer;
+
 import static com.mongodb.client.model.Filters.eq;
 
 /**
@@ -57,7 +59,7 @@ public class MongoTest {
         Document document = new Document("_id", 1).append("name", "hello mongodb");
         collection.insertOne(document);
 
-        collection.find().forEach((Block<Document>) doc -> {
+        collection.find().forEach((Consumer<Document>) doc -> {
             System.out.println(doc.toJson());
         });
     }
@@ -73,7 +75,7 @@ public class MongoTest {
         // 更新一个文档
         collection.updateOne(eq("_id", 1), new Document("$set", new Document("name", "new hello mongodb")));
 
-        collection.find().forEach((Block<Document>) doc -> {
+        collection.find().forEach((Consumer<Document>) doc -> {
             System.out.println(doc.toJson());
         });
     }
@@ -88,7 +90,7 @@ public class MongoTest {
         // 删除一个文档
         collection.deleteOne(eq("_id", 1));
 
-        collection.find().forEach((Block<Document>) doc -> {
+        collection.find().forEach((Consumer<Document>) doc -> {
             System.out.println(doc.toJson());
         });
     }

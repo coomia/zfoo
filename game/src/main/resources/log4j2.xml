@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- 该xml配置中,xml元素大小写不敏感 -->
+<!-- status="off",log4j2把自身事件记录到控制台的配置，off表示不记录，其余的记录有trace，debug，info，warn，error，fatal, off -->
+<!-- monitorInterval表示检测更改配置的时间,单位是秒,最小间隔为5秒,0或负数表示不检测 -->
+<configuration name="game-log-config" status="warn" monitorInterval="0">
+
+    <!-- %d: 输出日志时间点的日期或时间，默认格式为ISO8601，也可以在其后指定格式 -->
+    <!-- %t: 输出产生该日志事件的线程名 ,%p: 输出日志信息优先级的名称，即DEBUG，INFO，WARN，ERROR，FATAL -->
+    <!-- %c: 输出日志信息所属的类目，通常就是所在类的全名，%M：方法名称，%F: 输出日志消息产生时所在的文件名称 -->
+    <!-- %L: 输出代码中的行号 ，%l=%c.%M(%F:%L)，%m: 输出代码中指定的消息,产生的日志具体信息 -->
+    <!-- %n: 输出一个回车换行符，Windows平台为”\r\n”，Unix平台为”\n”输出日志信息换行 -->
+    <!-- 常量引用 -->
+    <properties>
+        <property name="LOG_HOME">log/game</property>
+        <property name="FORMAT">%d{yyyy-MM-dd HH:mm:ss} [%t] %p %c.%M(%F:%L) - %m%n</property>
+    </properties>
+
+    <!-- appender用于接收各种日志 -->
+    <appenders>
+        <!-- 常见的输出到console,常用于开发环境中,默认是system_err,还有一个system_out -->
+        <Console name="console" target="system_out">
+            <!-- 控制台只输出level及以上级别的信息，onMatch="ACCEPT"，onMismatch="DENY"，意思是匹配就接受,否则直接拒绝  -->
+            <thresholdFilter level="info" onMatch="accept" onMismatch="deny"/>
+            <patternLayout pattern="${FORMAT}"/>
+        </Console>
+
+        <!-- 文件会打印出所有信息，这个log每次程序重新运行会自动清空，由append属性决定，适合临时测试用 -->
+        <!-- append为TRUE表示消息增加到指定文件中，false表示消息覆盖指定的文件内容，默认值是true -->
+        <File name="testFile" fileName="${LOG_HOME}/test/game.log" append="false">
+            <PatternLayout pattern="${FORMAT}"/>
+        </File>
+
+        <File name="errorFile" fileName="${LOG_HOME}/error.log" append="true">
+            <PatternLayout pattern="${FORMAT}"/>
+        </File>
+
+        <RollingFile name="rollingFile" fileName="${LOG_HOME}/game.log"
+                     filePattern="${LOG_HOME}/%d{yyyy-MM-dd.HH-mm-ss}-%i.log">
+            <PatternLayout pattern="${FORMAT}"/>
+            <Policies>
+                <!-- interval，integer型，指定两次封存动作之间的时间间隔。单位:以日志的命名精度来确定单位，比如yyyy-MM-dd-HH 单位为小时，yyyy-MM-dd-HH-mm 单位为分钟。 -->
+                <!-- modulate，boolean型，说明是否对封存时间进行调制。若modulate=true，则封存时间将以0点为边界进行偏移计算。 -->
+                <!--设置每天打包日志一次-->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!--设置日志文件满10MB后打包-->
+                <SizeBasedTriggeringPolicy size="10 MB"/>
+            </Policies>
+            <!-- 用来指定同一个文件夹下最多有几个日志文件时开始删除最旧的，创建新的(通过max属性) -->
+            <DefaultRolloverStrategy max="60"/>
+        </RollingFile>
+
+    </appenders>
+
+    <!-- 接收appender，只有定义了logger并引入的appender，appender才会生效 -->
+    <loggers>
+        <!--*******************************************Spring********************************************************-->
+        <!--logger中的name是指代码的包名或类名，路径要写全，可以配置不同包中的日志输出到不同的文件中。level是日志输出级别 -->
+        <!--过滤掉spring的一些无用的DEBUG信息-->
+        <logger name="org.springframework" level="warn" additivity="true"/>
+        <!-- additivity="false"表示不继承父logger的配置和父类没有关系-->
+        <logger name="org.springframework.core" level="warn" additivity="false"/>
+
+        <!--*******************************************Hibernate*****************************************************-->
+        <logger name="org.hibernate.ps" level="warn" additivity="false"/>
+        <!-- Changing the log level to DEBUG will result in Hibernate generated SQL to be logged. -->
+        <logger name="org.hibernate.SQL" level="debug" additivity="false"/>
+        <logger name="org.springframework.core" level="warn" additivity="false"/>
+        <logger name="org.springframework.core" level="warn" additivity="false"/>
+
+        <!--*******************************************Netty*********************************************************-->
+        <logger name="io.netty" level="warn" additivity="false"/>
+
+        <!-- 日志输出级别(>=info级别的日志都输出) -->
+        <root level="info">
+            <appender-ref ref="console"/>
+            <appender-ref ref="rollingFile"/>
+            <appender-ref ref="testFile"/>
+            <appender-ref ref="errorFile"/>
+        </root>
+    </loggers>
+
+</configuration>
