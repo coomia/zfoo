@@ -7,7 +7,7 @@ import com.zfoo.game.gameserver.module.player.service.IPlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+//import javax.annotation.PostConstruct;
 
 /**
  * @author jaysunxiao
@@ -48,10 +48,10 @@ public class GameContext {
     // ----------------------------------------------------------------------------------------------------
     private static GameContext instance;
 
-    @PostConstruct
-    private void init() {
-        GameContext.instance = this;
-    }
+//    @PostConstruct
+//    private void init() {
+//        GameContext.instance = this;
+//    }
 
     public static GameContext getInstance() {
         return instance;

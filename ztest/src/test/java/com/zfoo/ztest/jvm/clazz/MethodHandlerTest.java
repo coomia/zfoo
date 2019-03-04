@@ -1,5 +1,6 @@
 package com.zfoo.ztest.jvm.clazz;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.lang.invoke.MethodHandle;
@@ -37,7 +38,7 @@ import java.time.Instant;
  * @version 1.0
  * @since 2018/11/23
  */
-
+@Ignore
 public class MethodHandlerTest {
 
     public void testMethod(String str) {

@@ -61,13 +61,12 @@
         <hibernate.version>5.4.1.Final</hibernate.version>
 
 
-
         <log4j2.version>2.11.2</log4j2.version>
 
         <junit.version>4.12</junit.version>
 
         <!-- java版本和文件编码 -->
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <file.encoding>UTF-8</file.encoding>
 
         <!-- maven核心插件 -->
@@ -75,7 +74,9 @@
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
+        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <maven-shade-plugin.version>3.2.1</maven-shade-plugin.version>
+        <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
 
         <!-- maven自定义plugin插件 -->
         <maven-plugin-api.version>3.6.0</maven-plugin-api.version>
@@ -104,15 +105,6 @@
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
-        </dependency>
-
-        <!-- 热更新依赖的类库 -->
-        <dependency>
-            <groupId>com.sun</groupId>
-            <artifactId>tools</artifactId>
-            <version>${java.version}</version>
-            <scope>system</scope>
-            <systemPath>${java.home}/../lib/tools.jar</systemPath>
         </dependency>
 
         <!--log4j2核心包-->
@@ -205,38 +197,14 @@
                 </configuration>
             </plugin>
 
-            <!-- 打包插件-->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>${maven-shade-plugin.version}</version>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                        <configuration>
-                            <createDependencyReducedPom>false</createDependencyReducedPom>
-                        </configuration>
-                    </execution>
-                </executions>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
                 <configuration>
-
-                    <transformers>
-                        <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                            <!--<mainClass>com.xxg.Main</mainClass>-->
-                        </transformer>
-                        <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                            <resource>META-INF/spring.handlers</resource>
-                        </transformer>
-                        <transformer
-                                implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                            <resource>META-INF/spring.schemas</resource>
-                        </transformer>
-                    </transformers>
+                    <archive>
+                        <manifestFile>src/main/resources/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
                 </configuration>
             </plugin>
 
@@ -252,6 +220,12 @@
     <!-- 用于生成javadoc文档，测试报告等等 -->
     <reporting>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${maven-site-plugin.version}</version>
+            </plugin>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-project-info-reports-plugin</artifactId>

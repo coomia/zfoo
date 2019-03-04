@@ -1,6 +1,5 @@
-package com.zfoo.utils;
+package com.zfoo.util;
 
-import com.zfoo.util.FileUtils;
 import org.junit.Ignore;
 import org.junit.Test;
 

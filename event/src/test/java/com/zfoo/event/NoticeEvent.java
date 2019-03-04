@@ -1,4 +1,4 @@
-package com.zfoo.event.test;
+package com.zfoo.event;
 
 import com.zfoo.event.model.event.IEvent;
 

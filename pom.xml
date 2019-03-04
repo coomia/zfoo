@@ -102,7 +102,7 @@
         <junit.version>4.12</junit.version>
 
         <!-- java版本和文件编码 -->
-        <java.version>1.8</java.version>
+        <java.version>11</java.version>
         <file.encoding>UTF-8</file.encoding>
 
         <!-- maven核心插件 -->
@@ -110,7 +110,9 @@
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
+        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <maven-shade-plugin.version>3.2.1</maven-shade-plugin.version>
+        <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
 
         <!-- maven自定义plugin插件 -->
         <maven-plugin-api.version>3.6.0</maven-plugin-api.version>
@@ -228,14 +230,15 @@
                 </configuration>
             </plugin>
 
+
             <!-- 打包插件-->
             <!--在target目录下会生成两个jar包，一个是包含了所有依赖的jar文件，所以可以直接运行；另一个original-xxx.jar文件，而是另外一个，生成的jar文件包含了所有依赖，所以可以直接运行。
             如果项目中用到了Spring Framework，将依赖打到一个jar包中，运行时会出现读取XML schema文件出错。原因是Spring Framework的多个jar包中包含相同的文件spring.handlers和spring.schemas，
             如果生成一个jar包会互相覆盖。为了避免互相影响，可以使用AppendingTransformer来对文件内容追加合并 -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>${maven-shade-plugin.version}</version>
+            <!--<plugin>-->
+            <!--<groupId>org.apache.maven.plugins</groupId>-->
+            <!--<artifactId>maven-shade-plugin</artifactId>-->
+            <!--<version>${maven-shade-plugin.version}</version>-->
                 <!--<executions>-->
                 <!--<execution>-->
                 <!--<phase>package</phase>-->
@@ -263,7 +266,7 @@
                 <!--</transformer>-->
                 <!--</transformers>-->
                 <!--</configuration>-->
-            </plugin>
+            <!--</plugin>-->
 
             <!-- 在执行site生成站点信息的时候会调用这个插件，会自动调用project-info-reports和javadoc两个插件 -->
             <!-- 在Settings，Build，Build Tools，Maven，Runner中配置VM Options中添加-Dfile.encoding=GBK,否则会乱码 -->
@@ -272,6 +275,19 @@
                 <artifactId>maven-site-plugin</artifactId>
                 <version>${maven-site-plugin.version}</version>
             </plugin>
+
+            <!--mvn versions:display-plugin-updates，查看最新的插件包-->
+            <!--mvn versions:display-dependency-updates，查看最新的依赖包-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${versions-maven-plugin.version}</version>
+                <configuration>
+                    <generateBackupPoms>false</generateBackupPoms>
+                </configuration>
+            </plugin>
+
+
         </plugins>
     </build>
 

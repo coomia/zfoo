@@ -37,7 +37,7 @@ public class PropertyFile {
 
             // 使用相对路径，当前的工程文件
             properties.store(new FileOutputStream(
-                    new File("utils/src/main/java/com/zfoo/utils/property/db.properties")), "配置文件的说明：db配置");
+                    new File("util/src/main/java/com/zfoo/util/property/db.properties")), "配置文件的说明：db配置");
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -55,7 +55,7 @@ public class PropertyFile {
         Properties properties = new Properties();
         try {
             //类的相对路径，以'/'开头，表示bin目录
-            properties.load(new FileInputStream(new File("utils/src/main/java/com/zfoo/utils/property/db.properties")));
+            properties.load(new FileInputStream(new File("util/src/main/java/com/zfoo/util/property/db.properties")));
             System.out.println(properties.getProperty("driver"));
             System.out.println(properties.getProperty("password"));
             System.out.println(properties.size());

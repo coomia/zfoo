@@ -1,4 +1,4 @@
-package com.zfoo.utils;
+package com.zfoo.util;
 
 import org.junit.Test;
 

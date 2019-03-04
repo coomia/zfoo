@@ -1,5 +1,6 @@
 package com.zfoo.ztest.juc;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.function.Supplier;
  * @version 1.0
  * @since 2018-12-21 19:57
  */
+@Ignore
 public class CompletableFutureTest {
 
     // 其中supplyAsync用于有返回值的任务，runAsync则用于没有返回值的任务。

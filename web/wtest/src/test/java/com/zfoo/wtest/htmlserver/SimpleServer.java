@@ -1,12 +1,11 @@
 package com.zfoo.wtest.htmlserver;
 
-import sun.misc.BASE64Encoder;
-
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.MessageDigest;
+import java.util.Base64;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -95,8 +94,7 @@ public class SimpleServer {
         MessageDigest md = MessageDigest.getInstance("SHA-1");
         md.update(key.getBytes("ISO-8859-1"), 0, key.length());
         byte[] sha1Hash = md.digest();
-        BASE64Encoder encoder = new BASE64Encoder();
-        return encoder.encode(sha1Hash);
+        return new String(Base64.getEncoder().encode(sha1Hash));
     }
 
 }

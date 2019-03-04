@@ -1,6 +1,5 @@
-package com.zfoo.utils;
+package com.zfoo.util;
 
-import com.zfoo.util.EnumUtils;
 import org.junit.Assert;
 import org.junit.Test;
 

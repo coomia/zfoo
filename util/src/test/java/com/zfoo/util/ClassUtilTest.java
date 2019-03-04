@@ -1,7 +1,7 @@
-package com.zfoo.utils;
+package com.zfoo.util;
 
-import com.zfoo.util.ClassUtils;
-import com.zfoo.util.StringUtils;
+import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Set;
@@ -11,16 +11,14 @@ import java.util.Set;
  * @version 1.0
  * @since 2017 09.21 18:19
  */
+@Ignore
 public class ClassUtilTest {
 
+    // ClassUtilTest
     @Test
     public void classLocation() throws Exception {
-        System.out.println(StringUtils.MULTIPLE_HYPHENS);
-        System.out.println("某个类的精确位置测试：");
         String str = ClassUtils.classLocation(Integer.class);
-        System.out.println(str);
-        System.out.println(StringUtils.MULTIPLE_HYPHENS);
-
+        Assert.assertEquals("jrt:/java.base/java/lang/Integer.class", str);
     }
 
     @Test

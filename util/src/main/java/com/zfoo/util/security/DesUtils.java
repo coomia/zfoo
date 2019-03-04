@@ -12,13 +12,12 @@ package com.zfoo.util.security;
  * @since 2017 10.30 14:58
  */
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import java.security.Key;
 import java.security.SecureRandom;
+import java.util.Base64;
 
 public abstract class DesUtils {
     private static Key key;
@@ -42,13 +41,13 @@ public abstract class DesUtils {
      对str进行DES加密
      */
     public static String getEncryptString(String str) {
-        BASE64Encoder base64en = new BASE64Encoder();
+        Base64.Encoder base64en = Base64.getEncoder();
         try {
             byte[] strBytes = str.getBytes(CHARSET_NAME);
             Cipher cipher = Cipher.getInstance(ENCRYPTION);
             cipher.init(Cipher.ENCRYPT_MODE, key);
             byte[] encryptStrBytes = cipher.doFinal(strBytes);
-            return base64en.encode(encryptStrBytes);
+            return base64en.encodeToString(encryptStrBytes);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -58,9 +57,9 @@ public abstract class DesUtils {
      对str进行DES解密
      */
     public static String getDecryptString(String str) {
-        BASE64Decoder base64De = new BASE64Decoder();
+        Base64.Decoder base64De = Base64.getDecoder();
         try {
-            byte[] strBytes = base64De.decodeBuffer(str);
+            byte[] strBytes = base64De.decode(str);
             Cipher cipher = Cipher.getInstance(ENCRYPTION);
             cipher.init(Cipher.DECRYPT_MODE, key);
             byte[] decryptStrBytes = cipher.doFinal(strBytes);

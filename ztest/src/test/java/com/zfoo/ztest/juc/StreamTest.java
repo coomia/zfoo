@@ -1,5 +1,6 @@
 package com.zfoo.ztest.juc;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.*;
@@ -10,6 +11,7 @@ import java.util.stream.Collectors;
  * @version 1.0
  * @since 2018-12-22 05:04
  */
+@Ignore
 public class StreamTest {
 
     // Stream（流）是一个来自数据源的元素队列并支持聚合操作
@@ -80,7 +82,7 @@ public class StreamTest {
     public void testOptional() {
         StreamTest java8Tester = new StreamTest();
         Integer value1 = null;
-        Integer value2 = new Integer(10);
+        Integer value2 = Integer.valueOf(10);
         // Optional.ofNullable - 允许传递为 null 参数
         Optional<Integer> a = Optional.ofNullable(value1);
         // Optional.of - 如果传递的参数是 null，抛出异常 NullPointerException

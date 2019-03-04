@@ -3,11 +3,11 @@ package com.zfoo.hotswap;
 import com.sun.tools.attach.VirtualMachine;
 import com.sun.tools.attach.VirtualMachineDescriptor;
 import com.zfoo.hotswap.service.HotSwapServiceMBean;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.management.ManagementFactory;
 import java.util.List;
 
 /**
@@ -18,7 +18,11 @@ public class TestMain {
 
     private static final Logger logger = LoggerFactory.getLogger(TestMain.class);
 
-    public static void main(String[] args) throws Exception {
+    // VM: -Djdk.attach.allowAttachSelf=true
+    // argument: --illegal-access=permit
+    @Ignore
+    @Test
+    public void testHotSwap() throws InterruptedException {
         TestA a = new TestA();
         a.print();
         while (true) {
@@ -29,7 +33,10 @@ public class TestMain {
         }
     }
 
+
+
     // 列出当前本机上运行的所有jvm实例描述
+    @Ignore
     @Test
     public void test() {
         List<VirtualMachineDescriptor> vmdList = VirtualMachine.list();
@@ -39,3 +46,4 @@ public class TestMain {
     }
 
 }
+

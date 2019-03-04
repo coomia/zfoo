@@ -1,4 +1,4 @@
-package com.zfoo.event.test;
+package com.zfoo.event;
 
 import com.zfoo.event.model.anno.EventReceiver;
 import org.springframework.stereotype.Component;
@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
  * @since 2017 09.08 17:48
  */
 @Component
-public class TestEvent {
+public class NoticeComponent {
 
 
     @EventReceiver

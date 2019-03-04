@@ -1,10 +1,9 @@
-package com.zfoo.utils;
+package com.zfoo.util;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
-import com.zfoo.util.DomUtils;
 import org.junit.Assert;
 import org.junit.Test;
 

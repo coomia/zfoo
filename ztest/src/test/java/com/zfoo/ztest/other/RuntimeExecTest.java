@@ -6,9 +6,9 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.helpers.FormattingTuple;
 import org.slf4j.helpers.MessageFormatter;
-import sun.nio.cs.ext.GBK;
 
 import java.io.InputStream;
+import java.nio.charset.Charset;
 
 /**
  * Runtime.getRuntime().exec()同步执行操作系统的外部命令
@@ -41,7 +41,7 @@ public class RuntimeExecTest {
 
         byte[] bytes = IOUtils.toByteArray(inputStream);
 
-        System.out.println(new String(bytes, new GBK()));
+        System.out.println(new String(bytes, Charset.forName("gbk")));
         System.out.println(StringUtils.MULTIPLE_HYPHENS);
         System.out.println(new String(bytes));
         System.out.println(StringUtils.MULTIPLE_HYPHENS);
@@ -64,7 +64,7 @@ public class RuntimeExecTest {
             byte[] bytes = IOUtils.toByteArray(errStream);
 
             FormattingTuple message = MessageFormatter.arrayFormat("执行命令错误，errorValue:[{}]，error:[{}]，返回码："
-                    , new Object[]{new String(bytes, new GBK()), exitValue});
+                    , new Object[]{new String(bytes, Charset.forName("gbk")), exitValue});
             throw new Exception(message.getMessage());
         }
     }

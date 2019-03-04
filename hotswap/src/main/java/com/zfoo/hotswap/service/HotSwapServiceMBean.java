@@ -1,19 +1,13 @@
 package com.zfoo.hotswap.service;
 
-import com.zfoo.hotswap.HotSwapContext;
-import com.zfoo.hotswap.manager.HotSwapManager;
-import com.zfoo.hotswap.model.ClassFileDef;
-import com.zfoo.hotswap.model.HotSwapClassLoader;
-import com.zfoo.util.FileUtils;
-import com.zfoo.util.IOUtils;
-import com.zfoo.util.StringUtils;
-import com.zfoo.util.TimeUtils;
 import com.sun.tools.attach.AgentInitializationException;
 import com.sun.tools.attach.AgentLoadException;
 import com.sun.tools.attach.AttachNotSupportedException;
 import com.sun.tools.attach.VirtualMachine;
-import com.sun.tools.classfile.ClassFile;
-import com.sun.tools.classfile.ConstantPoolException;
+import com.zfoo.hotswap.HotSwapContext;
+import com.zfoo.hotswap.manager.HotSwapManager;
+import com.zfoo.hotswap.model.ClassFileDef;
+import com.zfoo.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,8 +16,13 @@ import javax.management.MXBean;
 import javax.management.ObjectName;
 import java.io.*;
 import java.lang.management.ManagementFactory;
-import java.util.*;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+//java11过后ClassFile对外不可见
+//import com.sun.tools.classfile.ClassFile;
 /**
  * JMX（JAVA Management Extensions）技术是java5的新特性，它提供一种简单，标准的方式去管理应用程序，设备，服务等资源。
  * JMS定义了一些设计模式，api和一些服务来进行应用程序和网络的监控，这些都是基于java语言环境的。
@@ -45,7 +44,7 @@ public class HotSwapServiceMBean implements IHotSwapServiceMBean {
 
     // 热更新的代理和热更新的文件要放在同一个目录
     private static final String HOT_SWAP_SCRIPT = "hotscript";
-    private static final String HOT_SWAP_AGENT = HOT_SWAP_SCRIPT + "/hotswap.jar";
+    private static final String HOT_SWAP_AGENT = HOT_SWAP_SCRIPT + "/hotswap-2.0.jar";
 
     public static final String CLASS_SUFFIX = ".class";
     public static final String JAVA_SUFFIX = ".java";
@@ -82,14 +81,6 @@ public class HotSwapServiceMBean implements IHotSwapServiceMBean {
 
     @Override
     public synchronized void hotSwapByAbsolutePath(String absolutePath) {
-        // 热更新java文件，动态编译成class文件，如果类加载器已经加载过了这个类，则交给下面的class加载
-        try {
-            hotSwapJava(absolutePath);
-        } catch (IOException | ClassNotFoundException e) {
-            logger.error("热更新java文件异常：[exception:{}]", e);
-            return;
-        }
-
         // 热更新class文件，上一步没有完成的操作本次继续执行
         try {
             hotSwapClass(absolutePath);
@@ -107,65 +98,6 @@ public class HotSwapServiceMBean implements IHotSwapServiceMBean {
         }
     }
 
-    private void hotSwapJava(String absolutePath) throws IOException, ClassNotFoundException {
-        // 本次需要更新的所有java文件
-        Set<File> updateJavaSet = new HashSet<>();
-        List<File> fileList = FileUtils.getAllReadableFiles(new File(absolutePath));
-        for (File file : fileList) {
-            if (!file.getName().endsWith(JAVA_SUFFIX)) {
-                continue;
-            }
-            updateJavaSet.add(file);
-        }
-
-        if (updateJavaSet.isEmpty()) {
-            return;
-        }
-
-        // 编译所有的java文件
-        HotSwapClassLoader loader = new HotSwapClassLoader();
-        for (File file : updateJavaSet) {
-            try {
-                boolean isSuccessful = loader.compileJavaFile(file);
-                if (isSuccessful) {
-                    logger.info("编译成功：[file:{}]", file.getName());
-                } else {
-                    logger.error("编译失败：[file:{}]", file.getName());
-                }
-            } catch (IOException | InterruptedException e) {
-                logger.error("编译失败：[file:{}]，[exception:{}]", file.getName(), e);
-            }
-        }
-
-        // 重新加载所有编译好的class文件
-        Map<String, ClassFileDef> updateClassMap = new HashMap<>();
-        for (File javaFile : updateJavaSet) {
-            String compliedClassFile = StringUtils.substringBeforeLast(javaFile.getAbsolutePath(), JAVA_SUFFIX) + CLASS_SUFFIX;
-            File file = new File(compliedClassFile);
-            String path = file.getAbsolutePath();
-            long lastModifiedTime = file.lastModified();
-            byte[] data = FileUtils.readFileToByteArray(file);
-            String className = readClassName(data);
-            ClassFileDef classFileDef = new ClassFileDef(className, path, lastModifiedTime, data);
-            updateClassMap.put(classFileDef.getClassName(), classFileDef);
-        }
-
-        // 加载编译好的class文件，这里只是加载，如果以前加载过则不重新加载
-        loader.setUpdateClassMap(updateClassMap);
-        for (ClassFileDef classFileDef : updateClassMap.values()) {
-            loader.loadClass(classFileDef.getClassName());
-            HotSwapManager.getInstance().getClassFileDefMap().put(classFileDef.getClassName(), classFileDef);
-            logger.info("注入新类[{}]", classFileDef.getClassName());
-        }
-
-        // 删除所有被更新过的java和class文件
-        for (File file : updateJavaSet) {
-            FileUtils.deleteFile(file);
-        }
-        for (ClassFileDef def : updateClassMap.values()) {
-            FileUtils.deleteFile(new File(def.getPath()));
-        }
-    }
 
     private void hotSwapClass(String absolutePath) throws Exception {
         long start = System.currentTimeMillis();
@@ -279,10 +211,21 @@ public class HotSwapServiceMBean implements IHotSwapServiceMBean {
     private String readClassName(byte[] bytes) {
         ByteArrayInputStream byteArrayInputStream = null;
         try {
+            Class<?> classFileClazz = Class.forName("com.sun.tools.classfile.ClassFile");
+            Method readMethod = classFileClazz.getMethod("read", InputStream.class);
+            Method getNameMethod = classFileClazz.getMethod("getName");
+            AssertionUtils.notNull(classFileClazz, readMethod, getNameMethod, bytes);
+
             byteArrayInputStream = new ByteArrayInputStream(bytes);
-            ClassFile classFile = ClassFile.read(byteArrayInputStream);
-            return classFile.getName().replaceAll(StringUtils.SLASH, StringUtils.PERIOD);
-        } catch (IOException | ConstantPoolException e) {
+            Object classFileObject = ReflectionUtils.invokeMethod(null, readMethod, byteArrayInputStream);
+            String className = (String) ReflectionUtils.invokeMethod(classFileObject, getNameMethod);
+
+
+            String pid = ManagementFactory.getRuntimeMXBean().getName().split("@")[0];
+            // ClassFile classFile = ClassFile.read(byteArrayInputStream);
+            // return classFile.getName().replaceAll(StringUtils.SLASH, StringUtils.PERIOD);
+            return className.replaceAll(StringUtils.SLASH, StringUtils.PERIOD);
+        } catch (ClassNotFoundException | NoSuchMethodException e) {
             e.printStackTrace();
         } finally {
             IOUtils.closeIO(byteArrayInputStream);

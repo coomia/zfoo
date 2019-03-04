@@ -6,11 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-import sun.misc.BASE64Decoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.Base64;
 import java.util.Date;
 
 /**
@@ -38,7 +38,7 @@ public class UploadFileTest {
         // 去掉头部header
         String imageStrData = imageStr.substring(header.length());
         // 解码
-        byte[] bytes = new BASE64Decoder().decodeBuffer(imageStrData);
+        byte[] bytes = Base64.getDecoder().decode(imageStrData);
 
         FileOutputStream fileOutputStream = new FileOutputStream("uploadImage.png");
         fileOutputStream.write(bytes);

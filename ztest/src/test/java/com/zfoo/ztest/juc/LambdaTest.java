@@ -1,5 +1,6 @@
 package com.zfoo.ztest.juc;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -12,6 +13,7 @@ import java.util.function.Predicate;
  * @version 1.0
  * @since 2018-12-21 21:32
  */
+@Ignore
 public class LambdaTest {
 
     interface MathOperation {

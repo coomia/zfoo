@@ -1,5 +1,6 @@
 package com.zfoo.ztest.redis;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import redis.clients.jedis.Jedis;
@@ -10,6 +11,7 @@ import redis.clients.jedis.JedisPool;
  * @version 1.0
  * @since 2018/11/13
  */
+@Ignore
 public class JedisSingletonTest {
 
     @Test

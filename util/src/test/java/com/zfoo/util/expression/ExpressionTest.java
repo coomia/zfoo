@@ -1,4 +1,4 @@
-package com.zfoo.utils.expression;
+package com.zfoo.util.expression;
 
 import org.junit.Assert;
 import org.junit.Test;
