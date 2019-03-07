@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.zfoo</groupId>
+    <groupId>com.zfoo.web</groupId>
     <artifactId>web</artifactId>
     <packaging>pom</packaging>
     <version>2.0</version>
@@ -66,7 +66,8 @@
         <hibernate.version>5.4.1.Final</hibernate.version>
 
 
-        <log4j2.version>2.11.2</log4j2.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <logback.version>1.2.3</logback.version>
 
         <junit.version>4.12</junit.version>
 
@@ -79,7 +80,9 @@
         <maven-compiler-plugin.version>3.8.0</maven-compiler-plugin.version>
         <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
         <maven-surefire-plugin.version>3.0.0-M3</maven-surefire-plugin.version>
+        <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <maven-shade-plugin.version>3.2.1</maven-shade-plugin.version>
+        <versions-maven-plugin.version>2.7</versions-maven-plugin.version>
 
         <!-- maven自定义plugin插件 -->
         <maven-plugin-api.version>3.6.0</maven-plugin-api.version>
@@ -285,28 +288,23 @@
             </exclusions>
         </dependency>
 
-        <!--log4j2核心包-->
+        <!-- slf4j-api -->
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>${log4j2.version}</version>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
+        <!-- logback核心包 -->
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>${log4j2.version}</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>${logback.version}</version>
         </dependency>
-        <!--用于Log4j2和slf4j保持桥接-->
+        <!-- logback的sl4j的实现 -->
         <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-slf4j-impl</artifactId>
-            <version>${log4j2.version}</version>
-        </dependency>
-        <!-- Web项目需添加 -->
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-web</artifactId>
-            <version>${log4j2.version}</version>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
         </dependency>
 
 

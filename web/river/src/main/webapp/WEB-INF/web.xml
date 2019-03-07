@@ -17,7 +17,7 @@
 
     <!-- Tomcat停止时，销毁数据库注册的监听 -->
     <listener>
-        <listener-class>com.zfoo.river.RiverServletContextListener</listener-class>
+        <listener-class>com.zfoo.web.river.RiverServletContextListener</listener-class>
     </listener>
 
     <!-- 中文过滤器 -->

@@ -62,8 +62,8 @@
         <hibernate.version>5.4.1.Final</hibernate.version>
 
 
-
-        <log4j2.version>2.11.2</log4j2.version>
+        <slf4j.version>1.7.25</slf4j.version>
+        <logback.version>1.2.3</logback.version>
 
         <junit.version>4.12</junit.version>
 
@@ -93,7 +93,6 @@
         <project.build.sourceEncoding>${file.encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${file.encoding}</project.reporting.outputEncoding>
     </properties>
-
 
     <dependencies>
         <!-- 依赖的util类库 -->
