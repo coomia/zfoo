@@ -96,7 +96,7 @@
     - 3.additivity：为false，表示此logger的打印信息不再向上级root传递,如果设置为true，会打印两次
     - 4.appender-ref：指定了名字为"STDOUT"的appender。
     -->
-    <logger name="com.zfoo.ztest" level="DEBUG" additivity="false">
+    <logger name="com.zfoo.game" level="DEBUG" additivity="false">
         <appender-ref ref="zfoo_console"/>
         <appender-ref ref="zfoo_debug"/>
         <appender-ref ref="zfoo_info"/>

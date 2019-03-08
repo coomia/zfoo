@@ -1,0 +1,17 @@
+ _______  _______  _______  _______
+/ ___   )(  ____ \(  ___  )(  ___  )
+\/   )  || (    \/| (   ) || (   ) |
+    /   )| (__    | |   | || |   | |
+   /   / |  __)   | |   | || |   | |
+  /   /  | (      | |   | || |   | |
+ /   (_/\| )      | (___) || (___) |
+(_______/|/       (_______)(_______)
+
+# http://www.network-science.de/ascii/     将文字转化成字符串
+# http://www.degraeve.com/img2txt.php      可以将图片转化成字符串
+
+
+# https://gitee.com/52itstyle/spring-boot-pay      支付服务：支付宝，微信，银联详细代码案例；支付API文档。作为一个支付行业的老码农感觉这个项目挺实用，如果公司需要对接支付宝或者微信支付，是一个非常好的参考示例。
+# https://github.com/ChinaSilence/any-video        Any Video 是基于 Spring Boot 开发的应用，利用网络爬虫技术，实时解析互联网资源，可对所有资源分类收藏，并分享！
+# https://gitee.com/52itstyle/spring-boot-mail     邮件发送服务，文本、附件、模版多种实现，队列，线程定时任务功能
+# https://github.com/ityouknow/spring-boot-examples    Spring Boot 技术栈示例代码，快速简单上手教程，一个帮助大家学习 Spring Boot的开源示例项目。

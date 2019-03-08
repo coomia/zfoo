@@ -45,3 +45,4 @@ package-lock.json
 **/webapp/static/
 **/webapp/index.html
 **/webapp/favicon.png
+**/resources/static/
