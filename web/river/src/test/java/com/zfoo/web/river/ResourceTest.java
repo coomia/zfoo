@@ -1,11 +1,8 @@
 package com.zfoo.web.river;
 
-import com.zfoo.web.river.module.user.manager.IUserManager;
 import com.zfoo.util.FileUtils;
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.File;
 
@@ -24,13 +21,4 @@ public class ResourceTest {
     }
 
 
-    // webapp的资源在webapp目录下，而不是src/main/resources目录
-    @Test
-    public void test1() {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-
-        IUserManager userManager = context.getBean(IUserManager.class);
-
-        Assert.assertNotNull(userManager);
-    }
 }

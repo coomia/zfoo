@@ -1,6 +1,5 @@
 package com.zfoo.web.river.interceptor;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -34,7 +33,6 @@ public class RiverInterceptor extends HandlerInterceptorAdapter {
         String[] noNeedAuthPage = new String[]{"home", "checkLogin", "register", "loginAjax", "login", "product", "category", "search"};
 
         String uri = request.getRequestURI();
-        uri = StringUtils.remove(uri, contextPath);
 //        System.out.println(uri);
 //        if (uri.startsWith("/fore")) {
 //            String method = StringUtils.substringAfterLast(uri, "/fore");

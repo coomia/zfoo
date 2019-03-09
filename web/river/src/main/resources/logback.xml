@@ -127,12 +127,6 @@
     <!-- additivity="false"表示不继承父logger的配置和父类没有关系-->
     <logger name="org.springframework.core" level="warn"/>
 
-    <!--*******************************************Hibernate*****************************************************-->
-    <logger name="org.hibernate.ps" level="warn"/>
-    <!-- Changing the log level to DEBUG will result in Hibernate generated SQL to be logged. -->
-    <logger name="org.hibernate.SQL" level="debug"/>
-    <logger name="org.springframework.core" level="warn"/>
-    <logger name="org.springframework.core" level="warn"/>
 
     <!--*******************************************Netty*********************************************************-->
     <logger name="io.netty" level="warn"/>

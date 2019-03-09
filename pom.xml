@@ -35,11 +35,9 @@
         <module>event</module>
         <module>hotswap</module>
         <module>net</module>
-        <module>orm</module>
         <module>scheduler</module>
         <module>storage</module>
         <module>util</module>
-        <module>game</module>
         <module>web</module>
         <module>zplugin</module>
         <module>ztest</module>
@@ -51,7 +49,6 @@
         <zfoo.event.version>2.0</zfoo.event.version>
         <zfoo.hotswap.version>2.0</zfoo.hotswap.version>
         <zfoo.net.version>2.0</zfoo.net.version>
-        <zfoo.orm.version>2.0</zfoo.orm.version>
         <zfoo.scheduler.version>2.0</zfoo.scheduler.version>
         <zfoo.storage.version>2.0</zfoo.storage.version>
         <zfoo.util.version>2.0</zfoo.util.version>
@@ -92,9 +89,6 @@
         <!-- 数据库和缓存 -->
         <mongo-java-driver.version>3.10.1</mongo-java-driver.version>
         <jedis.version>3.0.1</jedis.version>
-
-        <mysql.version>8.0.15</mysql.version>
-        <hibernate.version>5.4.1.Final</hibernate.version>
 
 
         <slf4j.version>1.7.25</slf4j.version>

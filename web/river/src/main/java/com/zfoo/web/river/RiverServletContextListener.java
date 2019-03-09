@@ -1,7 +1,6 @@
 package com.zfoo.web.river;
 
 import com.zfoo.event.EventContext;
-import com.zfoo.orm.OrmContext;
 import com.zfoo.scheduler.SchedulerContext;
 
 import javax.servlet.ServletContext;
@@ -39,22 +38,6 @@ public class RiverServletContextListener implements ServletContextListener {
             EventContext.shutdown();
         } catch (Exception e) {
             ctx.log("Event problem cleaning up: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        // 再关闭orm，关闭之前将所有的数据写回数据库
-        try {
-            OrmContext.shutdown();
-        } catch (Exception e) {
-            ctx.log("Orm problem cleaning up: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        // 关闭数据库连接池
-        try {
-            OrmContext.shutdownDataSource();
-        } catch (Exception e) {
-            ctx.log("Mysql problem cleaning up: " + e.getMessage());
             e.printStackTrace();
         }
 

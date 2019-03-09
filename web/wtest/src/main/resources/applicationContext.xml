@@ -7,7 +7,6 @@
        xmlns:net="http://www.zfoo.com/schema/net"
        xmlns:scheduler="http://www.zfoo.com/schema/scheduler"
        xmlns:resource="http://www.zfoo.com/schema/resource"
-       xmlns:orm="http://www.zfoo.com/schema/orm"
 
        xsi:schemaLocation="
     http://www.springframework.org/schema/beans
@@ -25,13 +24,10 @@
     http://www.zfoo.com/schema/scheduler-1.0.xsd
 
     http://www.zfoo.com/schema/resource
-    http://www.zfoo.com/schema/resource-1.0.xsd
-
-    http://www.zfoo.com/schema/orm
-    http://www.zfoo.com/schema/orm-1.0.xsd">
+    http://www.zfoo.com/schema/resource-1.0.xsd">
 
 
-    <context:component-scan base-package="com.zfoo.wtest"/>
+    <context:component-scan base-package="com.zfoo.web.wtest"/>
 
 
 </beans>
