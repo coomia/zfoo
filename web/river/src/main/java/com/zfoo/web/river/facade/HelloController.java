@@ -2,7 +2,6 @@ package com.zfoo.web.river.facade;
 
 import com.zfoo.event.EventContext;
 import com.zfoo.event.model.anno.EventReceiver;
-import com.zfoo.scheduler.model.anno.Scheduler;
 import com.zfoo.storage.model.anno.ResInjection;
 import com.zfoo.storage.model.vo.Storage;
 import com.zfoo.web.river.event.HelloEvent;
@@ -16,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
 
+/**
+ * @author jaysunxiao
+ * @version 1.0
+ * @since 2019-03-10 19:43
+ */
 @Controller
 public class HelloController {
 
@@ -45,7 +49,7 @@ public class HelloController {
         logger.info("receive [msg:{}]", event.getMsg());
     }
 
-    @Scheduler(value = "helloScheduler", cronExpression = "0/5 * * * * ?")
+    //@Scheduler(value = "helloScheduler", cronExpression = "0/5 * * * * ?")
     public void helloScheduler() {
         logger.info("helloScheduler [date:{}]", new Date());
     }

@@ -291,5 +291,10 @@ curl www.google.com.hk
 ## 2.10. 注意：
 - 若不需使用代理时，把/etc/profile.d/privoxy.sh的内容注释掉
 
+## 2.11 手机上使用
+```
+iOS  Wingy，可以App Store上直接搜
+```
+
 # 3. 阿里云服务器配置
 - 若shadowsock服务器为阿里云服务器，在安全组规则中开放10086端口
