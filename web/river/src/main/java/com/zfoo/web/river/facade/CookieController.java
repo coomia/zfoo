@@ -1,7 +1,8 @@
-package com.zfoo.web.wtest.cookie;
+package com.zfoo.web.river.facade;
 
 import com.zfoo.util.TimeUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.Cookie;
@@ -20,9 +21,7 @@ import java.io.IOException;
  * @since 2018-08-22 14:39
  */
 @Controller
-@RequestMapping("")
-public class CookieTest {
-
+public class CookieController {
     // 1.可在同一应用服务器内共享方法：设置cookie.setPath("/");
     // 本机tomcat/webapp下面有两个应用：webapp_a和webapp_b，
     // 1）原来在webapp_a下面设置的cookie，在webapp_b下面获取不到，path默认是产生cookie的应用的路径。
@@ -52,7 +51,7 @@ public class CookieTest {
 
     // 测试地址:localhost:8080/get-cookie-test
     @RequestMapping("get-cookie-test")
-    public String getCookieTest(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public String getCookieTest(HttpServletRequest request, Model model) {
         // 读取cookie
         Cookie[] cookies = request.getCookies();
         if (cookies != null) {
@@ -62,11 +61,10 @@ public class CookieTest {
                     // 取出cookie的值
                     String value = cookie.getValue();
                     String lastTime = TimeUtils.timeToString(Long.parseLong(value));
-                    request.setAttribute("lastTime", lastTime);
+                    model.addAttribute("lastTime", lastTime);
                 }
             }
         }
         return "cookie/get-cookie-test";
     }
-
 }

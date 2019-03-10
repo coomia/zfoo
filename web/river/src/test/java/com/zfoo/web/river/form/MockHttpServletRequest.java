@@ -1,4 +1,4 @@
-package com.zfoo.web.wtest.form;
+package com.zfoo.web.river.form;
 
 import org.apache.commons.fileupload.FileUploadBase;
 

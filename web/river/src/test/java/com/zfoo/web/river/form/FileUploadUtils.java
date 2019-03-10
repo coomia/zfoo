@@ -1,4 +1,4 @@
-package com.zfoo.web.wtest.form;
+package com.zfoo.web.river.form;
 
 import com.zfoo.util.FileUtils;
 import com.zfoo.util.IOUtils;

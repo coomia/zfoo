@@ -1,11 +1,12 @@
-package com.zfoo.web.wtest.file;
+package com.zfoo.web.river.facade;
 
 import com.zfoo.util.AssertionUtils;
 import com.zfoo.util.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,12 +20,10 @@ import java.util.Date;
  * @since 2018-08-02 18:18
  */
 @Controller
-@RequestMapping("")
-public class UploadFileTest {
-
+public class UploadFileController {
 
     // 处理一个png图片的上传，并保存在服务器中
-    @RequestMapping("uploadImage")
+    @RequestMapping("/uploadImage")
     public void uploadImage(HttpServletRequest request, HttpServletResponse response) throws IOException {
         InputStream inputStream = request.getInputStream();
 
@@ -47,26 +46,28 @@ public class UploadFileTest {
     }
 
 
-    // 测试地址:localhost:8080/upload-file-test.jsp
+    // 测试地址:localhost:8080/file/upload-file-test.html
     // 通过流的方式上传文件
-    // @RequestParam("file") 将name=file控件得到的文件封装成 CommonsMultipartFile 对象
-    @RequestMapping("fileUpload")
-    public String fileUploadByZeroCopy(@RequestParam("file") CommonsMultipartFile file) throws IOException {
+    // @RequestParam("file") 将name=file控件得到的文件封装成 MultipartFile 对象
+    @ResponseBody
+    @RequestMapping("/fileUpload")
+    public String fileUploadByZeroCopy(@RequestParam("file") MultipartFile file) throws IOException {
         String path="D:/"+new Date().getTime()+file.getOriginalFilename();
         File newFile=new File(path);
-        //通过CommonsMultipartFile的方法直接写文件（注意这个时候）
+        //通过MultipartFile的方法直接写文件（注意这个时候）
         file.transferTo(newFile);
-        return "/success";
+        return "success";
     }
 
     // 同fileUploadByZeroCopy，效率会差一点，因为把bytes读到了内存
-    @RequestMapping("fileUpload")
-    public String fileUpload(@RequestParam("file") CommonsMultipartFile file) throws IOException {
+    // @ResponseBody
+    // @RequestMapping("fileUpload")
+    public String fileUpload(@RequestParam("file") MultipartFile file) throws IOException {
         OutputStream outputStream = null;
         InputStream inputStream = null;
         try {
             outputStream = new FileOutputStream("D:/" + new Date().getTime() + file.getOriginalFilename());
-            //获取输入流 CommonsMultipartFile 中可以直接得到文件的流
+            //获取输入流 MultipartFile 中可以直接得到文件的流
             inputStream = file.getInputStream();
             outputStream.write(IOUtils.toByteArray(inputStream));
             outputStream.flush();
@@ -75,6 +76,7 @@ public class UploadFileTest {
         } finally {
             IOUtils.closeIO(outputStream, inputStream);
         }
-        return "/success";
+        return "success";
     }
+
 }

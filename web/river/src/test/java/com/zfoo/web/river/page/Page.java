@@ -1,4 +1,4 @@
-package com.zfoo.web.wtest.page;
+package com.zfoo.web.river.page;
 
 import com.zfoo.util.AssertionUtils;
 
