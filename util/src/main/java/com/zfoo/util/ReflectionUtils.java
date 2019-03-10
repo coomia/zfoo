@@ -74,14 +74,13 @@ public abstract class ReflectionUtils {
     }
 
     /**
-     * 从一个指定的POJO的Class中获得具有指定注解的Field
+     * 从一个指定的POJO的Class中获得具有指定注解的Field，只获取子类的Field，不获取父类的Field
      *
      * @param clazz      指定的Class
      * @param annotation 指定注解的Class
      * @return 数组，可能长度为0
      */
     public static Field[] getFieldsByAnnoInPOJOClass(Class<?> clazz, Class<? extends Annotation> annotation) {
-        assertIsPOJOClass(clazz);
         List<Field> list = new ArrayList<Field>();
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
@@ -93,14 +92,13 @@ public abstract class ReflectionUtils {
     }
 
     /**
-     * 从一个Class中获得具有指定注解的Method
+     * 从一个Class中获得具有指定注解的Method，只获取子类的Method，不获取父类的Method
      *
      * @param clazz      指定的Class
      * @param annotation 指定注解的Class
      * @return 数组，可能长度为0
      */
     public static Method[] getMethodsByAnnoInPOJOClass(Class<?> clazz, Class<? extends Annotation> annotation) {
-        assertIsPOJOClass(clazz);
         List<Method> list = new ArrayList<>();
         Method[] methods = clazz.getDeclaredMethods();
         for (Method method : methods) {
@@ -112,7 +110,6 @@ public abstract class ReflectionUtils {
     }
 
     public static Method[] getMethodsByNameInPOJOClass(Class<?> clazz, String methodName) {
-        assertIsPOJOClass(clazz);
         List<Method> list = new ArrayList<>();
         Method[] methods = clazz.getDeclaredMethods();
         for (Method method : methods) {

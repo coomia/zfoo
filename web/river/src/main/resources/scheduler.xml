@@ -10,8 +10,6 @@
     http://www.zfoo.com/schema/scheduler
     http://www.zfoo.com/schema/scheduler-1.0.xsd">
 
-    <!--<net:net id="net" protocol-location="protocol.xml" receiver-package="facade" host-address="127.0.0.1" port="9999"/>-->
-
-    <scheduler:scheduler id="schedulerManager" scheduler-package="com.zfoo.river.**.facade"/>
+    <scheduler:scheduler id="schedulerManager" scheduler-package="com.zfoo.web.river.**.facade"/>
 
 </beans>

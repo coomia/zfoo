@@ -6,25 +6,13 @@
        xmlns:event="http://www.zfoo.com/schema/event"
        xmlns:net="http://www.zfoo.com/schema/net"
        xmlns:scheduler="http://www.zfoo.com/schema/scheduler"
-       xmlns:resource="http://www.zfoo.com/schema/resource"
+       xmlns:storage="http://www.zfoo.com/schema/storage"
 
        xsi:schemaLocation="
     http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
     http://www.springframework.org/schema/context
-    http://www.springframework.org/schema/context/spring-context-4.0.xsd
-
-    http://www.zfoo.com/schema/event
-    http://www.zfoo.com/schema/event-1.0.xsd
-
-    http://www.zfoo.com/schema/net
-    http://www.zfoo.com/schema/net-1.0.xsd
-
-    http://www.zfoo.com/schema/scheduler
-    http://www.zfoo.com/schema/scheduler-1.0.xsd
-
-    http://www.zfoo.com/schema/resource
-    http://www.zfoo.com/schema/resource-1.0.xsd">
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
 
     <context:component-scan base-package="com.zfoo.web.wtest"/>

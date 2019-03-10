@@ -123,9 +123,7 @@
     <!--*******************************************Spring********************************************************-->
     <!--logger中的name是指代码的包名或类名，路径要写全，可以配置不同包中的日志输出到不同的文件中。level是日志输出级别 -->
     <!--过滤掉spring的一些无用的DEBUG信息-->
-    <logger name="org.springframework" level="warn"/>
-    <!-- additivity="false"表示不继承父logger的配置和父类没有关系-->
-    <logger name="org.springframework.core" level="warn"/>
+    <logger name="org.springframework" level="info"/>
 
 
     <!--*******************************************Netty*********************************************************-->

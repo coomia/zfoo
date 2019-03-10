@@ -28,8 +28,8 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             xmlns:beans="http://www.springframework.org/schema/beans"
 
-            xmlns="http://www.zfoo.com/schema/resource"
-            targetNamespace="http://www.zfoo.com/schema/resource"
+            xmlns="http://www.zfoo.com/schema/storage"
+            targetNamespace="http://www.zfoo.com/schema/storage"
 
             elementFormDefault="qualified"
             attributeFormDefault="unqualified">

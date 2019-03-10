@@ -32,7 +32,7 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
 
-       xmlns:resource="http://www.zfoo.com/schema/resource"
+       xmlns:storage="http://www.zfoo.com/schema/storage"
 
        xsi:schemaLocation="
     http://www.springframework.org/schema/beans
@@ -40,8 +40,8 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context-4.0.xsd
 
-    http://www.zfoo.com/schema/resource
-    http://www.zfoo.com/schema/resource-1.0.xsd">
+    http://www.zfoo.com/schema/storage
+    storage-1.0.xsd">
 
 
     <!--<bean class="org.springframework.context.support.ConversionServiceFactoryBean">-->
@@ -58,10 +58,10 @@
 
     <context:component-scan base-package="com.zfoo.storage,com.zfoo.test"/>
 
-    <resource:storage id="resourceManager">
-        <resource:scan package="com.zfoo.**.test"/>
-        <resource:resource location="test_resource" suffix="xls"/>
-    </resource:storage>
+    <storage:storage id="resourceManager">
+        <storage:scan package="com.zfoo.**.test"/>
+        <storage:resource location="test_resource" suffix="xls"/>
+    </storage:storage>
 
 
 </beans>
