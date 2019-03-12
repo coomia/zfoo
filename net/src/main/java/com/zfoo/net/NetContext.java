@@ -52,7 +52,7 @@ public class NetContext extends InstantiationAwareBeanPostProcessorAdapter imple
             instance.protocolService = applicationContext.getBean(IProtocolService.class);
             instance.sessionManager = applicationContext.getBean(ISessionManager.class);
             instance.dispatcherManager = applicationContext.getBean(IPacketDispatcherManager.class);
-            instance.server = (Server) applicationContext.getBean(StringUtils.uncapitalize(Server.class.getSimpleName()));
+            instance.server = (Server) applicationContext.getBean(StringUtils.uncapitalize(Server.class.getName()));
             NetContext.getProtocolManager().parseProtocol(protocolLocation);
         }
     }

@@ -60,7 +60,7 @@ public class EventContext extends InstantiationAwareBeanPostProcessorAdapter imp
         // 初始化上下文
         EventContext.instance = this;
         instance.applicationContext = applicationContext;
-        instance.eventBusManager = (IEventBusManager) applicationContext.getBean(StringUtils.uncapitalize(EventBusManager.class.getSimpleName()));
+        instance.eventBusManager = (IEventBusManager) applicationContext.getBean(StringUtils.uncapitalize(EventBusManager.class.getName()));
     }
 
     @Override

@@ -32,19 +32,19 @@ public class SchedulerDefintionParser extends AbstractBeanDefinitionParser {
 
         // 注册SchedulerSpringContext
         clazz = SchedulerContext.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         parserContext.getRegistry().registerBeanDefinition(name, builder.getBeanDefinition());
 
         // 注册SchedulerRegisterProcessor
         clazz = SchedulerRegisterProcessor.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         parserContext.getRegistry().registerBeanDefinition(name, builder.getBeanDefinition());
 
         // 注册SchedulerService
         clazz = SchedulerService.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         parserContext.getRegistry().registerBeanDefinition(name, builder.getBeanDefinition());
 
@@ -52,7 +52,7 @@ public class SchedulerDefintionParser extends AbstractBeanDefinitionParser {
         String schedulerId = element.getAttribute(SCHEDULER_ID);
         String schedulerPackage = element.getAttribute(SCHEDULER_PACKAGE);
         clazz = SchedulerManager.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         builder.addConstructorArgValue(schedulerId);
         builder.addConstructorArgValue(schedulerPackage);

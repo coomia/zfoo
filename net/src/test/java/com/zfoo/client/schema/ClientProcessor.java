@@ -19,7 +19,7 @@ public class ClientProcessor extends InstantiationAwareBeanPostProcessorAdapter 
 
     public void printBean(Object bean) {
         count++;
-        System.out.println(this.getClass().getSimpleName() + "-->" + bean + "-->" + count);
+        System.out.println(this.getClass().getName() + "-->" + bean + "-->" + count);
     }
 
 

@@ -36,8 +36,8 @@ public class SchedulerContext extends InstantiationAwareBeanPostProcessorAdapter
         if (instance == null) {
             instance = this;
             instance.applicationContext = applicationContext;
-            instance.schedulerManager = (ISchedulerManager) applicationContext.getBean(StringUtils.uncapitalize(SchedulerManager.class.getSimpleName()));
-            instance.schedulerService = (ISchedulerService) applicationContext.getBean(StringUtils.uncapitalize(SchedulerService.class.getSimpleName()));
+            instance.schedulerManager = (ISchedulerManager) applicationContext.getBean(StringUtils.uncapitalize(SchedulerManager.class.getName()));
+            instance.schedulerService = (ISchedulerService) applicationContext.getBean(StringUtils.uncapitalize(SchedulerService.class.getName()));
         }
     }
 

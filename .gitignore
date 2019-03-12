@@ -42,7 +42,5 @@ package-lock.json
 **/dist/
 
 # 忽略webapp中部署的文件
-**/webapp/static/
-**/webapp/index.html
-**/webapp/favicon.png
 **/resources/static/
+**/resources/templates/index.html

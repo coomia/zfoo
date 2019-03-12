@@ -33,11 +33,11 @@ public class EventReceiverDefintion implements IEventReceiver {
     public static EventReceiverDefintion valueOf(Object bean, Method method) {
         Class<?>[] clazzs = method.getParameterTypes();
         if (clazzs.length != 1) {
-            FormattingTuple message = MessageFormatter.format("[class:{}] [method:{}] must have one parameter!", bean.getClass().getSimpleName(), method.getName());
+            FormattingTuple message = MessageFormatter.format("[class:{}] [method:{}] must have one parameter!", bean.getClass().getName(), method.getName());
             throw new IllegalArgumentException(message.getMessage());
         }
         if (!IEvent.class.isAssignableFrom(clazzs[0])) {
-            FormattingTuple message = MessageFormatter.format("[class:{}] [method:{}] must have one [IEvent] type parameter!", bean.getClass().getSimpleName(), method.getName());
+            FormattingTuple message = MessageFormatter.format("[class:{}] [method:{}] must have one [IEvent] type parameter!", bean.getClass().getName(), method.getName());
             throw new IllegalArgumentException(message.getMessage());
         }
         return new EventReceiverDefintion(bean, method, (Class<? extends IEvent>) clazzs[0]);

@@ -69,7 +69,7 @@ public abstract class ReflectionUtils {
 
     public static void assertIsPOJOClass(Class<?> clazz) {
         if (!isPOJOClass(clazz)) {
-            throw new POJOException(clazz.getSimpleName() + "不是简单的javabean");
+            throw new POJOException(clazz.getName() + "不是简单的javabean");
         }
     }
 

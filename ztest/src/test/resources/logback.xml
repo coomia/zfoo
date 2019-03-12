@@ -40,7 +40,7 @@
 
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
             <!-- rollover daily -->
-            <fileNamePattern>info.%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <fileNamePattern>info.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <!-- each file should be at most 100MB, keep 30 days worth of history, but at most 40GB -->
             <maxFileSize>100MB</maxFileSize>
             <maxHistory>30</maxHistory>
@@ -62,7 +62,7 @@
         <file>${LOG_HOME}/error.log</file>
 
         <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
-            <fileNamePattern>error.%d{yyyy-MM-dd}.%i.txt</fileNamePattern>
+            <fileNamePattern>error.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
             <maxFileSize>100MB</maxFileSize>
             <maxHistory>30</maxHistory>
             <totalSizeCap>20GB</totalSizeCap>

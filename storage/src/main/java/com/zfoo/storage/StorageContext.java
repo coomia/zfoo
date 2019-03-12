@@ -33,7 +33,7 @@ public class StorageContext extends InstantiationAwareBeanPostProcessorAdapter i
         if (StorageContext.instance == null) {
             StorageContext.instance = this;
             instance.applicationContext = applicationContext;
-            instance.conversionService = (ConversionService) applicationContext.getBean(StringUtils.uncapitalize(ConversionServiceFactoryBean.class.getSimpleName()));
+            instance.conversionService = (ConversionService) applicationContext.getBean(StringUtils.uncapitalize(ConversionServiceFactoryBean.class.getName()));
             instance.resourceReader = applicationContext.getBean(IResourceReader.class);
             instance.storageManager = applicationContext.getBean(IStorageManager.class);
             // 初始化

@@ -49,44 +49,44 @@ public class NetDefinitionParser extends AbstractBeanDefinitionParser {
 
         // 注册NetSpringContext
         clazz = NetContext.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         builder.addConstructorArgValue(protocolLocation);
         parserContext.getRegistry().registerBeanDefinition(name, builder.getBeanDefinition());
 
         // 注册NetProcessor
         clazz = NetProcessor.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         parserContext.getRegistry().registerBeanDefinition(name, builder.getBeanDefinition());
 
         // 注册ProtocolManager
         clazz = ProtocolManager.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         parserContext.getRegistry().registerBeanDefinition(name, builder.getBeanDefinition());
 
         // 注册ProtocolService
         clazz = ProtocolService.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         parserContext.getRegistry().registerBeanDefinition(name, builder.getBeanDefinition());
 
         // 注册PacketDispatcherManager
         clazz = PacketDispatcherManager.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         parserContext.getRegistry().registerBeanDefinition(name, builder.getBeanDefinition());
 
         // 注册SessionManager
         clazz = SessionManager.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         parserContext.getRegistry().registerBeanDefinition(name, builder.getBeanDefinition());
 
         // 注册Server
         clazz = Server.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         builder.addConstructorArgValue(hostName);
         builder.addConstructorArgValue(port);

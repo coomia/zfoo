@@ -153,25 +153,25 @@ public class StorageDefinitionParser extends AbstractBeanDefinitionParser {
 
         // 注入StorageSpringContext
         clazz = StorageContext.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         registry.registerBeanDefinition(name, builder.getBeanDefinition());
 
         // 注入ExcelResourceReader
         clazz = ExcelResourceReader.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         registry.registerBeanDefinition(name, builder.getBeanDefinition());
 
         // 注入StaticInjectProcessor
         clazz = ResInjectionProcessor.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         registry.registerBeanDefinition(name, builder.getBeanDefinition());
 
         // 注入ConversionServiceFactoryBean
         clazz = ConversionServiceFactoryBean.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         List<Object> converters = new ArrayList<>();
         converters.add(new JsonToArrayConverter());

@@ -74,15 +74,15 @@ public class PacketDispatcherManager implements IPacketDispatcherManager {
         for (Method method : methods) {
             Class<?>[] clazzs = method.getParameterTypes();
             if (clazzs.length != 2) {
-                FormattingTuple message = MessageFormatter.format("[class:{}] [method:{}] must have two parameter!", bean.getClass().getSimpleName(), method.getName());
+                FormattingTuple message = MessageFormatter.format("[class:{}] [method:{}] must have two parameter!", bean.getClass().getName(), method.getName());
                 throw new IllegalArgumentException(message.getMessage());
             }
             if (!Session.class.isAssignableFrom(clazzs[0])) {
-                FormattingTuple message = MessageFormatter.format("[class:{}] [method:{}],the first parameter must be Session type parameter Exception.", bean.getClass().getSimpleName(), method.getName());
+                FormattingTuple message = MessageFormatter.format("[class:{}] [method:{}],the first parameter must be Session type parameter Exception.", bean.getClass().getName(), method.getName());
                 throw new IllegalArgumentException(message.getMessage());
             }
             if (!IPacket.class.isAssignableFrom(clazzs[1])) {
-                FormattingTuple message = MessageFormatter.format("[class:{}] [method:{}],the second parameter must be IPacket type parameter Exception.", bean.getClass().getSimpleName(), method.getName());
+                FormattingTuple message = MessageFormatter.format("[class:{}] [method:{}],the second parameter must be IPacket type parameter Exception.", bean.getClass().getName(), method.getName());
                 throw new IllegalArgumentException(message.getMessage());
             }
 
@@ -107,7 +107,7 @@ public class PacketDispatcherManager implements IPacketDispatcherManager {
     public void doWithReceivePacket(Session session, IPacket packet) {
         IPacketReceiver receiver = receiverList.get(packet.protcolId());
         if (receiver == null) {
-            FormattingTuple message = MessageFormatter.format("no any receiverDefintion found for this [packet:{}]", packet.getClass().getSimpleName());
+            FormattingTuple message = MessageFormatter.format("no any receiverDefintion found for this [packet:{}]", packet.getClass().getName());
             throw new NullPointerException(message.getMessage());
         }
         receiver.invoke(session, packet);

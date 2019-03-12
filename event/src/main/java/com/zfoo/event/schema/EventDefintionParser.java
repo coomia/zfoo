@@ -31,13 +31,13 @@ public class EventDefintionParser extends AbstractBeanDefinitionParser {
 
         // 注册EventSpringContext
         clazz = EventContext.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         parserContext.getRegistry().registerBeanDefinition(name, builder.getBeanDefinition());
 
         // 注册EventRegisterProcessor，event事件处理
         clazz = EventRegisterProcessor.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         parserContext.getRegistry().registerBeanDefinition(name, builder.getBeanDefinition());
 
@@ -45,7 +45,7 @@ public class EventDefintionParser extends AbstractBeanDefinitionParser {
         String eventBusId = element.getAttribute(EVENT_BUS_ID);
         String eventBusPackage = element.getAttribute(EVENT_BUS_PACKAGE);
         clazz = EventBusManager.class;
-        name = StringUtils.uncapitalize(clazz.getSimpleName());
+        name = StringUtils.uncapitalize(clazz.getName());
         builder = BeanDefinitionBuilder.rootBeanDefinition(clazz);
         builder.addConstructorArgValue(eventBusId);
         builder.addConstructorArgValue(eventBusPackage);
